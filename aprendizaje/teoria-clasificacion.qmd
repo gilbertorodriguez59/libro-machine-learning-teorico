@@ -994,7 +994,7 @@ $$
 0.
 $$
 
-## Relación con $k$-NN
+## Relación con el método de vecinos más cercanos
 
 En $k$-NN, las probabilidades posteriores pueden estimarse como
 

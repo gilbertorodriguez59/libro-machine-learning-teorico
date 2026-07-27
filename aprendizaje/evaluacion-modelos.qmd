@@ -16,7 +16,7 @@ Al finalizar el capítulo, el lector podrá:
 2. definir un estimador del error de generalización;
 3. comprender el sesgo optimista del error de entrenamiento;
 4. aplicar particiones aleatorias y estratificadas;
-5. formular validación cruzada de \(K\) pliegues;
+5. formular validación cruzada de $K$ pliegues;
 6. interpretar leave-one-out;
 7. comprender métodos bootstrap;
 8. comparar sesgo y varianza de estimadores de error;
@@ -29,11 +29,11 @@ Al finalizar el capítulo, el lector podrá:
 
 ## Error de generalización
 
-Sea \(\widehat{f}_{\mathcal{D}}\) un modelo ajustado con una muestra \(\mathcal{D}\).
+Sea $\widehat{f}_{\mathcal{D}}$ un modelo ajustado con una muestra $\mathcal{D}$.
 
 Su error de generalización es
 
-\[
+$$
 R(\widehat{f}_{\mathcal{D}})
 =
 \mathbb{E}
@@ -46,17 +46,17 @@ Y,
 \mid
 \mathcal{D}
 \right].
-\]
+$$
 
-La esperanza se toma respecto de una nueva observación \((\mathbf{X},Y)\) proveniente del mismo proceso generador.
+La esperanza se toma respecto de una nueva observación $(\mathbf{X},Y)$ proveniente del mismo proceso generador.
 
-Este riesgo es desconocido porque la distribución \(P_{\mathbf{X},Y}\) es desconocida.
+Este riesgo es desconocido porque la distribución $P_{\mathbf{X},Y}$ es desconocida.
 
 ## Error de entrenamiento
 
 El error de entrenamiento es
 
-\[
+$$
 \widehat{R}_{train}
 =
 \frac{1}{n}
@@ -66,15 +66,15 @@ L
 y_i,
 \widehat{f}_{\mathcal{D}}(\mathbf{x}_i)
 \right).
-\]
+$$
 
 Como el modelo fue ajustado usando esas mismas observaciones, suele cumplirse
 
-\[
+$$
 \widehat{R}_{train}
 <
 R(\widehat{f}_{\mathcal{D}}).
-\]
+$$
 
 Esta diferencia se denomina optimismo.
 
@@ -86,7 +86,7 @@ El optimismo es la diferencia entre el error esperado sobre datos nuevos y el er
 
 Formalmente,
 
-\[
+$$
 \operatorname{Opt}
 =
 \mathbb{E}
@@ -95,7 +95,7 @@ R(\widehat{f}_{\mathcal{D}})
 -
 \widehat{R}_{train}
 \right].
-\]
+$$
 
 Los modelos más flexibles suelen presentar mayor optimismo.
 
@@ -103,19 +103,19 @@ Los modelos más flexibles suelen presentar mayor optimismo.
 
 Sea
 
-\[
+$$
 \mathcal{D}_{test}
 =
 \left\{
 (\mathbf{x}^{test}_j,y^{test}_j)
 \right\}_{j=1}^{m}
-\]
+$$
 
 una muestra independiente del entrenamiento.
 
 El error de prueba es
 
-\[
+$$
 \widehat{R}_{test}
 =
 \frac{1}{m}
@@ -125,11 +125,11 @@ L
 y^{test}_j,
 \widehat{f}_{\mathcal{D}}(\mathbf{x}^{test}_j)
 \right).
-\]
+$$
 
 Condicionado al modelo ajustado,
 
-\[
+$$
 \mathbb{E}
 \left[
 \widehat{R}_{test}
@@ -138,7 +138,7 @@ Condicionado al modelo ajustado,
 \right]
 =
 R(\widehat{f}_{\mathcal{D}}).
-\]
+$$
 
 Por tanto, el error de prueba es un estimador insesgado del riesgo del modelo fijo, siempre que el conjunto de prueba sea independiente y no intervenga en decisiones previas.
 
@@ -146,7 +146,7 @@ Por tanto, el error de prueba es un estimador insesgado del riesgo del modelo fi
 
 Una muestra puede dividirse en tres partes:
 
-\[
+$$
 \mathcal{D}
 =
 \mathcal{D}_{train}
@@ -154,7 +154,7 @@ Una muestra puede dividirse en tres partes:
 \mathcal{D}_{val}
 \cup
 \mathcal{D}_{test},
-\]
+$$
 
 con intersecciones vacías.
 
@@ -180,9 +180,9 @@ Se utiliza una sola vez para estimar el desempeño final.
 
 No existe una proporción universal. Algunas opciones son:
 
-- \(60\%-20\%-20\%\);
-- \(70\%-15\%-15\%\);
-- \(80\%-20\%\), usando validación cruzada dentro del entrenamiento.
+- $60\%-20\%-20\%$;
+- $70\%-15\%-15\%$;
+- $80\%-20\%$, usando validación cruzada dentro del entrenamiento.
 
 La elección depende de:
 
@@ -214,21 +214,21 @@ Una partición estratificada conserva aproximadamente la proporción de clases e
 
 Si
 
-\[
+$$
 \widehat{p}_k
 =
 \frac{n_k}{n},
-\]
+$$
 
 se busca que
 
-\[
+$$
 \widehat{p}_{k,train}
 \approx
 \widehat{p}_{k,val}
 \approx
 \widehat{p}_{k,test}.
-\]
+$$
 
 Es especialmente importante en clases desbalanceadas.
 
@@ -242,13 +242,13 @@ De lo contrario, el modelo puede aprender características específicas del grup
 
 El método holdout utiliza una sola partición:
 
-\[
+$$
 \mathcal{D}
 =
 \mathcal{D}_{train}
 \cup
 \mathcal{D}_{test}.
-\]
+$$
 
 Ventajas:
 
@@ -262,34 +262,34 @@ Desventajas:
 - puede tener alta varianza;
 - utiliza menos datos para entrenar.
 
-## Validación cruzada de \(K\) pliegues
+## Validación cruzada de K pliegues
 
 ::: {#def-validacion-cruzada}
-La validación cruzada de \(K\) pliegues divide la muestra en subconjuntos
+La validación cruzada de $K$ pliegues divide la muestra en subconjuntos
 
-\[
+$$
 I_1,\ldots,I_K
-\]
+$$
 
 aproximadamente del mismo tamaño.
 :::
 
-Para cada pliegue \(k\):
+Para cada pliegue $k$:
 
-1. se ajusta el modelo sin \(I_k\);
-2. se evalúa sobre \(I_k\).
+1. se ajusta el modelo sin $I_k$;
+2. se evalúa sobre $I_k$.
 
 Sea
 
-\[
+$$
 \widehat{f}^{(-k)}
-\]
+$$
 
-el modelo entrenado sin el pliegue \(k\).
+el modelo entrenado sin el pliegue $k$.
 
 El error es
 
-\[
+$$
 CV_K
 =
 \frac{1}{n}
@@ -300,48 +300,48 @@ L
 y_i,
 \widehat{f}^{(-k)}(\mathbf{x}_i)
 \right).
-\]
+$$
 
 Si los pliegues tienen igual tamaño,
 
-\[
+$$
 CV_K
 =
 \frac{1}{K}
 \sum_{k=1}^{K}
 \widehat{R}_k.
-\]
+$$
 
 ## Interpretación
 
 Cada observación se utiliza:
 
 - una vez para validación;
-- \(K-1\) veces como parte del entrenamiento.
+- $K-1$ veces como parte del entrenamiento.
 
 Los valores habituales son
 
-\[
+$$
 K=5
-\]
+$$
 
 o
 
-\[
+$$
 K=10.
-\]
+$$
 
 ## Sesgo de validación cruzada
 
 Cada modelo se entrena con
 
-\[
+$$
 \frac{K-1}{K}n
-\]
+$$
 
 observaciones.
 
-Por tanto, \(CV_K\) estima el error de un modelo entrenado con menos observaciones que el modelo final.
+Por tanto, $CV_K$ estima el error de un modelo entrenado con menos observaciones que el modelo final.
 
 Esto puede introducir un sesgo ligeramente pesimista.
 
@@ -353,15 +353,15 @@ Por ello, calcular la varianza como si fueran observaciones independientes puede
 
 ## Validación cruzada repetida
 
-Se repite la creación de pliegues \(B\) veces:
+Se repite la creación de pliegues $B$ veces:
 
-\[
+$$
 CV_{K,B}
 =
 \frac{1}{B}
 \sum_{b=1}^{B}
 CV_K^{(b)}.
-\]
+$$
 
 La repetición reduce la dependencia respecto de una sola división.
 
@@ -370,16 +370,16 @@ La repetición reduce la dependencia respecto de una sola división.
 ::: {#def-loocv}
 Leave-one-out cross-validation corresponde a
 
-\[
+$$
 K=n.
-\]
+$$
 :::
 
-Cada modelo se entrena con \(n-1\) observaciones y se evalúa en una sola.
+Cada modelo se entrena con $n-1$ observaciones y se evalúa en una sola.
 
 El estimador es
 
-\[
+$$
 CV_{LOO}
 =
 \frac{1}{n}
@@ -389,7 +389,7 @@ L
 y_i,
 \widehat{f}^{(-i)}(\mathbf{x}_i)
 \right).
-\]
+$$
 
 ## Ventajas y limitaciones de LOOCV
 
@@ -403,7 +403,7 @@ Limitaciones:
 - puede tener alta varianza;
 - alto costo computacional;
 - los modelos ajustados son muy similares;
-- no siempre supera a \(K=5\) o \(K=10\).
+- no siempre supera a $K=5$ o $K=10$.
 
 ## Validación cruzada estratificada
 
@@ -430,21 +430,21 @@ Una estrategia es la ventana creciente.
 
 Para tiempos
 
-\[
+$$
 1,\ldots,T,
-\]
+$$
 
 se realizan ajustes como:
 
-\[
+$$
 \{1,\ldots,t\}
 \to
 \{t+1\}.
-\]
+$$
 
 El error temporal es
 
-\[
+$$
 CV_{time}
 =
 \frac{1}{M}
@@ -454,31 +454,31 @@ L
 y_{t_m+1},
 \widehat{f}_{1:t_m}(\mathbf{x}_{t_m+1})
 \right).
-\]
+$$
 
 ## Ventana deslizante
 
-Se entrena con una ventana de longitud fija \(w\):
+Se entrena con una ventana de longitud fija $w$:
 
-\[
+$$
 \{t-w+1,\ldots,t\}
 \to
 \{t+1\}.
-\]
+$$
 
 Es útil cuando el proceso cambia con el tiempo.
 
 ## Bootstrap
 
 ::: {#def-bootstrap}
-Una muestra bootstrap se obtiene seleccionando \(n\) observaciones con reemplazo de la muestra original.
+Una muestra bootstrap se obtiene seleccionando $n$ observaciones con reemplazo de la muestra original.
 :::
 
 Se denota por
 
-\[
+$$
 \mathcal{D}^{*(b)}.
-\]
+$$
 
 Cada muestra bootstrap contiene observaciones repetidas y deja fuera algunas observaciones originales.
 
@@ -486,15 +486,15 @@ Cada muestra bootstrap contiene observaciones repetidas y deja fuera algunas obs
 
 La probabilidad de que una observación no sea seleccionada en una muestra bootstrap es
 
-\[
+$$
 \left(
 1-\frac{1}{n}
 \right)^n.
-\]
+$$
 
-Cuando \(n\) es grande,
+Cuando $n$ es grande,
 
-\[
+$$
 \left(
 1-\frac{1}{n}
 \right)^n
@@ -502,9 +502,9 @@ Cuando \(n\) es grande,
 e^{-1}
 \approx
 0.368.
-\]
+$$
 
-Por tanto, aproximadamente el \(36.8\%\) de las observaciones queda fuera de cada muestra bootstrap.
+Por tanto, aproximadamente el $36.8\%$ de las observaciones queda fuera de cada muestra bootstrap.
 
 ## Error out-of-bag
 
@@ -516,21 +516,21 @@ Este principio se utiliza en random forest.
 
 ## Estimador bootstrap del error
 
-Para \(B\) muestras bootstrap,
+Para $B$ muestras bootstrap,
 
-\[
+$$
 \widehat{R}_{boot}
 =
 \frac{1}{B}
 \sum_{b=1}^{B}
 \widehat{R}_{OOB}^{(b)}.
-\]
+$$
 
 ## Estimador .632
 
 El estimador .632 combina error de entrenamiento y error out-of-bag:
 
-\[
+$$
 \widehat{R}_{.632}
 =
 0.368
@@ -538,7 +538,7 @@ El estimador .632 combina error de entrenamiento y error out-of-bag:
 +
 0.632
 \widehat{R}_{OOB}.
-\]
+$$
 
 La ponderación se relaciona con la proporción esperada de observaciones distintas presentes en una muestra bootstrap.
 
@@ -548,19 +548,19 @@ Además de estimar error, bootstrap puede aproximar la distribución de un estad
 
 Sea
 
-\[
+$$
 T=T(\mathcal{D}).
-\]
+$$
 
 Se calculan
 
-\[
+$$
 T^{*(1)},\ldots,T^{*(B)}.
-\]
+$$
 
 La varianza bootstrap es
 
-\[
+$$
 \widehat{\operatorname{Var}}_{boot}(T)
 =
 \frac{1}{B-1}
@@ -570,40 +570,40 @@ T^{*(b)}
 -
 \overline{T}^{*}
 \right)^2.
-\]
+$$
 
 ## Selección de hiperparámetros
 
-Sea \(\lambda\in\Lambda\) un hiperparámetro.
+Sea $\lambda\in\Lambda$ un hiperparámetro.
 
 Para cada valor se estima
 
-\[
+$$
 CV_K(\lambda).
-\]
+$$
 
 Se selecciona
 
-\[
+$$
 \widehat{\lambda}
 =
 \arg\min_{\lambda\in\Lambda}
 CV_K(\lambda).
-\]
+$$
 
-Después se reajusta el modelo usando toda la muestra de entrenamiento con \(\widehat{\lambda}\).
+Después se reajusta el modelo usando toda la muestra de entrenamiento con $\widehat{\lambda}$.
 
 ## Búsqueda en rejilla
 
 Se define una rejilla
 
-\[
+$$
 \Lambda
 =
 \{
 \lambda_1,\ldots,\lambda_M
 \}.
-\]
+$$
 
 Se evalúa cada combinación.
 
@@ -627,11 +627,11 @@ Puede ser más eficiente cuando solo algunas dimensiones tienen gran influencia.
 
 Construye un modelo sustituto de la función
 
-\[
+$$
 \lambda
 \mapsto
 CV(\lambda)
-\]
+$$
 
 y utiliza una función de adquisición para elegir nuevas evaluaciones.
 
@@ -658,7 +658,7 @@ Toda transformación debe aprenderse únicamente en entrenamiento.
 
 Por ejemplo, para estandarizar:
 
-\[
+$$
 \widetilde{x}_{ij}
 =
 \frac{
@@ -666,7 +666,7 @@ x_{ij}-\widehat{\mu}_{j,train}
 }{
 \widehat{\sigma}_{j,train}
 }.
-\]
+$$
 
 Los valores de validación y prueba se transforman usando las estadísticas del entrenamiento.
 
@@ -710,13 +710,13 @@ Dentro del entrenamiento externo, selecciona hiperparámetros.
 
 El error anidado es
 
-\[
+$$
 CV_{nested}
 =
 \frac{1}{K_{ext}}
 \sum_{k=1}^{K_{ext}}
 \widehat{R}^{ext}_k.
-\]
+$$
 
 Este procedimiento reduce el sesgo de selección.
 
@@ -726,51 +726,51 @@ Si se prueban muchos modelos y se reporta el mejor valor de validación, el resu
 
 Esto ocurre porque se selecciona el mínimo entre estimaciones ruidosas:
 
-\[
+$$
 \min_m
 \widehat{R}_m.
-\]
+$$
 
 La validación anidada separa selección y evaluación.
 
 ## Regla de un error estándar
 
-Supóngase que \(\lambda_{min}\) minimiza el error medio.
+Supóngase que $\lambda_{min}$ minimiza el error medio.
 
 La regla de un error estándar selecciona el modelo más simple cuyo error satisface
 
-\[
+$$
 CV(\lambda)
 \leq
 CV(\lambda_{min})
 +
 SE(\lambda_{min}).
-\]
+$$
 
 Esta regla favorece modelos más parsimoniosos.
 
 ## Comparación de modelos
 
-Supóngase que se comparan modelos \(A\) y \(B\).
+Supóngase que se comparan modelos $A$ y $B$.
 
 En cada pliegue se calcula
 
-\[
+$$
 d_k
 =
 R_{A,k}
 -
 R_{B,k}.
-\]
+$$
 
-Una diferencia promedio negativa favorece a \(A\):
+Una diferencia promedio negativa favorece a $A$:
 
-\[
+$$
 \overline{d}
 =
 \frac{1}{K}
 \sum_{k=1}^{K}d_k.
-\]
+$$
 
 Sin embargo, los pliegues no son independientes, por lo que las pruebas estadísticas deben interpretarse con cautela.
 
@@ -778,12 +778,12 @@ Sin embargo, los pliegues no son independientes, por lo que las pruebas estadís
 
 Para dos clasificadores evaluados sobre las mismas observaciones, se consideran:
 
-- \(n_{01}\): \(A\) falla y \(B\) acierta;
-- \(n_{10}\): \(A\) acierta y \(B\) falla.
+- $n_{01}$: $A$ falla y $B$ acierta;
+- $n_{10}$: $A$ acierta y $B$ falla.
 
 El estadístico aproximado es
 
-\[
+$$
 \chi^2
 =
 \frac{
@@ -791,7 +791,7 @@ El estadístico aproximado es
 }{
 n_{01}+n_{10}
 }.
-\]
+$$
 
 Esta prueba analiza si los patrones de error difieren.
 
@@ -799,15 +799,15 @@ Esta prueba analiza si los patrones de error difieren.
 
 Si el error observado es
 
-\[
+$$
 \widehat{p}
 =
 \frac{e}{m},
-\]
+$$
 
 una aproximación del error estándar es
 
-\[
+$$
 SE(\widehat{p})
 =
 \sqrt{
@@ -817,16 +817,16 @@ SE(\widehat{p})
 m
 }
 }.
-\]
+$$
 
 Una aproximación normal es
 
-\[
+$$
 \widehat{p}
 \pm
 z_{\alpha/2}
 SE(\widehat{p}).
-\]
+$$
 
 Para muestras pequeñas o proporciones extremas son preferibles métodos como Wilson.
 
@@ -834,26 +834,26 @@ Para muestras pequeñas o proporciones extremas son preferibles métodos como Wi
 
 Para pérdidas
 
-\[
+$$
 \ell_1,\ldots,\ell_m,
-\]
+$$
 
 el error medio es
 
-\[
+$$
 \overline{\ell}
 =
 \frac{1}{m}
 \sum_{i=1}^{m}\ell_i.
-\]
+$$
 
 Su error estándar aproximado es
 
-\[
+$$
 SE(\overline{\ell})
 =
 \frac{s_\ell}{\sqrt{m}},
-\]
+$$
 
 si las observaciones de prueba son independientes.
 
@@ -888,7 +888,7 @@ Elegir la métrica después de observar resultados puede introducir sesgo.
 
 ### Error cuadrático medio
 
-\[
+$$
 MSE
 =
 \frac{1}{m}
@@ -896,29 +896,29 @@ MSE
 (
 y_i-\widehat{y}_i
 )^2.
-\]
+$$
 
 ### Raíz del error cuadrático medio
 
-\[
+$$
 RMSE
 =
 \sqrt{MSE}.
-\]
+$$
 
 ### Error absoluto medio
 
-\[
+$$
 MAE
 =
 \frac{1}{m}
 \sum_{i=1}^{m}
 |y_i-\widehat{y}_i|.
-\]
+$$
 
 ### Coeficiente de determinación
 
-\[
+$$
 R^2
 =
 1-
@@ -927,9 +927,9 @@ R^2
 }{
 \sum_i(y_i-\overline{y})^2
 }.
-\]
+$$
 
-En prueba, \(R^2\) puede ser negativo.
+En prueba, $R^2$ puede ser negativo.
 
 ## Evaluación en clasificación
 
@@ -979,27 +979,27 @@ mae
 
 Considere seis observaciones divididas en tres pliegues:
 
-\[
+$$
 I_1=\{1,2\},
 \quad
 I_2=\{3,4\},
 \quad
 I_3=\{5,6\}.
-\]
+$$
 
 Los errores de validación son:
 
-\[
+$$
 \widehat{R}_1=2.0,
 \quad
 \widehat{R}_2=3.5,
 \quad
 \widehat{R}_3=2.5.
-\]
+$$
 
 Entonces,
 
-\[
+$$
 CV_3
 =
 \frac{2.0+3.5+2.5}{3}
@@ -1007,29 +1007,29 @@ CV_3
 \frac{8}{3}
 \approx
 2.67.
-\]
+$$
 
 ## Ejemplo de fuga de información
 
 Supóngase que se estandariza una variable usando:
 
-\[
+$$
 \widehat{\mu}_{total}
 =
 \frac{1}{n}
 \sum_{i=1}^{n}x_i.
-\]
+$$
 
 Si esta media incluye observaciones de prueba, el entrenamiento utiliza indirectamente información futura.
 
 La transformación correcta usa:
 
-\[
+$$
 \widehat{\mu}_{train}
 =
 \frac{1}{n_{train}}
 \sum_{i\in train}x_i.
-\]
+$$
 
 ## Diseño recomendado de evaluación
 
@@ -1061,7 +1061,7 @@ Un procedimiento robusto puede ser:
 1. Explique la diferencia entre entrenamiento, validación y prueba.
 2. ¿Por qué el error de entrenamiento es optimista?
 3. ¿Qué ventaja ofrece la validación cruzada?
-4. ¿Qué diferencia existe entre \(K\)-fold y LOOCV?
+4. ¿Qué diferencia existe entre $K$-fold y LOOCV?
 5. ¿Por qué debe utilizarse estratificación?
 6. ¿Qué es fuga de información?
 7. ¿Por qué el preprocesamiento debe realizarse dentro de cada pliegue?
@@ -1071,9 +1071,9 @@ Un procedimiento robusto puede ser:
 
 ## Ejercicio de holdout
 
-Una muestra contiene \(1\,000\) observaciones.
+Una muestra contiene $1\,000$ observaciones.
 
-1. Calcule los tamaños para una división \(70\%-15\%-15\%\).
+1. Calcule los tamaños para una división $70\%-15\%-15\%$.
 2. Explique el uso de cada subconjunto.
 3. Proponga una alternativa usando validación cruzada.
 4. Analice qué ocurriría si solo existen 40 observaciones positivas.
@@ -1082,9 +1082,9 @@ Una muestra contiene \(1\,000\) observaciones.
 
 Los errores de cinco pliegues son:
 
-\[
+$$
 0.18,\ 0.22,\ 0.20,\ 0.25,\ 0.15.
-\]
+$$
 
 Calcule:
 
@@ -1095,7 +1095,7 @@ Calcule:
 
 ## Ejercicio bootstrap
 
-Para \(n=100\):
+Para $n=100$:
 
 1. calcule aproximadamente la proporción esperada de observaciones no seleccionadas;
 2. calcule la cantidad esperada de observaciones out-of-bag;
@@ -1106,7 +1106,7 @@ Para \(n=100\):
 
 Se obtienen los siguientes errores:
 
-| \(\lambda\) | Error CV | Error estándar |
+| $\lambda$ | Error CV | Error estándar |
 |---:|---:|---:|
 | 0.01 | 0.245 | 0.012 |
 | 0.10 | 0.228 | 0.010 |
@@ -1149,6 +1149,6 @@ Diseñe un procedimiento que incluya:
 
 En este capítulo se desarrollaron los fundamentos de evaluación y selección de modelos. Se distinguieron error de entrenamiento, validación, prueba y generalización.
 
-También se estudiaron holdout, validación cruzada de \(K\) pliegues, leave-one-out, validación repetida, validación agrupada y evaluación temporal.
+También se estudiaron holdout, validación cruzada de $K$ pliegues, leave-one-out, validación repetida, validación agrupada y evaluación temporal.
 
 Finalmente, se introdujeron bootstrap, error out-of-bag, selección de hiperparámetros, validación anidada, fuga de información, pipelines, comparación de modelos y reproducibilidad. Estas herramientas son indispensables para obtener evaluaciones confiables y evitar conclusiones optimistas.

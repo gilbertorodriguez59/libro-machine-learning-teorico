@@ -98,3 +98,18 @@
 - Metadatos de repositorio y sitio web.
 - Archivos BAT para primera publicación y actualizaciones posteriores.
 
+## Versión estable 1.1
+
+- Se agregó el botón de descarga del PDF en la barra lateral del libro web.
+- Se definió el archivo `fundamentos-matematicos-aprendizaje-automatico.pdf`.
+- Los archivos de publicación ahora generan simultáneamente HTML y PDF.
+- Se agregó `GENERAR_PDF.bat` para comprobar y generar únicamente el PDF.
+- Se añadieron instrucciones para instalar TinyTeX cuando sea necesario.
+
+## Versión estable 1.3
+
+- Se eliminaron fórmulas matemáticas de los encabezados de sección.
+- Se corrigió el encabezado `lambda_max` que provocaba `Argument of \@sect has an extra }`.
+- Se reemplazaron otros encabezados matemáticos potencialmente problemáticos para prevenir nuevos errores en LaTeX.
+- Las fórmulas permanecen dentro del contenido de cada sección.
+

@@ -8,9 +8,11 @@ book:
   site-url: "https://gilbertorodriguez59.github.io/libro-machine-learning-teorico/"
   repo-url: "https://github.com/gilbertorodriguez59/libro-machine-learning-teorico"
   repo-actions: [edit, issue]
+  downloads: [pdf]
   title: "Fundamentos Matemáticos del Aprendizaje Automático"
   subtitle: "Teoría, demostraciones y formulación rigurosa de los métodos de regresión, clasificación y análisis de datos"
   author: "MI Jesús Gilberto Rodríguez Escobedo"
+  output-file: "fundamentos-matematicos-aprendizaje-automatico"
   date: today
 
   chapters:

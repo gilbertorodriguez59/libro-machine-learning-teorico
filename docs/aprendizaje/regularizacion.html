@@ -332,8 +332,9 @@ window.Quarto = {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Fundamentos Matemáticos del Aprendizaje Automático</a> 
-        <div class="sidebar-tools-main">
+        <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/gilbertorodriguez59/libro-machine-learning-teorico" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
+    <a href="../fundamentos-matematicos-aprendizaje-automatico.pdf" title="Descargar PDF" class="quarto-navigation-tool px-1" aria-label="Descargar PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
 </div>
     </div>
@@ -588,7 +589,7 @@ window.Quarto = {
   <li><a href="#motivación" id="toc-motivación" class="nav-link" data-scroll-target="#motivación"><span class="header-section-number">12.3</span> Motivación</a></li>
   <li><a href="#problemas-de-multicolinealidad" id="toc-problemas-de-multicolinealidad" class="nav-link" data-scroll-target="#problemas-de-multicolinealidad"><span class="header-section-number">12.4</span> Problemas de multicolinealidad</a></li>
   <li><a href="#problema-penalizado-general" id="toc-problema-penalizado-general" class="nav-link" data-scroll-target="#problema-penalizado-general"><span class="header-section-number">12.5</span> Problema penalizado general</a></li>
-  <li><a href="#interpretación-del-parámetro" id="toc-interpretación-del-parámetro" class="nav-link" data-scroll-target="#interpretación-del-parámetro"><span class="header-section-number">12.6</span> Interpretación del parámetro ()</a></li>
+  <li><a href="#interpretación-del-parámetro-de-regularización" id="toc-interpretación-del-parámetro-de-regularización" class="nav-link" data-scroll-target="#interpretación-del-parámetro-de-regularización"><span class="header-section-number">12.6</span> Interpretación del parámetro de regularización</a></li>
   <li><a href="#formulación-restringida" id="toc-formulación-restringida" class="nav-link" data-scroll-target="#formulación-restringida"><span class="header-section-number">12.7</span> Formulación restringida</a></li>
   <li><a href="#regresión-ridge" id="toc-regresión-ridge" class="nav-link" data-scroll-target="#regresión-ridge"><span class="header-section-number">12.8</span> Regresión ridge</a></li>
   <li><a href="#forma-matricial-de-ridge" id="toc-forma-matricial-de-ridge" class="nav-link" data-scroll-target="#forma-matricial-de-ridge"><span class="header-section-number">12.9</span> Forma matricial de ridge</a></li>
@@ -614,8 +615,8 @@ window.Quarto = {
   <li><a href="#casos-particulares" id="toc-casos-particulares" class="nav-link" data-scroll-target="#casos-particulares"><span class="header-section-number">12.29</span> Casos particulares</a></li>
   <li><a href="#ventaja-de-elastic-net" id="toc-ventaja-de-elastic-net" class="nav-link" data-scroll-target="#ventaja-de-elastic-net"><span class="header-section-number">12.30</span> Ventaja de elastic net</a></li>
   <li><a href="#caminos-de-regularización" id="toc-caminos-de-regularización" class="nav-link" data-scroll-target="#caminos-de-regularización"><span class="header-section-number">12.31</span> Caminos de regularización</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">12.32</span> (_{})</a></li>
-  <li><a href="#selección-de" id="toc-selección-de" class="nav-link" data-scroll-target="#selección-de"><span class="header-section-number">12.33</span> Selección de ()</a></li>
+  <li><a href="#valor-máximo-del-parámetro-de-regularización" id="toc-valor-máximo-del-parámetro-de-regularización" class="nav-link" data-scroll-target="#valor-máximo-del-parámetro-de-regularización"><span class="header-section-number">12.32</span> Valor máximo del parámetro de regularización</a></li>
+  <li><a href="#selección-del-parámetro-de-regularización" id="toc-selección-del-parámetro-de-regularización" class="nav-link" data-scroll-target="#selección-del-parámetro-de-regularización"><span class="header-section-number">12.33</span> Selección del parámetro de regularización</a></li>
   <li><a href="#ridge-como-estimación-bayesiana" id="toc-ridge-como-estimación-bayesiana" class="nav-link" data-scroll-target="#ridge-como-estimación-bayesiana"><span class="header-section-number">12.34</span> Ridge como estimación bayesiana</a></li>
   <li><a href="#lasso-como-estimación-bayesiana" id="toc-lasso-como-estimación-bayesiana" class="nav-link" data-scroll-target="#lasso-como-estimación-bayesiana"><span class="header-section-number">12.35</span> LASSO como estimación bayesiana</a></li>
   <li><a href="#regularización-en-regresión-logística" id="toc-regularización-en-regresión-logística" class="nav-link" data-scroll-target="#regularización-en-regresión-logística"><span class="header-section-number">12.36</span> Regularización en regresión logística</a></li>
@@ -693,31 +694,53 @@ window.Quarto = {
 <li>formular problemas penalizados;</li>
 <li>relacionar penalización y restricción;</li>
 <li>derivar el estimador ridge;</li>
-<li>interpretar la penalización (L_2);</li>
+<li>interpretar la penalización <span class="math inline">\(L_2\)</span>;</li>
 <li>formular el problema LASSO;</li>
-<li>interpretar la penalización (L_1);</li>
+<li>interpretar la penalización <span class="math inline">\(L_1\)</span>;</li>
 <li>comprender por qué LASSO produce coeficientes exactamente iguales a cero;</li>
 <li>formular elastic net;</li>
 <li>analizar el efecto del parámetro de regularización;</li>
 <li>comprender la relación entre regularización, sesgo y varianza;</li>
 <li>interpretar regularización desde un punto de vista bayesiano;</li>
-<li>seleccionar () mediante validación;</li>
+<li>seleccionar <span class="math inline">\(\lambda\)</span> mediante validación;</li>
 <li>reconocer limitaciones y precauciones prácticas.</li>
 </ol>
 </section>
 <section id="motivación" class="level2" data-number="12.3">
 <h2 data-number="12.3" class="anchored" data-anchor-id="motivación"><span class="header-section-number">12.3</span> Motivación</h2>
 <p>Considere el modelo lineal</p>
-<p>[ = + . ]</p>
+<p><span class="math display">\[
+\mathbf{y}
+=
+\mathbf{X}\boldsymbol{\beta}
++
+\boldsymbol{\varepsilon}.
+\]</span></p>
 <p>El estimador de mínimos cuadrados es</p>
-<p>[ <em>{OLS} = </em>{} | - |_2^2. ]</p>
-<p>Si (^{T}) es invertible,</p>
-<p>[ _{OLS} = ( ^{T} )^{-1} ^{T}. ]</p>
+<p><span class="math display">\[
+\widehat{\boldsymbol{\beta}}_{OLS}
+=
+\arg\min_{\boldsymbol{\beta}}
+\left\|
+\mathbf{y}
+-
+\mathbf{X}\boldsymbol{\beta}
+\right\|_2^2.
+\]</span></p>
+<p>Si <span class="math inline">\(\mathbf{X}^{\mathsf T}\mathbf{X}\)</span> es invertible,</p>
+<p><span class="math display">\[
+\widehat{\boldsymbol{\beta}}_{OLS}
+=
+\left(
+\mathbf{X}^{\mathsf T}\mathbf{X}
+\right)^{-1}
+\mathbf{X}^{\mathsf T}\mathbf{y}.
+\]</span></p>
 <p>Sin embargo, este estimador puede presentar problemas cuando:</p>
 <ul>
 <li>existen variables altamente correlacionadas;</li>
-<li>(p) es grande;</li>
-<li>(pn);</li>
+<li><span class="math inline">\(p\)</span> es grande;</li>
+<li><span class="math inline">\(p\geq n\)</span>;</li>
 <li>hay ruido considerable;</li>
 <li>el modelo tiene demasiada flexibilidad;</li>
 <li>se desea seleccionar variables.</li>
@@ -725,8 +748,10 @@ window.Quarto = {
 </section>
 <section id="problemas-de-multicolinealidad" class="level2" data-number="12.4">
 <h2 data-number="12.4" class="anchored" data-anchor-id="problemas-de-multicolinealidad"><span class="header-section-number">12.4</span> Problemas de multicolinealidad</h2>
-<p>Cuando algunas columnas de () están altamente correlacionadas, la matriz</p>
-<p>[ ^{T} ]</p>
+<p>Cuando algunas columnas de <span class="math inline">\(\mathbf{X}\)</span> están altamente correlacionadas, la matriz</p>
+<p><span class="math display">\[
+\mathbf{X}^{\mathsf T}\mathbf{X}
+\]</span></p>
 <p>puede estar mal condicionada.</p>
 <p>Esto provoca:</p>
 <ul>
@@ -741,22 +766,34 @@ window.Quarto = {
 <h2 data-number="12.5" class="anchored" data-anchor-id="problema-penalizado-general"><span class="header-section-number">12.5</span> Problema penalizado general</h2>
 <div id="def-regularizacion-general" class="theorem definition">
 <p><span class="theorem-title"><strong>Definición 12.1</strong></span> Un problema de regularización tiene la forma</p>
-<p>[ = _{} { L() + () }, ]</p>
+<p><span class="math display">\[
+\widehat{\boldsymbol{\beta}}
+=
+\arg\min_{\boldsymbol{\beta}}
+\left\{
+L(\boldsymbol{\beta})
++
+\lambda
+\Omega(\boldsymbol{\beta})
+\right\},
+\]</span></p>
 <p>donde:</p>
 <ul>
-<li>(L()) es la pérdida;</li>
-<li>(()) mide complejidad;</li>
-<li>() controla la intensidad de regularización.</li>
+<li><span class="math inline">\(L(\boldsymbol{\beta})\)</span> es la pérdida;</li>
+<li><span class="math inline">\(\Omega(\boldsymbol{\beta})\)</span> mide complejidad;</li>
+<li><span class="math inline">\(\lambda\geq 0\)</span> controla la intensidad de regularización.</li>
 </ul>
 </div>
 <p>Cuando</p>
-<p>[ , ]</p>
+<p><span class="math display">\[
+\lambda=0,
+\]</span></p>
 <p>se recupera el modelo sin penalización.</p>
-<p>Cuando () aumenta, la penalización adquiere mayor peso.</p>
+<p>Cuando <span class="math inline">\(\lambda\)</span> aumenta, la penalización adquiere mayor peso.</p>
 </section>
-<section id="interpretación-del-parámetro" class="level2" data-number="12.6">
-<h2 data-number="12.6" class="anchored" data-anchor-id="interpretación-del-parámetro"><span class="header-section-number">12.6</span> Interpretación del parámetro ()</h2>
-<p>Un valor pequeño de ():</p>
+<section id="interpretación-del-parámetro-de-regularización" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="interpretación-del-parámetro-de-regularización"><span class="header-section-number">12.6</span> Interpretación del parámetro de regularización</h2>
+<p>Un valor pequeño de <span class="math inline">\(\lambda\)</span>:</p>
 <ul>
 <li>permite mayor flexibilidad;</li>
 <li>reduce sesgo;</li>
@@ -773,77 +810,217 @@ window.Quarto = {
 <section id="formulación-restringida" class="level2" data-number="12.7">
 <h2 data-number="12.7" class="anchored" data-anchor-id="formulación-restringida"><span class="header-section-number">12.7</span> Formulación restringida</h2>
 <p>El problema penalizado puede relacionarse con</p>
-<p>[ _{} L() ]</p>
+<p><span class="math display">\[
+\min_{\boldsymbol{\beta}}
+L(\boldsymbol{\beta})
+\]</span></p>
 <p>sujeto a</p>
-<p>[ () t. ]</p>
-<p>Existe una correspondencia entre () y (t), bajo condiciones regulares.</p>
-<p>La forma penalizada utiliza (); la forma restringida limita directamente la complejidad.</p>
+<p><span class="math display">\[
+\Omega(\boldsymbol{\beta})
+\leq t.
+\]</span></p>
+<p>Existe una correspondencia entre <span class="math inline">\(\lambda\)</span> y <span class="math inline">\(t\)</span>, bajo condiciones regulares.</p>
+<p>La forma penalizada utiliza <span class="math inline">\(\lambda\)</span>; la forma restringida limita directamente la complejidad.</p>
 </section>
 <section id="regresión-ridge" class="level2" data-number="12.8">
 <h2 data-number="12.8" class="anchored" data-anchor-id="regresión-ridge"><span class="header-section-number">12.8</span> Regresión ridge</h2>
 <div id="def-ridge" class="theorem definition">
 <p><span class="theorem-title"><strong>Definición 12.2</strong></span> La regresión ridge minimiza</p>
-<p>[ J_{ridge}() = | - |_2^2 + | |_2^2. ]</p>
+<p><span class="math display">\[
+J_{ridge}(\boldsymbol{\beta})
+=
+\left\|
+\mathbf{y}
+-
+\mathbf{X}\boldsymbol{\beta}
+\right\|_2^2
++
+\lambda
+\left\|
+\boldsymbol{\beta}
+\right\|_2^2.
+\]</span></p>
 </div>
 <p>La penalización es</p>
-<p>[ | |<em>2^2 = </em>{j=1}^{p} _j^2. ]</p>
+<p><span class="math display">\[
+\left\|
+\boldsymbol{\beta}
+\right\|_2^2
+=
+\sum_{j=1}^{p}
+\beta_j^2.
+\]</span></p>
 <p>Habitualmente el intercepto no se penaliza.</p>
 </section>
 <section id="forma-matricial-de-ridge" class="level2" data-number="12.9">
 <h2 data-number="12.9" class="anchored" data-anchor-id="forma-matricial-de-ridge"><span class="header-section-number">12.9</span> Forma matricial de ridge</h2>
 <p>La función objetivo puede escribirse como</p>
-<p>[ J_{ridge}() = (-)^{T} (-) + ^{T}. ]</p>
+<p><span class="math display">\[
+J_{ridge}(\boldsymbol{\beta})
+=
+(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})^{\mathsf T}
+(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})
++
+\lambda
+\boldsymbol{\beta}^{\mathsf T}\boldsymbol{\beta}.
+\]</span></p>
 </section>
 <section id="derivación-del-estimador-ridge" class="level2" data-number="12.10">
 <h2 data-number="12.10" class="anchored" data-anchor-id="derivación-del-estimador-ridge"><span class="header-section-number">12.10</span> Derivación del estimador ridge</h2>
-<p>Derivando respecto de (),</p>
-<p>[ J_{ridge} = -2^{T} (-) + 2. ]</p>
+<p>Derivando respecto de <span class="math inline">\(\boldsymbol{\beta}\)</span>,</p>
+<p><span class="math display">\[
+\nabla J_{ridge}
+=
+-2\mathbf{X}^{\mathsf T}
+(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})
++
+2\lambda\boldsymbol{\beta}.
+\]</span></p>
 <p>Igualando a cero,</p>
-<p>[ -2^{T} + 2^{T} + 2 = . ]</p>
+<p><span class="math display">\[
+-2\mathbf{X}^{\mathsf T}\mathbf{y}
++
+2\mathbf{X}^{\mathsf T}\mathbf{X}\boldsymbol{\beta}
++
+2\lambda\boldsymbol{\beta}
+=
+\mathbf{0}.
+\]</span></p>
 <p>Entonces,</p>
-<p>[ ( ^{T} + ) = ^{T}. ]</p>
+<p><span class="math display">\[
+\left(
+\mathbf{X}^{\mathsf T}\mathbf{X}
++
+\lambda\mathbf{I}
+\right)
+\boldsymbol{\beta}
+=
+\mathbf{X}^{\mathsf T}\mathbf{y}.
+\]</span></p>
 <p>Por tanto,</p>
-<p>[ _{ridge} = ( ^{T} + )^{-1} ^{T}. ]</p>
+<p><span class="math display">\[
+\widehat{\boldsymbol{\beta}}_{ridge}
+=
+\left(
+\mathbf{X}^{\mathsf T}\mathbf{X}
++
+\lambda\mathbf{I}
+\right)^{-1}
+\mathbf{X}^{\mathsf T}\mathbf{y}.
+\]</span></p>
 </section>
 <section id="efecto-sobre-la-invertibilidad" class="level2" data-number="12.11">
 <h2 data-number="12.11" class="anchored" data-anchor-id="efecto-sobre-la-invertibilidad"><span class="header-section-number">12.11</span> Efecto sobre la invertibilidad</h2>
 <p>Incluso si</p>
-<p>[ ^{T} ]</p>
-<p>es singular, para (&gt;0),</p>
-<p>[ ^{T} + ]</p>
+<p><span class="math display">\[
+\mathbf{X}^{\mathsf T}\mathbf{X}
+\]</span></p>
+<p>es singular, para <span class="math inline">\(\lambda&gt;0\)</span>,</p>
+<p><span class="math display">\[
+\mathbf{X}^{\mathsf T}\mathbf{X}
++
+\lambda\mathbf{I}
+\]</span></p>
 <p>es definida positiva y, por tanto, invertible.</p>
 <p>Esta es una ventaja fundamental de ridge.</p>
 </section>
 <section id="interpretación-espectral" class="level2" data-number="12.12">
 <h2 data-number="12.12" class="anchored" data-anchor-id="interpretación-espectral"><span class="header-section-number">12.12</span> Interpretación espectral</h2>
 <p>Supóngase que</p>
-<p>[ ^{T} = ^{T}, ]</p>
+<p><span class="math display">\[
+\mathbf{X}^{\mathsf T}\mathbf{X}
+=
+\mathbf{Q}
+\boldsymbol{\Lambda}
+\mathbf{Q}^{\mathsf T},
+\]</span></p>
 <p>donde</p>
-<p>[ = (_1,,_p). ]</p>
+<p><span class="math display">\[
+\boldsymbol{\Lambda}
+=
+\operatorname{diag}
+(\mu_1,\ldots,\mu_p).
+\]</span></p>
 <p>Entonces,</p>
-<p>[ ( ^{T} + )^{-1} = ( ) ^{T}. ]</p>
+<p><span class="math display">\[
+\left(
+\mathbf{X}^{\mathsf T}\mathbf{X}
++
+\lambda\mathbf{I}
+\right)^{-1}
+=
+\mathbf{Q}
+\operatorname{diag}
+\left(
+\frac{1}{\mu_j+\lambda}
+\right)
+\mathbf{Q}^{\mathsf T}.
+\]</span></p>
 <p>Ridge reduce con mayor intensidad las direcciones asociadas a valores propios pequeños.</p>
 </section>
 <section id="factores-de-contracción" class="level2" data-number="12.13">
 <h2 data-number="12.13" class="anchored" data-anchor-id="factores-de-contracción"><span class="header-section-number">12.13</span> Factores de contracción</h2>
 <p>En las coordenadas principales, el factor de contracción es</p>
-<p>[ . ]</p>
+<p><span class="math display">\[
+\frac{\mu_j}{\mu_j+\lambda}.
+\]</span></p>
 <p>Se cumple</p>
-<p>[ 0 &lt; 1. ]</p>
-<p>Cuando (_j) es pequeño, la contracción es mayor.</p>
+<p><span class="math display">\[
+0
+\leq
+\frac{\mu_j}{\mu_j+\lambda}
+&lt;
+1.
+\]</span></p>
+<p>Cuando <span class="math inline">\(\mu_j\)</span> es pequeño, la contracción es mayor.</p>
 </section>
 <section id="sesgo-de-ridge" class="level2" data-number="12.14">
 <h2 data-number="12.14" class="anchored" data-anchor-id="sesgo-de-ridge"><span class="header-section-number">12.14</span> Sesgo de ridge</h2>
-<p>Condicionado a (),</p>
-<p>[ [ _{ridge}] = ( ^{T} + )^{-1} ^{T} . ]</p>
-<p>Por tanto, ridge es sesgado cuando (&gt;0).</p>
+<p>Condicionado a <span class="math inline">\(\mathbf{X}\)</span>,</p>
+<p><span class="math display">\[
+\mathbb{E}
+[
+\widehat{\boldsymbol{\beta}}_{ridge}
+]
+=
+\left(
+\mathbf{X}^{\mathsf T}\mathbf{X}
++
+\lambda\mathbf{I}
+\right)^{-1}
+\mathbf{X}^{\mathsf T}\mathbf{X}
+\boldsymbol{\beta}.
+\]</span></p>
+<p>Por tanto, ridge es sesgado cuando <span class="math inline">\(\lambda&gt;0\)</span>.</p>
 </section>
 <section id="varianza-de-ridge" class="level2" data-number="12.15">
 <h2 data-number="12.15" class="anchored" data-anchor-id="varianza-de-ridge"><span class="header-section-number">12.15</span> Varianza de ridge</h2>
 <p>Si</p>
-<p>[ () = ^2, ]</p>
+<p><span class="math display">\[
+\operatorname{Var}(\boldsymbol{\varepsilon})
+=
+\sigma^2\mathbf{I},
+\]</span></p>
 <p>entonces</p>
-<p>[ ( _{ridge} ) = ^2 ( ^{T} + )^{-1} ^{T} ( ^{T} + )^{-1}. ]</p>
+<p><span class="math display">\[
+\operatorname{Var}
+(
+\widehat{\boldsymbol{\beta}}_{ridge}
+)
+=
+\sigma^2
+\left(
+\mathbf{X}^{\mathsf T}\mathbf{X}
++
+\lambda\mathbf{I}
+\right)^{-1}
+\mathbf{X}^{\mathsf T}\mathbf{X}
+\left(
+\mathbf{X}^{\mathsf T}\mathbf{X}
++
+\lambda\mathbf{I}
+\right)^{-1}.
+\]</span></p>
 <p>Ridge introduce sesgo, pero puede reducir considerablemente la varianza.</p>
 </section>
 <section id="ridge-y-el-compromiso-sesgo-varianza" class="level2" data-number="12.16">
@@ -854,40 +1031,96 @@ window.Quarto = {
 <section id="geometría-de-ridge" class="level2" data-number="12.17">
 <h2 data-number="12.17" class="anchored" data-anchor-id="geometría-de-ridge"><span class="header-section-number">12.17</span> Geometría de ridge</h2>
 <p>La forma restringida es</p>
-<p>[ _{} | - |_2^2 ]</p>
+<p><span class="math display">\[
+\min_{\boldsymbol{\beta}}
+\left\|
+\mathbf{y}
+-
+\mathbf{X}\boldsymbol{\beta}
+\right\|_2^2
+\]</span></p>
 <p>sujeto a</p>
-<p>[ _{j=1}^{p} _j^2 t. ]</p>
-<p>La región factible es una esfera o circunferencia (L_2).</p>
+<p><span class="math display">\[
+\sum_{j=1}^{p}
+\beta_j^2
+\leq
+t.
+\]</span></p>
+<p>La región factible es una esfera o circunferencia <span class="math inline">\(L_2\)</span>.</p>
 <p>La solución aparece donde una curva de nivel de la pérdida toca la región restringida.</p>
 </section>
 <section id="estandarización" class="level2" data-number="12.18">
 <h2 data-number="12.18" class="anchored" data-anchor-id="estandarización"><span class="header-section-number">12.18</span> Estandarización</h2>
 <p>Ridge depende de la escala de las variables.</p>
 <p>Antes de ajustar, suele utilizarse</p>
-<p>[ z_{ij} = . ]</p>
+<p><span class="math display">\[
+z_{ij}
+=
+\frac{
+x_{ij}-\overline{x}_j
+}{
+s_j
+}.
+\]</span></p>
 <p>Sin estandarización, las variables con escalas grandes reciben una penalización relativa diferente.</p>
 </section>
 <section id="lasso" class="level2" data-number="12.19">
 <h2 data-number="12.19" class="anchored" data-anchor-id="lasso"><span class="header-section-number">12.19</span> LASSO</h2>
 <div id="def-lasso" class="theorem definition">
 <p><span class="theorem-title"><strong>Definición 12.3</strong></span> LASSO minimiza</p>
-<p>[ J_{lasso}() = | - |_2^2 + | |_1. ]</p>
+<p><span class="math display">\[
+J_{lasso}(\boldsymbol{\beta})
+=
+\left\|
+\mathbf{y}
+-
+\mathbf{X}\boldsymbol{\beta}
+\right\|_2^2
++
+\lambda
+\left\|
+\boldsymbol{\beta}
+\right\|_1.
+\]</span></p>
 </div>
-<p>La norma (L_1) es</p>
-<p>[ | |<em>1 = </em>{j=1}^{p} |_j|. ]</p>
+<p>La norma <span class="math inline">\(L_1\)</span> es</p>
+<p><span class="math display">\[
+\left\|
+\boldsymbol{\beta}
+\right\|_1
+=
+\sum_{j=1}^{p}
+|\beta_j|.
+\]</span></p>
 </section>
 <section id="forma-restringida-de-lasso" class="level2" data-number="12.20">
 <h2 data-number="12.20" class="anchored" data-anchor-id="forma-restringida-de-lasso"><span class="header-section-number">12.20</span> Forma restringida de LASSO</h2>
-<p>[ _{} | - |_2^2 ]</p>
+<p><span class="math display">\[
+\min_{\boldsymbol{\beta}}
+\left\|
+\mathbf{y}
+-
+\mathbf{X}\boldsymbol{\beta}
+\right\|_2^2
+\]</span></p>
 <p>sujeto a</p>
-<p>[ _{j=1}^{p} |_j| t. ]</p>
+<p><span class="math display">\[
+\sum_{j=1}^{p}
+|\beta_j|
+\leq
+t.
+\]</span></p>
 </section>
 <section id="no-diferenciabilidad" class="level2" data-number="12.21">
 <h2 data-number="12.21" class="anchored" data-anchor-id="no-diferenciabilidad"><span class="header-section-number">12.21</span> No diferenciabilidad</h2>
 <p>La función</p>
-<p>[ || ]</p>
+<p><span class="math display">\[
+|\beta|
+\]</span></p>
 <p>no es diferenciable en</p>
-<p>[ . ]</p>
+<p><span class="math display">\[
+\beta=0.
+\]</span></p>
 <p>Por tanto, LASSO no posee una solución matricial cerrada análoga a ridge.</p>
 <p>Se utilizan métodos como:</p>
 <ul>
@@ -900,37 +1133,68 @@ window.Quarto = {
 <section id="subgradiente" class="level2" data-number="12.22">
 <h2 data-number="12.22" class="anchored" data-anchor-id="subgradiente"><span class="header-section-number">12.22</span> Subgradiente</h2>
 <p>Para</p>
-<p>[ g()=||, ]</p>
+<p><span class="math display">\[
+g(\beta)=|\beta|,
+\]</span></p>
 <p>el subgradiente es</p>
-[ g() =
-<span class="math display">\[\begin{cases}
+<p><span class="math display">\[
+\partial g(\beta)
+=
+\begin{cases}
 \{1\}, &amp; \beta&gt;0,\\
 [-1,1], &amp; \beta=0,\\
 \{-1\}, &amp; \beta&lt;0.
-\end{cases}\]</span>
-<p>]</p>
+\end{cases}
+\]</span></p>
 <p>Las condiciones óptimas se expresan mediante subgradientes.</p>
 </section>
 <section id="operador-soft-thresholding" class="level2" data-number="12.23">
 <h2 data-number="12.23" class="anchored" data-anchor-id="operador-soft-thresholding"><span class="header-section-number">12.23</span> Operador soft-thresholding</h2>
 <div id="def-soft-thresholding" class="theorem definition">
 <p><span class="theorem-title"><strong>Definición 12.4</strong></span> El operador de umbral suave se define como</p>
-<p>[ S(z,) = (z) { |z|-, 0 }. ]</p>
+<p><span class="math display">\[
+S(z,\gamma)
+=
+\operatorname{sign}(z)
+\max
+\{
+|z|-\gamma,
+0
+\}.
+\]</span></p>
 </div>
 <p>Este operador reduce la magnitud y puede producir exactamente cero.</p>
 </section>
 <section id="caso-ortonormal" class="level2" data-number="12.24">
 <h2 data-number="12.24" class="anchored" data-anchor-id="caso-ortonormal"><span class="header-section-number">12.24</span> Caso ortonormal</h2>
 <p>Si</p>
-<p>[ ^{T} = , ]</p>
+<p><span class="math display">\[
+\mathbf{X}^{\mathsf T}\mathbf{X}
+=
+\mathbf{I},
+\]</span></p>
 <p>la solución LASSO tiene la forma</p>
-<p>[ <em>j = S ( </em>{j,OLS}, ), ]</p>
+<p><span class="math display">\[
+\widehat{\beta}_j
+=
+S
+\left(
+\widehat{\beta}_{j,OLS},
+\frac{\lambda}{2}
+\right),
+\]</span></p>
 <p>según la convención de escala utilizada.</p>
 </section>
 <section id="geometría-de-lasso" class="level2" data-number="12.25">
 <h2 data-number="12.25" class="anchored" data-anchor-id="geometría-de-lasso"><span class="header-section-number">12.25</span> Geometría de LASSO</h2>
 <p>La región</p>
-<p>[ | |_1 t ]</p>
+<p><span class="math display">\[
+\left\|
+\boldsymbol{\beta}
+\right\|_1
+\leq
+t
+\]</span></p>
 <p>tiene forma de rombo en dos dimensiones.</p>
 <p>Sus vértices están sobre los ejes coordenados. Las curvas de nivel de la pérdida tienen mayor probabilidad de tocar un vértice.</p>
 <p>Por ello, LASSO produce coeficientes exactamente iguales a cero.</p>
@@ -938,8 +1202,10 @@ window.Quarto = {
 <section id="selección-de-variables" class="level2" data-number="12.26">
 <h2 data-number="12.26" class="anchored" data-anchor-id="selección-de-variables"><span class="header-section-number">12.26</span> Selección de variables</h2>
 <p>Si</p>
-<p>[ _j=0, ]</p>
-<p>la variable (j) queda excluida del modelo.</p>
+<p><span class="math display">\[
+\widehat{\beta}_j=0,
+\]</span></p>
+<p>la variable <span class="math inline">\(j\)</span> queda excluida del modelo.</p>
 <p>LASSO realiza simultáneamente:</p>
 <ul>
 <li>ajuste;</li>
@@ -952,7 +1218,7 @@ window.Quarto = {
 <p>LASSO puede presentar dificultades cuando:</p>
 <ul>
 <li>las variables están fuertemente correlacionadas;</li>
-<li>(pn);</li>
+<li><span class="math inline">\(p\gg n\)</span>;</li>
 <li>existen grupos de variables similares;</li>
 <li>la señal está distribuida entre muchas variables pequeñas.</li>
 </ul>
@@ -961,24 +1227,67 @@ window.Quarto = {
 <section id="elastic-net" class="level2" data-number="12.28">
 <h2 data-number="12.28" class="anchored" data-anchor-id="elastic-net"><span class="header-section-number">12.28</span> Elastic net</h2>
 <div id="def-elastic-net" class="theorem definition">
-<p><span class="theorem-title"><strong>Definición 12.5</strong></span> Elastic net combina penalizaciones (L_1) y (L_2):</p>
-<p>[ J_{EN}() = | - |_2^2 + _1 | |_1 + _2 | |_2^2. ]</p>
+<p><span class="theorem-title"><strong>Definición 12.5</strong></span> Elastic net combina penalizaciones <span class="math inline">\(L_1\)</span> y <span class="math inline">\(L_2\)</span>:</p>
+<p><span class="math display">\[
+J_{EN}(\boldsymbol{\beta})
+=
+\left\|
+\mathbf{y}
+-
+\mathbf{X}\boldsymbol{\beta}
+\right\|_2^2
++
+\lambda_1
+\left\|
+\boldsymbol{\beta}
+\right\|_1
++
+\lambda_2
+\left\|
+\boldsymbol{\beta}
+\right\|_2^2.
+\]</span></p>
 </div>
 <p>Otra parametrización es</p>
-<p>[ J_{EN}() = L() + , ]</p>
+<p><span class="math display">\[
+J_{EN}(\boldsymbol{\beta})
+=
+L(\boldsymbol{\beta})
++
+\lambda
+\left[
+\alpha
+\left\|
+\boldsymbol{\beta}
+\right\|_1
++
+(1-\alpha)
+\left\|
+\boldsymbol{\beta}
+\right\|_2^2
+\right],
+\]</span></p>
 <p>con</p>
-<p>[ 0. ]</p>
+<p><span class="math display">\[
+0\leq\alpha\leq 1.
+\]</span></p>
 </section>
 <section id="casos-particulares" class="level2" data-number="12.29">
 <h2 data-number="12.29" class="anchored" data-anchor-id="casos-particulares"><span class="header-section-number">12.29</span> Casos particulares</h2>
 <p>Si</p>
-<p>[ , ]</p>
+<p><span class="math display">\[
+\alpha=1,
+\]</span></p>
 <p>se obtiene LASSO.</p>
 <p>Si</p>
-<p>[ , ]</p>
+<p><span class="math display">\[
+\alpha=0,
+\]</span></p>
 <p>se obtiene ridge.</p>
 <p>Si</p>
-<p>[ 0&lt;&lt;1, ]</p>
+<p><span class="math display">\[
+0&lt;\alpha&lt;1,
+\]</span></p>
 <p>se obtiene elastic net.</p>
 </section>
 <section id="ventaja-de-elastic-net" class="level2" data-number="12.30">
@@ -987,50 +1296,107 @@ window.Quarto = {
 <ul>
 <li>seleccionar variables;</li>
 <li>estabilizar grupos correlacionados;</li>
-<li>funcionar mejor cuando (p&gt;n);</li>
+<li>funcionar mejor cuando <span class="math inline">\(p&gt;n\)</span>;</li>
 <li>combinar esparsidad y estabilidad.</li>
 </ul>
 </section>
 <section id="caminos-de-regularización" class="level2" data-number="12.31">
 <h2 data-number="12.31" class="anchored" data-anchor-id="caminos-de-regularización"><span class="header-section-number">12.31</span> Caminos de regularización</h2>
-<p>Al variar (), se obtiene una trayectoria</p>
-<p>[ (). ]</p>
-<p>Cuando (), la solución se aproxima al modelo no regularizado.</p>
-<p>Cuando (), los coeficientes tienden a cero.</p>
+<p>Al variar <span class="math inline">\(\lambda\)</span>, se obtiene una trayectoria</p>
+<p><span class="math display">\[
+\widehat{\boldsymbol{\beta}}(\lambda).
+\]</span></p>
+<p>Cuando <span class="math inline">\(\lambda\to 0\)</span>, la solución se aproxima al modelo no regularizado.</p>
+<p>Cuando <span class="math inline">\(\lambda\to\infty\)</span>, los coeficientes tienden a cero.</p>
 </section>
-<section id="section" class="level2" data-number="12.32">
-<h2 data-number="12.32" class="anchored" data-anchor-id="section"><span class="header-section-number">12.32</span> (_{})</h2>
+<section id="valor-máximo-del-parámetro-de-regularización" class="level2" data-number="12.32">
+<h2 data-number="12.32" class="anchored" data-anchor-id="valor-máximo-del-parámetro-de-regularización"><span class="header-section-number">12.32</span> Valor máximo del parámetro de regularización</h2>
 <p>En LASSO existe un valor suficientemente grande</p>
-<p>[ _{} ]</p>
+<p><span class="math display">\[
+\lambda_{\max}
+\]</span></p>
 <p>para el cual todos los coeficientes penalizados son cero.</p>
-<p>Los algoritmos suelen construir una secuencia decreciente desde (_{}).</p>
+<p>Los algoritmos suelen construir una secuencia decreciente desde <span class="math inline">\(\lambda_{\max}\)</span>.</p>
 </section>
-<section id="selección-de" class="level2" data-number="12.33">
-<h2 data-number="12.33" class="anchored" data-anchor-id="selección-de"><span class="header-section-number">12.33</span> Selección de ()</h2>
-<p>La práctica habitual es seleccionar () mediante validación cruzada:</p>
-<p>[ = _{} CV(). ]</p>
+<section id="selección-del-parámetro-de-regularización" class="level2" data-number="12.33">
+<h2 data-number="12.33" class="anchored" data-anchor-id="selección-del-parámetro-de-regularización"><span class="header-section-number">12.33</span> Selección del parámetro de regularización</h2>
+<p>La práctica habitual es seleccionar <span class="math inline">\(\lambda\)</span> mediante validación cruzada:</p>
+<p><span class="math display">\[
+\widehat{\lambda}
+=
+\arg\min_{\lambda}
+CV(\lambda).
+\]</span></p>
 <p>También puede utilizarse la regla de un error estándar para elegir una solución más regularizada y parsimoniosa.</p>
 </section>
 <section id="ridge-como-estimación-bayesiana" class="level2" data-number="12.34">
 <h2 data-number="12.34" class="anchored" data-anchor-id="ridge-como-estimación-bayesiana"><span class="header-section-number">12.34</span> Ridge como estimación bayesiana</h2>
 <p>Supóngase el modelo gaussiano</p>
-<p>[ N( , ^2 ). ]</p>
+<p><span class="math display">\[
+\mathbf{y}
+\mid
+\boldsymbol{\beta}
+\sim
+N(
+\mathbf{X}\boldsymbol{\beta},
+\sigma^2\mathbf{I}
+).
+\]</span></p>
 <p>Considérese la previa</p>
-<p>[ N( , ^2 ). ]</p>
+<p><span class="math display">\[
+\boldsymbol{\beta}
+\sim
+N(
+\mathbf{0},
+\tau^2\mathbf{I}
+).
+\]</span></p>
 <p>El estimador MAP minimiza</p>
-<p>[ | - |_2^2 + | |_2^2. ]</p>
+<p><span class="math display">\[
+\frac{1}{2\sigma^2}
+\left\|
+\mathbf{y}
+-
+\mathbf{X}\boldsymbol{\beta}
+\right\|_2^2
++
+\frac{1}{2\tau^2}
+\left\|
+\boldsymbol{\beta}
+\right\|_2^2.
+\]</span></p>
 <p>Por tanto, ridge corresponde a una previa normal.</p>
 </section>
 <section id="lasso-como-estimación-bayesiana" class="level2" data-number="12.35">
 <h2 data-number="12.35" class="anchored" data-anchor-id="lasso-como-estimación-bayesiana"><span class="header-section-number">12.35</span> LASSO como estimación bayesiana</h2>
 <p>Si la previa de cada coeficiente es Laplace,</p>
-<p>[ p(_j) ( - ), ]</p>
-<p>el estimador MAP conduce a una penalización (L_1).</p>
+<p><span class="math display">\[
+p(\beta_j)
+\propto
+\exp
+\left(
+-\frac{|\beta_j|}{b}
+\right),
+\]</span></p>
+<p>el estimador MAP conduce a una penalización <span class="math inline">\(L_1\)</span>.</p>
 </section>
 <section id="regularización-en-regresión-logística" class="level2" data-number="12.36">
 <h2 data-number="12.36" class="anchored" data-anchor-id="regularización-en-regresión-logística"><span class="header-section-number">12.36</span> Regularización en regresión logística</h2>
 <p>La pérdida logística penalizada es</p>
-<p>[ J() = - _{i=1}^{n} + (). ]</p>
+<p><span class="math display">\[
+J(\boldsymbol{\beta})
+=
+-
+\sum_{i=1}^{n}
+\left[
+y_i\log\pi_i
++
+(1-y_i)\log(1-\pi_i)
+\right]
++
+\lambda
+\Omega(\boldsymbol{\beta}).
+\]</span></p>
 <p>Puede utilizarse:</p>
 <ul>
 <li>ridge;</li>
@@ -1043,7 +1409,13 @@ window.Quarto = {
 <section id="weight-decay" class="level3" data-number="12.37.1">
 <h3 data-number="12.37.1" class="anchored" data-anchor-id="weight-decay"><span class="header-section-number">12.37.1</span> Weight decay</h3>
 <p>Se añade</p>
-<p>[ _l | ^{(l)} |_F^2. ]</p>
+<p><span class="math display">\[
+\lambda
+\sum_l
+\left\|
+\mathbf{W}^{(l)}
+\right\|_F^2.
+\]</span></p>
 </section>
 <section id="dropout" class="level3" data-number="12.37.2">
 <h3 data-number="12.37.2" class="anchored" data-anchor-id="dropout"><span class="header-section-number">12.37.2</span> Dropout</h3>
@@ -1084,12 +1456,33 @@ window.Quarto = {
 <section id="grados-de-libertad-efectivos" class="level2" data-number="12.40">
 <h2 data-number="12.40" class="anchored" data-anchor-id="grados-de-libertad-efectivos"><span class="header-section-number">12.40</span> Grados de libertad efectivos</h2>
 <p>En ridge, los valores ajustados son</p>
-<p>[ = _{}, ]</p>
+<p><span class="math display">\[
+\widehat{\mathbf{y}}
+=
+\mathbf{H}_{\lambda}\mathbf{y},
+\]</span></p>
 <p>donde</p>
-<p>[ _{} = ( ^{T} + )^{-1} ^{T}. ]</p>
+<p><span class="math display">\[
+\mathbf{H}_{\lambda}
+=
+\mathbf{X}
+\left(
+\mathbf{X}^{\mathsf T}\mathbf{X}
++
+\lambda\mathbf{I}
+\right)^{-1}
+\mathbf{X}^{\mathsf T}.
+\]</span></p>
 <p>Los grados de libertad efectivos son</p>
-<p>[ df() = ( _{} ). ]</p>
-<p>Al aumentar (), disminuyen los grados de libertad efectivos.</p>
+<p><span class="math display">\[
+df(\lambda)
+=
+\operatorname{tr}
+(
+\mathbf{H}_{\lambda}
+).
+\]</span></p>
+<p>Al aumentar <span class="math inline">\(\lambda\)</span>, disminuyen los grados de libertad efectivos.</p>
 </section>
 <section id="relación-con-la-estabilidad" class="level2" data-number="12.41">
 <h2 data-number="12.41" class="anchored" data-anchor-id="relación-con-la-estabilidad"><span class="header-section-number">12.41</span> Relación con la estabilidad</h2>
@@ -1108,16 +1501,27 @@ window.Quarto = {
 </section>
 <section id="group-lasso" class="level2" data-number="12.43">
 <h2 data-number="12.43" class="anchored" data-anchor-id="group-lasso"><span class="header-section-number">12.43</span> Group LASSO</h2>
-<p>Si los parámetros se agrupan en (G) bloques,</p>
-<p>[ _1,,_G, ]</p>
+<p>Si los parámetros se agrupan en <span class="math inline">\(G\)</span> bloques,</p>
+<p><span class="math display">\[
+\boldsymbol{\beta}_1,\ldots,\boldsymbol{\beta}_G,
+\]</span></p>
 <p>la penalización es</p>
-<p>[ _{g=1}^{G} w_g | _g |_2. ]</p>
+<p><span class="math display">\[
+\sum_{g=1}^{G}
+w_g
+\left\|
+\boldsymbol{\beta}_g
+\right\|_2.
+\]</span></p>
 <p>Puede eliminar grupos completos de variables.</p>
 </section>
 <section id="regularización-adaptativa" class="level2" data-number="12.44">
 <h2 data-number="12.44" class="anchored" data-anchor-id="regularización-adaptativa"><span class="header-section-number">12.44</span> Regularización adaptativa</h2>
 <p>Adaptive LASSO utiliza pesos:</p>
-<p>[ _{j=1}^{p} w_j|_j|. ]</p>
+<p><span class="math display">\[
+\sum_{j=1}^{p}
+w_j|\beta_j|.
+\]</span></p>
 <p>Los pesos pueden depender de estimaciones iniciales.</p>
 <p>Esto permite penalizar menos los coeficientes aparentemente importantes.</p>
 </section>
@@ -1186,40 +1590,51 @@ window.Quarto = {
 <section id="ejemplo-numérico-ridge" class="level2" data-number="12.47">
 <h2 data-number="12.47" class="anchored" data-anchor-id="ejemplo-numérico-ridge"><span class="header-section-number">12.47</span> Ejemplo numérico ridge</h2>
 <p>Considere</p>
-[ ^{T} =
-<span class="math display">\[\begin{pmatrix}
+<p><span class="math display">\[
+\mathbf{X}^{\mathsf T}\mathbf{X}
+=
+\begin{pmatrix}
 4 &amp; 3\\
 3 &amp; 2.5
-\end{pmatrix}\]</span>
-<p>, ]</p>
+\end{pmatrix},
+\]</span></p>
 <p>y</p>
-[ ^{T} =
-<span class="math display">\[\begin{pmatrix}
+<p><span class="math display">\[
+\mathbf{X}^{\mathsf T}\mathbf{y}
+=
+\begin{pmatrix}
 10\\
 8
-\end{pmatrix}\]</span>
-<p>. ]</p>
+\end{pmatrix}.
+\]</span></p>
 <p>Con</p>
-<p>[ , ]</p>
+<p><span class="math display">\[
+\lambda=1,
+\]</span></p>
 <p>se obtiene</p>
-[ ^{T} + =
-<span class="math display">\[\begin{pmatrix}
+<p><span class="math display">\[
+\mathbf{X}^{\mathsf T}\mathbf{X}
++
+\lambda\mathbf{I}
+=
+\begin{pmatrix}
 5 &amp; 3\\
 3 &amp; 3.5
-\end{pmatrix}\]</span>
-<p>. ]</p>
+\end{pmatrix}.
+\]</span></p>
 <p>La solución ridge es</p>
-[ _{ridge} =
-<span class="math display">\[\begin{pmatrix}
+<p><span class="math display">\[
+\widehat{\boldsymbol{\beta}}_{ridge}
+=
+\begin{pmatrix}
 5 &amp; 3\\
 3 &amp; 3.5
-\end{pmatrix}\]</span>
-^{-1}
-<span class="math display">\[\begin{pmatrix}
+\end{pmatrix}^{-1}
+\begin{pmatrix}
 10\\
 8
-\end{pmatrix}\]</span>
-<p>. ]</p>
+\end{pmatrix}.
+\]</span></p>
 <p>Este sistema es más estable que el sistema sin penalización.</p>
 </section>
 <section id="comparación-conceptual" class="level2" data-number="12.48">
@@ -1236,19 +1651,19 @@ window.Quarto = {
 <tbody>
 <tr class="odd">
 <td>Ridge</td>
-<td>(L_2)</td>
+<td><span class="math inline">\(L_2\)</span></td>
 <td>No exacta</td>
 <td>Alta</td>
 </tr>
 <tr class="even">
 <td>LASSO</td>
-<td>(L_1)</td>
+<td><span class="math inline">\(L_1\)</span></td>
 <td>Sí</td>
 <td>Puede ser inestable con correlación</td>
 </tr>
 <tr class="odd">
 <td>Elastic net</td>
-<td>(L_1+L_2)</td>
+<td><span class="math inline">\(L_1+L_2\)</span></td>
 <td>Sí</td>
 <td>Mayor con variables correlacionadas</td>
 </tr>
@@ -1260,14 +1675,14 @@ window.Quarto = {
 <ol type="1">
 <li>Penalizar variables sin estandarizarlas.</li>
 <li>Penalizar el intercepto sin intención.</li>
-<li>Seleccionar () usando el conjunto de prueba.</li>
+<li>Seleccionar <span class="math inline">\(\lambda\)</span> usando el conjunto de prueba.</li>
 <li>Interpretar coeficientes LASSO como evidencia causal.</li>
 <li>Suponer que LASSO siempre selecciona la variable correcta.</li>
 <li>Confundir coeficiente pequeño con irrelevancia absoluta.</li>
 <li>Ignorar la inestabilidad entre variables correlacionadas.</li>
 <li>Comparar soluciones obtenidas con escalas distintas.</li>
 <li>Utilizar regularización sin recalibrar el modelo cuando sea necesario.</li>
-<li>Reportar únicamente (_{min}) sin considerar parsimonia.</li>
+<li>Reportar únicamente <span class="math inline">\(\lambda_{min}\)</span> sin considerar parsimonia.</li>
 </ol>
 </section>
 <section id="ejercicios-conceptuales" class="level2" data-number="12.50">
@@ -1277,7 +1692,7 @@ window.Quarto = {
 <li>¿Cómo puede un estimador sesgado tener menor error cuadrático medio?</li>
 <li>¿Por qué ridge ayuda con multicolinealidad?</li>
 <li>¿Por qué LASSO produce coeficientes cero?</li>
-<li>Explique la diferencia geométrica entre (L_1) y (L_2).</li>
+<li>Explique la diferencia geométrica entre <span class="math inline">\(L_1\)</span> y <span class="math inline">\(L_2\)</span>.</li>
 <li>¿Qué ventaja ofrece elastic net?</li>
 <li>¿Por qué es necesaria la estandarización?</li>
 <li>¿Qué relación existe entre ridge y una previa normal?</li>
@@ -1288,25 +1703,35 @@ window.Quarto = {
 <section id="ejercicio-de-derivación-ridge" class="level2" data-number="12.51">
 <h2 data-number="12.51" class="anchored" data-anchor-id="ejercicio-de-derivación-ridge"><span class="header-section-number">12.51</span> Ejercicio de derivación ridge</h2>
 <p>Considere</p>
-<p>[ J() = (-)^{T} (-) + ^{T}. ]</p>
+<p><span class="math display">\[
+J(\boldsymbol{\beta})
+=
+(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})^{\mathsf T}
+(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})
++
+\lambda
+\boldsymbol{\beta}^{\mathsf T}\boldsymbol{\beta}.
+\]</span></p>
 <ol type="1">
 <li>Expanda la expresión.</li>
 <li>Calcule el gradiente.</li>
 <li>Iguale a cero.</li>
 <li>Obtenga la solución ridge.</li>
-<li>Explique por qué la matriz resultante es invertible para (&gt;0).</li>
+<li>Explique por qué la matriz resultante es invertible para <span class="math inline">\(\lambda&gt;0\)</span>.</li>
 </ol>
 </section>
 <section id="ejercicio-de-soft-thresholding" class="level2" data-number="12.52">
 <h2 data-number="12.52" class="anchored" data-anchor-id="ejercicio-de-soft-thresholding"><span class="header-section-number">12.52</span> Ejercicio de soft-thresholding</h2>
 <p>Calcule</p>
-<p>[ S(z,) ]</p>
+<p><span class="math display">\[
+S(z,\gamma)
+\]</span></p>
 <p>para:</p>
 <ol type="1">
-<li>(z=5), ();</li>
-<li>(z=-4), ();</li>
-<li>(z=1), ();</li>
-<li>(z=-0.5), ().</li>
+<li><span class="math inline">\(z=5\)</span>, <span class="math inline">\(\gamma=2\)</span>;</li>
+<li><span class="math inline">\(z=-4\)</span>, <span class="math inline">\(\gamma=1.5\)</span>;</li>
+<li><span class="math inline">\(z=1\)</span>, <span class="math inline">\(\gamma=2\)</span>;</li>
+<li><span class="math inline">\(z=-0.5\)</span>, <span class="math inline">\(\gamma=0.5\)</span>.</li>
 </ol>
 <p>Interprete cuándo el resultado es cero.</p>
 </section>
@@ -1316,7 +1741,7 @@ window.Quarto = {
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th style="text-align: right;">()</th>
+<th style="text-align: right;"><span class="math inline">\(\lambda\)</span></th>
 <th style="text-align: right;">Error CV</th>
 </tr>
 </thead>
@@ -1344,7 +1769,7 @@ window.Quarto = {
 </tbody>
 </table>
 <ol type="1">
-<li>Seleccione ().</li>
+<li>Seleccione <span class="math inline">\(\lambda\)</span>.</li>
 <li>Explique qué ocurre en valores muy pequeños.</li>
 <li>Explique qué ocurre en valores muy grandes.</li>
 <li>Relacione el patrón con sesgo y varianza.</li>
@@ -1371,7 +1796,7 @@ window.Quarto = {
 <li>Defina un modelo ridge.</li>
 <li>Defina un modelo LASSO.</li>
 <li>Defina un modelo elastic net.</li>
-<li>Diseñe la selección de () y ().</li>
+<li>Diseñe la selección de <span class="math inline">\(\lambda\)</span> y <span class="math inline">\(\alpha\)</span>.</li>
 <li>Explique qué métricas usaría.</li>
 <li>Indique cómo evitaría fuga de información.</li>
 <li>Explique cómo interpretaría los coeficientes.</li>
@@ -1381,8 +1806,8 @@ window.Quarto = {
 <section id="resumen" class="level2" data-number="12.56">
 <h2 data-number="12.56" class="anchored" data-anchor-id="resumen"><span class="header-section-number">12.56</span> Resumen</h2>
 <p>En este capítulo se estudió la regularización como mecanismo para controlar complejidad, reducir varianza y mejorar estabilidad.</p>
-<p>Se derivó el estimador ridge y se analizó su efecto espectral. También se formuló LASSO mediante penalización (L_1), se introdujeron subgradientes y soft-thresholding, y se explicó su capacidad de selección de variables.</p>
-<p>Finalmente, se desarrolló elastic net, la interpretación bayesiana, los caminos de regularización, la selección de () y extensiones como group LASSO. Estos conceptos serán fundamentales en regresión, clasificación y redes neuronales.</p>
+<p>Se derivó el estimador ridge y se analizó su efecto espectral. También se formuló LASSO mediante penalización <span class="math inline">\(L_1\)</span>, se introdujeron subgradientes y soft-thresholding, y se explicó su capacidad de selección de variables.</p>
+<p>Finalmente, se desarrolló elastic net, la interpretación bayesiana, los caminos de regularización, la selección de <span class="math inline">\(\lambda\)</span> y extensiones como group LASSO. Estos conceptos serán fundamentales en regresión, clasificación y redes neuronales.</p>
 
 
 <!-- -->
@@ -1891,32 +2316,32 @@ window.Quarto = {
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>formular problemas penalizados;</span>
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>relacionar penalización y restricción;</span>
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>derivar el estimador ridge;</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>interpretar la penalización <span class="sc">\(</span>L_2<span class="sc">\)</span>;</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>interpretar la penalización $L_2$;</span>
 <span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>formular el problema LASSO;</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>interpretar la penalización <span class="sc">\(</span>L_1<span class="sc">\)</span>;</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>interpretar la penalización $L_1$;</span>
 <span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="ss">8. </span>comprender por qué LASSO produce coeficientes exactamente iguales a cero;</span>
 <span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="ss">9. </span>formular elastic net;</span>
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="ss">10. </span>analizar el efecto del parámetro de regularización;</span>
 <span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="ss">11. </span>comprender la relación entre regularización, sesgo y varianza;</span>
 <span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="ss">12. </span>interpretar regularización desde un punto de vista bayesiano;</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="ss">13. </span>seleccionar <span class="sc">\(</span>\lambda<span class="sc">\)</span> mediante validación;</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="ss">13. </span>seleccionar $\lambda$ mediante validación;</span>
 <span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="ss">14. </span>reconocer limitaciones y precauciones prácticas.</span>
 <span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## Motivación</span></span>
 <span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>Considere el modelo lineal</span>
 <span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>\mathbf{y}</span>
 <span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>\mathbf{X}\boldsymbol{\beta}</span>
 <span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>+</span>
 <span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>\boldsymbol{\varepsilon}.</span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>El estimador de mínimos cuadrados es</span>
 <span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>\widehat{\boldsymbol{\beta}}_{OLS}</span>
 <span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>\arg\min_{\boldsymbol{\beta}}</span>
@@ -1925,35 +2350,35 @@ window.Quarto = {
 <span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>-</span>
 <span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>\mathbf{X}\boldsymbol{\beta}</span>
 <span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>\right<span class="sc">\|</span>_2^2.</span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>Si <span class="sc">\(</span>\mathbf{X}^{\mathsf T}\mathbf{X}<span class="sc">\)</span> es invertible,</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>Si $\mathbf{X}^{\mathsf T}\mathbf{X}$ es invertible,</span>
 <span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>\widehat{\boldsymbol{\beta}}_{OLS}</span>
 <span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>\left(</span>
 <span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>\mathbf{X}^{\mathsf T}\mathbf{X}</span>
 <span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>\right)^{-1}</span>
 <span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>\mathbf{X}^{\mathsf T}\mathbf{y}.</span>
-<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>Sin embargo, este estimador puede presentar problemas cuando:</span>
 <span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>existen variables altamente correlacionadas;</span>
-<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="sc">\(</span>p<span class="sc">\)</span> es grande;</span>
-<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="sc">\(</span>p\geq n<span class="sc">\)</span>;</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$p$ es grande;</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$p\geq n$;</span>
 <span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>hay ruido considerable;</span>
 <span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>el modelo tiene demasiada flexibilidad;</span>
 <span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>se desea seleccionar variables.</span>
 <span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a><span class="fu">## Problemas de multicolinealidad</span></span>
 <span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>Cuando algunas columnas de <span class="sc">\(</span>\mathbf{X}<span class="sc">\)</span> están altamente correlacionadas, la matriz</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>Cuando algunas columnas de $\mathbf{X}$ están altamente correlacionadas, la matriz</span>
 <span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>\mathbf{X}^{\mathsf T}\mathbf{X}</span>
-<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>puede estar mal condicionada.</span>
 <span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a></span>
@@ -1970,7 +2395,7 @@ window.Quarto = {
 <span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>::: {#def-regularizacion-general}</span>
 <span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>Un problema de regularización tiene la forma</span>
 <span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>\widehat{\boldsymbol{\beta}}</span>
 <span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>\arg\min_{\boldsymbol{\beta}}</span>
@@ -1980,28 +2405,28 @@ window.Quarto = {
 <span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>\lambda</span>
 <span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>\Omega(\boldsymbol{\beta})</span>
 <span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>\right<span class="sc">\}</span>,</span>
-<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>donde:</span>
 <span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="sc">\(</span>L(\boldsymbol{\beta})<span class="sc">\)</span> es la pérdida;</span>
-<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="sc">\(</span>\Omega(\boldsymbol{\beta})<span class="sc">\)</span> mide complejidad;</span>
-<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="sc">\(</span>\lambda\geq 0<span class="sc">\)</span> controla la intensidad de regularización.</span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$L(\boldsymbol{\beta})$ es la pérdida;</span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\Omega(\boldsymbol{\beta})$ mide complejidad;</span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\lambda\geq 0$ controla la intensidad de regularización.</span>
 <span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a>Cuando</span>
 <span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a>\lambda=0,</span>
-<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>se recupera el modelo sin penalización.</span>
 <span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>Cuando <span class="sc">\(</span>\lambda<span class="sc">\)</span> aumenta, la penalización adquiere mayor peso.</span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>Cuando $\lambda$ aumenta, la penalización adquiere mayor peso.</span>
 <span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a><span class="fu">## Interpretación del parámetro \(\lambda\)</span></span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a><span class="fu">## Interpretación del parámetro de regularización</span></span>
 <span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a>Un valor pequeño de <span class="sc">\(</span>\lambda<span class="sc">\)</span>:</span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a>Un valor pequeño de $\lambda$:</span>
 <span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>permite mayor flexibilidad;</span>
 <span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>reduce sesgo;</span>
@@ -2018,28 +2443,28 @@ window.Quarto = {
 <span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a>El problema penalizado puede relacionarse con</span>
 <span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a>\min_{\boldsymbol{\beta}}</span>
 <span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a>L(\boldsymbol{\beta})</span>
-<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-158"><a href="#cb2-158" aria-hidden="true" tabindex="-1"></a>sujeto a</span>
 <span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-161"><a href="#cb2-161" aria-hidden="true" tabindex="-1"></a>\Omega(\boldsymbol{\beta})</span>
 <span id="cb2-162"><a href="#cb2-162" aria-hidden="true" tabindex="-1"></a>\leq t.</span>
-<span id="cb2-163"><a href="#cb2-163" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-163"><a href="#cb2-163" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-164"><a href="#cb2-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-165"><a href="#cb2-165" aria-hidden="true" tabindex="-1"></a>Existe una correspondencia entre <span class="sc">\(</span>\lambda<span class="sc">\)</span> y <span class="sc">\(</span>t<span class="sc">\)</span>, bajo condiciones regulares.</span>
+<span id="cb2-165"><a href="#cb2-165" aria-hidden="true" tabindex="-1"></a>Existe una correspondencia entre $\lambda$ y $t$, bajo condiciones regulares.</span>
 <span id="cb2-166"><a href="#cb2-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-167"><a href="#cb2-167" aria-hidden="true" tabindex="-1"></a>La forma penalizada utiliza <span class="sc">\(</span>\lambda<span class="sc">\)</span>; la forma restringida limita directamente la complejidad.</span>
+<span id="cb2-167"><a href="#cb2-167" aria-hidden="true" tabindex="-1"></a>La forma penalizada utiliza $\lambda$; la forma restringida limita directamente la complejidad.</span>
 <span id="cb2-168"><a href="#cb2-168" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-169"><a href="#cb2-169" aria-hidden="true" tabindex="-1"></a><span class="fu">## Regresión ridge</span></span>
 <span id="cb2-170"><a href="#cb2-170" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-171"><a href="#cb2-171" aria-hidden="true" tabindex="-1"></a>::: {#def-ridge}</span>
 <span id="cb2-172"><a href="#cb2-172" aria-hidden="true" tabindex="-1"></a>La regresión ridge minimiza</span>
 <span id="cb2-173"><a href="#cb2-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-174"><a href="#cb2-174" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-174"><a href="#cb2-174" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-175"><a href="#cb2-175" aria-hidden="true" tabindex="-1"></a>J_{ridge}(\boldsymbol{\beta})</span>
 <span id="cb2-176"><a href="#cb2-176" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-177"><a href="#cb2-177" aria-hidden="true" tabindex="-1"></a>\left<span class="sc">\|</span></span>
@@ -2052,19 +2477,19 @@ window.Quarto = {
 <span id="cb2-184"><a href="#cb2-184" aria-hidden="true" tabindex="-1"></a>\left<span class="sc">\|</span></span>
 <span id="cb2-185"><a href="#cb2-185" aria-hidden="true" tabindex="-1"></a>\boldsymbol{\beta}</span>
 <span id="cb2-186"><a href="#cb2-186" aria-hidden="true" tabindex="-1"></a>\right<span class="sc">\|</span>_2^2.</span>
-<span id="cb2-187"><a href="#cb2-187" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-187"><a href="#cb2-187" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-188"><a href="#cb2-188" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb2-189"><a href="#cb2-189" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-190"><a href="#cb2-190" aria-hidden="true" tabindex="-1"></a>La penalización es</span>
 <span id="cb2-191"><a href="#cb2-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-192"><a href="#cb2-192" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-192"><a href="#cb2-192" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-193"><a href="#cb2-193" aria-hidden="true" tabindex="-1"></a>\left<span class="sc">\|</span></span>
 <span id="cb2-194"><a href="#cb2-194" aria-hidden="true" tabindex="-1"></a>\boldsymbol{\beta}</span>
 <span id="cb2-195"><a href="#cb2-195" aria-hidden="true" tabindex="-1"></a>\right<span class="sc">\|</span>_2^2</span>
 <span id="cb2-196"><a href="#cb2-196" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-197"><a href="#cb2-197" aria-hidden="true" tabindex="-1"></a>\sum_{j=1}^{p}</span>
 <span id="cb2-198"><a href="#cb2-198" aria-hidden="true" tabindex="-1"></a>\beta_j^2.</span>
-<span id="cb2-199"><a href="#cb2-199" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-199"><a href="#cb2-199" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-200"><a href="#cb2-200" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-201"><a href="#cb2-201" aria-hidden="true" tabindex="-1"></a>Habitualmente el intercepto no se penaliza.</span>
 <span id="cb2-202"><a href="#cb2-202" aria-hidden="true" tabindex="-1"></a></span>
@@ -2072,7 +2497,7 @@ window.Quarto = {
 <span id="cb2-204"><a href="#cb2-204" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-205"><a href="#cb2-205" aria-hidden="true" tabindex="-1"></a>La función objetivo puede escribirse como</span>
 <span id="cb2-206"><a href="#cb2-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-207"><a href="#cb2-207" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-207"><a href="#cb2-207" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-208"><a href="#cb2-208" aria-hidden="true" tabindex="-1"></a>J_{ridge}(\boldsymbol{\beta})</span>
 <span id="cb2-209"><a href="#cb2-209" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-210"><a href="#cb2-210" aria-hidden="true" tabindex="-1"></a>(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})^{\mathsf T}</span>
@@ -2080,24 +2505,24 @@ window.Quarto = {
 <span id="cb2-212"><a href="#cb2-212" aria-hidden="true" tabindex="-1"></a>+</span>
 <span id="cb2-213"><a href="#cb2-213" aria-hidden="true" tabindex="-1"></a>\lambda</span>
 <span id="cb2-214"><a href="#cb2-214" aria-hidden="true" tabindex="-1"></a>\boldsymbol{\beta}^{\mathsf T}\boldsymbol{\beta}.</span>
-<span id="cb2-215"><a href="#cb2-215" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-215"><a href="#cb2-215" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-216"><a href="#cb2-216" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-217"><a href="#cb2-217" aria-hidden="true" tabindex="-1"></a><span class="fu">## Derivación del estimador ridge</span></span>
 <span id="cb2-218"><a href="#cb2-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-219"><a href="#cb2-219" aria-hidden="true" tabindex="-1"></a>Derivando respecto de <span class="sc">\(</span>\boldsymbol{\beta}<span class="sc">\)</span>,</span>
+<span id="cb2-219"><a href="#cb2-219" aria-hidden="true" tabindex="-1"></a>Derivando respecto de $\boldsymbol{\beta}$,</span>
 <span id="cb2-220"><a href="#cb2-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-221"><a href="#cb2-221" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-221"><a href="#cb2-221" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-222"><a href="#cb2-222" aria-hidden="true" tabindex="-1"></a>\nabla J_{ridge}</span>
 <span id="cb2-223"><a href="#cb2-223" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-224"><a href="#cb2-224" aria-hidden="true" tabindex="-1"></a>-2\mathbf{X}^{\mathsf T}</span>
 <span id="cb2-225"><a href="#cb2-225" aria-hidden="true" tabindex="-1"></a>(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})</span>
 <span id="cb2-226"><a href="#cb2-226" aria-hidden="true" tabindex="-1"></a>+</span>
 <span id="cb2-227"><a href="#cb2-227" aria-hidden="true" tabindex="-1"></a>2\lambda\boldsymbol{\beta}.</span>
-<span id="cb2-228"><a href="#cb2-228" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-228"><a href="#cb2-228" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-229"><a href="#cb2-229" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-230"><a href="#cb2-230" aria-hidden="true" tabindex="-1"></a>Igualando a cero,</span>
 <span id="cb2-231"><a href="#cb2-231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-232"><a href="#cb2-232" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-232"><a href="#cb2-232" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-233"><a href="#cb2-233" aria-hidden="true" tabindex="-1"></a>-2\mathbf{X}^{\mathsf T}\mathbf{y}</span>
 <span id="cb2-234"><a href="#cb2-234" aria-hidden="true" tabindex="-1"></a>+</span>
 <span id="cb2-235"><a href="#cb2-235" aria-hidden="true" tabindex="-1"></a>2\mathbf{X}^{\mathsf T}\mathbf{X}\boldsymbol{\beta}</span>
@@ -2105,11 +2530,11 @@ window.Quarto = {
 <span id="cb2-237"><a href="#cb2-237" aria-hidden="true" tabindex="-1"></a>2\lambda\boldsymbol{\beta}</span>
 <span id="cb2-238"><a href="#cb2-238" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-239"><a href="#cb2-239" aria-hidden="true" tabindex="-1"></a>\mathbf{0}.</span>
-<span id="cb2-240"><a href="#cb2-240" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-240"><a href="#cb2-240" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-241"><a href="#cb2-241" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-242"><a href="#cb2-242" aria-hidden="true" tabindex="-1"></a>Entonces,</span>
 <span id="cb2-243"><a href="#cb2-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-244"><a href="#cb2-244" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-244"><a href="#cb2-244" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-245"><a href="#cb2-245" aria-hidden="true" tabindex="-1"></a>\left(</span>
 <span id="cb2-246"><a href="#cb2-246" aria-hidden="true" tabindex="-1"></a>\mathbf{X}^{\mathsf T}\mathbf{X}</span>
 <span id="cb2-247"><a href="#cb2-247" aria-hidden="true" tabindex="-1"></a>+</span>
@@ -2118,11 +2543,11 @@ window.Quarto = {
 <span id="cb2-250"><a href="#cb2-250" aria-hidden="true" tabindex="-1"></a>\boldsymbol{\beta}</span>
 <span id="cb2-251"><a href="#cb2-251" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-252"><a href="#cb2-252" aria-hidden="true" tabindex="-1"></a>\mathbf{X}^{\mathsf T}\mathbf{y}.</span>
-<span id="cb2-253"><a href="#cb2-253" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-253"><a href="#cb2-253" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-254"><a href="#cb2-254" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-255"><a href="#cb2-255" aria-hidden="true" tabindex="-1"></a>Por tanto,</span>
 <span id="cb2-256"><a href="#cb2-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-257"><a href="#cb2-257" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-257"><a href="#cb2-257" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-258"><a href="#cb2-258" aria-hidden="true" tabindex="-1"></a>\widehat{\boldsymbol{\beta}}_{ridge}</span>
 <span id="cb2-259"><a href="#cb2-259" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-260"><a href="#cb2-260" aria-hidden="true" tabindex="-1"></a>\left(</span>
@@ -2131,23 +2556,23 @@ window.Quarto = {
 <span id="cb2-263"><a href="#cb2-263" aria-hidden="true" tabindex="-1"></a>\lambda\mathbf{I}</span>
 <span id="cb2-264"><a href="#cb2-264" aria-hidden="true" tabindex="-1"></a>\right)^{-1}</span>
 <span id="cb2-265"><a href="#cb2-265" aria-hidden="true" tabindex="-1"></a>\mathbf{X}^{\mathsf T}\mathbf{y}.</span>
-<span id="cb2-266"><a href="#cb2-266" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-266"><a href="#cb2-266" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-267"><a href="#cb2-267" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-268"><a href="#cb2-268" aria-hidden="true" tabindex="-1"></a><span class="fu">## Efecto sobre la invertibilidad</span></span>
 <span id="cb2-269"><a href="#cb2-269" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-270"><a href="#cb2-270" aria-hidden="true" tabindex="-1"></a>Incluso si</span>
 <span id="cb2-271"><a href="#cb2-271" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-272"><a href="#cb2-272" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-272"><a href="#cb2-272" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-273"><a href="#cb2-273" aria-hidden="true" tabindex="-1"></a>\mathbf{X}^{\mathsf T}\mathbf{X}</span>
-<span id="cb2-274"><a href="#cb2-274" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-274"><a href="#cb2-274" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-275"><a href="#cb2-275" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-276"><a href="#cb2-276" aria-hidden="true" tabindex="-1"></a>es singular, para <span class="sc">\(</span>\lambda&gt;0<span class="sc">\)</span>,</span>
+<span id="cb2-276"><a href="#cb2-276" aria-hidden="true" tabindex="-1"></a>es singular, para $\lambda&gt;0$,</span>
 <span id="cb2-277"><a href="#cb2-277" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-278"><a href="#cb2-278" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-278"><a href="#cb2-278" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-279"><a href="#cb2-279" aria-hidden="true" tabindex="-1"></a>\mathbf{X}^{\mathsf T}\mathbf{X}</span>
 <span id="cb2-280"><a href="#cb2-280" aria-hidden="true" tabindex="-1"></a>+</span>
 <span id="cb2-281"><a href="#cb2-281" aria-hidden="true" tabindex="-1"></a>\lambda\mathbf{I}</span>
-<span id="cb2-282"><a href="#cb2-282" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-282"><a href="#cb2-282" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-283"><a href="#cb2-283" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-284"><a href="#cb2-284" aria-hidden="true" tabindex="-1"></a>es definida positiva y, por tanto, invertible.</span>
 <span id="cb2-285"><a href="#cb2-285" aria-hidden="true" tabindex="-1"></a></span>
@@ -2157,26 +2582,26 @@ window.Quarto = {
 <span id="cb2-289"><a href="#cb2-289" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-290"><a href="#cb2-290" aria-hidden="true" tabindex="-1"></a>Supóngase que</span>
 <span id="cb2-291"><a href="#cb2-291" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-292"><a href="#cb2-292" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-292"><a href="#cb2-292" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-293"><a href="#cb2-293" aria-hidden="true" tabindex="-1"></a>\mathbf{X}^{\mathsf T}\mathbf{X}</span>
 <span id="cb2-294"><a href="#cb2-294" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-295"><a href="#cb2-295" aria-hidden="true" tabindex="-1"></a>\mathbf{Q}</span>
 <span id="cb2-296"><a href="#cb2-296" aria-hidden="true" tabindex="-1"></a>\boldsymbol{\Lambda}</span>
 <span id="cb2-297"><a href="#cb2-297" aria-hidden="true" tabindex="-1"></a>\mathbf{Q}^{\mathsf T},</span>
-<span id="cb2-298"><a href="#cb2-298" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-298"><a href="#cb2-298" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-299"><a href="#cb2-299" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-300"><a href="#cb2-300" aria-hidden="true" tabindex="-1"></a>donde</span>
 <span id="cb2-301"><a href="#cb2-301" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-302"><a href="#cb2-302" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-302"><a href="#cb2-302" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-303"><a href="#cb2-303" aria-hidden="true" tabindex="-1"></a>\boldsymbol{\Lambda}</span>
 <span id="cb2-304"><a href="#cb2-304" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-305"><a href="#cb2-305" aria-hidden="true" tabindex="-1"></a>\operatorname{diag}</span>
 <span id="cb2-306"><a href="#cb2-306" aria-hidden="true" tabindex="-1"></a>(\mu_1,\ldots,\mu_p).</span>
-<span id="cb2-307"><a href="#cb2-307" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-307"><a href="#cb2-307" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-308"><a href="#cb2-308" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-309"><a href="#cb2-309" aria-hidden="true" tabindex="-1"></a>Entonces,</span>
 <span id="cb2-310"><a href="#cb2-310" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-311"><a href="#cb2-311" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-311"><a href="#cb2-311" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-312"><a href="#cb2-312" aria-hidden="true" tabindex="-1"></a>\left(</span>
 <span id="cb2-313"><a href="#cb2-313" aria-hidden="true" tabindex="-1"></a>\mathbf{X}^{\mathsf T}\mathbf{X}</span>
 <span id="cb2-314"><a href="#cb2-314" aria-hidden="true" tabindex="-1"></a>+</span>
@@ -2189,7 +2614,7 @@ window.Quarto = {
 <span id="cb2-321"><a href="#cb2-321" aria-hidden="true" tabindex="-1"></a>\frac{1}{\mu_j+\lambda}</span>
 <span id="cb2-322"><a href="#cb2-322" aria-hidden="true" tabindex="-1"></a>\right)</span>
 <span id="cb2-323"><a href="#cb2-323" aria-hidden="true" tabindex="-1"></a>\mathbf{Q}^{\mathsf T}.</span>
-<span id="cb2-324"><a href="#cb2-324" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-324"><a href="#cb2-324" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-325"><a href="#cb2-325" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-326"><a href="#cb2-326" aria-hidden="true" tabindex="-1"></a>Ridge reduce con mayor intensidad las direcciones asociadas a valores propios pequeños.</span>
 <span id="cb2-327"><a href="#cb2-327" aria-hidden="true" tabindex="-1"></a></span>
@@ -2197,27 +2622,27 @@ window.Quarto = {
 <span id="cb2-329"><a href="#cb2-329" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-330"><a href="#cb2-330" aria-hidden="true" tabindex="-1"></a>En las coordenadas principales, el factor de contracción es</span>
 <span id="cb2-331"><a href="#cb2-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-332"><a href="#cb2-332" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-332"><a href="#cb2-332" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-333"><a href="#cb2-333" aria-hidden="true" tabindex="-1"></a>\frac{\mu_j}{\mu_j+\lambda}.</span>
-<span id="cb2-334"><a href="#cb2-334" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-334"><a href="#cb2-334" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-335"><a href="#cb2-335" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-336"><a href="#cb2-336" aria-hidden="true" tabindex="-1"></a>Se cumple</span>
 <span id="cb2-337"><a href="#cb2-337" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-338"><a href="#cb2-338" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-338"><a href="#cb2-338" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-339"><a href="#cb2-339" aria-hidden="true" tabindex="-1"></a>0</span>
 <span id="cb2-340"><a href="#cb2-340" aria-hidden="true" tabindex="-1"></a>\leq</span>
 <span id="cb2-341"><a href="#cb2-341" aria-hidden="true" tabindex="-1"></a>\frac{\mu_j}{\mu_j+\lambda}</span>
 <span id="cb2-342"><a href="#cb2-342" aria-hidden="true" tabindex="-1"></a>&lt;</span>
 <span id="cb2-343"><a href="#cb2-343" aria-hidden="true" tabindex="-1"></a>1.</span>
-<span id="cb2-344"><a href="#cb2-344" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-344"><a href="#cb2-344" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-345"><a href="#cb2-345" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-346"><a href="#cb2-346" aria-hidden="true" tabindex="-1"></a>Cuando <span class="sc">\(</span>\mu_j<span class="sc">\)</span> es pequeño, la contracción es mayor.</span>
+<span id="cb2-346"><a href="#cb2-346" aria-hidden="true" tabindex="-1"></a>Cuando $\mu_j$ es pequeño, la contracción es mayor.</span>
 <span id="cb2-347"><a href="#cb2-347" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-348"><a href="#cb2-348" aria-hidden="true" tabindex="-1"></a><span class="fu">## Sesgo de ridge</span></span>
 <span id="cb2-349"><a href="#cb2-349" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-350"><a href="#cb2-350" aria-hidden="true" tabindex="-1"></a>Condicionado a <span class="sc">\(</span>\mathbf{X}<span class="sc">\)</span>,</span>
+<span id="cb2-350"><a href="#cb2-350" aria-hidden="true" tabindex="-1"></a>Condicionado a $\mathbf{X}$,</span>
 <span id="cb2-351"><a href="#cb2-351" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-352"><a href="#cb2-352" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-352"><a href="#cb2-352" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-353"><a href="#cb2-353" aria-hidden="true" tabindex="-1"></a>\mathbb{E}</span>
 <span id="cb2-354"><a href="#cb2-354" aria-hidden="true" tabindex="-1"></a>[</span>
 <span id="cb2-355"><a href="#cb2-355" aria-hidden="true" tabindex="-1"></a>\widehat{\boldsymbol{\beta}}_{ridge}</span>
@@ -2230,23 +2655,23 @@ window.Quarto = {
 <span id="cb2-362"><a href="#cb2-362" aria-hidden="true" tabindex="-1"></a>\right)^{-1}</span>
 <span id="cb2-363"><a href="#cb2-363" aria-hidden="true" tabindex="-1"></a>\mathbf{X}^{\mathsf T}\mathbf{X}</span>
 <span id="cb2-364"><a href="#cb2-364" aria-hidden="true" tabindex="-1"></a>\boldsymbol{\beta}.</span>
-<span id="cb2-365"><a href="#cb2-365" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-365"><a href="#cb2-365" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-366"><a href="#cb2-366" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-367"><a href="#cb2-367" aria-hidden="true" tabindex="-1"></a>Por tanto, ridge es sesgado cuando <span class="sc">\(</span>\lambda&gt;0<span class="sc">\)</span>.</span>
+<span id="cb2-367"><a href="#cb2-367" aria-hidden="true" tabindex="-1"></a>Por tanto, ridge es sesgado cuando $\lambda&gt;0$.</span>
 <span id="cb2-368"><a href="#cb2-368" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-369"><a href="#cb2-369" aria-hidden="true" tabindex="-1"></a><span class="fu">## Varianza de ridge</span></span>
 <span id="cb2-370"><a href="#cb2-370" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-371"><a href="#cb2-371" aria-hidden="true" tabindex="-1"></a>Si</span>
 <span id="cb2-372"><a href="#cb2-372" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-373"><a href="#cb2-373" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-373"><a href="#cb2-373" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-374"><a href="#cb2-374" aria-hidden="true" tabindex="-1"></a>\operatorname{Var}(\boldsymbol{\varepsilon})</span>
 <span id="cb2-375"><a href="#cb2-375" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-376"><a href="#cb2-376" aria-hidden="true" tabindex="-1"></a>\sigma^2\mathbf{I},</span>
-<span id="cb2-377"><a href="#cb2-377" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-377"><a href="#cb2-377" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-378"><a href="#cb2-378" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-379"><a href="#cb2-379" aria-hidden="true" tabindex="-1"></a>entonces</span>
 <span id="cb2-380"><a href="#cb2-380" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-381"><a href="#cb2-381" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-381"><a href="#cb2-381" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-382"><a href="#cb2-382" aria-hidden="true" tabindex="-1"></a>\operatorname{Var}</span>
 <span id="cb2-383"><a href="#cb2-383" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb2-384"><a href="#cb2-384" aria-hidden="true" tabindex="-1"></a>\widehat{\boldsymbol{\beta}}_{ridge}</span>
@@ -2264,7 +2689,7 @@ window.Quarto = {
 <span id="cb2-396"><a href="#cb2-396" aria-hidden="true" tabindex="-1"></a>+</span>
 <span id="cb2-397"><a href="#cb2-397" aria-hidden="true" tabindex="-1"></a>\lambda\mathbf{I}</span>
 <span id="cb2-398"><a href="#cb2-398" aria-hidden="true" tabindex="-1"></a>\right)^{-1}.</span>
-<span id="cb2-399"><a href="#cb2-399" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-399"><a href="#cb2-399" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-400"><a href="#cb2-400" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-401"><a href="#cb2-401" aria-hidden="true" tabindex="-1"></a>Ridge introduce sesgo, pero puede reducir considerablemente la varianza.</span>
 <span id="cb2-402"><a href="#cb2-402" aria-hidden="true" tabindex="-1"></a></span>
@@ -2278,25 +2703,25 @@ window.Quarto = {
 <span id="cb2-410"><a href="#cb2-410" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-411"><a href="#cb2-411" aria-hidden="true" tabindex="-1"></a>La forma restringida es</span>
 <span id="cb2-412"><a href="#cb2-412" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-413"><a href="#cb2-413" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-413"><a href="#cb2-413" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-414"><a href="#cb2-414" aria-hidden="true" tabindex="-1"></a>\min_{\boldsymbol{\beta}}</span>
 <span id="cb2-415"><a href="#cb2-415" aria-hidden="true" tabindex="-1"></a>\left<span class="sc">\|</span></span>
 <span id="cb2-416"><a href="#cb2-416" aria-hidden="true" tabindex="-1"></a>\mathbf{y}</span>
 <span id="cb2-417"><a href="#cb2-417" aria-hidden="true" tabindex="-1"></a>-</span>
 <span id="cb2-418"><a href="#cb2-418" aria-hidden="true" tabindex="-1"></a>\mathbf{X}\boldsymbol{\beta}</span>
 <span id="cb2-419"><a href="#cb2-419" aria-hidden="true" tabindex="-1"></a>\right<span class="sc">\|</span>_2^2</span>
-<span id="cb2-420"><a href="#cb2-420" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-420"><a href="#cb2-420" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-421"><a href="#cb2-421" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-422"><a href="#cb2-422" aria-hidden="true" tabindex="-1"></a>sujeto a</span>
 <span id="cb2-423"><a href="#cb2-423" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-424"><a href="#cb2-424" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-424"><a href="#cb2-424" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-425"><a href="#cb2-425" aria-hidden="true" tabindex="-1"></a>\sum_{j=1}^{p}</span>
 <span id="cb2-426"><a href="#cb2-426" aria-hidden="true" tabindex="-1"></a>\beta_j^2</span>
 <span id="cb2-427"><a href="#cb2-427" aria-hidden="true" tabindex="-1"></a>\leq</span>
 <span id="cb2-428"><a href="#cb2-428" aria-hidden="true" tabindex="-1"></a>t.</span>
-<span id="cb2-429"><a href="#cb2-429" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-429"><a href="#cb2-429" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-430"><a href="#cb2-430" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-431"><a href="#cb2-431" aria-hidden="true" tabindex="-1"></a>La región factible es una esfera o circunferencia <span class="sc">\(</span>L_2<span class="sc">\)</span>.</span>
+<span id="cb2-431"><a href="#cb2-431" aria-hidden="true" tabindex="-1"></a>La región factible es una esfera o circunferencia $L_2$.</span>
 <span id="cb2-432"><a href="#cb2-432" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-433"><a href="#cb2-433" aria-hidden="true" tabindex="-1"></a>La solución aparece donde una curva de nivel de la pérdida toca la región restringida.</span>
 <span id="cb2-434"><a href="#cb2-434" aria-hidden="true" tabindex="-1"></a></span>
@@ -2306,7 +2731,7 @@ window.Quarto = {
 <span id="cb2-438"><a href="#cb2-438" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-439"><a href="#cb2-439" aria-hidden="true" tabindex="-1"></a>Antes de ajustar, suele utilizarse</span>
 <span id="cb2-440"><a href="#cb2-440" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-441"><a href="#cb2-441" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-441"><a href="#cb2-441" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-442"><a href="#cb2-442" aria-hidden="true" tabindex="-1"></a>z_{ij}</span>
 <span id="cb2-443"><a href="#cb2-443" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-444"><a href="#cb2-444" aria-hidden="true" tabindex="-1"></a>\frac{</span>
@@ -2314,7 +2739,7 @@ window.Quarto = {
 <span id="cb2-446"><a href="#cb2-446" aria-hidden="true" tabindex="-1"></a>}{</span>
 <span id="cb2-447"><a href="#cb2-447" aria-hidden="true" tabindex="-1"></a>s_j</span>
 <span id="cb2-448"><a href="#cb2-448" aria-hidden="true" tabindex="-1"></a>}.</span>
-<span id="cb2-449"><a href="#cb2-449" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-449"><a href="#cb2-449" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-450"><a href="#cb2-450" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-451"><a href="#cb2-451" aria-hidden="true" tabindex="-1"></a>Sin estandarización, las variables con escalas grandes reciben una penalización relativa diferente.</span>
 <span id="cb2-452"><a href="#cb2-452" aria-hidden="true" tabindex="-1"></a></span>
@@ -2323,7 +2748,7 @@ window.Quarto = {
 <span id="cb2-455"><a href="#cb2-455" aria-hidden="true" tabindex="-1"></a>::: {#def-lasso}</span>
 <span id="cb2-456"><a href="#cb2-456" aria-hidden="true" tabindex="-1"></a>LASSO minimiza</span>
 <span id="cb2-457"><a href="#cb2-457" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-458"><a href="#cb2-458" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-458"><a href="#cb2-458" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-459"><a href="#cb2-459" aria-hidden="true" tabindex="-1"></a>J_{lasso}(\boldsymbol{\beta})</span>
 <span id="cb2-460"><a href="#cb2-460" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-461"><a href="#cb2-461" aria-hidden="true" tabindex="-1"></a>\left<span class="sc">\|</span></span>
@@ -2336,53 +2761,53 @@ window.Quarto = {
 <span id="cb2-468"><a href="#cb2-468" aria-hidden="true" tabindex="-1"></a>\left<span class="sc">\|</span></span>
 <span id="cb2-469"><a href="#cb2-469" aria-hidden="true" tabindex="-1"></a>\boldsymbol{\beta}</span>
 <span id="cb2-470"><a href="#cb2-470" aria-hidden="true" tabindex="-1"></a>\right<span class="sc">\|</span>_1.</span>
-<span id="cb2-471"><a href="#cb2-471" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-471"><a href="#cb2-471" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-472"><a href="#cb2-472" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb2-473"><a href="#cb2-473" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-474"><a href="#cb2-474" aria-hidden="true" tabindex="-1"></a>La norma <span class="sc">\(</span>L_1<span class="sc">\)</span> es</span>
+<span id="cb2-474"><a href="#cb2-474" aria-hidden="true" tabindex="-1"></a>La norma $L_1$ es</span>
 <span id="cb2-475"><a href="#cb2-475" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-476"><a href="#cb2-476" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-476"><a href="#cb2-476" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-477"><a href="#cb2-477" aria-hidden="true" tabindex="-1"></a>\left<span class="sc">\|</span></span>
 <span id="cb2-478"><a href="#cb2-478" aria-hidden="true" tabindex="-1"></a>\boldsymbol{\beta}</span>
 <span id="cb2-479"><a href="#cb2-479" aria-hidden="true" tabindex="-1"></a>\right<span class="sc">\|</span>_1</span>
 <span id="cb2-480"><a href="#cb2-480" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-481"><a href="#cb2-481" aria-hidden="true" tabindex="-1"></a>\sum_{j=1}^{p}</span>
 <span id="cb2-482"><a href="#cb2-482" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span>\beta_j<span class="pp">|</span>.</span>
-<span id="cb2-483"><a href="#cb2-483" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-483"><a href="#cb2-483" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-484"><a href="#cb2-484" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-485"><a href="#cb2-485" aria-hidden="true" tabindex="-1"></a><span class="fu">## Forma restringida de LASSO</span></span>
 <span id="cb2-486"><a href="#cb2-486" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-487"><a href="#cb2-487" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-487"><a href="#cb2-487" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-488"><a href="#cb2-488" aria-hidden="true" tabindex="-1"></a>\min_{\boldsymbol{\beta}}</span>
 <span id="cb2-489"><a href="#cb2-489" aria-hidden="true" tabindex="-1"></a>\left<span class="sc">\|</span></span>
 <span id="cb2-490"><a href="#cb2-490" aria-hidden="true" tabindex="-1"></a>\mathbf{y}</span>
 <span id="cb2-491"><a href="#cb2-491" aria-hidden="true" tabindex="-1"></a>-</span>
 <span id="cb2-492"><a href="#cb2-492" aria-hidden="true" tabindex="-1"></a>\mathbf{X}\boldsymbol{\beta}</span>
 <span id="cb2-493"><a href="#cb2-493" aria-hidden="true" tabindex="-1"></a>\right<span class="sc">\|</span>_2^2</span>
-<span id="cb2-494"><a href="#cb2-494" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-494"><a href="#cb2-494" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-495"><a href="#cb2-495" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-496"><a href="#cb2-496" aria-hidden="true" tabindex="-1"></a>sujeto a</span>
 <span id="cb2-497"><a href="#cb2-497" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-498"><a href="#cb2-498" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-498"><a href="#cb2-498" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-499"><a href="#cb2-499" aria-hidden="true" tabindex="-1"></a>\sum_{j=1}^{p}</span>
 <span id="cb2-500"><a href="#cb2-500" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span>\beta_j<span class="pp">|</span></span>
 <span id="cb2-501"><a href="#cb2-501" aria-hidden="true" tabindex="-1"></a>\leq</span>
 <span id="cb2-502"><a href="#cb2-502" aria-hidden="true" tabindex="-1"></a>t.</span>
-<span id="cb2-503"><a href="#cb2-503" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-503"><a href="#cb2-503" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-504"><a href="#cb2-504" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-505"><a href="#cb2-505" aria-hidden="true" tabindex="-1"></a><span class="fu">## No diferenciabilidad</span></span>
 <span id="cb2-506"><a href="#cb2-506" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-507"><a href="#cb2-507" aria-hidden="true" tabindex="-1"></a>La función</span>
 <span id="cb2-508"><a href="#cb2-508" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-509"><a href="#cb2-509" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-509"><a href="#cb2-509" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-510"><a href="#cb2-510" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span>\beta<span class="pp">|</span></span>
-<span id="cb2-511"><a href="#cb2-511" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-511"><a href="#cb2-511" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-512"><a href="#cb2-512" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-513"><a href="#cb2-513" aria-hidden="true" tabindex="-1"></a>no es diferenciable en</span>
 <span id="cb2-514"><a href="#cb2-514" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-515"><a href="#cb2-515" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-515"><a href="#cb2-515" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-516"><a href="#cb2-516" aria-hidden="true" tabindex="-1"></a>\beta=0.</span>
-<span id="cb2-517"><a href="#cb2-517" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-517"><a href="#cb2-517" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-518"><a href="#cb2-518" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-519"><a href="#cb2-519" aria-hidden="true" tabindex="-1"></a>Por tanto, LASSO no posee una solución matricial cerrada análoga a ridge.</span>
 <span id="cb2-520"><a href="#cb2-520" aria-hidden="true" tabindex="-1"></a></span>
@@ -2397,13 +2822,13 @@ window.Quarto = {
 <span id="cb2-529"><a href="#cb2-529" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-530"><a href="#cb2-530" aria-hidden="true" tabindex="-1"></a>Para</span>
 <span id="cb2-531"><a href="#cb2-531" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-532"><a href="#cb2-532" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-532"><a href="#cb2-532" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-533"><a href="#cb2-533" aria-hidden="true" tabindex="-1"></a>g(\beta)=|\beta|,</span>
-<span id="cb2-534"><a href="#cb2-534" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-534"><a href="#cb2-534" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-535"><a href="#cb2-535" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-536"><a href="#cb2-536" aria-hidden="true" tabindex="-1"></a>el subgradiente es</span>
 <span id="cb2-537"><a href="#cb2-537" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-538"><a href="#cb2-538" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-538"><a href="#cb2-538" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-539"><a href="#cb2-539" aria-hidden="true" tabindex="-1"></a>\partial g(\beta)</span>
 <span id="cb2-540"><a href="#cb2-540" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-541"><a href="#cb2-541" aria-hidden="true" tabindex="-1"></a>\begin{cases}</span>
@@ -2411,7 +2836,7 @@ window.Quarto = {
 <span id="cb2-543"><a href="#cb2-543" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">-1,1</span><span class="co">]</span>, &amp; \beta=0,<span class="sc">\\</span></span>
 <span id="cb2-544"><a href="#cb2-544" aria-hidden="true" tabindex="-1"></a><span class="sc">\{</span>-1<span class="sc">\}</span>, &amp; \beta&lt;0.</span>
 <span id="cb2-545"><a href="#cb2-545" aria-hidden="true" tabindex="-1"></a>\end{cases}</span>
-<span id="cb2-546"><a href="#cb2-546" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-546"><a href="#cb2-546" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-547"><a href="#cb2-547" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-548"><a href="#cb2-548" aria-hidden="true" tabindex="-1"></a>Las condiciones óptimas se expresan mediante subgradientes.</span>
 <span id="cb2-549"><a href="#cb2-549" aria-hidden="true" tabindex="-1"></a></span>
@@ -2420,7 +2845,7 @@ window.Quarto = {
 <span id="cb2-552"><a href="#cb2-552" aria-hidden="true" tabindex="-1"></a>::: {#def-soft-thresholding}</span>
 <span id="cb2-553"><a href="#cb2-553" aria-hidden="true" tabindex="-1"></a>El operador de umbral suave se define como</span>
 <span id="cb2-554"><a href="#cb2-554" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-555"><a href="#cb2-555" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-555"><a href="#cb2-555" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-556"><a href="#cb2-556" aria-hidden="true" tabindex="-1"></a>S(z,\gamma)</span>
 <span id="cb2-557"><a href="#cb2-557" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-558"><a href="#cb2-558" aria-hidden="true" tabindex="-1"></a>\operatorname{sign}(z)</span>
@@ -2429,7 +2854,7 @@ window.Quarto = {
 <span id="cb2-561"><a href="#cb2-561" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span>z<span class="pp">|</span>-\gamma,</span>
 <span id="cb2-562"><a href="#cb2-562" aria-hidden="true" tabindex="-1"></a>0</span>
 <span id="cb2-563"><a href="#cb2-563" aria-hidden="true" tabindex="-1"></a><span class="sc">\}</span>.</span>
-<span id="cb2-564"><a href="#cb2-564" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-564"><a href="#cb2-564" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-565"><a href="#cb2-565" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb2-566"><a href="#cb2-566" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-567"><a href="#cb2-567" aria-hidden="true" tabindex="-1"></a>Este operador reduce la magnitud y puede producir exactamente cero.</span>
@@ -2438,15 +2863,15 @@ window.Quarto = {
 <span id="cb2-570"><a href="#cb2-570" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-571"><a href="#cb2-571" aria-hidden="true" tabindex="-1"></a>Si</span>
 <span id="cb2-572"><a href="#cb2-572" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-573"><a href="#cb2-573" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-573"><a href="#cb2-573" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-574"><a href="#cb2-574" aria-hidden="true" tabindex="-1"></a>\mathbf{X}^{\mathsf T}\mathbf{X}</span>
 <span id="cb2-575"><a href="#cb2-575" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-576"><a href="#cb2-576" aria-hidden="true" tabindex="-1"></a>\mathbf{I},</span>
-<span id="cb2-577"><a href="#cb2-577" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-577"><a href="#cb2-577" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-578"><a href="#cb2-578" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-579"><a href="#cb2-579" aria-hidden="true" tabindex="-1"></a>la solución LASSO tiene la forma</span>
 <span id="cb2-580"><a href="#cb2-580" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-581"><a href="#cb2-581" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-581"><a href="#cb2-581" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-582"><a href="#cb2-582" aria-hidden="true" tabindex="-1"></a>\widehat{\beta}_j</span>
 <span id="cb2-583"><a href="#cb2-583" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-584"><a href="#cb2-584" aria-hidden="true" tabindex="-1"></a>S</span>
@@ -2454,7 +2879,7 @@ window.Quarto = {
 <span id="cb2-586"><a href="#cb2-586" aria-hidden="true" tabindex="-1"></a>\widehat{\beta}_{j,OLS},</span>
 <span id="cb2-587"><a href="#cb2-587" aria-hidden="true" tabindex="-1"></a>\frac{\lambda}{2}</span>
 <span id="cb2-588"><a href="#cb2-588" aria-hidden="true" tabindex="-1"></a>\right),</span>
-<span id="cb2-589"><a href="#cb2-589" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-589"><a href="#cb2-589" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-590"><a href="#cb2-590" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-591"><a href="#cb2-591" aria-hidden="true" tabindex="-1"></a>según la convención de escala utilizada.</span>
 <span id="cb2-592"><a href="#cb2-592" aria-hidden="true" tabindex="-1"></a></span>
@@ -2462,13 +2887,13 @@ window.Quarto = {
 <span id="cb2-594"><a href="#cb2-594" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-595"><a href="#cb2-595" aria-hidden="true" tabindex="-1"></a>La región</span>
 <span id="cb2-596"><a href="#cb2-596" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-597"><a href="#cb2-597" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-597"><a href="#cb2-597" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-598"><a href="#cb2-598" aria-hidden="true" tabindex="-1"></a>\left<span class="sc">\|</span></span>
 <span id="cb2-599"><a href="#cb2-599" aria-hidden="true" tabindex="-1"></a>\boldsymbol{\beta}</span>
 <span id="cb2-600"><a href="#cb2-600" aria-hidden="true" tabindex="-1"></a>\right<span class="sc">\|</span>_1</span>
 <span id="cb2-601"><a href="#cb2-601" aria-hidden="true" tabindex="-1"></a>\leq</span>
 <span id="cb2-602"><a href="#cb2-602" aria-hidden="true" tabindex="-1"></a>t</span>
-<span id="cb2-603"><a href="#cb2-603" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-603"><a href="#cb2-603" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-604"><a href="#cb2-604" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-605"><a href="#cb2-605" aria-hidden="true" tabindex="-1"></a>tiene forma de rombo en dos dimensiones.</span>
 <span id="cb2-606"><a href="#cb2-606" aria-hidden="true" tabindex="-1"></a></span>
@@ -2480,11 +2905,11 @@ window.Quarto = {
 <span id="cb2-612"><a href="#cb2-612" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-613"><a href="#cb2-613" aria-hidden="true" tabindex="-1"></a>Si</span>
 <span id="cb2-614"><a href="#cb2-614" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-615"><a href="#cb2-615" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-615"><a href="#cb2-615" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-616"><a href="#cb2-616" aria-hidden="true" tabindex="-1"></a>\widehat{\beta}_j=0,</span>
-<span id="cb2-617"><a href="#cb2-617" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-617"><a href="#cb2-617" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-618"><a href="#cb2-618" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-619"><a href="#cb2-619" aria-hidden="true" tabindex="-1"></a>la variable <span class="sc">\(</span>j<span class="sc">\)</span> queda excluida del modelo.</span>
+<span id="cb2-619"><a href="#cb2-619" aria-hidden="true" tabindex="-1"></a>la variable $j$ queda excluida del modelo.</span>
 <span id="cb2-620"><a href="#cb2-620" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-621"><a href="#cb2-621" aria-hidden="true" tabindex="-1"></a>LASSO realiza simultáneamente:</span>
 <span id="cb2-622"><a href="#cb2-622" aria-hidden="true" tabindex="-1"></a></span>
@@ -2497,7 +2922,7 @@ window.Quarto = {
 <span id="cb2-629"><a href="#cb2-629" aria-hidden="true" tabindex="-1"></a>LASSO puede presentar dificultades cuando:</span>
 <span id="cb2-630"><a href="#cb2-630" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-631"><a href="#cb2-631" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>las variables están fuertemente correlacionadas;</span>
-<span id="cb2-632"><a href="#cb2-632" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="sc">\(</span>p\gg n<span class="sc">\)</span>;</span>
+<span id="cb2-632"><a href="#cb2-632" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$p\gg n$;</span>
 <span id="cb2-633"><a href="#cb2-633" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>existen grupos de variables similares;</span>
 <span id="cb2-634"><a href="#cb2-634" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>la señal está distribuida entre muchas variables pequeñas.</span>
 <span id="cb2-635"><a href="#cb2-635" aria-hidden="true" tabindex="-1"></a></span>
@@ -2506,9 +2931,9 @@ window.Quarto = {
 <span id="cb2-638"><a href="#cb2-638" aria-hidden="true" tabindex="-1"></a><span class="fu">## Elastic net</span></span>
 <span id="cb2-639"><a href="#cb2-639" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-640"><a href="#cb2-640" aria-hidden="true" tabindex="-1"></a>::: {#def-elastic-net}</span>
-<span id="cb2-641"><a href="#cb2-641" aria-hidden="true" tabindex="-1"></a>Elastic net combina penalizaciones <span class="sc">\(</span>L_1<span class="sc">\)</span> y <span class="sc">\(</span>L_2<span class="sc">\)</span>:</span>
+<span id="cb2-641"><a href="#cb2-641" aria-hidden="true" tabindex="-1"></a>Elastic net combina penalizaciones $L_1$ y $L_2$:</span>
 <span id="cb2-642"><a href="#cb2-642" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-643"><a href="#cb2-643" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-643"><a href="#cb2-643" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-644"><a href="#cb2-644" aria-hidden="true" tabindex="-1"></a>J_{EN}(\boldsymbol{\beta})</span>
 <span id="cb2-645"><a href="#cb2-645" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-646"><a href="#cb2-646" aria-hidden="true" tabindex="-1"></a>\left<span class="sc">\|</span></span>
@@ -2526,12 +2951,12 @@ window.Quarto = {
 <span id="cb2-658"><a href="#cb2-658" aria-hidden="true" tabindex="-1"></a>\left<span class="sc">\|</span></span>
 <span id="cb2-659"><a href="#cb2-659" aria-hidden="true" tabindex="-1"></a>\boldsymbol{\beta}</span>
 <span id="cb2-660"><a href="#cb2-660" aria-hidden="true" tabindex="-1"></a>\right<span class="sc">\|</span>_2^2.</span>
-<span id="cb2-661"><a href="#cb2-661" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-661"><a href="#cb2-661" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-662"><a href="#cb2-662" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb2-663"><a href="#cb2-663" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-664"><a href="#cb2-664" aria-hidden="true" tabindex="-1"></a>Otra parametrización es</span>
 <span id="cb2-665"><a href="#cb2-665" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-666"><a href="#cb2-666" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-666"><a href="#cb2-666" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-667"><a href="#cb2-667" aria-hidden="true" tabindex="-1"></a>J_{EN}(\boldsymbol{\beta})</span>
 <span id="cb2-668"><a href="#cb2-668" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-669"><a href="#cb2-669" aria-hidden="true" tabindex="-1"></a>L(\boldsymbol{\beta})</span>
@@ -2548,37 +2973,37 @@ window.Quarto = {
 <span id="cb2-680"><a href="#cb2-680" aria-hidden="true" tabindex="-1"></a>\boldsymbol{\beta}</span>
 <span id="cb2-681"><a href="#cb2-681" aria-hidden="true" tabindex="-1"></a>\right<span class="sc">\|</span>_2^2</span>
 <span id="cb2-682"><a href="#cb2-682" aria-hidden="true" tabindex="-1"></a>\right],</span>
-<span id="cb2-683"><a href="#cb2-683" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-683"><a href="#cb2-683" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-684"><a href="#cb2-684" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-685"><a href="#cb2-685" aria-hidden="true" tabindex="-1"></a>con</span>
 <span id="cb2-686"><a href="#cb2-686" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-687"><a href="#cb2-687" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-687"><a href="#cb2-687" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-688"><a href="#cb2-688" aria-hidden="true" tabindex="-1"></a>0\leq\alpha\leq 1.</span>
-<span id="cb2-689"><a href="#cb2-689" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-689"><a href="#cb2-689" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-690"><a href="#cb2-690" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-691"><a href="#cb2-691" aria-hidden="true" tabindex="-1"></a><span class="fu">## Casos particulares</span></span>
 <span id="cb2-692"><a href="#cb2-692" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-693"><a href="#cb2-693" aria-hidden="true" tabindex="-1"></a>Si</span>
 <span id="cb2-694"><a href="#cb2-694" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-695"><a href="#cb2-695" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-695"><a href="#cb2-695" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-696"><a href="#cb2-696" aria-hidden="true" tabindex="-1"></a>\alpha=1,</span>
-<span id="cb2-697"><a href="#cb2-697" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-697"><a href="#cb2-697" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-698"><a href="#cb2-698" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-699"><a href="#cb2-699" aria-hidden="true" tabindex="-1"></a>se obtiene LASSO.</span>
 <span id="cb2-700"><a href="#cb2-700" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-701"><a href="#cb2-701" aria-hidden="true" tabindex="-1"></a>Si</span>
 <span id="cb2-702"><a href="#cb2-702" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-703"><a href="#cb2-703" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-703"><a href="#cb2-703" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-704"><a href="#cb2-704" aria-hidden="true" tabindex="-1"></a>\alpha=0,</span>
-<span id="cb2-705"><a href="#cb2-705" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-705"><a href="#cb2-705" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-706"><a href="#cb2-706" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-707"><a href="#cb2-707" aria-hidden="true" tabindex="-1"></a>se obtiene ridge.</span>
 <span id="cb2-708"><a href="#cb2-708" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-709"><a href="#cb2-709" aria-hidden="true" tabindex="-1"></a>Si</span>
 <span id="cb2-710"><a href="#cb2-710" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-711"><a href="#cb2-711" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-711"><a href="#cb2-711" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-712"><a href="#cb2-712" aria-hidden="true" tabindex="-1"></a>0&lt;\alpha&lt;1,</span>
-<span id="cb2-713"><a href="#cb2-713" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-713"><a href="#cb2-713" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-714"><a href="#cb2-714" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-715"><a href="#cb2-715" aria-hidden="true" tabindex="-1"></a>se obtiene elastic net.</span>
 <span id="cb2-716"><a href="#cb2-716" aria-hidden="true" tabindex="-1"></a></span>
@@ -2588,43 +3013,43 @@ window.Quarto = {
 <span id="cb2-720"><a href="#cb2-720" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-721"><a href="#cb2-721" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>seleccionar variables;</span>
 <span id="cb2-722"><a href="#cb2-722" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>estabilizar grupos correlacionados;</span>
-<span id="cb2-723"><a href="#cb2-723" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>funcionar mejor cuando <span class="sc">\(</span>p&gt;n<span class="sc">\)</span>;</span>
+<span id="cb2-723"><a href="#cb2-723" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>funcionar mejor cuando $p&gt;n$;</span>
 <span id="cb2-724"><a href="#cb2-724" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>combinar esparsidad y estabilidad.</span>
 <span id="cb2-725"><a href="#cb2-725" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-726"><a href="#cb2-726" aria-hidden="true" tabindex="-1"></a><span class="fu">## Caminos de regularización</span></span>
 <span id="cb2-727"><a href="#cb2-727" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-728"><a href="#cb2-728" aria-hidden="true" tabindex="-1"></a>Al variar <span class="sc">\(</span>\lambda<span class="sc">\)</span>, se obtiene una trayectoria</span>
+<span id="cb2-728"><a href="#cb2-728" aria-hidden="true" tabindex="-1"></a>Al variar $\lambda$, se obtiene una trayectoria</span>
 <span id="cb2-729"><a href="#cb2-729" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-730"><a href="#cb2-730" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-730"><a href="#cb2-730" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-731"><a href="#cb2-731" aria-hidden="true" tabindex="-1"></a>\widehat{\boldsymbol{\beta}}(\lambda).</span>
-<span id="cb2-732"><a href="#cb2-732" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-732"><a href="#cb2-732" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-733"><a href="#cb2-733" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-734"><a href="#cb2-734" aria-hidden="true" tabindex="-1"></a>Cuando <span class="sc">\(</span>\lambda\to 0<span class="sc">\)</span>, la solución se aproxima al modelo no regularizado.</span>
+<span id="cb2-734"><a href="#cb2-734" aria-hidden="true" tabindex="-1"></a>Cuando $\lambda\to 0$, la solución se aproxima al modelo no regularizado.</span>
 <span id="cb2-735"><a href="#cb2-735" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-736"><a href="#cb2-736" aria-hidden="true" tabindex="-1"></a>Cuando <span class="sc">\(</span>\lambda\to\infty<span class="sc">\)</span>, los coeficientes tienden a cero.</span>
+<span id="cb2-736"><a href="#cb2-736" aria-hidden="true" tabindex="-1"></a>Cuando $\lambda\to\infty$, los coeficientes tienden a cero.</span>
 <span id="cb2-737"><a href="#cb2-737" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-738"><a href="#cb2-738" aria-hidden="true" tabindex="-1"></a><span class="fu">## \(\lambda_{\max}\)</span></span>
+<span id="cb2-738"><a href="#cb2-738" aria-hidden="true" tabindex="-1"></a><span class="fu">## Valor máximo del parámetro de regularización</span></span>
 <span id="cb2-739"><a href="#cb2-739" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-740"><a href="#cb2-740" aria-hidden="true" tabindex="-1"></a>En LASSO existe un valor suficientemente grande</span>
 <span id="cb2-741"><a href="#cb2-741" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-742"><a href="#cb2-742" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-742"><a href="#cb2-742" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-743"><a href="#cb2-743" aria-hidden="true" tabindex="-1"></a>\lambda_{\max}</span>
-<span id="cb2-744"><a href="#cb2-744" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-744"><a href="#cb2-744" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-745"><a href="#cb2-745" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-746"><a href="#cb2-746" aria-hidden="true" tabindex="-1"></a>para el cual todos los coeficientes penalizados son cero.</span>
 <span id="cb2-747"><a href="#cb2-747" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-748"><a href="#cb2-748" aria-hidden="true" tabindex="-1"></a>Los algoritmos suelen construir una secuencia decreciente desde <span class="sc">\(</span>\lambda_{\max}<span class="sc">\)</span>.</span>
+<span id="cb2-748"><a href="#cb2-748" aria-hidden="true" tabindex="-1"></a>Los algoritmos suelen construir una secuencia decreciente desde $\lambda_{\max}$.</span>
 <span id="cb2-749"><a href="#cb2-749" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-750"><a href="#cb2-750" aria-hidden="true" tabindex="-1"></a><span class="fu">## Selección de \(\lambda\)</span></span>
+<span id="cb2-750"><a href="#cb2-750" aria-hidden="true" tabindex="-1"></a><span class="fu">## Selección del parámetro de regularización</span></span>
 <span id="cb2-751"><a href="#cb2-751" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-752"><a href="#cb2-752" aria-hidden="true" tabindex="-1"></a>La práctica habitual es seleccionar <span class="sc">\(</span>\lambda<span class="sc">\)</span> mediante validación cruzada:</span>
+<span id="cb2-752"><a href="#cb2-752" aria-hidden="true" tabindex="-1"></a>La práctica habitual es seleccionar $\lambda$ mediante validación cruzada:</span>
 <span id="cb2-753"><a href="#cb2-753" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-754"><a href="#cb2-754" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-754"><a href="#cb2-754" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-755"><a href="#cb2-755" aria-hidden="true" tabindex="-1"></a>\widehat{\lambda}</span>
 <span id="cb2-756"><a href="#cb2-756" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-757"><a href="#cb2-757" aria-hidden="true" tabindex="-1"></a>\arg\min_{\lambda}</span>
 <span id="cb2-758"><a href="#cb2-758" aria-hidden="true" tabindex="-1"></a>CV(\lambda).</span>
-<span id="cb2-759"><a href="#cb2-759" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-759"><a href="#cb2-759" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-760"><a href="#cb2-760" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-761"><a href="#cb2-761" aria-hidden="true" tabindex="-1"></a>También puede utilizarse la regla de un error estándar para elegir una solución más regularizada y parsimoniosa.</span>
 <span id="cb2-762"><a href="#cb2-762" aria-hidden="true" tabindex="-1"></a></span>
@@ -2632,7 +3057,7 @@ window.Quarto = {
 <span id="cb2-764"><a href="#cb2-764" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-765"><a href="#cb2-765" aria-hidden="true" tabindex="-1"></a>Supóngase el modelo gaussiano</span>
 <span id="cb2-766"><a href="#cb2-766" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-767"><a href="#cb2-767" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-767"><a href="#cb2-767" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-768"><a href="#cb2-768" aria-hidden="true" tabindex="-1"></a>\mathbf{y}</span>
 <span id="cb2-769"><a href="#cb2-769" aria-hidden="true" tabindex="-1"></a>\mid</span>
 <span id="cb2-770"><a href="#cb2-770" aria-hidden="true" tabindex="-1"></a>\boldsymbol{\beta}</span>
@@ -2641,22 +3066,22 @@ window.Quarto = {
 <span id="cb2-773"><a href="#cb2-773" aria-hidden="true" tabindex="-1"></a>\mathbf{X}\boldsymbol{\beta},</span>
 <span id="cb2-774"><a href="#cb2-774" aria-hidden="true" tabindex="-1"></a>\sigma^2\mathbf{I}</span>
 <span id="cb2-775"><a href="#cb2-775" aria-hidden="true" tabindex="-1"></a>).</span>
-<span id="cb2-776"><a href="#cb2-776" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-776"><a href="#cb2-776" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-777"><a href="#cb2-777" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-778"><a href="#cb2-778" aria-hidden="true" tabindex="-1"></a>Considérese la previa</span>
 <span id="cb2-779"><a href="#cb2-779" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-780"><a href="#cb2-780" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-780"><a href="#cb2-780" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-781"><a href="#cb2-781" aria-hidden="true" tabindex="-1"></a>\boldsymbol{\beta}</span>
 <span id="cb2-782"><a href="#cb2-782" aria-hidden="true" tabindex="-1"></a>\sim</span>
 <span id="cb2-783"><a href="#cb2-783" aria-hidden="true" tabindex="-1"></a>N(</span>
 <span id="cb2-784"><a href="#cb2-784" aria-hidden="true" tabindex="-1"></a>\mathbf{0},</span>
 <span id="cb2-785"><a href="#cb2-785" aria-hidden="true" tabindex="-1"></a>\tau^2\mathbf{I}</span>
 <span id="cb2-786"><a href="#cb2-786" aria-hidden="true" tabindex="-1"></a>).</span>
-<span id="cb2-787"><a href="#cb2-787" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-787"><a href="#cb2-787" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-788"><a href="#cb2-788" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-789"><a href="#cb2-789" aria-hidden="true" tabindex="-1"></a>El estimador MAP minimiza</span>
 <span id="cb2-790"><a href="#cb2-790" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-791"><a href="#cb2-791" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-791"><a href="#cb2-791" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-792"><a href="#cb2-792" aria-hidden="true" tabindex="-1"></a>\frac{1}{2\sigma^2}</span>
 <span id="cb2-793"><a href="#cb2-793" aria-hidden="true" tabindex="-1"></a>\left<span class="sc">\|</span></span>
 <span id="cb2-794"><a href="#cb2-794" aria-hidden="true" tabindex="-1"></a>\mathbf{y}</span>
@@ -2668,7 +3093,7 @@ window.Quarto = {
 <span id="cb2-800"><a href="#cb2-800" aria-hidden="true" tabindex="-1"></a>\left<span class="sc">\|</span></span>
 <span id="cb2-801"><a href="#cb2-801" aria-hidden="true" tabindex="-1"></a>\boldsymbol{\beta}</span>
 <span id="cb2-802"><a href="#cb2-802" aria-hidden="true" tabindex="-1"></a>\right<span class="sc">\|</span>_2^2.</span>
-<span id="cb2-803"><a href="#cb2-803" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-803"><a href="#cb2-803" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-804"><a href="#cb2-804" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-805"><a href="#cb2-805" aria-hidden="true" tabindex="-1"></a>Por tanto, ridge corresponde a una previa normal.</span>
 <span id="cb2-806"><a href="#cb2-806" aria-hidden="true" tabindex="-1"></a></span>
@@ -2676,22 +3101,22 @@ window.Quarto = {
 <span id="cb2-808"><a href="#cb2-808" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-809"><a href="#cb2-809" aria-hidden="true" tabindex="-1"></a>Si la previa de cada coeficiente es Laplace,</span>
 <span id="cb2-810"><a href="#cb2-810" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-811"><a href="#cb2-811" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-811"><a href="#cb2-811" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-812"><a href="#cb2-812" aria-hidden="true" tabindex="-1"></a>p(\beta_j)</span>
 <span id="cb2-813"><a href="#cb2-813" aria-hidden="true" tabindex="-1"></a>\propto</span>
 <span id="cb2-814"><a href="#cb2-814" aria-hidden="true" tabindex="-1"></a>\exp</span>
 <span id="cb2-815"><a href="#cb2-815" aria-hidden="true" tabindex="-1"></a>\left(</span>
 <span id="cb2-816"><a href="#cb2-816" aria-hidden="true" tabindex="-1"></a>-\frac{|\beta_j|}{b}</span>
 <span id="cb2-817"><a href="#cb2-817" aria-hidden="true" tabindex="-1"></a>\right),</span>
-<span id="cb2-818"><a href="#cb2-818" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-818"><a href="#cb2-818" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-819"><a href="#cb2-819" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-820"><a href="#cb2-820" aria-hidden="true" tabindex="-1"></a>el estimador MAP conduce a una penalización <span class="sc">\(</span>L_1<span class="sc">\)</span>.</span>
+<span id="cb2-820"><a href="#cb2-820" aria-hidden="true" tabindex="-1"></a>el estimador MAP conduce a una penalización $L_1$.</span>
 <span id="cb2-821"><a href="#cb2-821" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-822"><a href="#cb2-822" aria-hidden="true" tabindex="-1"></a><span class="fu">## Regularización en regresión logística</span></span>
 <span id="cb2-823"><a href="#cb2-823" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-824"><a href="#cb2-824" aria-hidden="true" tabindex="-1"></a>La pérdida logística penalizada es</span>
 <span id="cb2-825"><a href="#cb2-825" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-826"><a href="#cb2-826" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-826"><a href="#cb2-826" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-827"><a href="#cb2-827" aria-hidden="true" tabindex="-1"></a>J(\boldsymbol{\beta})</span>
 <span id="cb2-828"><a href="#cb2-828" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-829"><a href="#cb2-829" aria-hidden="true" tabindex="-1"></a>-</span>
@@ -2704,7 +3129,7 @@ window.Quarto = {
 <span id="cb2-836"><a href="#cb2-836" aria-hidden="true" tabindex="-1"></a>+</span>
 <span id="cb2-837"><a href="#cb2-837" aria-hidden="true" tabindex="-1"></a>\lambda</span>
 <span id="cb2-838"><a href="#cb2-838" aria-hidden="true" tabindex="-1"></a>\Omega(\boldsymbol{\beta}).</span>
-<span id="cb2-839"><a href="#cb2-839" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-839"><a href="#cb2-839" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-840"><a href="#cb2-840" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-841"><a href="#cb2-841" aria-hidden="true" tabindex="-1"></a>Puede utilizarse:</span>
 <span id="cb2-842"><a href="#cb2-842" aria-hidden="true" tabindex="-1"></a></span>
@@ -2718,13 +3143,13 @@ window.Quarto = {
 <span id="cb2-850"><a href="#cb2-850" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-851"><a href="#cb2-851" aria-hidden="true" tabindex="-1"></a>Se añade</span>
 <span id="cb2-852"><a href="#cb2-852" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-853"><a href="#cb2-853" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-853"><a href="#cb2-853" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-854"><a href="#cb2-854" aria-hidden="true" tabindex="-1"></a>\lambda</span>
 <span id="cb2-855"><a href="#cb2-855" aria-hidden="true" tabindex="-1"></a>\sum_l</span>
 <span id="cb2-856"><a href="#cb2-856" aria-hidden="true" tabindex="-1"></a>\left<span class="sc">\|</span></span>
 <span id="cb2-857"><a href="#cb2-857" aria-hidden="true" tabindex="-1"></a>\mathbf{W}^{(l)}</span>
 <span id="cb2-858"><a href="#cb2-858" aria-hidden="true" tabindex="-1"></a>\right<span class="sc">\|</span>_F^2.</span>
-<span id="cb2-859"><a href="#cb2-859" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-859"><a href="#cb2-859" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-860"><a href="#cb2-860" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-861"><a href="#cb2-861" aria-hidden="true" tabindex="-1"></a><span class="fu">### Dropout</span></span>
 <span id="cb2-862"><a href="#cb2-862" aria-hidden="true" tabindex="-1"></a></span>
@@ -2765,15 +3190,15 @@ window.Quarto = {
 <span id="cb2-897"><a href="#cb2-897" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-898"><a href="#cb2-898" aria-hidden="true" tabindex="-1"></a>En ridge, los valores ajustados son</span>
 <span id="cb2-899"><a href="#cb2-899" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-900"><a href="#cb2-900" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-900"><a href="#cb2-900" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-901"><a href="#cb2-901" aria-hidden="true" tabindex="-1"></a>\widehat{\mathbf{y}}</span>
 <span id="cb2-902"><a href="#cb2-902" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-903"><a href="#cb2-903" aria-hidden="true" tabindex="-1"></a>\mathbf{H}_{\lambda}\mathbf{y},</span>
-<span id="cb2-904"><a href="#cb2-904" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-904"><a href="#cb2-904" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-905"><a href="#cb2-905" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-906"><a href="#cb2-906" aria-hidden="true" tabindex="-1"></a>donde</span>
 <span id="cb2-907"><a href="#cb2-907" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-908"><a href="#cb2-908" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-908"><a href="#cb2-908" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-909"><a href="#cb2-909" aria-hidden="true" tabindex="-1"></a>\mathbf{H}_{\lambda}</span>
 <span id="cb2-910"><a href="#cb2-910" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-911"><a href="#cb2-911" aria-hidden="true" tabindex="-1"></a>\mathbf{X}</span>
@@ -2783,20 +3208,20 @@ window.Quarto = {
 <span id="cb2-915"><a href="#cb2-915" aria-hidden="true" tabindex="-1"></a>\lambda\mathbf{I}</span>
 <span id="cb2-916"><a href="#cb2-916" aria-hidden="true" tabindex="-1"></a>\right)^{-1}</span>
 <span id="cb2-917"><a href="#cb2-917" aria-hidden="true" tabindex="-1"></a>\mathbf{X}^{\mathsf T}.</span>
-<span id="cb2-918"><a href="#cb2-918" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-918"><a href="#cb2-918" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-919"><a href="#cb2-919" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-920"><a href="#cb2-920" aria-hidden="true" tabindex="-1"></a>Los grados de libertad efectivos son</span>
 <span id="cb2-921"><a href="#cb2-921" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-922"><a href="#cb2-922" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-922"><a href="#cb2-922" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-923"><a href="#cb2-923" aria-hidden="true" tabindex="-1"></a>df(\lambda)</span>
 <span id="cb2-924"><a href="#cb2-924" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-925"><a href="#cb2-925" aria-hidden="true" tabindex="-1"></a>\operatorname{tr}</span>
 <span id="cb2-926"><a href="#cb2-926" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb2-927"><a href="#cb2-927" aria-hidden="true" tabindex="-1"></a>\mathbf{H}_{\lambda}</span>
 <span id="cb2-928"><a href="#cb2-928" aria-hidden="true" tabindex="-1"></a>).</span>
-<span id="cb2-929"><a href="#cb2-929" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-929"><a href="#cb2-929" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-930"><a href="#cb2-930" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-931"><a href="#cb2-931" aria-hidden="true" tabindex="-1"></a>Al aumentar <span class="sc">\(</span>\lambda<span class="sc">\)</span>, disminuyen los grados de libertad efectivos.</span>
+<span id="cb2-931"><a href="#cb2-931" aria-hidden="true" tabindex="-1"></a>Al aumentar $\lambda$, disminuyen los grados de libertad efectivos.</span>
 <span id="cb2-932"><a href="#cb2-932" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-933"><a href="#cb2-933" aria-hidden="true" tabindex="-1"></a><span class="fu">## Relación con la estabilidad</span></span>
 <span id="cb2-934"><a href="#cb2-934" aria-hidden="true" tabindex="-1"></a></span>
@@ -2817,21 +3242,21 @@ window.Quarto = {
 <span id="cb2-949"><a href="#cb2-949" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-950"><a href="#cb2-950" aria-hidden="true" tabindex="-1"></a><span class="fu">## Group LASSO</span></span>
 <span id="cb2-951"><a href="#cb2-951" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-952"><a href="#cb2-952" aria-hidden="true" tabindex="-1"></a>Si los parámetros se agrupan en <span class="sc">\(</span>G<span class="sc">\)</span> bloques,</span>
+<span id="cb2-952"><a href="#cb2-952" aria-hidden="true" tabindex="-1"></a>Si los parámetros se agrupan en $G$ bloques,</span>
 <span id="cb2-953"><a href="#cb2-953" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-954"><a href="#cb2-954" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-954"><a href="#cb2-954" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-955"><a href="#cb2-955" aria-hidden="true" tabindex="-1"></a>\boldsymbol{\beta}_1,\ldots,\boldsymbol{\beta}_G,</span>
-<span id="cb2-956"><a href="#cb2-956" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-956"><a href="#cb2-956" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-957"><a href="#cb2-957" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-958"><a href="#cb2-958" aria-hidden="true" tabindex="-1"></a>la penalización es</span>
 <span id="cb2-959"><a href="#cb2-959" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-960"><a href="#cb2-960" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-960"><a href="#cb2-960" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-961"><a href="#cb2-961" aria-hidden="true" tabindex="-1"></a>\sum_{g=1}^{G}</span>
 <span id="cb2-962"><a href="#cb2-962" aria-hidden="true" tabindex="-1"></a>w_g</span>
 <span id="cb2-963"><a href="#cb2-963" aria-hidden="true" tabindex="-1"></a>\left<span class="sc">\|</span></span>
 <span id="cb2-964"><a href="#cb2-964" aria-hidden="true" tabindex="-1"></a>\boldsymbol{\beta}_g</span>
 <span id="cb2-965"><a href="#cb2-965" aria-hidden="true" tabindex="-1"></a>\right<span class="sc">\|</span>_2.</span>
-<span id="cb2-966"><a href="#cb2-966" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-966"><a href="#cb2-966" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-967"><a href="#cb2-967" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-968"><a href="#cb2-968" aria-hidden="true" tabindex="-1"></a>Puede eliminar grupos completos de variables.</span>
 <span id="cb2-969"><a href="#cb2-969" aria-hidden="true" tabindex="-1"></a></span>
@@ -2839,10 +3264,10 @@ window.Quarto = {
 <span id="cb2-971"><a href="#cb2-971" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-972"><a href="#cb2-972" aria-hidden="true" tabindex="-1"></a>Adaptive LASSO utiliza pesos:</span>
 <span id="cb2-973"><a href="#cb2-973" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-974"><a href="#cb2-974" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-974"><a href="#cb2-974" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-975"><a href="#cb2-975" aria-hidden="true" tabindex="-1"></a>\sum_{j=1}^{p}</span>
 <span id="cb2-976"><a href="#cb2-976" aria-hidden="true" tabindex="-1"></a>w_j|\beta_j|.</span>
-<span id="cb2-977"><a href="#cb2-977" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-977"><a href="#cb2-977" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-978"><a href="#cb2-978" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-979"><a href="#cb2-979" aria-hidden="true" tabindex="-1"></a>Los pesos pueden depender de estimaciones iniciales.</span>
 <span id="cb2-980"><a href="#cb2-980" aria-hidden="true" tabindex="-1"></a></span>
@@ -2914,35 +3339,35 @@ window.Quarto = {
 <span id="cb2-1048"><a href="#cb2-1048" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1049"><a href="#cb2-1049" aria-hidden="true" tabindex="-1"></a>Considere</span>
 <span id="cb2-1050"><a href="#cb2-1050" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-1051"><a href="#cb2-1051" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-1051"><a href="#cb2-1051" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-1052"><a href="#cb2-1052" aria-hidden="true" tabindex="-1"></a>\mathbf{X}^{\mathsf T}\mathbf{X}</span>
 <span id="cb2-1053"><a href="#cb2-1053" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-1054"><a href="#cb2-1054" aria-hidden="true" tabindex="-1"></a>\begin{pmatrix}</span>
 <span id="cb2-1055"><a href="#cb2-1055" aria-hidden="true" tabindex="-1"></a>4 &amp; 3<span class="sc">\\</span></span>
 <span id="cb2-1056"><a href="#cb2-1056" aria-hidden="true" tabindex="-1"></a>3 &amp; 2.5</span>
 <span id="cb2-1057"><a href="#cb2-1057" aria-hidden="true" tabindex="-1"></a>\end{pmatrix},</span>
-<span id="cb2-1058"><a href="#cb2-1058" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-1058"><a href="#cb2-1058" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-1059"><a href="#cb2-1059" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1060"><a href="#cb2-1060" aria-hidden="true" tabindex="-1"></a>y</span>
 <span id="cb2-1061"><a href="#cb2-1061" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-1062"><a href="#cb2-1062" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-1062"><a href="#cb2-1062" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-1063"><a href="#cb2-1063" aria-hidden="true" tabindex="-1"></a>\mathbf{X}^{\mathsf T}\mathbf{y}</span>
 <span id="cb2-1064"><a href="#cb2-1064" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-1065"><a href="#cb2-1065" aria-hidden="true" tabindex="-1"></a>\begin{pmatrix}</span>
 <span id="cb2-1066"><a href="#cb2-1066" aria-hidden="true" tabindex="-1"></a>10<span class="sc">\\</span></span>
 <span id="cb2-1067"><a href="#cb2-1067" aria-hidden="true" tabindex="-1"></a>8</span>
 <span id="cb2-1068"><a href="#cb2-1068" aria-hidden="true" tabindex="-1"></a>\end{pmatrix}.</span>
-<span id="cb2-1069"><a href="#cb2-1069" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-1069"><a href="#cb2-1069" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-1070"><a href="#cb2-1070" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1071"><a href="#cb2-1071" aria-hidden="true" tabindex="-1"></a>Con</span>
 <span id="cb2-1072"><a href="#cb2-1072" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-1073"><a href="#cb2-1073" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-1073"><a href="#cb2-1073" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-1074"><a href="#cb2-1074" aria-hidden="true" tabindex="-1"></a>\lambda=1,</span>
-<span id="cb2-1075"><a href="#cb2-1075" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-1075"><a href="#cb2-1075" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-1076"><a href="#cb2-1076" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1077"><a href="#cb2-1077" aria-hidden="true" tabindex="-1"></a>se obtiene</span>
 <span id="cb2-1078"><a href="#cb2-1078" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-1079"><a href="#cb2-1079" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-1079"><a href="#cb2-1079" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-1080"><a href="#cb2-1080" aria-hidden="true" tabindex="-1"></a>\mathbf{X}^{\mathsf T}\mathbf{X}</span>
 <span id="cb2-1081"><a href="#cb2-1081" aria-hidden="true" tabindex="-1"></a>+</span>
 <span id="cb2-1082"><a href="#cb2-1082" aria-hidden="true" tabindex="-1"></a>\lambda\mathbf{I}</span>
@@ -2951,11 +3376,11 @@ window.Quarto = {
 <span id="cb2-1085"><a href="#cb2-1085" aria-hidden="true" tabindex="-1"></a>5 &amp; 3<span class="sc">\\</span></span>
 <span id="cb2-1086"><a href="#cb2-1086" aria-hidden="true" tabindex="-1"></a>3 &amp; 3.5</span>
 <span id="cb2-1087"><a href="#cb2-1087" aria-hidden="true" tabindex="-1"></a>\end{pmatrix}.</span>
-<span id="cb2-1088"><a href="#cb2-1088" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-1088"><a href="#cb2-1088" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-1089"><a href="#cb2-1089" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1090"><a href="#cb2-1090" aria-hidden="true" tabindex="-1"></a>La solución ridge es</span>
 <span id="cb2-1091"><a href="#cb2-1091" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-1092"><a href="#cb2-1092" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-1092"><a href="#cb2-1092" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-1093"><a href="#cb2-1093" aria-hidden="true" tabindex="-1"></a>\widehat{\boldsymbol{\beta}}_{ridge}</span>
 <span id="cb2-1094"><a href="#cb2-1094" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-1095"><a href="#cb2-1095" aria-hidden="true" tabindex="-1"></a>\begin{pmatrix}</span>
@@ -2966,7 +3391,7 @@ window.Quarto = {
 <span id="cb2-1100"><a href="#cb2-1100" aria-hidden="true" tabindex="-1"></a>10<span class="sc">\\</span></span>
 <span id="cb2-1101"><a href="#cb2-1101" aria-hidden="true" tabindex="-1"></a>8</span>
 <span id="cb2-1102"><a href="#cb2-1102" aria-hidden="true" tabindex="-1"></a>\end{pmatrix}.</span>
-<span id="cb2-1103"><a href="#cb2-1103" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-1103"><a href="#cb2-1103" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-1104"><a href="#cb2-1104" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1105"><a href="#cb2-1105" aria-hidden="true" tabindex="-1"></a>Este sistema es más estable que el sistema sin penalización.</span>
 <span id="cb2-1106"><a href="#cb2-1106" aria-hidden="true" tabindex="-1"></a></span>
@@ -2974,22 +3399,22 @@ window.Quarto = {
 <span id="cb2-1108"><a href="#cb2-1108" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1109"><a href="#cb2-1109" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Método <span class="pp">|</span> Penalización <span class="pp">|</span> Selección de variables <span class="pp">|</span> Estabilidad <span class="pp">|</span></span>
 <span id="cb2-1110"><a href="#cb2-1110" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|---|</span></span>
-<span id="cb2-1111"><a href="#cb2-1111" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Ridge <span class="pp">|</span> <span class="sc">\(</span>L_2<span class="sc">\)</span> <span class="pp">|</span> No exacta <span class="pp">|</span> Alta <span class="pp">|</span></span>
-<span id="cb2-1112"><a href="#cb2-1112" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> LASSO <span class="pp">|</span> <span class="sc">\(</span>L_1<span class="sc">\)</span> <span class="pp">|</span> Sí <span class="pp">|</span> Puede ser inestable con correlación <span class="pp">|</span></span>
-<span id="cb2-1113"><a href="#cb2-1113" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Elastic net <span class="pp">|</span> <span class="sc">\(</span>L_1+L_2<span class="sc">\)</span> <span class="pp">|</span> Sí <span class="pp">|</span> Mayor con variables correlacionadas <span class="pp">|</span></span>
+<span id="cb2-1111"><a href="#cb2-1111" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Ridge <span class="pp">|</span> $L_2$ <span class="pp">|</span> No exacta <span class="pp">|</span> Alta <span class="pp">|</span></span>
+<span id="cb2-1112"><a href="#cb2-1112" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> LASSO <span class="pp">|</span> $L_1$ <span class="pp">|</span> Sí <span class="pp">|</span> Puede ser inestable con correlación <span class="pp">|</span></span>
+<span id="cb2-1113"><a href="#cb2-1113" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Elastic net <span class="pp">|</span> $L_1+L_2$ <span class="pp">|</span> Sí <span class="pp">|</span> Mayor con variables correlacionadas <span class="pp">|</span></span>
 <span id="cb2-1114"><a href="#cb2-1114" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1115"><a href="#cb2-1115" aria-hidden="true" tabindex="-1"></a><span class="fu">## Errores frecuentes</span></span>
 <span id="cb2-1116"><a href="#cb2-1116" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1117"><a href="#cb2-1117" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Penalizar variables sin estandarizarlas.</span>
 <span id="cb2-1118"><a href="#cb2-1118" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Penalizar el intercepto sin intención.</span>
-<span id="cb2-1119"><a href="#cb2-1119" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Seleccionar <span class="sc">\(</span>\lambda<span class="sc">\)</span> usando el conjunto de prueba.</span>
+<span id="cb2-1119"><a href="#cb2-1119" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Seleccionar $\lambda$ usando el conjunto de prueba.</span>
 <span id="cb2-1120"><a href="#cb2-1120" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Interpretar coeficientes LASSO como evidencia causal.</span>
 <span id="cb2-1121"><a href="#cb2-1121" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Suponer que LASSO siempre selecciona la variable correcta.</span>
 <span id="cb2-1122"><a href="#cb2-1122" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>Confundir coeficiente pequeño con irrelevancia absoluta.</span>
 <span id="cb2-1123"><a href="#cb2-1123" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>Ignorar la inestabilidad entre variables correlacionadas.</span>
 <span id="cb2-1124"><a href="#cb2-1124" aria-hidden="true" tabindex="-1"></a><span class="ss">8. </span>Comparar soluciones obtenidas con escalas distintas.</span>
 <span id="cb2-1125"><a href="#cb2-1125" aria-hidden="true" tabindex="-1"></a><span class="ss">9. </span>Utilizar regularización sin recalibrar el modelo cuando sea necesario.</span>
-<span id="cb2-1126"><a href="#cb2-1126" aria-hidden="true" tabindex="-1"></a><span class="ss">10. </span>Reportar únicamente <span class="sc">\(</span>\lambda_{min}<span class="sc">\)</span> sin considerar parsimonia.</span>
+<span id="cb2-1126"><a href="#cb2-1126" aria-hidden="true" tabindex="-1"></a><span class="ss">10. </span>Reportar únicamente $\lambda_{min}$ sin considerar parsimonia.</span>
 <span id="cb2-1127"><a href="#cb2-1127" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1128"><a href="#cb2-1128" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ejercicios conceptuales</span></span>
 <span id="cb2-1129"><a href="#cb2-1129" aria-hidden="true" tabindex="-1"></a></span>
@@ -2997,7 +3422,7 @@ window.Quarto = {
 <span id="cb2-1131"><a href="#cb2-1131" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>¿Cómo puede un estimador sesgado tener menor error cuadrático medio?</span>
 <span id="cb2-1132"><a href="#cb2-1132" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>¿Por qué ridge ayuda con multicolinealidad?</span>
 <span id="cb2-1133"><a href="#cb2-1133" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>¿Por qué LASSO produce coeficientes cero?</span>
-<span id="cb2-1134"><a href="#cb2-1134" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Explique la diferencia geométrica entre <span class="sc">\(</span>L_1<span class="sc">\)</span> y <span class="sc">\(</span>L_2<span class="sc">\)</span>.</span>
+<span id="cb2-1134"><a href="#cb2-1134" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Explique la diferencia geométrica entre $L_1$ y $L_2$.</span>
 <span id="cb2-1135"><a href="#cb2-1135" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>¿Qué ventaja ofrece elastic net?</span>
 <span id="cb2-1136"><a href="#cb2-1136" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>¿Por qué es necesaria la estandarización?</span>
 <span id="cb2-1137"><a href="#cb2-1137" aria-hidden="true" tabindex="-1"></a><span class="ss">8. </span>¿Qué relación existe entre ridge y una previa normal?</span>
@@ -3008,7 +3433,7 @@ window.Quarto = {
 <span id="cb2-1142"><a href="#cb2-1142" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1143"><a href="#cb2-1143" aria-hidden="true" tabindex="-1"></a>Considere</span>
 <span id="cb2-1144"><a href="#cb2-1144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-1145"><a href="#cb2-1145" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-1145"><a href="#cb2-1145" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-1146"><a href="#cb2-1146" aria-hidden="true" tabindex="-1"></a>J(\boldsymbol{\beta})</span>
 <span id="cb2-1147"><a href="#cb2-1147" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-1148"><a href="#cb2-1148" aria-hidden="true" tabindex="-1"></a>(\mathbf{y}-\mathbf{X}\boldsymbol{\beta})^{\mathsf T}</span>
@@ -3016,28 +3441,28 @@ window.Quarto = {
 <span id="cb2-1150"><a href="#cb2-1150" aria-hidden="true" tabindex="-1"></a>+</span>
 <span id="cb2-1151"><a href="#cb2-1151" aria-hidden="true" tabindex="-1"></a>\lambda</span>
 <span id="cb2-1152"><a href="#cb2-1152" aria-hidden="true" tabindex="-1"></a>\boldsymbol{\beta}^{\mathsf T}\boldsymbol{\beta}.</span>
-<span id="cb2-1153"><a href="#cb2-1153" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-1153"><a href="#cb2-1153" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-1154"><a href="#cb2-1154" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1155"><a href="#cb2-1155" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Expanda la expresión.</span>
 <span id="cb2-1156"><a href="#cb2-1156" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Calcule el gradiente.</span>
 <span id="cb2-1157"><a href="#cb2-1157" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Iguale a cero.</span>
 <span id="cb2-1158"><a href="#cb2-1158" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Obtenga la solución ridge.</span>
-<span id="cb2-1159"><a href="#cb2-1159" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Explique por qué la matriz resultante es invertible para <span class="sc">\(</span>\lambda&gt;0<span class="sc">\)</span>.</span>
+<span id="cb2-1159"><a href="#cb2-1159" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Explique por qué la matriz resultante es invertible para $\lambda&gt;0$.</span>
 <span id="cb2-1160"><a href="#cb2-1160" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1161"><a href="#cb2-1161" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ejercicio de soft-thresholding</span></span>
 <span id="cb2-1162"><a href="#cb2-1162" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1163"><a href="#cb2-1163" aria-hidden="true" tabindex="-1"></a>Calcule</span>
 <span id="cb2-1164"><a href="#cb2-1164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-1165"><a href="#cb2-1165" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-1165"><a href="#cb2-1165" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-1166"><a href="#cb2-1166" aria-hidden="true" tabindex="-1"></a>S(z,\gamma)</span>
-<span id="cb2-1167"><a href="#cb2-1167" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-1167"><a href="#cb2-1167" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-1168"><a href="#cb2-1168" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1169"><a href="#cb2-1169" aria-hidden="true" tabindex="-1"></a>para:</span>
 <span id="cb2-1170"><a href="#cb2-1170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-1171"><a href="#cb2-1171" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="sc">\(</span>z=5<span class="sc">\)</span>, <span class="sc">\(</span>\gamma=2<span class="sc">\)</span>;</span>
-<span id="cb2-1172"><a href="#cb2-1172" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span><span class="sc">\(</span>z=-4<span class="sc">\)</span>, <span class="sc">\(</span>\gamma=1.5<span class="sc">\)</span>;</span>
-<span id="cb2-1173"><a href="#cb2-1173" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span><span class="sc">\(</span>z=1<span class="sc">\)</span>, <span class="sc">\(</span>\gamma=2<span class="sc">\)</span>;</span>
-<span id="cb2-1174"><a href="#cb2-1174" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span><span class="sc">\(</span>z=-0.5<span class="sc">\)</span>, <span class="sc">\(</span>\gamma=0.5<span class="sc">\)</span>.</span>
+<span id="cb2-1171"><a href="#cb2-1171" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>$z=5$, $\gamma=2$;</span>
+<span id="cb2-1172"><a href="#cb2-1172" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>$z=-4$, $\gamma=1.5$;</span>
+<span id="cb2-1173"><a href="#cb2-1173" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>$z=1$, $\gamma=2$;</span>
+<span id="cb2-1174"><a href="#cb2-1174" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>$z=-0.5$, $\gamma=0.5$.</span>
 <span id="cb2-1175"><a href="#cb2-1175" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1176"><a href="#cb2-1176" aria-hidden="true" tabindex="-1"></a>Interprete cuándo el resultado es cero.</span>
 <span id="cb2-1177"><a href="#cb2-1177" aria-hidden="true" tabindex="-1"></a></span>
@@ -3045,7 +3470,7 @@ window.Quarto = {
 <span id="cb2-1179"><a href="#cb2-1179" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1180"><a href="#cb2-1180" aria-hidden="true" tabindex="-1"></a>Se obtienen los siguientes errores:</span>
 <span id="cb2-1181"><a href="#cb2-1181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-1182"><a href="#cb2-1182" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="sc">\(</span>\lambda<span class="sc">\)</span> <span class="pp">|</span> Error CV <span class="pp">|</span></span>
+<span id="cb2-1182"><a href="#cb2-1182" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> $\lambda$ <span class="pp">|</span> Error CV <span class="pp">|</span></span>
 <span id="cb2-1183"><a href="#cb2-1183" aria-hidden="true" tabindex="-1"></a><span class="pp">|---:|---:|</span></span>
 <span id="cb2-1184"><a href="#cb2-1184" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 0.001 <span class="pp">|</span> 4.80 <span class="pp">|</span></span>
 <span id="cb2-1185"><a href="#cb2-1185" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 0.01 <span class="pp">|</span> 4.20 <span class="pp">|</span></span>
@@ -3053,7 +3478,7 @@ window.Quarto = {
 <span id="cb2-1187"><a href="#cb2-1187" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 1.00 <span class="pp">|</span> 4.05 <span class="pp">|</span></span>
 <span id="cb2-1188"><a href="#cb2-1188" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 10.00 <span class="pp">|</span> 5.30 <span class="pp">|</span></span>
 <span id="cb2-1189"><a href="#cb2-1189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-1190"><a href="#cb2-1190" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Seleccione <span class="sc">\(</span>\lambda<span class="sc">\)</span>.</span>
+<span id="cb2-1190"><a href="#cb2-1190" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Seleccione $\lambda$.</span>
 <span id="cb2-1191"><a href="#cb2-1191" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Explique qué ocurre en valores muy pequeños.</span>
 <span id="cb2-1192"><a href="#cb2-1192" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Explique qué ocurre en valores muy grandes.</span>
 <span id="cb2-1193"><a href="#cb2-1193" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Relacione el patrón con sesgo y varianza.</span>
@@ -3080,7 +3505,7 @@ window.Quarto = {
 <span id="cb2-1214"><a href="#cb2-1214" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Defina un modelo ridge.</span>
 <span id="cb2-1215"><a href="#cb2-1215" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Defina un modelo LASSO.</span>
 <span id="cb2-1216"><a href="#cb2-1216" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Defina un modelo elastic net.</span>
-<span id="cb2-1217"><a href="#cb2-1217" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>Diseñe la selección de <span class="sc">\(</span>\lambda<span class="sc">\)</span> y <span class="sc">\(</span>\alpha<span class="sc">\)</span>.</span>
+<span id="cb2-1217"><a href="#cb2-1217" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>Diseñe la selección de $\lambda$ y $\alpha$.</span>
 <span id="cb2-1218"><a href="#cb2-1218" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>Explique qué métricas usaría.</span>
 <span id="cb2-1219"><a href="#cb2-1219" aria-hidden="true" tabindex="-1"></a><span class="ss">8. </span>Indique cómo evitaría fuga de información.</span>
 <span id="cb2-1220"><a href="#cb2-1220" aria-hidden="true" tabindex="-1"></a><span class="ss">9. </span>Explique cómo interpretaría los coeficientes.</span>
@@ -3090,9 +3515,9 @@ window.Quarto = {
 <span id="cb2-1224"><a href="#cb2-1224" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1225"><a href="#cb2-1225" aria-hidden="true" tabindex="-1"></a>En este capítulo se estudió la regularización como mecanismo para controlar complejidad, reducir varianza y mejorar estabilidad.</span>
 <span id="cb2-1226"><a href="#cb2-1226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-1227"><a href="#cb2-1227" aria-hidden="true" tabindex="-1"></a>Se derivó el estimador ridge y se analizó su efecto espectral. También se formuló LASSO mediante penalización <span class="sc">\(</span>L_1<span class="sc">\)</span>, se introdujeron subgradientes y soft-thresholding, y se explicó su capacidad de selección de variables.</span>
+<span id="cb2-1227"><a href="#cb2-1227" aria-hidden="true" tabindex="-1"></a>Se derivó el estimador ridge y se analizó su efecto espectral. También se formuló LASSO mediante penalización $L_1$, se introdujeron subgradientes y soft-thresholding, y se explicó su capacidad de selección de variables.</span>
 <span id="cb2-1228"><a href="#cb2-1228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-1229"><a href="#cb2-1229" aria-hidden="true" tabindex="-1"></a>Finalmente, se desarrolló elastic net, la interpretación bayesiana, los caminos de regularización, la selección de <span class="sc">\(</span>\lambda<span class="sc">\)</span> y extensiones como group LASSO. Estos conceptos serán fundamentales en regresión, clasificación y redes neuronales.</span>
+<span id="cb2-1229"><a href="#cb2-1229" aria-hidden="true" tabindex="-1"></a>Finalmente, se desarrolló elastic net, la interpretación bayesiana, los caminos de regularización, la selección de $\lambda$ y extensiones como group LASSO. Estos conceptos serán fundamentales en regresión, clasificación y redes neuronales.</span>
 </code></pre></div><button title="Copiar al portapapeles" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

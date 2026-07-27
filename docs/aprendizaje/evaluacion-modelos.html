@@ -112,6 +112,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../estilos/styles.css">
 </head>
@@ -303,8 +332,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Fundamentos Matemáticos del Aprendizaje Automático</a> 
-        <div class="sidebar-tools-main">
+        <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/gilbertorodriguez59/libro-machine-learning-teorico" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
+    <a href="../fundamentos-matematicos-aprendizaje-automatico.pdf" title="Descargar PDF" class="quarto-navigation-tool px-1" aria-label="Descargar PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
 </div>
     </div>
@@ -571,7 +601,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#partición-estratificada" id="toc-partición-estratificada" class="nav-link" data-scroll-target="#partición-estratificada"><span class="header-section-number">11.10</span> Partición estratificada</a></li>
   <li><a href="#partición-por-grupos" id="toc-partición-por-grupos" class="nav-link" data-scroll-target="#partición-por-grupos"><span class="header-section-number">11.11</span> Partición por grupos</a></li>
   <li><a href="#método-holdout" id="toc-método-holdout" class="nav-link" data-scroll-target="#método-holdout"><span class="header-section-number">11.12</span> Método holdout</a></li>
-  <li><a href="#validación-cruzada-de-k-pliegues" id="toc-validación-cruzada-de-k-pliegues" class="nav-link" data-scroll-target="#validación-cruzada-de-k-pliegues"><span class="header-section-number">11.13</span> Validación cruzada de (K) pliegues</a></li>
+  <li><a href="#validación-cruzada-de-k-pliegues" id="toc-validación-cruzada-de-k-pliegues" class="nav-link" data-scroll-target="#validación-cruzada-de-k-pliegues"><span class="header-section-number">11.13</span> Validación cruzada de K pliegues</a></li>
   <li><a href="#interpretación" id="toc-interpretación" class="nav-link" data-scroll-target="#interpretación"><span class="header-section-number">11.14</span> Interpretación</a></li>
   <li><a href="#sesgo-de-validación-cruzada" id="toc-sesgo-de-validación-cruzada" class="nav-link" data-scroll-target="#sesgo-de-validación-cruzada"><span class="header-section-number">11.15</span> Sesgo de validación cruzada</a></li>
   <li><a href="#varianza-de-validación-cruzada" id="toc-varianza-de-validación-cruzada" class="nav-link" data-scroll-target="#varianza-de-validación-cruzada"><span class="header-section-number">11.16</span> Varianza de validación cruzada</a></li>
@@ -670,7 +700,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>definir un estimador del error de generalización;</li>
 <li>comprender el sesgo optimista del error de entrenamiento;</li>
 <li>aplicar particiones aleatorias y estratificadas;</li>
-<li>formular validación cruzada de (K) pliegues;</li>
+<li>formular validación cruzada de <span class="math inline">\(K\)</span> pliegues;</li>
 <li>interpretar leave-one-out;</li>
 <li>comprender métodos bootstrap;</li>
 <li>comparar sesgo y varianza de estimadores de error;</li>
@@ -684,18 +714,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="error-de-generalización" class="level2" data-number="11.3">
 <h2 data-number="11.3" class="anchored" data-anchor-id="error-de-generalización"><span class="header-section-number">11.3</span> Error de generalización</h2>
-<p>Sea (_{}) un modelo ajustado con una muestra ().</p>
+<p>Sea <span class="math inline">\(\widehat{f}_{\mathcal{D}}\)</span> un modelo ajustado con una muestra <span class="math inline">\(\mathcal{D}\)</span>.</p>
 <p>Su error de generalización es</p>
-<p>[ R(_{}) = . ]</p>
-<p>La esperanza se toma respecto de una nueva observación ((,Y)) proveniente del mismo proceso generador.</p>
-<p>Este riesgo es desconocido porque la distribución (P_{,Y}) es desconocida.</p>
+<p><span class="math display">\[
+R(\widehat{f}_{\mathcal{D}})
+=
+\mathbb{E}
+\left[
+L
+\left(
+Y,
+\widehat{f}_{\mathcal{D}}(\mathbf{X})
+\right)
+\mid
+\mathcal{D}
+\right].
+\]</span></p>
+<p>La esperanza se toma respecto de una nueva observación <span class="math inline">\((\mathbf{X},Y)\)</span> proveniente del mismo proceso generador.</p>
+<p>Este riesgo es desconocido porque la distribución <span class="math inline">\(P_{\mathbf{X},Y}\)</span> es desconocida.</p>
 </section>
 <section id="error-de-entrenamiento" class="level2" data-number="11.4">
 <h2 data-number="11.4" class="anchored" data-anchor-id="error-de-entrenamiento"><span class="header-section-number">11.4</span> Error de entrenamiento</h2>
 <p>El error de entrenamiento es</p>
-<p>[ <em>{train} = </em>{i=1}^{n} L ( y_i, _{}(_i) ). ]</p>
+<p><span class="math display">\[
+\widehat{R}_{train}
+=
+\frac{1}{n}
+\sum_{i=1}^{n}
+L
+\left(
+y_i,
+\widehat{f}_{\mathcal{D}}(\mathbf{x}_i)
+\right).
+\]</span></p>
 <p>Como el modelo fue ajustado usando esas mismas observaciones, suele cumplirse</p>
-<p>[ <em>{train} &lt; R(</em>{}). ]</p>
+<p><span class="math display">\[
+\widehat{R}_{train}
+&lt;
+R(\widehat{f}_{\mathcal{D}}).
+\]</span></p>
 <p>Esta diferencia se denomina optimismo.</p>
 </section>
 <section id="optimismo-de-entrenamiento" class="level2" data-number="11.5">
@@ -704,24 +761,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><span class="theorem-title"><strong>Definición 11.1</strong></span> El optimismo es la diferencia entre el error esperado sobre datos nuevos y el error observado sobre los datos de entrenamiento.</p>
 </div>
 <p>Formalmente,</p>
-<p>[ = . ]</p>
+<p><span class="math display">\[
+\operatorname{Opt}
+=
+\mathbb{E}
+\left[
+R(\widehat{f}_{\mathcal{D}})
+-
+\widehat{R}_{train}
+\right].
+\]</span></p>
 <p>Los modelos más flexibles suelen presentar mayor optimismo.</p>
 </section>
 <section id="conjunto-de-prueba" class="level2" data-number="11.6">
 <h2 data-number="11.6" class="anchored" data-anchor-id="conjunto-de-prueba"><span class="header-section-number">11.6</span> Conjunto de prueba</h2>
 <p>Sea</p>
-<p>[ _{test} = { (<sup>{test}_j,y</sup>{test}<em>j) }</em>{j=1}^{m} ]</p>
+<p><span class="math display">\[
+\mathcal{D}_{test}
+=
+\left\{
+(\mathbf{x}^{test}_j,y^{test}_j)
+\right\}_{j=1}^{m}
+\]</span></p>
 <p>una muestra independiente del entrenamiento.</p>
 <p>El error de prueba es</p>
-<p>[ <em>{test} = </em>{j=1}^{m} L ( y^{test}<em>j, </em>{}(^{test}_j) ). ]</p>
+<p><span class="math display">\[
+\widehat{R}_{test}
+=
+\frac{1}{m}
+\sum_{j=1}^{m}
+L
+\left(
+y^{test}_j,
+\widehat{f}_{\mathcal{D}}(\mathbf{x}^{test}_j)
+\right).
+\]</span></p>
 <p>Condicionado al modelo ajustado,</p>
-<p>[ = R(_{}). ]</p>
+<p><span class="math display">\[
+\mathbb{E}
+\left[
+\widehat{R}_{test}
+\mid
+\mathcal{D}
+\right]
+=
+R(\widehat{f}_{\mathcal{D}}).
+\]</span></p>
 <p>Por tanto, el error de prueba es un estimador insesgado del riesgo del modelo fijo, siempre que el conjunto de prueba sea independiente y no intervenga en decisiones previas.</p>
 </section>
 <section id="división-entrenamiento-validación-prueba" class="level2" data-number="11.7">
 <h2 data-number="11.7" class="anchored" data-anchor-id="división-entrenamiento-validación-prueba"><span class="header-section-number">11.7</span> División entrenamiento-validación-prueba</h2>
 <p>Una muestra puede dividirse en tres partes:</p>
-<p>[ = <em>{train} </em>{val} _{test}, ]</p>
+<p><span class="math display">\[
+\mathcal{D}
+=
+\mathcal{D}_{train}
+\cup
+\mathcal{D}_{val}
+\cup
+\mathcal{D}_{test},
+\]</span></p>
 <p>con intersecciones vacías.</p>
 <section id="entrenamiento" class="level3" data-number="11.7.1">
 <h3 data-number="11.7.1" class="anchored" data-anchor-id="entrenamiento"><span class="header-section-number">11.7.1</span> Entrenamiento</h3>
@@ -747,9 +846,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="11.8" class="anchored" data-anchor-id="proporciones-de-partición"><span class="header-section-number">11.8</span> Proporciones de partición</h2>
 <p>No existe una proporción universal. Algunas opciones son:</p>
 <ul>
-<li>(60%-20%-20%);</li>
-<li>(70%-15%-15%);</li>
-<li>(80%-20%), usando validación cruzada dentro del entrenamiento.</li>
+<li><span class="math inline">\(60\%-20\%-20\%\)</span>;</li>
+<li><span class="math inline">\(70\%-15\%-15\%\)</span>;</li>
+<li><span class="math inline">\(80\%-20\%\)</span>, usando validación cruzada dentro del entrenamiento.</li>
 </ul>
 <p>La elección depende de:</p>
 <ul>
@@ -779,9 +878,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><span class="theorem-title"><strong>Definición 11.2</strong></span> Una partición estratificada conserva aproximadamente la proporción de clases en cada subconjunto.</p>
 </div>
 <p>Si</p>
-<p>[ _k = , ]</p>
+<p><span class="math display">\[
+\widehat{p}_k
+=
+\frac{n_k}{n},
+\]</span></p>
 <p>se busca que</p>
-<p>[ <em>{k,train} </em>{k,val} _{k,test}. ]</p>
+<p><span class="math display">\[
+\widehat{p}_{k,train}
+\approx
+\widehat{p}_{k,val}
+\approx
+\widehat{p}_{k,test}.
+\]</span></p>
 <p>Es especialmente importante en clases desbalanceadas.</p>
 </section>
 <section id="partición-por-grupos" class="level2" data-number="11.11">
@@ -792,7 +901,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="método-holdout" class="level2" data-number="11.12">
 <h2 data-number="11.12" class="anchored" data-anchor-id="método-holdout"><span class="header-section-number">11.12</span> Método holdout</h2>
 <p>El método holdout utiliza una sola partición:</p>
-<p>[ = <em>{train} </em>{test}. ]</p>
+<p><span class="math display">\[
+\mathcal{D}
+=
+\mathcal{D}_{train}
+\cup
+\mathcal{D}_{test}.
+\]</span></p>
 <p>Ventajas:</p>
 <ul>
 <li>simple;</li>
@@ -807,43 +922,70 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 <section id="validación-cruzada-de-k-pliegues" class="level2" data-number="11.13">
-<h2 data-number="11.13" class="anchored" data-anchor-id="validación-cruzada-de-k-pliegues"><span class="header-section-number">11.13</span> Validación cruzada de (K) pliegues</h2>
+<h2 data-number="11.13" class="anchored" data-anchor-id="validación-cruzada-de-k-pliegues"><span class="header-section-number">11.13</span> Validación cruzada de K pliegues</h2>
 <div id="def-validacion-cruzada" class="theorem definition">
-<p><span class="theorem-title"><strong>Definición 11.3</strong></span> La validación cruzada de (K) pliegues divide la muestra en subconjuntos</p>
-<p>[ I_1,,I_K ]</p>
+<p><span class="theorem-title"><strong>Definición 11.3</strong></span> La validación cruzada de <span class="math inline">\(K\)</span> pliegues divide la muestra en subconjuntos</p>
+<p><span class="math display">\[
+I_1,\ldots,I_K
+\]</span></p>
 <p>aproximadamente del mismo tamaño.</p>
 </div>
-<p>Para cada pliegue (k):</p>
+<p>Para cada pliegue <span class="math inline">\(k\)</span>:</p>
 <ol type="1">
-<li>se ajusta el modelo sin (I_k);</li>
-<li>se evalúa sobre (I_k).</li>
+<li>se ajusta el modelo sin <span class="math inline">\(I_k\)</span>;</li>
+<li>se evalúa sobre <span class="math inline">\(I_k\)</span>.</li>
 </ol>
 <p>Sea</p>
-<p>[ ^{(-k)} ]</p>
-<p>el modelo entrenado sin el pliegue (k).</p>
+<p><span class="math display">\[
+\widehat{f}^{(-k)}
+\]</span></p>
+<p>el modelo entrenado sin el pliegue <span class="math inline">\(k\)</span>.</p>
 <p>El error es</p>
-<p>[ CV_K = <em>{k=1}^{K} </em>{iI_k} L ( y_i, ^{(-k)}(_i) ). ]</p>
+<p><span class="math display">\[
+CV_K
+=
+\frac{1}{n}
+\sum_{k=1}^{K}
+\sum_{i\in I_k}
+L
+\left(
+y_i,
+\widehat{f}^{(-k)}(\mathbf{x}_i)
+\right).
+\]</span></p>
 <p>Si los pliegues tienen igual tamaño,</p>
-<p>[ CV_K = _{k=1}^{K} _k. ]</p>
+<p><span class="math display">\[
+CV_K
+=
+\frac{1}{K}
+\sum_{k=1}^{K}
+\widehat{R}_k.
+\]</span></p>
 </section>
 <section id="interpretación" class="level2" data-number="11.14">
 <h2 data-number="11.14" class="anchored" data-anchor-id="interpretación"><span class="header-section-number">11.14</span> Interpretación</h2>
 <p>Cada observación se utiliza:</p>
 <ul>
 <li>una vez para validación;</li>
-<li>(K-1) veces como parte del entrenamiento.</li>
+<li><span class="math inline">\(K-1\)</span> veces como parte del entrenamiento.</li>
 </ul>
 <p>Los valores habituales son</p>
-<p>[ K=5 ]</p>
+<p><span class="math display">\[
+K=5
+\]</span></p>
 <p>o</p>
-<p>[ K=10. ]</p>
+<p><span class="math display">\[
+K=10.
+\]</span></p>
 </section>
 <section id="sesgo-de-validación-cruzada" class="level2" data-number="11.15">
 <h2 data-number="11.15" class="anchored" data-anchor-id="sesgo-de-validación-cruzada"><span class="header-section-number">11.15</span> Sesgo de validación cruzada</h2>
 <p>Cada modelo se entrena con</p>
-<p>[ n ]</p>
+<p><span class="math display">\[
+\frac{K-1}{K}n
+\]</span></p>
 <p>observaciones.</p>
-<p>Por tanto, (CV_K) estima el error de un modelo entrenado con menos observaciones que el modelo final.</p>
+<p>Por tanto, <span class="math inline">\(CV_K\)</span> estima el error de un modelo entrenado con menos observaciones que el modelo final.</p>
 <p>Esto puede introducir un sesgo ligeramente pesimista.</p>
 </section>
 <section id="varianza-de-validación-cruzada" class="level2" data-number="11.16">
@@ -853,19 +995,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="validación-cruzada-repetida" class="level2" data-number="11.17">
 <h2 data-number="11.17" class="anchored" data-anchor-id="validación-cruzada-repetida"><span class="header-section-number">11.17</span> Validación cruzada repetida</h2>
-<p>Se repite la creación de pliegues (B) veces:</p>
-<p>[ CV_{K,B} = _{b=1}^{B} CV_K^{(b)}. ]</p>
+<p>Se repite la creación de pliegues <span class="math inline">\(B\)</span> veces:</p>
+<p><span class="math display">\[
+CV_{K,B}
+=
+\frac{1}{B}
+\sum_{b=1}^{B}
+CV_K^{(b)}.
+\]</span></p>
 <p>La repetición reduce la dependencia respecto de una sola división.</p>
 </section>
 <section id="leave-one-out" class="level2" data-number="11.18">
 <h2 data-number="11.18" class="anchored" data-anchor-id="leave-one-out"><span class="header-section-number">11.18</span> Leave-one-out</h2>
 <div id="def-loocv" class="theorem definition">
 <p><span class="theorem-title"><strong>Definición 11.4</strong></span> Leave-one-out cross-validation corresponde a</p>
-<p>[ K=n. ]</p>
+<p><span class="math display">\[
+K=n.
+\]</span></p>
 </div>
-<p>Cada modelo se entrena con (n-1) observaciones y se evalúa en una sola.</p>
+<p>Cada modelo se entrena con <span class="math inline">\(n-1\)</span> observaciones y se evalúa en una sola.</p>
 <p>El estimador es</p>
-<p>[ CV_{LOO} = _{i=1}^{n} L ( y_i, ^{(-i)}(_i) ). ]</p>
+<p><span class="math display">\[
+CV_{LOO}
+=
+\frac{1}{n}
+\sum_{i=1}^{n}
+L
+\left(
+y_i,
+\widehat{f}^{(-i)}(\mathbf{x}_i)
+\right).
+\]</span></p>
 </section>
 <section id="ventajas-y-limitaciones-de-loocv" class="level2" data-number="11.19">
 <h2 data-number="11.19" class="anchored" data-anchor-id="ventajas-y-limitaciones-de-loocv"><span class="header-section-number">11.19</span> Ventajas y limitaciones de LOOCV</h2>
@@ -879,7 +1039,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>puede tener alta varianza;</li>
 <li>alto costo computacional;</li>
 <li>los modelos ajustados son muy similares;</li>
-<li>no siempre supera a (K=5) o (K=10).</li>
+<li>no siempre supera a <span class="math inline">\(K=5\)</span> o <span class="math inline">\(K=10\)</span>.</li>
 </ul>
 </section>
 <section id="validación-cruzada-estratificada" class="level2" data-number="11.20">
@@ -903,34 +1063,68 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>En series temporales no debe mezclarse aleatoriamente pasado y futuro.</p>
 <p>Una estrategia es la ventana creciente.</p>
 <p>Para tiempos</p>
-<p>[ 1,,T, ]</p>
+<p><span class="math display">\[
+1,\ldots,T,
+\]</span></p>
 <p>se realizan ajustes como:</p>
-<p>[ {1,,t} {t+1}. ]</p>
+<p><span class="math display">\[
+\{1,\ldots,t\}
+\to
+\{t+1\}.
+\]</span></p>
 <p>El error temporal es</p>
-<p>[ CV_{time} = <em>{m=1}^{M} L ( y</em>{t_m+1}, <em>{1:t_m}(</em>{t_m+1}) ). ]</p>
+<p><span class="math display">\[
+CV_{time}
+=
+\frac{1}{M}
+\sum_{m=1}^{M}
+L
+\left(
+y_{t_m+1},
+\widehat{f}_{1:t_m}(\mathbf{x}_{t_m+1})
+\right).
+\]</span></p>
 </section>
 <section id="ventana-deslizante" class="level2" data-number="11.23">
 <h2 data-number="11.23" class="anchored" data-anchor-id="ventana-deslizante"><span class="header-section-number">11.23</span> Ventana deslizante</h2>
-<p>Se entrena con una ventana de longitud fija (w):</p>
-<p>[ {t-w+1,,t} {t+1}. ]</p>
+<p>Se entrena con una ventana de longitud fija <span class="math inline">\(w\)</span>:</p>
+<p><span class="math display">\[
+\{t-w+1,\ldots,t\}
+\to
+\{t+1\}.
+\]</span></p>
 <p>Es útil cuando el proceso cambia con el tiempo.</p>
 </section>
 <section id="bootstrap" class="level2" data-number="11.24">
 <h2 data-number="11.24" class="anchored" data-anchor-id="bootstrap"><span class="header-section-number">11.24</span> Bootstrap</h2>
 <div id="def-bootstrap" class="theorem definition">
-<p><span class="theorem-title"><strong>Definición 11.5</strong></span> Una muestra bootstrap se obtiene seleccionando (n) observaciones con reemplazo de la muestra original.</p>
+<p><span class="theorem-title"><strong>Definición 11.5</strong></span> Una muestra bootstrap se obtiene seleccionando <span class="math inline">\(n\)</span> observaciones con reemplazo de la muestra original.</p>
 </div>
 <p>Se denota por</p>
-<p>[ ^{*(b)}. ]</p>
+<p><span class="math display">\[
+\mathcal{D}^{*(b)}.
+\]</span></p>
 <p>Cada muestra bootstrap contiene observaciones repetidas y deja fuera algunas observaciones originales.</p>
 </section>
 <section id="probabilidad-de-exclusión" class="level2" data-number="11.25">
 <h2 data-number="11.25" class="anchored" data-anchor-id="probabilidad-de-exclusión"><span class="header-section-number">11.25</span> Probabilidad de exclusión</h2>
 <p>La probabilidad de que una observación no sea seleccionada en una muestra bootstrap es</p>
-<p>[ ( 1- )^n. ]</p>
-<p>Cuando (n) es grande,</p>
-<p>[ ( 1- )^n e^{-1} . ]</p>
-<p>Por tanto, aproximadamente el (36.8%) de las observaciones queda fuera de cada muestra bootstrap.</p>
+<p><span class="math display">\[
+\left(
+1-\frac{1}{n}
+\right)^n.
+\]</span></p>
+<p>Cuando <span class="math inline">\(n\)</span> es grande,</p>
+<p><span class="math display">\[
+\left(
+1-\frac{1}{n}
+\right)^n
+\approx
+e^{-1}
+\approx
+0.368.
+\]</span></p>
+<p>Por tanto, aproximadamente el <span class="math inline">\(36.8\%\)</span> de las observaciones queda fuera de cada muestra bootstrap.</p>
 </section>
 <section id="error-out-of-bag" class="level2" data-number="11.26">
 <h2 data-number="11.26" class="anchored" data-anchor-id="error-out-of-bag"><span class="header-section-number">11.26</span> Error out-of-bag</h2>
@@ -940,38 +1134,79 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="estimador-bootstrap-del-error" class="level2" data-number="11.27">
 <h2 data-number="11.27" class="anchored" data-anchor-id="estimador-bootstrap-del-error"><span class="header-section-number">11.27</span> Estimador bootstrap del error</h2>
-<p>Para (B) muestras bootstrap,</p>
-<p>[ <em>{boot} = </em>{b=1}^{B} _{OOB}^{(b)}. ]</p>
+<p>Para <span class="math inline">\(B\)</span> muestras bootstrap,</p>
+<p><span class="math display">\[
+\widehat{R}_{boot}
+=
+\frac{1}{B}
+\sum_{b=1}^{B}
+\widehat{R}_{OOB}^{(b)}.
+\]</span></p>
 </section>
 <section id="estimador-.632" class="level2" data-number="11.28">
 <h2 data-number="11.28" class="anchored" data-anchor-id="estimador-.632"><span class="header-section-number">11.28</span> Estimador .632</h2>
 <p>El estimador .632 combina error de entrenamiento y error out-of-bag:</p>
-<p>[ <em>{.632} = 0.368 </em>{train} + 0.632 _{OOB}. ]</p>
+<p><span class="math display">\[
+\widehat{R}_{.632}
+=
+0.368
+\widehat{R}_{train}
++
+0.632
+\widehat{R}_{OOB}.
+\]</span></p>
 <p>La ponderación se relaciona con la proporción esperada de observaciones distintas presentes en una muestra bootstrap.</p>
 </section>
 <section id="bootstrap-para-incertidumbre" class="level2" data-number="11.29">
 <h2 data-number="11.29" class="anchored" data-anchor-id="bootstrap-para-incertidumbre"><span class="header-section-number">11.29</span> Bootstrap para incertidumbre</h2>
 <p>Además de estimar error, bootstrap puede aproximar la distribución de un estadístico.</p>
 <p>Sea</p>
-<p>[ T=T(). ]</p>
+<p><span class="math display">\[
+T=T(\mathcal{D}).
+\]</span></p>
 <p>Se calculan</p>
-<p>[ T<sup>{*(1)},,T</sup>{*(B)}. ]</p>
+<p><span class="math display">\[
+T^{*(1)},\ldots,T^{*(B)}.
+\]</span></p>
 <p>La varianza bootstrap es</p>
-<p>[ <em>{boot}(T) = </em>{b=1}^{B} ( T^{<em>(b)} - ^{</em>} )^2. ]</p>
+<p><span class="math display">\[
+\widehat{\operatorname{Var}}_{boot}(T)
+=
+\frac{1}{B-1}
+\sum_{b=1}^{B}
+\left(
+T^{*(b)}
+-
+\overline{T}^{*}
+\right)^2.
+\]</span></p>
 </section>
 <section id="selección-de-hiperparámetros" class="level2" data-number="11.30">
 <h2 data-number="11.30" class="anchored" data-anchor-id="selección-de-hiperparámetros"><span class="header-section-number">11.30</span> Selección de hiperparámetros</h2>
-<p>Sea () un hiperparámetro.</p>
+<p>Sea <span class="math inline">\(\lambda\in\Lambda\)</span> un hiperparámetro.</p>
 <p>Para cada valor se estima</p>
-<p>[ CV_K(). ]</p>
+<p><span class="math display">\[
+CV_K(\lambda).
+\]</span></p>
 <p>Se selecciona</p>
-<p>[ = _{} CV_K(). ]</p>
-<p>Después se reajusta el modelo usando toda la muestra de entrenamiento con ().</p>
+<p><span class="math display">\[
+\widehat{\lambda}
+=
+\arg\min_{\lambda\in\Lambda}
+CV_K(\lambda).
+\]</span></p>
+<p>Después se reajusta el modelo usando toda la muestra de entrenamiento con <span class="math inline">\(\widehat{\lambda}\)</span>.</p>
 </section>
 <section id="búsqueda-en-rejilla" class="level2" data-number="11.31">
 <h2 data-number="11.31" class="anchored" data-anchor-id="búsqueda-en-rejilla"><span class="header-section-number">11.31</span> Búsqueda en rejilla</h2>
 <p>Se define una rejilla</p>
-<p>[ = { _1,,_M }. ]</p>
+<p><span class="math display">\[
+\Lambda
+=
+\{
+\lambda_1,\ldots,\lambda_M
+\}.
+\]</span></p>
 <p>Se evalúa cada combinación.</p>
 <p>Ventajas:</p>
 <ul>
@@ -992,7 +1227,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="optimización-bayesiana" class="level2" data-number="11.33">
 <h2 data-number="11.33" class="anchored" data-anchor-id="optimización-bayesiana"><span class="header-section-number">11.33</span> Optimización bayesiana</h2>
 <p>Construye un modelo sustituto de la función</p>
-<p>[ CV() ]</p>
+<p><span class="math display">\[
+\lambda
+\mapsto
+CV(\lambda)
+\]</span></p>
 <p>y utiliza una función de adquisición para elegir nuevas evaluaciones.</p>
 <p>Es útil cuando cada entrenamiento es costoso.</p>
 </section>
@@ -1015,7 +1254,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="11.35" class="anchored" data-anchor-id="preprocesamiento-correcto"><span class="header-section-number">11.35</span> Preprocesamiento correcto</h2>
 <p>Toda transformación debe aprenderse únicamente en entrenamiento.</p>
 <p>Por ejemplo, para estandarizar:</p>
-<p>[ _{ij} = . ]</p>
+<p><span class="math display">\[
+\widetilde{x}_{ij}
+=
+\frac{
+x_{ij}-\widehat{\mu}_{j,train}
+}{
+\widehat{\sigma}_{j,train}
+}.
+\]</span></p>
 <p>Los valores de validación y prueba se transforman usando las estadísticas del entrenamiento.</p>
 <p>No deben recalcularse con cada conjunto.</p>
 </section>
@@ -1054,7 +1301,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 data-number="11.38.2" class="anchored" data-anchor-id="ciclo-interno"><span class="header-section-number">11.38.2</span> Ciclo interno</h3>
 <p>Dentro del entrenamiento externo, selecciona hiperparámetros.</p>
 <p>El error anidado es</p>
-<p>[ CV_{nested} = <em>{k=1}^{K</em>{ext}} ^{ext}_k. ]</p>
+<p><span class="math display">\[
+CV_{nested}
+=
+\frac{1}{K_{ext}}
+\sum_{k=1}^{K_{ext}}
+\widehat{R}^{ext}_k.
+\]</span></p>
 <p>Este procedimiento reduce el sesgo de selección.</p>
 </section>
 </section>
@@ -1062,54 +1315,112 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="11.39" class="anchored" data-anchor-id="sesgo-por-selección"><span class="header-section-number">11.39</span> Sesgo por selección</h2>
 <p>Si se prueban muchos modelos y se reporta el mejor valor de validación, el resultado tiende a ser optimista.</p>
 <p>Esto ocurre porque se selecciona el mínimo entre estimaciones ruidosas:</p>
-<p>[ _m _m. ]</p>
+<p><span class="math display">\[
+\min_m
+\widehat{R}_m.
+\]</span></p>
 <p>La validación anidada separa selección y evaluación.</p>
 </section>
 <section id="regla-de-un-error-estándar" class="level2" data-number="11.40">
 <h2 data-number="11.40" class="anchored" data-anchor-id="regla-de-un-error-estándar"><span class="header-section-number">11.40</span> Regla de un error estándar</h2>
-<p>Supóngase que (_{min}) minimiza el error medio.</p>
+<p>Supóngase que <span class="math inline">\(\lambda_{min}\)</span> minimiza el error medio.</p>
 <p>La regla de un error estándar selecciona el modelo más simple cuyo error satisface</p>
-<p>[ CV() CV(<em>{min}) + SE(</em>{min}). ]</p>
+<p><span class="math display">\[
+CV(\lambda)
+\leq
+CV(\lambda_{min})
++
+SE(\lambda_{min}).
+\]</span></p>
 <p>Esta regla favorece modelos más parsimoniosos.</p>
 </section>
 <section id="comparación-de-modelos" class="level2" data-number="11.41">
 <h2 data-number="11.41" class="anchored" data-anchor-id="comparación-de-modelos"><span class="header-section-number">11.41</span> Comparación de modelos</h2>
-<p>Supóngase que se comparan modelos (A) y (B).</p>
+<p>Supóngase que se comparan modelos <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span>.</p>
 <p>En cada pliegue se calcula</p>
-<p>[ d_k = R_{A,k} - R_{B,k}. ]</p>
-<p>Una diferencia promedio negativa favorece a (A):</p>
-<p>[ = _{k=1}^{K}d_k. ]</p>
+<p><span class="math display">\[
+d_k
+=
+R_{A,k}
+-
+R_{B,k}.
+\]</span></p>
+<p>Una diferencia promedio negativa favorece a <span class="math inline">\(A\)</span>:</p>
+<p><span class="math display">\[
+\overline{d}
+=
+\frac{1}{K}
+\sum_{k=1}^{K}d_k.
+\]</span></p>
 <p>Sin embargo, los pliegues no son independientes, por lo que las pruebas estadísticas deben interpretarse con cautela.</p>
 </section>
 <section id="prueba-de-mcnemar" class="level2" data-number="11.42">
 <h2 data-number="11.42" class="anchored" data-anchor-id="prueba-de-mcnemar"><span class="header-section-number">11.42</span> Prueba de McNemar</h2>
 <p>Para dos clasificadores evaluados sobre las mismas observaciones, se consideran:</p>
 <ul>
-<li>(n_{01}): (A) falla y (B) acierta;</li>
-<li>(n_{10}): (A) acierta y (B) falla.</li>
+<li><span class="math inline">\(n_{01}\)</span>: <span class="math inline">\(A\)</span> falla y <span class="math inline">\(B\)</span> acierta;</li>
+<li><span class="math inline">\(n_{10}\)</span>: <span class="math inline">\(A\)</span> acierta y <span class="math inline">\(B\)</span> falla.</li>
 </ul>
 <p>El estadístico aproximado es</p>
-<p>[ ^2 = . ]</p>
+<p><span class="math display">\[
+\chi^2
+=
+\frac{
+(|n_{01}-n_{10}|-1)^2
+}{
+n_{01}+n_{10}
+}.
+\]</span></p>
 <p>Esta prueba analiza si los patrones de error difieren.</p>
 </section>
 <section id="intervalo-para-error-de-clasificación" class="level2" data-number="11.43">
 <h2 data-number="11.43" class="anchored" data-anchor-id="intervalo-para-error-de-clasificación"><span class="header-section-number">11.43</span> Intervalo para error de clasificación</h2>
 <p>Si el error observado es</p>
-<p>[ = , ]</p>
+<p><span class="math display">\[
+\widehat{p}
+=
+\frac{e}{m},
+\]</span></p>
 <p>una aproximación del error estándar es</p>
-<p>[ SE() = . ]</p>
+<p><span class="math display">\[
+SE(\widehat{p})
+=
+\sqrt{
+\frac{
+\widehat{p}(1-\widehat{p})
+}{
+m
+}
+}.
+\]</span></p>
 <p>Una aproximación normal es</p>
-<p>[ z_{/2} SE(). ]</p>
+<p><span class="math display">\[
+\widehat{p}
+\pm
+z_{\alpha/2}
+SE(\widehat{p}).
+\]</span></p>
 <p>Para muestras pequeñas o proporciones extremas son preferibles métodos como Wilson.</p>
 </section>
 <section id="incertidumbre-del-error-cuadrático-medio" class="level2" data-number="11.44">
 <h2 data-number="11.44" class="anchored" data-anchor-id="incertidumbre-del-error-cuadrático-medio"><span class="header-section-number">11.44</span> Incertidumbre del error cuadrático medio</h2>
 <p>Para pérdidas</p>
-<p>[ _1,,_m, ]</p>
+<p><span class="math display">\[
+\ell_1,\ldots,\ell_m,
+\]</span></p>
 <p>el error medio es</p>
-<p>[ = _{i=1}^{m}_i. ]</p>
+<p><span class="math display">\[
+\overline{\ell}
+=
+\frac{1}{m}
+\sum_{i=1}^{m}\ell_i.
+\]</span></p>
 <p>Su error estándar aproximado es</p>
-<p>[ SE() = , ]</p>
+<p><span class="math display">\[
+SE(\overline{\ell})
+=
+\frac{s_\ell}{\sqrt{m}},
+\]</span></p>
 <p>si las observaciones de prueba son independientes.</p>
 </section>
 <section id="reproducibilidad" class="level2" data-number="11.45">
@@ -1143,20 +1454,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="11.47" class="anchored" data-anchor-id="evaluación-en-regresión"><span class="header-section-number">11.47</span> Evaluación en regresión</h2>
 <section id="error-cuadrático-medio" class="level3" data-number="11.47.1">
 <h3 data-number="11.47.1" class="anchored" data-anchor-id="error-cuadrático-medio"><span class="header-section-number">11.47.1</span> Error cuadrático medio</h3>
-<p>[ MSE = _{i=1}^{m} ( y_i-_i )^2. ]</p>
+<p><span class="math display">\[
+MSE
+=
+\frac{1}{m}
+\sum_{i=1}^{m}
+(
+y_i-\widehat{y}_i
+)^2.
+\]</span></p>
 </section>
 <section id="raíz-del-error-cuadrático-medio" class="level3" data-number="11.47.2">
 <h3 data-number="11.47.2" class="anchored" data-anchor-id="raíz-del-error-cuadrático-medio"><span class="header-section-number">11.47.2</span> Raíz del error cuadrático medio</h3>
-<p>[ RMSE = . ]</p>
+<p><span class="math display">\[
+RMSE
+=
+\sqrt{MSE}.
+\]</span></p>
 </section>
 <section id="error-absoluto-medio" class="level3" data-number="11.47.3">
 <h3 data-number="11.47.3" class="anchored" data-anchor-id="error-absoluto-medio"><span class="header-section-number">11.47.3</span> Error absoluto medio</h3>
-<p>[ MAE = _{i=1}^{m} |y_i-_i|. ]</p>
+<p><span class="math display">\[
+MAE
+=
+\frac{1}{m}
+\sum_{i=1}^{m}
+|y_i-\widehat{y}_i|.
+\]</span></p>
 </section>
 <section id="coeficiente-de-determinación" class="level3" data-number="11.47.4">
 <h3 data-number="11.47.4" class="anchored" data-anchor-id="coeficiente-de-determinación"><span class="header-section-number">11.47.4</span> Coeficiente de determinación</h3>
-<p>[ R^2 = 1- . ]</p>
-<p>En prueba, (R^2) puede ser negativo.</p>
+<p><span class="math display">\[
+R^2
+=
+1-
+\frac{
+\sum_i(y_i-\widehat{y}_i)^2
+}{
+\sum_i(y_i-\overline{y})^2
+}.
+\]</span></p>
+<p>En prueba, <span class="math inline">\(R^2\)</span> puede ser negativo.</p>
 </section>
 </section>
 <section id="evaluación-en-clasificación" class="level2" data-number="11.48">
@@ -1207,19 +1545,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="ejemplo-manual-de-validación-cruzada" class="level2" data-number="11.50">
 <h2 data-number="11.50" class="anchored" data-anchor-id="ejemplo-manual-de-validación-cruzada"><span class="header-section-number">11.50</span> Ejemplo manual de validación cruzada</h2>
 <p>Considere seis observaciones divididas en tres pliegues:</p>
-<p>[ I_1={1,2}, I_2={3,4}, I_3={5,6}. ]</p>
+<p><span class="math display">\[
+I_1=\{1,2\},
+\quad
+I_2=\{3,4\},
+\quad
+I_3=\{5,6\}.
+\]</span></p>
 <p>Los errores de validación son:</p>
-<p>[ _1=2.0, _2=3.5, _3=2.5. ]</p>
+<p><span class="math display">\[
+\widehat{R}_1=2.0,
+\quad
+\widehat{R}_2=3.5,
+\quad
+\widehat{R}_3=2.5.
+\]</span></p>
 <p>Entonces,</p>
-<p>[ CV_3 = = . ]</p>
+<p><span class="math display">\[
+CV_3
+=
+\frac{2.0+3.5+2.5}{3}
+=
+\frac{8}{3}
+\approx
+2.67.
+\]</span></p>
 </section>
 <section id="ejemplo-de-fuga-de-información" class="level2" data-number="11.51">
 <h2 data-number="11.51" class="anchored" data-anchor-id="ejemplo-de-fuga-de-información"><span class="header-section-number">11.51</span> Ejemplo de fuga de información</h2>
 <p>Supóngase que se estandariza una variable usando:</p>
-<p>[ <em>{total} = </em>{i=1}^{n}x_i. ]</p>
+<p><span class="math display">\[
+\widehat{\mu}_{total}
+=
+\frac{1}{n}
+\sum_{i=1}^{n}x_i.
+\]</span></p>
 <p>Si esta media incluye observaciones de prueba, el entrenamiento utiliza indirectamente información futura.</p>
 <p>La transformación correcta usa:</p>
-<p>[ <em>{train} = </em>{itrain}x_i. ]</p>
+<p><span class="math display">\[
+\widehat{\mu}_{train}
+=
+\frac{1}{n_{train}}
+\sum_{i\in train}x_i.
+\]</span></p>
 </section>
 <section id="diseño-recomendado-de-evaluación" class="level2" data-number="11.52">
 <h2 data-number="11.52" class="anchored" data-anchor-id="diseño-recomendado-de-evaluación"><span class="header-section-number">11.52</span> Diseño recomendado de evaluación</h2>
@@ -1255,7 +1623,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Explique la diferencia entre entrenamiento, validación y prueba.</li>
 <li>¿Por qué el error de entrenamiento es optimista?</li>
 <li>¿Qué ventaja ofrece la validación cruzada?</li>
-<li>¿Qué diferencia existe entre (K)-fold y LOOCV?</li>
+<li>¿Qué diferencia existe entre <span class="math inline">\(K\)</span>-fold y LOOCV?</li>
 <li>¿Por qué debe utilizarse estratificación?</li>
 <li>¿Qué es fuga de información?</li>
 <li>¿Por qué el preprocesamiento debe realizarse dentro de cada pliegue?</li>
@@ -1266,9 +1634,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="ejercicio-de-holdout" class="level2" data-number="11.55">
 <h2 data-number="11.55" class="anchored" data-anchor-id="ejercicio-de-holdout"><span class="header-section-number">11.55</span> Ejercicio de holdout</h2>
-<p>Una muestra contiene (1,000) observaciones.</p>
+<p>Una muestra contiene <span class="math inline">\(1\,000\)</span> observaciones.</p>
 <ol type="1">
-<li>Calcule los tamaños para una división (70%-15%-15%).</li>
+<li>Calcule los tamaños para una división <span class="math inline">\(70\%-15\%-15\%\)</span>.</li>
 <li>Explique el uso de cada subconjunto.</li>
 <li>Proponga una alternativa usando validación cruzada.</li>
 <li>Analice qué ocurriría si solo existen 40 observaciones positivas.</li>
@@ -1277,7 +1645,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="ejercicio-de-validación-cruzada" class="level2" data-number="11.56">
 <h2 data-number="11.56" class="anchored" data-anchor-id="ejercicio-de-validación-cruzada"><span class="header-section-number">11.56</span> Ejercicio de validación cruzada</h2>
 <p>Los errores de cinco pliegues son:</p>
-<p>[ 0.18,&nbsp;0.22,&nbsp;0.20,&nbsp;0.25,&nbsp;0.15. ]</p>
+<p><span class="math display">\[
+0.18,\ 0.22,\ 0.20,\ 0.25,\ 0.15.
+\]</span></p>
 <p>Calcule:</p>
 <ol type="1">
 <li>el error medio;</li>
@@ -1288,7 +1658,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="ejercicio-bootstrap" class="level2" data-number="11.57">
 <h2 data-number="11.57" class="anchored" data-anchor-id="ejercicio-bootstrap"><span class="header-section-number">11.57</span> Ejercicio bootstrap</h2>
-<p>Para (n=100):</p>
+<p>Para <span class="math inline">\(n=100\)</span>:</p>
 <ol type="1">
 <li>calcule aproximadamente la proporción esperada de observaciones no seleccionadas;</li>
 <li>calcule la cantidad esperada de observaciones out-of-bag;</li>
@@ -1302,7 +1672,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th style="text-align: right;">()</th>
+<th style="text-align: right;"><span class="math inline">\(\lambda\)</span></th>
 <th style="text-align: right;">Error CV</th>
 <th style="text-align: right;">Error estándar</th>
 </tr>
@@ -1368,7 +1738,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="resumen" class="level2" data-number="11.61">
 <h2 data-number="11.61" class="anchored" data-anchor-id="resumen"><span class="header-section-number">11.61</span> Resumen</h2>
 <p>En este capítulo se desarrollaron los fundamentos de evaluación y selección de modelos. Se distinguieron error de entrenamiento, validación, prueba y generalización.</p>
-<p>También se estudiaron holdout, validación cruzada de (K) pliegues, leave-one-out, validación repetida, validación agrupada y evaluación temporal.</p>
+<p>También se estudiaron holdout, validación cruzada de <span class="math inline">\(K\)</span> pliegues, leave-one-out, validación repetida, validación agrupada y evaluación temporal.</p>
 <p>Finalmente, se introdujeron bootstrap, error out-of-bag, selección de hiperparámetros, validación anidada, fuga de información, pipelines, comparación de modelos y reproducibilidad. Estas herramientas son indispensables para obtener evaluaciones confiables y evitar conclusiones optimistas.</p>
 
 
@@ -1871,7 +2241,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>definir un estimador del error de generalización;</span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>comprender el sesgo optimista del error de entrenamiento;</span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>aplicar particiones aleatorias y estratificadas;</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>formular validación cruzada de <span class="sc">\(</span>K<span class="sc">\)</span> pliegues;</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>formular validación cruzada de $K$ pliegues;</span>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>interpretar leave-one-out;</span>
 <span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>comprender métodos bootstrap;</span>
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="ss">8. </span>comparar sesgo y varianza de estimadores de error;</span>
@@ -1884,11 +2254,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="fu">## Error de generalización</span></span>
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>Sea <span class="sc">\(</span>\widehat{f}_{\mathcal{D}}<span class="sc">\)</span> un modelo ajustado con una muestra <span class="sc">\(</span>\mathcal{D}<span class="sc">\)</span>.</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>Sea $\widehat{f}_{\mathcal{D}}$ un modelo ajustado con una muestra $\mathcal{D}$.</span>
 <span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>Su error de generalización es</span>
 <span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>R(\widehat{f}_{\mathcal{D}})</span>
 <span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>\mathbb{E}</span>
@@ -1901,17 +2271,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>\mid</span>
 <span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>\mathcal{D}</span>
 <span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>\right].</span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>La esperanza se toma respecto de una nueva observación <span class="sc">\(</span>(\mathbf{X},Y)<span class="sc">\)</span> proveniente del mismo proceso generador.</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>La esperanza se toma respecto de una nueva observación $(\mathbf{X},Y)$ proveniente del mismo proceso generador.</span>
 <span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>Este riesgo es desconocido porque la distribución <span class="sc">\(</span>P_{\mathbf{X},Y}<span class="sc">\)</span> es desconocida.</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>Este riesgo es desconocido porque la distribución $P_{\mathbf{X},Y}$ es desconocida.</span>
 <span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="fu">## Error de entrenamiento</span></span>
 <span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>El error de entrenamiento es</span>
 <span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>\widehat{R}_{train}</span>
 <span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>\frac{1}{n}</span>
@@ -1921,15 +2291,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>y_i,</span>
 <span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>\widehat{f}_{\mathcal{D}}(\mathbf{x}_i)</span>
 <span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>\right).</span>
-<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>Como el modelo fue ajustado usando esas mismas observaciones, suele cumplirse</span>
 <span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>\widehat{R}_{train}</span>
 <span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>&lt;</span>
 <span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>R(\widehat{f}_{\mathcal{D}}).</span>
-<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>Esta diferencia se denomina optimismo.</span>
 <span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a></span>
@@ -1941,7 +2311,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>Formalmente,</span>
 <span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>\operatorname{Opt}</span>
 <span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>\mathbb{E}</span>
@@ -1950,7 +2320,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>-</span>
 <span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>\widehat{R}_{train}</span>
 <span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>\right].</span>
-<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>Los modelos más flexibles suelen presentar mayor optimismo.</span>
 <span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a></span>
@@ -1958,19 +2328,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>Sea</span>
 <span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>\mathcal{D}_{test}</span>
 <span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>\left<span class="sc">\{</span></span>
 <span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>(\mathbf{x}^{test}_j,y^{test}_j)</span>
 <span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>\right<span class="sc">\}</span>_{j=1}^{m}</span>
-<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>una muestra independiente del entrenamiento.</span>
 <span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>El error de prueba es</span>
 <span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>\widehat{R}_{test}</span>
 <span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>\frac{1}{m}</span>
@@ -1980,11 +2350,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a>y^{test}_j,</span>
 <span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>\widehat{f}_{\mathcal{D}}(\mathbf{x}^{test}_j)</span>
 <span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a>\right).</span>
-<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>Condicionado al modelo ajustado,</span>
 <span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a>\mathbb{E}</span>
 <span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a>\left[</span>
 <span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a>\widehat{R}_{test}</span>
@@ -1993,7 +2363,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a>\right]</span>
 <span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a>R(\widehat{f}_{\mathcal{D}}).</span>
-<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a>Por tanto, el error de prueba es un estimador insesgado del riesgo del modelo fijo, siempre que el conjunto de prueba sea independiente y no intervenga en decisiones previas.</span>
 <span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a></span>
@@ -2001,7 +2371,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a>Una muestra puede dividirse en tres partes:</span>
 <span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a>\mathcal{D}</span>
 <span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a>\mathcal{D}_{train}</span>
@@ -2009,7 +2379,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a>\mathcal{D}_{val}</span>
 <span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a>\cup</span>
 <span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a>\mathcal{D}_{test},</span>
-<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-158"><a href="#cb2-158" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a>con intersecciones vacías.</span>
 <span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a></span>
@@ -2035,9 +2405,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-180"><a href="#cb2-180" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-181"><a href="#cb2-181" aria-hidden="true" tabindex="-1"></a>No existe una proporción universal. Algunas opciones son:</span>
 <span id="cb2-182"><a href="#cb2-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-183"><a href="#cb2-183" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="sc">\(</span>60\%-20\%-20\%<span class="sc">\)</span>;</span>
-<span id="cb2-184"><a href="#cb2-184" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="sc">\(</span>70\%-15\%-15\%<span class="sc">\)</span>;</span>
-<span id="cb2-185"><a href="#cb2-185" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="sc">\(</span>80\%-20\%<span class="sc">\)</span>, usando validación cruzada dentro del entrenamiento.</span>
+<span id="cb2-183"><a href="#cb2-183" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$60\%-20\%-20\%$;</span>
+<span id="cb2-184"><a href="#cb2-184" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$70\%-15\%-15\%$;</span>
+<span id="cb2-185"><a href="#cb2-185" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$80\%-20\%$, usando validación cruzada dentro del entrenamiento.</span>
 <span id="cb2-186"><a href="#cb2-186" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-187"><a href="#cb2-187" aria-hidden="true" tabindex="-1"></a>La elección depende de:</span>
 <span id="cb2-188"><a href="#cb2-188" aria-hidden="true" tabindex="-1"></a></span>
@@ -2069,21 +2439,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-214"><a href="#cb2-214" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-215"><a href="#cb2-215" aria-hidden="true" tabindex="-1"></a>Si</span>
 <span id="cb2-216"><a href="#cb2-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-217"><a href="#cb2-217" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-217"><a href="#cb2-217" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-218"><a href="#cb2-218" aria-hidden="true" tabindex="-1"></a>\widehat{p}_k</span>
 <span id="cb2-219"><a href="#cb2-219" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-220"><a href="#cb2-220" aria-hidden="true" tabindex="-1"></a>\frac{n_k}{n},</span>
-<span id="cb2-221"><a href="#cb2-221" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-221"><a href="#cb2-221" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-222"><a href="#cb2-222" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-223"><a href="#cb2-223" aria-hidden="true" tabindex="-1"></a>se busca que</span>
 <span id="cb2-224"><a href="#cb2-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-225"><a href="#cb2-225" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-225"><a href="#cb2-225" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-226"><a href="#cb2-226" aria-hidden="true" tabindex="-1"></a>\widehat{p}_{k,train}</span>
 <span id="cb2-227"><a href="#cb2-227" aria-hidden="true" tabindex="-1"></a>\approx</span>
 <span id="cb2-228"><a href="#cb2-228" aria-hidden="true" tabindex="-1"></a>\widehat{p}_{k,val}</span>
 <span id="cb2-229"><a href="#cb2-229" aria-hidden="true" tabindex="-1"></a>\approx</span>
 <span id="cb2-230"><a href="#cb2-230" aria-hidden="true" tabindex="-1"></a>\widehat{p}_{k,test}.</span>
-<span id="cb2-231"><a href="#cb2-231" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-231"><a href="#cb2-231" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-232"><a href="#cb2-232" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-233"><a href="#cb2-233" aria-hidden="true" tabindex="-1"></a>Es especialmente importante en clases desbalanceadas.</span>
 <span id="cb2-234"><a href="#cb2-234" aria-hidden="true" tabindex="-1"></a></span>
@@ -2097,13 +2467,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-242"><a href="#cb2-242" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-243"><a href="#cb2-243" aria-hidden="true" tabindex="-1"></a>El método holdout utiliza una sola partición:</span>
 <span id="cb2-244"><a href="#cb2-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-245"><a href="#cb2-245" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-245"><a href="#cb2-245" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-246"><a href="#cb2-246" aria-hidden="true" tabindex="-1"></a>\mathcal{D}</span>
 <span id="cb2-247"><a href="#cb2-247" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-248"><a href="#cb2-248" aria-hidden="true" tabindex="-1"></a>\mathcal{D}_{train}</span>
 <span id="cb2-249"><a href="#cb2-249" aria-hidden="true" tabindex="-1"></a>\cup</span>
 <span id="cb2-250"><a href="#cb2-250" aria-hidden="true" tabindex="-1"></a>\mathcal{D}_{test}.</span>
-<span id="cb2-251"><a href="#cb2-251" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-251"><a href="#cb2-251" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-252"><a href="#cb2-252" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-253"><a href="#cb2-253" aria-hidden="true" tabindex="-1"></a>Ventajas:</span>
 <span id="cb2-254"><a href="#cb2-254" aria-hidden="true" tabindex="-1"></a></span>
@@ -2117,34 +2487,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-262"><a href="#cb2-262" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>puede tener alta varianza;</span>
 <span id="cb2-263"><a href="#cb2-263" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>utiliza menos datos para entrenar.</span>
 <span id="cb2-264"><a href="#cb2-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-265"><a href="#cb2-265" aria-hidden="true" tabindex="-1"></a><span class="fu">## Validación cruzada de \(K\) pliegues</span></span>
+<span id="cb2-265"><a href="#cb2-265" aria-hidden="true" tabindex="-1"></a><span class="fu">## Validación cruzada de K pliegues</span></span>
 <span id="cb2-266"><a href="#cb2-266" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-267"><a href="#cb2-267" aria-hidden="true" tabindex="-1"></a>::: {#def-validacion-cruzada}</span>
-<span id="cb2-268"><a href="#cb2-268" aria-hidden="true" tabindex="-1"></a>La validación cruzada de <span class="sc">\(</span>K<span class="sc">\)</span> pliegues divide la muestra en subconjuntos</span>
+<span id="cb2-268"><a href="#cb2-268" aria-hidden="true" tabindex="-1"></a>La validación cruzada de $K$ pliegues divide la muestra en subconjuntos</span>
 <span id="cb2-269"><a href="#cb2-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-270"><a href="#cb2-270" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-270"><a href="#cb2-270" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-271"><a href="#cb2-271" aria-hidden="true" tabindex="-1"></a>I_1,\ldots,I_K</span>
-<span id="cb2-272"><a href="#cb2-272" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-272"><a href="#cb2-272" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-273"><a href="#cb2-273" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-274"><a href="#cb2-274" aria-hidden="true" tabindex="-1"></a>aproximadamente del mismo tamaño.</span>
 <span id="cb2-275"><a href="#cb2-275" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb2-276"><a href="#cb2-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-277"><a href="#cb2-277" aria-hidden="true" tabindex="-1"></a>Para cada pliegue <span class="sc">\(</span>k<span class="sc">\)</span>:</span>
+<span id="cb2-277"><a href="#cb2-277" aria-hidden="true" tabindex="-1"></a>Para cada pliegue $k$:</span>
 <span id="cb2-278"><a href="#cb2-278" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-279"><a href="#cb2-279" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>se ajusta el modelo sin <span class="sc">\(</span>I_k<span class="sc">\)</span>;</span>
-<span id="cb2-280"><a href="#cb2-280" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>se evalúa sobre <span class="sc">\(</span>I_k<span class="sc">\)</span>.</span>
+<span id="cb2-279"><a href="#cb2-279" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>se ajusta el modelo sin $I_k$;</span>
+<span id="cb2-280"><a href="#cb2-280" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>se evalúa sobre $I_k$.</span>
 <span id="cb2-281"><a href="#cb2-281" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-282"><a href="#cb2-282" aria-hidden="true" tabindex="-1"></a>Sea</span>
 <span id="cb2-283"><a href="#cb2-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-284"><a href="#cb2-284" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-284"><a href="#cb2-284" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-285"><a href="#cb2-285" aria-hidden="true" tabindex="-1"></a>\widehat{f}^{(-k)}</span>
-<span id="cb2-286"><a href="#cb2-286" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-286"><a href="#cb2-286" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-287"><a href="#cb2-287" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-288"><a href="#cb2-288" aria-hidden="true" tabindex="-1"></a>el modelo entrenado sin el pliegue <span class="sc">\(</span>k<span class="sc">\)</span>.</span>
+<span id="cb2-288"><a href="#cb2-288" aria-hidden="true" tabindex="-1"></a>el modelo entrenado sin el pliegue $k$.</span>
 <span id="cb2-289"><a href="#cb2-289" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-290"><a href="#cb2-290" aria-hidden="true" tabindex="-1"></a>El error es</span>
 <span id="cb2-291"><a href="#cb2-291" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-292"><a href="#cb2-292" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-292"><a href="#cb2-292" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-293"><a href="#cb2-293" aria-hidden="true" tabindex="-1"></a>CV_K</span>
 <span id="cb2-294"><a href="#cb2-294" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-295"><a href="#cb2-295" aria-hidden="true" tabindex="-1"></a>\frac{1}{n}</span>
@@ -2155,48 +2525,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-300"><a href="#cb2-300" aria-hidden="true" tabindex="-1"></a>y_i,</span>
 <span id="cb2-301"><a href="#cb2-301" aria-hidden="true" tabindex="-1"></a>\widehat{f}^{(-k)}(\mathbf{x}_i)</span>
 <span id="cb2-302"><a href="#cb2-302" aria-hidden="true" tabindex="-1"></a>\right).</span>
-<span id="cb2-303"><a href="#cb2-303" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-303"><a href="#cb2-303" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-304"><a href="#cb2-304" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-305"><a href="#cb2-305" aria-hidden="true" tabindex="-1"></a>Si los pliegues tienen igual tamaño,</span>
 <span id="cb2-306"><a href="#cb2-306" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-307"><a href="#cb2-307" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-307"><a href="#cb2-307" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-308"><a href="#cb2-308" aria-hidden="true" tabindex="-1"></a>CV_K</span>
 <span id="cb2-309"><a href="#cb2-309" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-310"><a href="#cb2-310" aria-hidden="true" tabindex="-1"></a>\frac{1}{K}</span>
 <span id="cb2-311"><a href="#cb2-311" aria-hidden="true" tabindex="-1"></a>\sum_{k=1}^{K}</span>
 <span id="cb2-312"><a href="#cb2-312" aria-hidden="true" tabindex="-1"></a>\widehat{R}_k.</span>
-<span id="cb2-313"><a href="#cb2-313" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-313"><a href="#cb2-313" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-314"><a href="#cb2-314" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-315"><a href="#cb2-315" aria-hidden="true" tabindex="-1"></a><span class="fu">## Interpretación</span></span>
 <span id="cb2-316"><a href="#cb2-316" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-317"><a href="#cb2-317" aria-hidden="true" tabindex="-1"></a>Cada observación se utiliza:</span>
 <span id="cb2-318"><a href="#cb2-318" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-319"><a href="#cb2-319" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>una vez para validación;</span>
-<span id="cb2-320"><a href="#cb2-320" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="sc">\(</span>K-1<span class="sc">\)</span> veces como parte del entrenamiento.</span>
+<span id="cb2-320"><a href="#cb2-320" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$K-1$ veces como parte del entrenamiento.</span>
 <span id="cb2-321"><a href="#cb2-321" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-322"><a href="#cb2-322" aria-hidden="true" tabindex="-1"></a>Los valores habituales son</span>
 <span id="cb2-323"><a href="#cb2-323" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-324"><a href="#cb2-324" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-324"><a href="#cb2-324" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-325"><a href="#cb2-325" aria-hidden="true" tabindex="-1"></a>K=5</span>
-<span id="cb2-326"><a href="#cb2-326" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-326"><a href="#cb2-326" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-327"><a href="#cb2-327" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-328"><a href="#cb2-328" aria-hidden="true" tabindex="-1"></a>o</span>
 <span id="cb2-329"><a href="#cb2-329" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-330"><a href="#cb2-330" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-330"><a href="#cb2-330" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-331"><a href="#cb2-331" aria-hidden="true" tabindex="-1"></a>K=10.</span>
-<span id="cb2-332"><a href="#cb2-332" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-332"><a href="#cb2-332" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-333"><a href="#cb2-333" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-334"><a href="#cb2-334" aria-hidden="true" tabindex="-1"></a><span class="fu">## Sesgo de validación cruzada</span></span>
 <span id="cb2-335"><a href="#cb2-335" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-336"><a href="#cb2-336" aria-hidden="true" tabindex="-1"></a>Cada modelo se entrena con</span>
 <span id="cb2-337"><a href="#cb2-337" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-338"><a href="#cb2-338" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-338"><a href="#cb2-338" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-339"><a href="#cb2-339" aria-hidden="true" tabindex="-1"></a>\frac{K-1}{K}n</span>
-<span id="cb2-340"><a href="#cb2-340" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-340"><a href="#cb2-340" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-341"><a href="#cb2-341" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-342"><a href="#cb2-342" aria-hidden="true" tabindex="-1"></a>observaciones.</span>
 <span id="cb2-343"><a href="#cb2-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-344"><a href="#cb2-344" aria-hidden="true" tabindex="-1"></a>Por tanto, <span class="sc">\(</span>CV_K<span class="sc">\)</span> estima el error de un modelo entrenado con menos observaciones que el modelo final.</span>
+<span id="cb2-344"><a href="#cb2-344" aria-hidden="true" tabindex="-1"></a>Por tanto, $CV_K$ estima el error de un modelo entrenado con menos observaciones que el modelo final.</span>
 <span id="cb2-345"><a href="#cb2-345" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-346"><a href="#cb2-346" aria-hidden="true" tabindex="-1"></a>Esto puede introducir un sesgo ligeramente pesimista.</span>
 <span id="cb2-347"><a href="#cb2-347" aria-hidden="true" tabindex="-1"></a></span>
@@ -2208,15 +2578,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-353"><a href="#cb2-353" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-354"><a href="#cb2-354" aria-hidden="true" tabindex="-1"></a><span class="fu">## Validación cruzada repetida</span></span>
 <span id="cb2-355"><a href="#cb2-355" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-356"><a href="#cb2-356" aria-hidden="true" tabindex="-1"></a>Se repite la creación de pliegues <span class="sc">\(</span>B<span class="sc">\)</span> veces:</span>
+<span id="cb2-356"><a href="#cb2-356" aria-hidden="true" tabindex="-1"></a>Se repite la creación de pliegues $B$ veces:</span>
 <span id="cb2-357"><a href="#cb2-357" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-358"><a href="#cb2-358" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-358"><a href="#cb2-358" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-359"><a href="#cb2-359" aria-hidden="true" tabindex="-1"></a>CV_{K,B}</span>
 <span id="cb2-360"><a href="#cb2-360" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-361"><a href="#cb2-361" aria-hidden="true" tabindex="-1"></a>\frac{1}{B}</span>
 <span id="cb2-362"><a href="#cb2-362" aria-hidden="true" tabindex="-1"></a>\sum_{b=1}^{B}</span>
 <span id="cb2-363"><a href="#cb2-363" aria-hidden="true" tabindex="-1"></a>CV_K^{(b)}.</span>
-<span id="cb2-364"><a href="#cb2-364" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-364"><a href="#cb2-364" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-365"><a href="#cb2-365" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-366"><a href="#cb2-366" aria-hidden="true" tabindex="-1"></a>La repetición reduce la dependencia respecto de una sola división.</span>
 <span id="cb2-367"><a href="#cb2-367" aria-hidden="true" tabindex="-1"></a></span>
@@ -2225,16 +2595,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-370"><a href="#cb2-370" aria-hidden="true" tabindex="-1"></a>::: {#def-loocv}</span>
 <span id="cb2-371"><a href="#cb2-371" aria-hidden="true" tabindex="-1"></a>Leave-one-out cross-validation corresponde a</span>
 <span id="cb2-372"><a href="#cb2-372" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-373"><a href="#cb2-373" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-373"><a href="#cb2-373" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-374"><a href="#cb2-374" aria-hidden="true" tabindex="-1"></a>K=n.</span>
-<span id="cb2-375"><a href="#cb2-375" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-375"><a href="#cb2-375" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-376"><a href="#cb2-376" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb2-377"><a href="#cb2-377" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-378"><a href="#cb2-378" aria-hidden="true" tabindex="-1"></a>Cada modelo se entrena con <span class="sc">\(</span>n-1<span class="sc">\)</span> observaciones y se evalúa en una sola.</span>
+<span id="cb2-378"><a href="#cb2-378" aria-hidden="true" tabindex="-1"></a>Cada modelo se entrena con $n-1$ observaciones y se evalúa en una sola.</span>
 <span id="cb2-379"><a href="#cb2-379" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-380"><a href="#cb2-380" aria-hidden="true" tabindex="-1"></a>El estimador es</span>
 <span id="cb2-381"><a href="#cb2-381" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-382"><a href="#cb2-382" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-382"><a href="#cb2-382" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-383"><a href="#cb2-383" aria-hidden="true" tabindex="-1"></a>CV_{LOO}</span>
 <span id="cb2-384"><a href="#cb2-384" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-385"><a href="#cb2-385" aria-hidden="true" tabindex="-1"></a>\frac{1}{n}</span>
@@ -2244,7 +2614,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-389"><a href="#cb2-389" aria-hidden="true" tabindex="-1"></a>y_i,</span>
 <span id="cb2-390"><a href="#cb2-390" aria-hidden="true" tabindex="-1"></a>\widehat{f}^{(-i)}(\mathbf{x}_i)</span>
 <span id="cb2-391"><a href="#cb2-391" aria-hidden="true" tabindex="-1"></a>\right).</span>
-<span id="cb2-392"><a href="#cb2-392" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-392"><a href="#cb2-392" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-393"><a href="#cb2-393" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-394"><a href="#cb2-394" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ventajas y limitaciones de LOOCV</span></span>
 <span id="cb2-395"><a href="#cb2-395" aria-hidden="true" tabindex="-1"></a></span>
@@ -2258,7 +2628,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-403"><a href="#cb2-403" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>puede tener alta varianza;</span>
 <span id="cb2-404"><a href="#cb2-404" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>alto costo computacional;</span>
 <span id="cb2-405"><a href="#cb2-405" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>los modelos ajustados son muy similares;</span>
-<span id="cb2-406"><a href="#cb2-406" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>no siempre supera a <span class="sc">\(</span>K=5<span class="sc">\)</span> o <span class="sc">\(</span>K=10<span class="sc">\)</span>.</span>
+<span id="cb2-406"><a href="#cb2-406" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>no siempre supera a $K=5$ o $K=10$.</span>
 <span id="cb2-407"><a href="#cb2-407" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-408"><a href="#cb2-408" aria-hidden="true" tabindex="-1"></a><span class="fu">## Validación cruzada estratificada</span></span>
 <span id="cb2-409"><a href="#cb2-409" aria-hidden="true" tabindex="-1"></a></span>
@@ -2285,21 +2655,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-430"><a href="#cb2-430" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-431"><a href="#cb2-431" aria-hidden="true" tabindex="-1"></a>Para tiempos</span>
 <span id="cb2-432"><a href="#cb2-432" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-433"><a href="#cb2-433" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-433"><a href="#cb2-433" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-434"><a href="#cb2-434" aria-hidden="true" tabindex="-1"></a>1,\ldots,T,</span>
-<span id="cb2-435"><a href="#cb2-435" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-435"><a href="#cb2-435" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-436"><a href="#cb2-436" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-437"><a href="#cb2-437" aria-hidden="true" tabindex="-1"></a>se realizan ajustes como:</span>
 <span id="cb2-438"><a href="#cb2-438" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-439"><a href="#cb2-439" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-439"><a href="#cb2-439" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-440"><a href="#cb2-440" aria-hidden="true" tabindex="-1"></a><span class="sc">\{</span>1,\ldots,t<span class="sc">\}</span></span>
 <span id="cb2-441"><a href="#cb2-441" aria-hidden="true" tabindex="-1"></a>\to</span>
 <span id="cb2-442"><a href="#cb2-442" aria-hidden="true" tabindex="-1"></a><span class="sc">\{</span>t+1<span class="sc">\}</span>.</span>
-<span id="cb2-443"><a href="#cb2-443" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-443"><a href="#cb2-443" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-444"><a href="#cb2-444" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-445"><a href="#cb2-445" aria-hidden="true" tabindex="-1"></a>El error temporal es</span>
 <span id="cb2-446"><a href="#cb2-446" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-447"><a href="#cb2-447" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-447"><a href="#cb2-447" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-448"><a href="#cb2-448" aria-hidden="true" tabindex="-1"></a>CV_{time}</span>
 <span id="cb2-449"><a href="#cb2-449" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-450"><a href="#cb2-450" aria-hidden="true" tabindex="-1"></a>\frac{1}{M}</span>
@@ -2309,31 +2679,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-454"><a href="#cb2-454" aria-hidden="true" tabindex="-1"></a>y_{t_m+1},</span>
 <span id="cb2-455"><a href="#cb2-455" aria-hidden="true" tabindex="-1"></a>\widehat{f}_{1:t_m}(\mathbf{x}_{t_m+1})</span>
 <span id="cb2-456"><a href="#cb2-456" aria-hidden="true" tabindex="-1"></a>\right).</span>
-<span id="cb2-457"><a href="#cb2-457" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-457"><a href="#cb2-457" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-458"><a href="#cb2-458" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-459"><a href="#cb2-459" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ventana deslizante</span></span>
 <span id="cb2-460"><a href="#cb2-460" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-461"><a href="#cb2-461" aria-hidden="true" tabindex="-1"></a>Se entrena con una ventana de longitud fija <span class="sc">\(</span>w<span class="sc">\)</span>:</span>
+<span id="cb2-461"><a href="#cb2-461" aria-hidden="true" tabindex="-1"></a>Se entrena con una ventana de longitud fija $w$:</span>
 <span id="cb2-462"><a href="#cb2-462" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-463"><a href="#cb2-463" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-463"><a href="#cb2-463" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-464"><a href="#cb2-464" aria-hidden="true" tabindex="-1"></a><span class="sc">\{</span>t-w+1,\ldots,t<span class="sc">\}</span></span>
 <span id="cb2-465"><a href="#cb2-465" aria-hidden="true" tabindex="-1"></a>\to</span>
 <span id="cb2-466"><a href="#cb2-466" aria-hidden="true" tabindex="-1"></a><span class="sc">\{</span>t+1<span class="sc">\}</span>.</span>
-<span id="cb2-467"><a href="#cb2-467" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-467"><a href="#cb2-467" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-468"><a href="#cb2-468" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-469"><a href="#cb2-469" aria-hidden="true" tabindex="-1"></a>Es útil cuando el proceso cambia con el tiempo.</span>
 <span id="cb2-470"><a href="#cb2-470" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-471"><a href="#cb2-471" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bootstrap</span></span>
 <span id="cb2-472"><a href="#cb2-472" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-473"><a href="#cb2-473" aria-hidden="true" tabindex="-1"></a>::: {#def-bootstrap}</span>
-<span id="cb2-474"><a href="#cb2-474" aria-hidden="true" tabindex="-1"></a>Una muestra bootstrap se obtiene seleccionando <span class="sc">\(</span>n<span class="sc">\)</span> observaciones con reemplazo de la muestra original.</span>
+<span id="cb2-474"><a href="#cb2-474" aria-hidden="true" tabindex="-1"></a>Una muestra bootstrap se obtiene seleccionando $n$ observaciones con reemplazo de la muestra original.</span>
 <span id="cb2-475"><a href="#cb2-475" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb2-476"><a href="#cb2-476" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-477"><a href="#cb2-477" aria-hidden="true" tabindex="-1"></a>Se denota por</span>
 <span id="cb2-478"><a href="#cb2-478" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-479"><a href="#cb2-479" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-479"><a href="#cb2-479" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-480"><a href="#cb2-480" aria-hidden="true" tabindex="-1"></a>\mathcal{D}^{*(b)}.</span>
-<span id="cb2-481"><a href="#cb2-481" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-481"><a href="#cb2-481" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-482"><a href="#cb2-482" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-483"><a href="#cb2-483" aria-hidden="true" tabindex="-1"></a>Cada muestra bootstrap contiene observaciones repetidas y deja fuera algunas observaciones originales.</span>
 <span id="cb2-484"><a href="#cb2-484" aria-hidden="true" tabindex="-1"></a></span>
@@ -2341,15 +2711,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-486"><a href="#cb2-486" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-487"><a href="#cb2-487" aria-hidden="true" tabindex="-1"></a>La probabilidad de que una observación no sea seleccionada en una muestra bootstrap es</span>
 <span id="cb2-488"><a href="#cb2-488" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-489"><a href="#cb2-489" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-489"><a href="#cb2-489" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-490"><a href="#cb2-490" aria-hidden="true" tabindex="-1"></a>\left(</span>
 <span id="cb2-491"><a href="#cb2-491" aria-hidden="true" tabindex="-1"></a>1-\frac{1}{n}</span>
 <span id="cb2-492"><a href="#cb2-492" aria-hidden="true" tabindex="-1"></a>\right)^n.</span>
-<span id="cb2-493"><a href="#cb2-493" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-493"><a href="#cb2-493" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-494"><a href="#cb2-494" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-495"><a href="#cb2-495" aria-hidden="true" tabindex="-1"></a>Cuando <span class="sc">\(</span>n<span class="sc">\)</span> es grande,</span>
+<span id="cb2-495"><a href="#cb2-495" aria-hidden="true" tabindex="-1"></a>Cuando $n$ es grande,</span>
 <span id="cb2-496"><a href="#cb2-496" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-497"><a href="#cb2-497" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-497"><a href="#cb2-497" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-498"><a href="#cb2-498" aria-hidden="true" tabindex="-1"></a>\left(</span>
 <span id="cb2-499"><a href="#cb2-499" aria-hidden="true" tabindex="-1"></a>1-\frac{1}{n}</span>
 <span id="cb2-500"><a href="#cb2-500" aria-hidden="true" tabindex="-1"></a>\right)^n</span>
@@ -2357,9 +2727,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-502"><a href="#cb2-502" aria-hidden="true" tabindex="-1"></a>e^{-1}</span>
 <span id="cb2-503"><a href="#cb2-503" aria-hidden="true" tabindex="-1"></a>\approx</span>
 <span id="cb2-504"><a href="#cb2-504" aria-hidden="true" tabindex="-1"></a>0.368.</span>
-<span id="cb2-505"><a href="#cb2-505" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-505"><a href="#cb2-505" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-506"><a href="#cb2-506" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-507"><a href="#cb2-507" aria-hidden="true" tabindex="-1"></a>Por tanto, aproximadamente el <span class="sc">\(</span>36.8\%<span class="sc">\)</span> de las observaciones queda fuera de cada muestra bootstrap.</span>
+<span id="cb2-507"><a href="#cb2-507" aria-hidden="true" tabindex="-1"></a>Por tanto, aproximadamente el $36.8\%$ de las observaciones queda fuera de cada muestra bootstrap.</span>
 <span id="cb2-508"><a href="#cb2-508" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-509"><a href="#cb2-509" aria-hidden="true" tabindex="-1"></a><span class="fu">## Error out-of-bag</span></span>
 <span id="cb2-510"><a href="#cb2-510" aria-hidden="true" tabindex="-1"></a></span>
@@ -2371,21 +2741,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-516"><a href="#cb2-516" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-517"><a href="#cb2-517" aria-hidden="true" tabindex="-1"></a><span class="fu">## Estimador bootstrap del error</span></span>
 <span id="cb2-518"><a href="#cb2-518" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-519"><a href="#cb2-519" aria-hidden="true" tabindex="-1"></a>Para <span class="sc">\(</span>B<span class="sc">\)</span> muestras bootstrap,</span>
+<span id="cb2-519"><a href="#cb2-519" aria-hidden="true" tabindex="-1"></a>Para $B$ muestras bootstrap,</span>
 <span id="cb2-520"><a href="#cb2-520" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-521"><a href="#cb2-521" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-521"><a href="#cb2-521" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-522"><a href="#cb2-522" aria-hidden="true" tabindex="-1"></a>\widehat{R}_{boot}</span>
 <span id="cb2-523"><a href="#cb2-523" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-524"><a href="#cb2-524" aria-hidden="true" tabindex="-1"></a>\frac{1}{B}</span>
 <span id="cb2-525"><a href="#cb2-525" aria-hidden="true" tabindex="-1"></a>\sum_{b=1}^{B}</span>
 <span id="cb2-526"><a href="#cb2-526" aria-hidden="true" tabindex="-1"></a>\widehat{R}_{OOB}^{(b)}.</span>
-<span id="cb2-527"><a href="#cb2-527" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-527"><a href="#cb2-527" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-528"><a href="#cb2-528" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-529"><a href="#cb2-529" aria-hidden="true" tabindex="-1"></a><span class="fu">## Estimador .632</span></span>
 <span id="cb2-530"><a href="#cb2-530" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-531"><a href="#cb2-531" aria-hidden="true" tabindex="-1"></a>El estimador .632 combina error de entrenamiento y error out-of-bag:</span>
 <span id="cb2-532"><a href="#cb2-532" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-533"><a href="#cb2-533" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-533"><a href="#cb2-533" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-534"><a href="#cb2-534" aria-hidden="true" tabindex="-1"></a>\widehat{R}_{.632}</span>
 <span id="cb2-535"><a href="#cb2-535" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-536"><a href="#cb2-536" aria-hidden="true" tabindex="-1"></a>0.368</span>
@@ -2393,7 +2763,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-538"><a href="#cb2-538" aria-hidden="true" tabindex="-1"></a>+</span>
 <span id="cb2-539"><a href="#cb2-539" aria-hidden="true" tabindex="-1"></a>0.632</span>
 <span id="cb2-540"><a href="#cb2-540" aria-hidden="true" tabindex="-1"></a>\widehat{R}_{OOB}.</span>
-<span id="cb2-541"><a href="#cb2-541" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-541"><a href="#cb2-541" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-542"><a href="#cb2-542" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-543"><a href="#cb2-543" aria-hidden="true" tabindex="-1"></a>La ponderación se relaciona con la proporción esperada de observaciones distintas presentes en una muestra bootstrap.</span>
 <span id="cb2-544"><a href="#cb2-544" aria-hidden="true" tabindex="-1"></a></span>
@@ -2403,19 +2773,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-548"><a href="#cb2-548" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-549"><a href="#cb2-549" aria-hidden="true" tabindex="-1"></a>Sea</span>
 <span id="cb2-550"><a href="#cb2-550" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-551"><a href="#cb2-551" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-551"><a href="#cb2-551" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-552"><a href="#cb2-552" aria-hidden="true" tabindex="-1"></a>T=T(\mathcal{D}).</span>
-<span id="cb2-553"><a href="#cb2-553" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-553"><a href="#cb2-553" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-554"><a href="#cb2-554" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-555"><a href="#cb2-555" aria-hidden="true" tabindex="-1"></a>Se calculan</span>
 <span id="cb2-556"><a href="#cb2-556" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-557"><a href="#cb2-557" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-557"><a href="#cb2-557" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-558"><a href="#cb2-558" aria-hidden="true" tabindex="-1"></a>T^{*(1)},\ldots,T^{*(B)}.</span>
-<span id="cb2-559"><a href="#cb2-559" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-559"><a href="#cb2-559" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-560"><a href="#cb2-560" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-561"><a href="#cb2-561" aria-hidden="true" tabindex="-1"></a>La varianza bootstrap es</span>
 <span id="cb2-562"><a href="#cb2-562" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-563"><a href="#cb2-563" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-563"><a href="#cb2-563" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-564"><a href="#cb2-564" aria-hidden="true" tabindex="-1"></a>\widehat{\operatorname{Var}}_{boot}(T)</span>
 <span id="cb2-565"><a href="#cb2-565" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-566"><a href="#cb2-566" aria-hidden="true" tabindex="-1"></a>\frac{1}{B-1}</span>
@@ -2425,40 +2795,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-570"><a href="#cb2-570" aria-hidden="true" tabindex="-1"></a>-</span>
 <span id="cb2-571"><a href="#cb2-571" aria-hidden="true" tabindex="-1"></a>\overline{T}^{*}</span>
 <span id="cb2-572"><a href="#cb2-572" aria-hidden="true" tabindex="-1"></a>\right)^2.</span>
-<span id="cb2-573"><a href="#cb2-573" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-573"><a href="#cb2-573" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-574"><a href="#cb2-574" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-575"><a href="#cb2-575" aria-hidden="true" tabindex="-1"></a><span class="fu">## Selección de hiperparámetros</span></span>
 <span id="cb2-576"><a href="#cb2-576" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-577"><a href="#cb2-577" aria-hidden="true" tabindex="-1"></a>Sea <span class="sc">\(</span>\lambda\in\Lambda<span class="sc">\)</span> un hiperparámetro.</span>
+<span id="cb2-577"><a href="#cb2-577" aria-hidden="true" tabindex="-1"></a>Sea $\lambda\in\Lambda$ un hiperparámetro.</span>
 <span id="cb2-578"><a href="#cb2-578" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-579"><a href="#cb2-579" aria-hidden="true" tabindex="-1"></a>Para cada valor se estima</span>
 <span id="cb2-580"><a href="#cb2-580" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-581"><a href="#cb2-581" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-581"><a href="#cb2-581" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-582"><a href="#cb2-582" aria-hidden="true" tabindex="-1"></a>CV_K(\lambda).</span>
-<span id="cb2-583"><a href="#cb2-583" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-583"><a href="#cb2-583" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-584"><a href="#cb2-584" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-585"><a href="#cb2-585" aria-hidden="true" tabindex="-1"></a>Se selecciona</span>
 <span id="cb2-586"><a href="#cb2-586" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-587"><a href="#cb2-587" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-587"><a href="#cb2-587" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-588"><a href="#cb2-588" aria-hidden="true" tabindex="-1"></a>\widehat{\lambda}</span>
 <span id="cb2-589"><a href="#cb2-589" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-590"><a href="#cb2-590" aria-hidden="true" tabindex="-1"></a>\arg\min_{\lambda\in\Lambda}</span>
 <span id="cb2-591"><a href="#cb2-591" aria-hidden="true" tabindex="-1"></a>CV_K(\lambda).</span>
-<span id="cb2-592"><a href="#cb2-592" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-592"><a href="#cb2-592" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-593"><a href="#cb2-593" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-594"><a href="#cb2-594" aria-hidden="true" tabindex="-1"></a>Después se reajusta el modelo usando toda la muestra de entrenamiento con <span class="sc">\(</span>\widehat{\lambda}<span class="sc">\)</span>.</span>
+<span id="cb2-594"><a href="#cb2-594" aria-hidden="true" tabindex="-1"></a>Después se reajusta el modelo usando toda la muestra de entrenamiento con $\widehat{\lambda}$.</span>
 <span id="cb2-595"><a href="#cb2-595" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-596"><a href="#cb2-596" aria-hidden="true" tabindex="-1"></a><span class="fu">## Búsqueda en rejilla</span></span>
 <span id="cb2-597"><a href="#cb2-597" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-598"><a href="#cb2-598" aria-hidden="true" tabindex="-1"></a>Se define una rejilla</span>
 <span id="cb2-599"><a href="#cb2-599" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-600"><a href="#cb2-600" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-600"><a href="#cb2-600" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-601"><a href="#cb2-601" aria-hidden="true" tabindex="-1"></a>\Lambda</span>
 <span id="cb2-602"><a href="#cb2-602" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-603"><a href="#cb2-603" aria-hidden="true" tabindex="-1"></a><span class="sc">\{</span></span>
 <span id="cb2-604"><a href="#cb2-604" aria-hidden="true" tabindex="-1"></a>\lambda_1,\ldots,\lambda_M</span>
 <span id="cb2-605"><a href="#cb2-605" aria-hidden="true" tabindex="-1"></a><span class="sc">\}</span>.</span>
-<span id="cb2-606"><a href="#cb2-606" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-606"><a href="#cb2-606" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-607"><a href="#cb2-607" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-608"><a href="#cb2-608" aria-hidden="true" tabindex="-1"></a>Se evalúa cada combinación.</span>
 <span id="cb2-609"><a href="#cb2-609" aria-hidden="true" tabindex="-1"></a></span>
@@ -2482,11 +2852,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-627"><a href="#cb2-627" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-628"><a href="#cb2-628" aria-hidden="true" tabindex="-1"></a>Construye un modelo sustituto de la función</span>
 <span id="cb2-629"><a href="#cb2-629" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-630"><a href="#cb2-630" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-630"><a href="#cb2-630" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-631"><a href="#cb2-631" aria-hidden="true" tabindex="-1"></a>\lambda</span>
 <span id="cb2-632"><a href="#cb2-632" aria-hidden="true" tabindex="-1"></a>\mapsto</span>
 <span id="cb2-633"><a href="#cb2-633" aria-hidden="true" tabindex="-1"></a>CV(\lambda)</span>
-<span id="cb2-634"><a href="#cb2-634" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-634"><a href="#cb2-634" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-635"><a href="#cb2-635" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-636"><a href="#cb2-636" aria-hidden="true" tabindex="-1"></a>y utiliza una función de adquisición para elegir nuevas evaluaciones.</span>
 <span id="cb2-637"><a href="#cb2-637" aria-hidden="true" tabindex="-1"></a></span>
@@ -2513,7 +2883,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-658"><a href="#cb2-658" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-659"><a href="#cb2-659" aria-hidden="true" tabindex="-1"></a>Por ejemplo, para estandarizar:</span>
 <span id="cb2-660"><a href="#cb2-660" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-661"><a href="#cb2-661" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-661"><a href="#cb2-661" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-662"><a href="#cb2-662" aria-hidden="true" tabindex="-1"></a>\widetilde{x}_{ij}</span>
 <span id="cb2-663"><a href="#cb2-663" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-664"><a href="#cb2-664" aria-hidden="true" tabindex="-1"></a>\frac{</span>
@@ -2521,7 +2891,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-666"><a href="#cb2-666" aria-hidden="true" tabindex="-1"></a>}{</span>
 <span id="cb2-667"><a href="#cb2-667" aria-hidden="true" tabindex="-1"></a>\widehat{\sigma}_{j,train}</span>
 <span id="cb2-668"><a href="#cb2-668" aria-hidden="true" tabindex="-1"></a>}.</span>
-<span id="cb2-669"><a href="#cb2-669" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-669"><a href="#cb2-669" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-670"><a href="#cb2-670" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-671"><a href="#cb2-671" aria-hidden="true" tabindex="-1"></a>Los valores de validación y prueba se transforman usando las estadísticas del entrenamiento.</span>
 <span id="cb2-672"><a href="#cb2-672" aria-hidden="true" tabindex="-1"></a></span>
@@ -2565,13 +2935,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-710"><a href="#cb2-710" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-711"><a href="#cb2-711" aria-hidden="true" tabindex="-1"></a>El error anidado es</span>
 <span id="cb2-712"><a href="#cb2-712" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-713"><a href="#cb2-713" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-713"><a href="#cb2-713" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-714"><a href="#cb2-714" aria-hidden="true" tabindex="-1"></a>CV_{nested}</span>
 <span id="cb2-715"><a href="#cb2-715" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-716"><a href="#cb2-716" aria-hidden="true" tabindex="-1"></a>\frac{1}{K_{ext}}</span>
 <span id="cb2-717"><a href="#cb2-717" aria-hidden="true" tabindex="-1"></a>\sum_{k=1}^{K_{ext}}</span>
 <span id="cb2-718"><a href="#cb2-718" aria-hidden="true" tabindex="-1"></a>\widehat{R}^{ext}_k.</span>
-<span id="cb2-719"><a href="#cb2-719" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-719"><a href="#cb2-719" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-720"><a href="#cb2-720" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-721"><a href="#cb2-721" aria-hidden="true" tabindex="-1"></a>Este procedimiento reduce el sesgo de selección.</span>
 <span id="cb2-722"><a href="#cb2-722" aria-hidden="true" tabindex="-1"></a></span>
@@ -2581,51 +2951,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-726"><a href="#cb2-726" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-727"><a href="#cb2-727" aria-hidden="true" tabindex="-1"></a>Esto ocurre porque se selecciona el mínimo entre estimaciones ruidosas:</span>
 <span id="cb2-728"><a href="#cb2-728" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-729"><a href="#cb2-729" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-729"><a href="#cb2-729" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-730"><a href="#cb2-730" aria-hidden="true" tabindex="-1"></a>\min_m</span>
 <span id="cb2-731"><a href="#cb2-731" aria-hidden="true" tabindex="-1"></a>\widehat{R}_m.</span>
-<span id="cb2-732"><a href="#cb2-732" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-732"><a href="#cb2-732" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-733"><a href="#cb2-733" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-734"><a href="#cb2-734" aria-hidden="true" tabindex="-1"></a>La validación anidada separa selección y evaluación.</span>
 <span id="cb2-735"><a href="#cb2-735" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-736"><a href="#cb2-736" aria-hidden="true" tabindex="-1"></a><span class="fu">## Regla de un error estándar</span></span>
 <span id="cb2-737"><a href="#cb2-737" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-738"><a href="#cb2-738" aria-hidden="true" tabindex="-1"></a>Supóngase que <span class="sc">\(</span>\lambda_{min}<span class="sc">\)</span> minimiza el error medio.</span>
+<span id="cb2-738"><a href="#cb2-738" aria-hidden="true" tabindex="-1"></a>Supóngase que $\lambda_{min}$ minimiza el error medio.</span>
 <span id="cb2-739"><a href="#cb2-739" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-740"><a href="#cb2-740" aria-hidden="true" tabindex="-1"></a>La regla de un error estándar selecciona el modelo más simple cuyo error satisface</span>
 <span id="cb2-741"><a href="#cb2-741" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-742"><a href="#cb2-742" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-742"><a href="#cb2-742" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-743"><a href="#cb2-743" aria-hidden="true" tabindex="-1"></a>CV(\lambda)</span>
 <span id="cb2-744"><a href="#cb2-744" aria-hidden="true" tabindex="-1"></a>\leq</span>
 <span id="cb2-745"><a href="#cb2-745" aria-hidden="true" tabindex="-1"></a>CV(\lambda_{min})</span>
 <span id="cb2-746"><a href="#cb2-746" aria-hidden="true" tabindex="-1"></a>+</span>
 <span id="cb2-747"><a href="#cb2-747" aria-hidden="true" tabindex="-1"></a>SE(\lambda_{min}).</span>
-<span id="cb2-748"><a href="#cb2-748" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-748"><a href="#cb2-748" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-749"><a href="#cb2-749" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-750"><a href="#cb2-750" aria-hidden="true" tabindex="-1"></a>Esta regla favorece modelos más parsimoniosos.</span>
 <span id="cb2-751"><a href="#cb2-751" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-752"><a href="#cb2-752" aria-hidden="true" tabindex="-1"></a><span class="fu">## Comparación de modelos</span></span>
 <span id="cb2-753"><a href="#cb2-753" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-754"><a href="#cb2-754" aria-hidden="true" tabindex="-1"></a>Supóngase que se comparan modelos <span class="sc">\(</span>A<span class="sc">\)</span> y <span class="sc">\(</span>B<span class="sc">\)</span>.</span>
+<span id="cb2-754"><a href="#cb2-754" aria-hidden="true" tabindex="-1"></a>Supóngase que se comparan modelos $A$ y $B$.</span>
 <span id="cb2-755"><a href="#cb2-755" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-756"><a href="#cb2-756" aria-hidden="true" tabindex="-1"></a>En cada pliegue se calcula</span>
 <span id="cb2-757"><a href="#cb2-757" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-758"><a href="#cb2-758" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-758"><a href="#cb2-758" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-759"><a href="#cb2-759" aria-hidden="true" tabindex="-1"></a>d_k</span>
 <span id="cb2-760"><a href="#cb2-760" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-761"><a href="#cb2-761" aria-hidden="true" tabindex="-1"></a>R_{A,k}</span>
 <span id="cb2-762"><a href="#cb2-762" aria-hidden="true" tabindex="-1"></a>-</span>
 <span id="cb2-763"><a href="#cb2-763" aria-hidden="true" tabindex="-1"></a>R_{B,k}.</span>
-<span id="cb2-764"><a href="#cb2-764" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-764"><a href="#cb2-764" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-765"><a href="#cb2-765" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-766"><a href="#cb2-766" aria-hidden="true" tabindex="-1"></a>Una diferencia promedio negativa favorece a <span class="sc">\(</span>A<span class="sc">\)</span>:</span>
+<span id="cb2-766"><a href="#cb2-766" aria-hidden="true" tabindex="-1"></a>Una diferencia promedio negativa favorece a $A$:</span>
 <span id="cb2-767"><a href="#cb2-767" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-768"><a href="#cb2-768" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-768"><a href="#cb2-768" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-769"><a href="#cb2-769" aria-hidden="true" tabindex="-1"></a>\overline{d}</span>
 <span id="cb2-770"><a href="#cb2-770" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-771"><a href="#cb2-771" aria-hidden="true" tabindex="-1"></a>\frac{1}{K}</span>
 <span id="cb2-772"><a href="#cb2-772" aria-hidden="true" tabindex="-1"></a>\sum_{k=1}^{K}d_k.</span>
-<span id="cb2-773"><a href="#cb2-773" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-773"><a href="#cb2-773" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-774"><a href="#cb2-774" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-775"><a href="#cb2-775" aria-hidden="true" tabindex="-1"></a>Sin embargo, los pliegues no son independientes, por lo que las pruebas estadísticas deben interpretarse con cautela.</span>
 <span id="cb2-776"><a href="#cb2-776" aria-hidden="true" tabindex="-1"></a></span>
@@ -2633,12 +3003,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-778"><a href="#cb2-778" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-779"><a href="#cb2-779" aria-hidden="true" tabindex="-1"></a>Para dos clasificadores evaluados sobre las mismas observaciones, se consideran:</span>
 <span id="cb2-780"><a href="#cb2-780" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-781"><a href="#cb2-781" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="sc">\(</span>n_{01}<span class="sc">\)</span>: <span class="sc">\(</span>A<span class="sc">\)</span> falla y <span class="sc">\(</span>B<span class="sc">\)</span> acierta;</span>
-<span id="cb2-782"><a href="#cb2-782" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="sc">\(</span>n_{10}<span class="sc">\)</span>: <span class="sc">\(</span>A<span class="sc">\)</span> acierta y <span class="sc">\(</span>B<span class="sc">\)</span> falla.</span>
+<span id="cb2-781"><a href="#cb2-781" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$n_{01}$: $A$ falla y $B$ acierta;</span>
+<span id="cb2-782"><a href="#cb2-782" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$n_{10}$: $A$ acierta y $B$ falla.</span>
 <span id="cb2-783"><a href="#cb2-783" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-784"><a href="#cb2-784" aria-hidden="true" tabindex="-1"></a>El estadístico aproximado es</span>
 <span id="cb2-785"><a href="#cb2-785" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-786"><a href="#cb2-786" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-786"><a href="#cb2-786" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-787"><a href="#cb2-787" aria-hidden="true" tabindex="-1"></a>\chi^2</span>
 <span id="cb2-788"><a href="#cb2-788" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-789"><a href="#cb2-789" aria-hidden="true" tabindex="-1"></a>\frac{</span>
@@ -2646,7 +3016,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-791"><a href="#cb2-791" aria-hidden="true" tabindex="-1"></a>}{</span>
 <span id="cb2-792"><a href="#cb2-792" aria-hidden="true" tabindex="-1"></a>n_{01}+n_{10}</span>
 <span id="cb2-793"><a href="#cb2-793" aria-hidden="true" tabindex="-1"></a>}.</span>
-<span id="cb2-794"><a href="#cb2-794" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-794"><a href="#cb2-794" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-795"><a href="#cb2-795" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-796"><a href="#cb2-796" aria-hidden="true" tabindex="-1"></a>Esta prueba analiza si los patrones de error difieren.</span>
 <span id="cb2-797"><a href="#cb2-797" aria-hidden="true" tabindex="-1"></a></span>
@@ -2654,15 +3024,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-799"><a href="#cb2-799" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-800"><a href="#cb2-800" aria-hidden="true" tabindex="-1"></a>Si el error observado es</span>
 <span id="cb2-801"><a href="#cb2-801" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-802"><a href="#cb2-802" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-802"><a href="#cb2-802" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-803"><a href="#cb2-803" aria-hidden="true" tabindex="-1"></a>\widehat{p}</span>
 <span id="cb2-804"><a href="#cb2-804" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-805"><a href="#cb2-805" aria-hidden="true" tabindex="-1"></a>\frac{e}{m},</span>
-<span id="cb2-806"><a href="#cb2-806" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-806"><a href="#cb2-806" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-807"><a href="#cb2-807" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-808"><a href="#cb2-808" aria-hidden="true" tabindex="-1"></a>una aproximación del error estándar es</span>
 <span id="cb2-809"><a href="#cb2-809" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-810"><a href="#cb2-810" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-810"><a href="#cb2-810" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-811"><a href="#cb2-811" aria-hidden="true" tabindex="-1"></a>SE(\widehat{p})</span>
 <span id="cb2-812"><a href="#cb2-812" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-813"><a href="#cb2-813" aria-hidden="true" tabindex="-1"></a>\sqrt{</span>
@@ -2672,16 +3042,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-817"><a href="#cb2-817" aria-hidden="true" tabindex="-1"></a>m</span>
 <span id="cb2-818"><a href="#cb2-818" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb2-819"><a href="#cb2-819" aria-hidden="true" tabindex="-1"></a>}.</span>
-<span id="cb2-820"><a href="#cb2-820" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-820"><a href="#cb2-820" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-821"><a href="#cb2-821" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-822"><a href="#cb2-822" aria-hidden="true" tabindex="-1"></a>Una aproximación normal es</span>
 <span id="cb2-823"><a href="#cb2-823" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-824"><a href="#cb2-824" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-824"><a href="#cb2-824" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-825"><a href="#cb2-825" aria-hidden="true" tabindex="-1"></a>\widehat{p}</span>
 <span id="cb2-826"><a href="#cb2-826" aria-hidden="true" tabindex="-1"></a>\pm</span>
 <span id="cb2-827"><a href="#cb2-827" aria-hidden="true" tabindex="-1"></a>z_{\alpha/2}</span>
 <span id="cb2-828"><a href="#cb2-828" aria-hidden="true" tabindex="-1"></a>SE(\widehat{p}).</span>
-<span id="cb2-829"><a href="#cb2-829" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-829"><a href="#cb2-829" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-830"><a href="#cb2-830" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-831"><a href="#cb2-831" aria-hidden="true" tabindex="-1"></a>Para muestras pequeñas o proporciones extremas son preferibles métodos como Wilson.</span>
 <span id="cb2-832"><a href="#cb2-832" aria-hidden="true" tabindex="-1"></a></span>
@@ -2689,26 +3059,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-834"><a href="#cb2-834" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-835"><a href="#cb2-835" aria-hidden="true" tabindex="-1"></a>Para pérdidas</span>
 <span id="cb2-836"><a href="#cb2-836" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-837"><a href="#cb2-837" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-837"><a href="#cb2-837" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-838"><a href="#cb2-838" aria-hidden="true" tabindex="-1"></a>\ell_1,\ldots,\ell_m,</span>
-<span id="cb2-839"><a href="#cb2-839" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-839"><a href="#cb2-839" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-840"><a href="#cb2-840" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-841"><a href="#cb2-841" aria-hidden="true" tabindex="-1"></a>el error medio es</span>
 <span id="cb2-842"><a href="#cb2-842" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-843"><a href="#cb2-843" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-843"><a href="#cb2-843" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-844"><a href="#cb2-844" aria-hidden="true" tabindex="-1"></a>\overline{\ell}</span>
 <span id="cb2-845"><a href="#cb2-845" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-846"><a href="#cb2-846" aria-hidden="true" tabindex="-1"></a>\frac{1}{m}</span>
 <span id="cb2-847"><a href="#cb2-847" aria-hidden="true" tabindex="-1"></a>\sum_{i=1}^{m}\ell_i.</span>
-<span id="cb2-848"><a href="#cb2-848" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-848"><a href="#cb2-848" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-849"><a href="#cb2-849" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-850"><a href="#cb2-850" aria-hidden="true" tabindex="-1"></a>Su error estándar aproximado es</span>
 <span id="cb2-851"><a href="#cb2-851" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-852"><a href="#cb2-852" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-852"><a href="#cb2-852" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-853"><a href="#cb2-853" aria-hidden="true" tabindex="-1"></a>SE(\overline{\ell})</span>
 <span id="cb2-854"><a href="#cb2-854" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-855"><a href="#cb2-855" aria-hidden="true" tabindex="-1"></a>\frac{s_\ell}{\sqrt{m}},</span>
-<span id="cb2-856"><a href="#cb2-856" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-856"><a href="#cb2-856" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-857"><a href="#cb2-857" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-858"><a href="#cb2-858" aria-hidden="true" tabindex="-1"></a>si las observaciones de prueba son independientes.</span>
 <span id="cb2-859"><a href="#cb2-859" aria-hidden="true" tabindex="-1"></a></span>
@@ -2743,7 +3113,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-888"><a href="#cb2-888" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-889"><a href="#cb2-889" aria-hidden="true" tabindex="-1"></a><span class="fu">### Error cuadrático medio</span></span>
 <span id="cb2-890"><a href="#cb2-890" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-891"><a href="#cb2-891" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-891"><a href="#cb2-891" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-892"><a href="#cb2-892" aria-hidden="true" tabindex="-1"></a>MSE</span>
 <span id="cb2-893"><a href="#cb2-893" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-894"><a href="#cb2-894" aria-hidden="true" tabindex="-1"></a>\frac{1}{m}</span>
@@ -2751,29 +3121,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-896"><a href="#cb2-896" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb2-897"><a href="#cb2-897" aria-hidden="true" tabindex="-1"></a>y_i-\widehat{y}_i</span>
 <span id="cb2-898"><a href="#cb2-898" aria-hidden="true" tabindex="-1"></a>)^2.</span>
-<span id="cb2-899"><a href="#cb2-899" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-899"><a href="#cb2-899" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-900"><a href="#cb2-900" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-901"><a href="#cb2-901" aria-hidden="true" tabindex="-1"></a><span class="fu">### Raíz del error cuadrático medio</span></span>
 <span id="cb2-902"><a href="#cb2-902" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-903"><a href="#cb2-903" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-903"><a href="#cb2-903" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-904"><a href="#cb2-904" aria-hidden="true" tabindex="-1"></a>RMSE</span>
 <span id="cb2-905"><a href="#cb2-905" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-906"><a href="#cb2-906" aria-hidden="true" tabindex="-1"></a>\sqrt{MSE}.</span>
-<span id="cb2-907"><a href="#cb2-907" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-907"><a href="#cb2-907" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-908"><a href="#cb2-908" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-909"><a href="#cb2-909" aria-hidden="true" tabindex="-1"></a><span class="fu">### Error absoluto medio</span></span>
 <span id="cb2-910"><a href="#cb2-910" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-911"><a href="#cb2-911" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-911"><a href="#cb2-911" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-912"><a href="#cb2-912" aria-hidden="true" tabindex="-1"></a>MAE</span>
 <span id="cb2-913"><a href="#cb2-913" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-914"><a href="#cb2-914" aria-hidden="true" tabindex="-1"></a>\frac{1}{m}</span>
 <span id="cb2-915"><a href="#cb2-915" aria-hidden="true" tabindex="-1"></a>\sum_{i=1}^{m}</span>
 <span id="cb2-916"><a href="#cb2-916" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span>y_i-\widehat{y}_i<span class="pp">|</span>.</span>
-<span id="cb2-917"><a href="#cb2-917" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-917"><a href="#cb2-917" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-918"><a href="#cb2-918" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-919"><a href="#cb2-919" aria-hidden="true" tabindex="-1"></a><span class="fu">### Coeficiente de determinación</span></span>
 <span id="cb2-920"><a href="#cb2-920" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-921"><a href="#cb2-921" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-921"><a href="#cb2-921" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-922"><a href="#cb2-922" aria-hidden="true" tabindex="-1"></a>R^2</span>
 <span id="cb2-923"><a href="#cb2-923" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-924"><a href="#cb2-924" aria-hidden="true" tabindex="-1"></a>1-</span>
@@ -2782,9 +3152,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-927"><a href="#cb2-927" aria-hidden="true" tabindex="-1"></a>}{</span>
 <span id="cb2-928"><a href="#cb2-928" aria-hidden="true" tabindex="-1"></a>\sum_i(y_i-\overline{y})^2</span>
 <span id="cb2-929"><a href="#cb2-929" aria-hidden="true" tabindex="-1"></a>}.</span>
-<span id="cb2-930"><a href="#cb2-930" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-930"><a href="#cb2-930" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-931"><a href="#cb2-931" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-932"><a href="#cb2-932" aria-hidden="true" tabindex="-1"></a>En prueba, <span class="sc">\(</span>R^2<span class="sc">\)</span> puede ser negativo.</span>
+<span id="cb2-932"><a href="#cb2-932" aria-hidden="true" tabindex="-1"></a>En prueba, $R^2$ puede ser negativo.</span>
 <span id="cb2-933"><a href="#cb2-933" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-934"><a href="#cb2-934" aria-hidden="true" tabindex="-1"></a><span class="fu">## Evaluación en clasificación</span></span>
 <span id="cb2-935"><a href="#cb2-935" aria-hidden="true" tabindex="-1"></a></span>
@@ -2834,27 +3204,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-981"><a href="#cb2-981" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-982"><a href="#cb2-982" aria-hidden="true" tabindex="-1"></a>Considere seis observaciones divididas en tres pliegues:</span>
 <span id="cb2-983"><a href="#cb2-983" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-984"><a href="#cb2-984" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-984"><a href="#cb2-984" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-985"><a href="#cb2-985" aria-hidden="true" tabindex="-1"></a>I_1=<span class="sc">\{</span>1,2<span class="sc">\}</span>,</span>
 <span id="cb2-986"><a href="#cb2-986" aria-hidden="true" tabindex="-1"></a>\quad</span>
 <span id="cb2-987"><a href="#cb2-987" aria-hidden="true" tabindex="-1"></a>I_2=<span class="sc">\{</span>3,4<span class="sc">\}</span>,</span>
 <span id="cb2-988"><a href="#cb2-988" aria-hidden="true" tabindex="-1"></a>\quad</span>
 <span id="cb2-989"><a href="#cb2-989" aria-hidden="true" tabindex="-1"></a>I_3=<span class="sc">\{</span>5,6<span class="sc">\}</span>.</span>
-<span id="cb2-990"><a href="#cb2-990" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-990"><a href="#cb2-990" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-991"><a href="#cb2-991" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-992"><a href="#cb2-992" aria-hidden="true" tabindex="-1"></a>Los errores de validación son:</span>
 <span id="cb2-993"><a href="#cb2-993" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-994"><a href="#cb2-994" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-994"><a href="#cb2-994" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-995"><a href="#cb2-995" aria-hidden="true" tabindex="-1"></a>\widehat{R}_1=2.0,</span>
 <span id="cb2-996"><a href="#cb2-996" aria-hidden="true" tabindex="-1"></a>\quad</span>
 <span id="cb2-997"><a href="#cb2-997" aria-hidden="true" tabindex="-1"></a>\widehat{R}_2=3.5,</span>
 <span id="cb2-998"><a href="#cb2-998" aria-hidden="true" tabindex="-1"></a>\quad</span>
 <span id="cb2-999"><a href="#cb2-999" aria-hidden="true" tabindex="-1"></a>\widehat{R}_3=2.5.</span>
-<span id="cb2-1000"><a href="#cb2-1000" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-1000"><a href="#cb2-1000" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-1001"><a href="#cb2-1001" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1002"><a href="#cb2-1002" aria-hidden="true" tabindex="-1"></a>Entonces,</span>
 <span id="cb2-1003"><a href="#cb2-1003" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-1004"><a href="#cb2-1004" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-1004"><a href="#cb2-1004" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-1005"><a href="#cb2-1005" aria-hidden="true" tabindex="-1"></a>CV_3</span>
 <span id="cb2-1006"><a href="#cb2-1006" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-1007"><a href="#cb2-1007" aria-hidden="true" tabindex="-1"></a>\frac{2.0+3.5+2.5}{3}</span>
@@ -2862,29 +3232,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-1009"><a href="#cb2-1009" aria-hidden="true" tabindex="-1"></a>\frac{8}{3}</span>
 <span id="cb2-1010"><a href="#cb2-1010" aria-hidden="true" tabindex="-1"></a>\approx</span>
 <span id="cb2-1011"><a href="#cb2-1011" aria-hidden="true" tabindex="-1"></a>2.67.</span>
-<span id="cb2-1012"><a href="#cb2-1012" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-1012"><a href="#cb2-1012" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-1013"><a href="#cb2-1013" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1014"><a href="#cb2-1014" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ejemplo de fuga de información</span></span>
 <span id="cb2-1015"><a href="#cb2-1015" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1016"><a href="#cb2-1016" aria-hidden="true" tabindex="-1"></a>Supóngase que se estandariza una variable usando:</span>
 <span id="cb2-1017"><a href="#cb2-1017" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-1018"><a href="#cb2-1018" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-1018"><a href="#cb2-1018" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-1019"><a href="#cb2-1019" aria-hidden="true" tabindex="-1"></a>\widehat{\mu}_{total}</span>
 <span id="cb2-1020"><a href="#cb2-1020" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-1021"><a href="#cb2-1021" aria-hidden="true" tabindex="-1"></a>\frac{1}{n}</span>
 <span id="cb2-1022"><a href="#cb2-1022" aria-hidden="true" tabindex="-1"></a>\sum_{i=1}^{n}x_i.</span>
-<span id="cb2-1023"><a href="#cb2-1023" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-1023"><a href="#cb2-1023" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-1024"><a href="#cb2-1024" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1025"><a href="#cb2-1025" aria-hidden="true" tabindex="-1"></a>Si esta media incluye observaciones de prueba, el entrenamiento utiliza indirectamente información futura.</span>
 <span id="cb2-1026"><a href="#cb2-1026" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1027"><a href="#cb2-1027" aria-hidden="true" tabindex="-1"></a>La transformación correcta usa:</span>
 <span id="cb2-1028"><a href="#cb2-1028" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-1029"><a href="#cb2-1029" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-1029"><a href="#cb2-1029" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-1030"><a href="#cb2-1030" aria-hidden="true" tabindex="-1"></a>\widehat{\mu}_{train}</span>
 <span id="cb2-1031"><a href="#cb2-1031" aria-hidden="true" tabindex="-1"></a>=</span>
 <span id="cb2-1032"><a href="#cb2-1032" aria-hidden="true" tabindex="-1"></a>\frac{1}{n_{train}}</span>
 <span id="cb2-1033"><a href="#cb2-1033" aria-hidden="true" tabindex="-1"></a>\sum_{i\in train}x_i.</span>
-<span id="cb2-1034"><a href="#cb2-1034" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-1034"><a href="#cb2-1034" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-1035"><a href="#cb2-1035" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1036"><a href="#cb2-1036" aria-hidden="true" tabindex="-1"></a><span class="fu">## Diseño recomendado de evaluación</span></span>
 <span id="cb2-1037"><a href="#cb2-1037" aria-hidden="true" tabindex="-1"></a></span>
@@ -2916,7 +3286,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-1063"><a href="#cb2-1063" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Explique la diferencia entre entrenamiento, validación y prueba.</span>
 <span id="cb2-1064"><a href="#cb2-1064" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>¿Por qué el error de entrenamiento es optimista?</span>
 <span id="cb2-1065"><a href="#cb2-1065" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>¿Qué ventaja ofrece la validación cruzada?</span>
-<span id="cb2-1066"><a href="#cb2-1066" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>¿Qué diferencia existe entre <span class="sc">\(</span>K<span class="sc">\)</span>-fold y LOOCV?</span>
+<span id="cb2-1066"><a href="#cb2-1066" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>¿Qué diferencia existe entre $K$-fold y LOOCV?</span>
 <span id="cb2-1067"><a href="#cb2-1067" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>¿Por qué debe utilizarse estratificación?</span>
 <span id="cb2-1068"><a href="#cb2-1068" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>¿Qué es fuga de información?</span>
 <span id="cb2-1069"><a href="#cb2-1069" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>¿Por qué el preprocesamiento debe realizarse dentro de cada pliegue?</span>
@@ -2926,9 +3296,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-1073"><a href="#cb2-1073" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1074"><a href="#cb2-1074" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ejercicio de holdout</span></span>
 <span id="cb2-1075"><a href="#cb2-1075" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-1076"><a href="#cb2-1076" aria-hidden="true" tabindex="-1"></a>Una muestra contiene <span class="sc">\(</span>1\,000<span class="sc">\)</span> observaciones.</span>
+<span id="cb2-1076"><a href="#cb2-1076" aria-hidden="true" tabindex="-1"></a>Una muestra contiene $1\,000$ observaciones.</span>
 <span id="cb2-1077"><a href="#cb2-1077" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-1078"><a href="#cb2-1078" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Calcule los tamaños para una división <span class="sc">\(</span>70\%-15\%-15\%<span class="sc">\)</span>.</span>
+<span id="cb2-1078"><a href="#cb2-1078" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Calcule los tamaños para una división $70\%-15\%-15\%$.</span>
 <span id="cb2-1079"><a href="#cb2-1079" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Explique el uso de cada subconjunto.</span>
 <span id="cb2-1080"><a href="#cb2-1080" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Proponga una alternativa usando validación cruzada.</span>
 <span id="cb2-1081"><a href="#cb2-1081" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Analice qué ocurriría si solo existen 40 observaciones positivas.</span>
@@ -2937,9 +3307,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-1084"><a href="#cb2-1084" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1085"><a href="#cb2-1085" aria-hidden="true" tabindex="-1"></a>Los errores de cinco pliegues son:</span>
 <span id="cb2-1086"><a href="#cb2-1086" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-1087"><a href="#cb2-1087" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
+<span id="cb2-1087"><a href="#cb2-1087" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-1088"><a href="#cb2-1088" aria-hidden="true" tabindex="-1"></a>0.18,\ 0.22,\ 0.20,\ 0.25,\ 0.15.</span>
-<span id="cb2-1089"><a href="#cb2-1089" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb2-1089"><a href="#cb2-1089" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb2-1090"><a href="#cb2-1090" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1091"><a href="#cb2-1091" aria-hidden="true" tabindex="-1"></a>Calcule:</span>
 <span id="cb2-1092"><a href="#cb2-1092" aria-hidden="true" tabindex="-1"></a></span>
@@ -2950,7 +3320,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-1097"><a href="#cb2-1097" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1098"><a href="#cb2-1098" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ejercicio bootstrap</span></span>
 <span id="cb2-1099"><a href="#cb2-1099" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-1100"><a href="#cb2-1100" aria-hidden="true" tabindex="-1"></a>Para <span class="sc">\(</span>n=100<span class="sc">\)</span>:</span>
+<span id="cb2-1100"><a href="#cb2-1100" aria-hidden="true" tabindex="-1"></a>Para $n=100$:</span>
 <span id="cb2-1101"><a href="#cb2-1101" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1102"><a href="#cb2-1102" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>calcule aproximadamente la proporción esperada de observaciones no seleccionadas;</span>
 <span id="cb2-1103"><a href="#cb2-1103" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>calcule la cantidad esperada de observaciones out-of-bag;</span>
@@ -2961,7 +3331,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-1108"><a href="#cb2-1108" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1109"><a href="#cb2-1109" aria-hidden="true" tabindex="-1"></a>Se obtienen los siguientes errores:</span>
 <span id="cb2-1110"><a href="#cb2-1110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-1111"><a href="#cb2-1111" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="sc">\(</span>\lambda<span class="sc">\)</span> <span class="pp">|</span> Error CV <span class="pp">|</span> Error estándar <span class="pp">|</span></span>
+<span id="cb2-1111"><a href="#cb2-1111" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> $\lambda$ <span class="pp">|</span> Error CV <span class="pp">|</span> Error estándar <span class="pp">|</span></span>
 <span id="cb2-1112"><a href="#cb2-1112" aria-hidden="true" tabindex="-1"></a><span class="pp">|---:|---:|---:|</span></span>
 <span id="cb2-1113"><a href="#cb2-1113" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 0.01 <span class="pp">|</span> 0.245 <span class="pp">|</span> 0.012 <span class="pp">|</span></span>
 <span id="cb2-1114"><a href="#cb2-1114" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 0.10 <span class="pp">|</span> 0.228 <span class="pp">|</span> 0.010 <span class="pp">|</span></span>
@@ -3004,7 +3374,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-1151"><a href="#cb2-1151" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1152"><a href="#cb2-1152" aria-hidden="true" tabindex="-1"></a>En este capítulo se desarrollaron los fundamentos de evaluación y selección de modelos. Se distinguieron error de entrenamiento, validación, prueba y generalización.</span>
 <span id="cb2-1153"><a href="#cb2-1153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-1154"><a href="#cb2-1154" aria-hidden="true" tabindex="-1"></a>También se estudiaron holdout, validación cruzada de <span class="sc">\(</span>K<span class="sc">\)</span> pliegues, leave-one-out, validación repetida, validación agrupada y evaluación temporal.</span>
+<span id="cb2-1154"><a href="#cb2-1154" aria-hidden="true" tabindex="-1"></a>También se estudiaron holdout, validación cruzada de $K$ pliegues, leave-one-out, validación repetida, validación agrupada y evaluación temporal.</span>
 <span id="cb2-1155"><a href="#cb2-1155" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1156"><a href="#cb2-1156" aria-hidden="true" tabindex="-1"></a>Finalmente, se introdujeron bootstrap, error out-of-bag, selección de hiperparámetros, validación anidada, fuga de información, pipelines, comparación de modelos y reproducibilidad. Estas herramientas son indispensables para obtener evaluaciones confiables y evitar conclusiones optimistas.</span>
 </code></pre></div><button title="Copiar al portapapeles" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>

@@ -1029,7 +1029,7 @@ y_i\log\pi_i
 \right].
 $$
 
-## Relación con $k$-NN
+## Relación con el método de vecinos más cercanos
 
 En $k$-NN, el espacio de hipótesis depende directamente de la muestra. La complejidad se controla mediante $k$:
 

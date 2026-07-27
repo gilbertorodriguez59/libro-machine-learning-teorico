@@ -51,3 +51,41 @@ Guarda la configuración.
 Después de transferir una versión revisada a la carpeta estable, ejecuta:
 
 `ACTUALIZAR_ESTABLE.bat`
+## PDF descargable en la versión web
+
+La configuración incluye:
+
+```yaml
+book:
+  downloads: [pdf]
+  output-file: "fundamentos-matematicos-aprendizaje-automatico"
+```
+
+Al ejecutar:
+
+```bash
+quarto render
+```
+
+Quarto genera dentro de `docs`:
+
+- el sitio HTML;
+- `fundamentos-matematicos-aprendizaje-automatico.pdf`.
+
+La versión web mostrará un botón de descarga del PDF debajo del título del libro.
+
+Si la generación del PDF falla, instala TinyTeX:
+
+```bash
+quarto install tinytex
+```
+
+Después ejecuta:
+
+`GENERAR_PDF.bat`
+
+o directamente:
+
+```bash
+quarto render
+```

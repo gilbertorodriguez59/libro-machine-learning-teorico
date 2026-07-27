@@ -2899,11 +2899,11 @@
     ]
   },
   {
-    "objectID": "aprendizaje/aprendizaje-supervisado.html#relación-con-k-nn",
-    "href": "aprendizaje/aprendizaje-supervisado.html#relación-con-k-nn",
+    "objectID": "aprendizaje/aprendizaje-supervisado.html#relación-con-el-método-de-vecinos-más-cercanos",
+    "href": "aprendizaje/aprendizaje-supervisado.html#relación-con-el-método-de-vecinos-más-cercanos",
     "title": "9  Formulación matemática del aprendizaje supervisado",
-    "section": "9.50 Relación con \\(k\\)-NN",
-    "text": "9.50 Relación con \\(k\\)-NN\nEn \\(k\\)-NN, el espacio de hipótesis depende directamente de la muestra. La complejidad se controla mediante \\(k\\):\n\n\\(k\\) pequeño: baja sesgo, alta varianza;\n\\(k\\) grande: mayor sesgo, menor varianza.",
+    "section": "9.50 Relación con el método de vecinos más cercanos",
+    "text": "9.50 Relación con el método de vecinos más cercanos\nEn \\(k\\)-NN, el espacio de hipótesis depende directamente de la muestra. La complejidad se controla mediante \\(k\\):\n\n\\(k\\) pequeño: baja sesgo, alta varianza;\n\\(k\\) grande: mayor sesgo, menor varianza.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Formulación matemática del aprendizaje supervisado</span>"
@@ -3625,11 +3625,11 @@
     ]
   },
   {
-    "objectID": "aprendizaje/teoria-clasificacion.html#relación-con-k-nn",
-    "href": "aprendizaje/teoria-clasificacion.html#relación-con-k-nn",
+    "objectID": "aprendizaje/teoria-clasificacion.html#relación-con-el-método-de-vecinos-más-cercanos",
+    "href": "aprendizaje/teoria-clasificacion.html#relación-con-el-método-de-vecinos-más-cercanos",
     "title": "10  Teoría matemática de la clasificación",
-    "section": "10.54 Relación con \\(k\\)-NN",
-    "text": "10.54 Relación con \\(k\\)-NN\nEn \\(k\\)-NN, las probabilidades posteriores pueden estimarse como\n\\[\n\\widehat{P}(Y=c\\mid\\mathbf{x})\n=\n\\frac{1}{k}\n\\sum_{i\\in N_k(\\mathbf{x})}\n\\mathbb{I}(y_i=c).\n\\]\nLa clase predicha es la de mayor frecuencia local.",
+    "section": "10.54 Relación con el método de vecinos más cercanos",
+    "text": "10.54 Relación con el método de vecinos más cercanos\nEn \\(k\\)-NN, las probabilidades posteriores pueden estimarse como\n\\[\n\\widehat{P}(Y=c\\mid\\mathbf{x})\n=\n\\frac{1}{k}\n\\sum_{i\\in N_k(\\mathbf{x})}\n\\mathbb{I}(y_i=c).\n\\]\nLa clase predicha es la de mayor frecuencia local.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Teoría matemática de la clasificación</span>"
@@ -3794,7 +3794,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#objetivos",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.2 Objetivos",
-    "text": "11.2 Objetivos\nAl finalizar el capítulo, el lector podrá:\n\ndistinguir entrenamiento, validación y prueba;\ndefinir un estimador del error de generalización;\ncomprender el sesgo optimista del error de entrenamiento;\naplicar particiones aleatorias y estratificadas;\nformular validación cruzada de (K) pliegues;\ninterpretar leave-one-out;\ncomprender métodos bootstrap;\ncomparar sesgo y varianza de estimadores de error;\nseleccionar hiperparámetros sin contaminar el conjunto de prueba;\ncomprender validación cruzada anidada;\ndetectar fuga de información;\nevaluar modelos en series de tiempo;\ncomparar modelos de forma estadísticamente válida;\ndiseñar un procedimiento reproducible de evaluación.",
+    "text": "11.2 Objetivos\nAl finalizar el capítulo, el lector podrá:\n\ndistinguir entrenamiento, validación y prueba;\ndefinir un estimador del error de generalización;\ncomprender el sesgo optimista del error de entrenamiento;\naplicar particiones aleatorias y estratificadas;\nformular validación cruzada de \\(K\\) pliegues;\ninterpretar leave-one-out;\ncomprender métodos bootstrap;\ncomparar sesgo y varianza de estimadores de error;\nseleccionar hiperparámetros sin contaminar el conjunto de prueba;\ncomprender validación cruzada anidada;\ndetectar fuga de información;\nevaluar modelos en series de tiempo;\ncomparar modelos de forma estadísticamente válida;\ndiseñar un procedimiento reproducible de evaluación.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -3805,7 +3805,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#error-de-generalización",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.3 Error de generalización",
-    "text": "11.3 Error de generalización\nSea (_{}) un modelo ajustado con una muestra ().\nSu error de generalización es\n[ R(_{}) = . ]\nLa esperanza se toma respecto de una nueva observación ((,Y)) proveniente del mismo proceso generador.\nEste riesgo es desconocido porque la distribución (P_{,Y}) es desconocida.",
+    "text": "11.3 Error de generalización\nSea \\(\\widehat{f}_{\\mathcal{D}}\\) un modelo ajustado con una muestra \\(\\mathcal{D}\\).\nSu error de generalización es\n\\[\nR(\\widehat{f}_{\\mathcal{D}})\n=\n\\mathbb{E}\n\\left[\nL\n\\left(\nY,\n\\widehat{f}_{\\mathcal{D}}(\\mathbf{X})\n\\right)\n\\mid\n\\mathcal{D}\n\\right].\n\\]\nLa esperanza se toma respecto de una nueva observación \\((\\mathbf{X},Y)\\) proveniente del mismo proceso generador.\nEste riesgo es desconocido porque la distribución \\(P_{\\mathbf{X},Y}\\) es desconocida.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -3816,7 +3816,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#error-de-entrenamiento",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.4 Error de entrenamiento",
-    "text": "11.4 Error de entrenamiento\nEl error de entrenamiento es\n[ {train} = {i=1}^{n} L ( y_i, _{}(_i) ). ]\nComo el modelo fue ajustado usando esas mismas observaciones, suele cumplirse\n[ {train} &lt; R({}). ]\nEsta diferencia se denomina optimismo.",
+    "text": "11.4 Error de entrenamiento\nEl error de entrenamiento es\n\\[\n\\widehat{R}_{train}\n=\n\\frac{1}{n}\n\\sum_{i=1}^{n}\nL\n\\left(\ny_i,\n\\widehat{f}_{\\mathcal{D}}(\\mathbf{x}_i)\n\\right).\n\\]\nComo el modelo fue ajustado usando esas mismas observaciones, suele cumplirse\n\\[\n\\widehat{R}_{train}\n&lt;\nR(\\widehat{f}_{\\mathcal{D}}).\n\\]\nEsta diferencia se denomina optimismo.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -3827,7 +3827,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#optimismo-de-entrenamiento",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.5 Optimismo de entrenamiento",
-    "text": "11.5 Optimismo de entrenamiento\n\nDefinición 11.1 El optimismo es la diferencia entre el error esperado sobre datos nuevos y el error observado sobre los datos de entrenamiento.\n\nFormalmente,\n[ = . ]\nLos modelos más flexibles suelen presentar mayor optimismo.",
+    "text": "11.5 Optimismo de entrenamiento\n\nDefinición 11.1 El optimismo es la diferencia entre el error esperado sobre datos nuevos y el error observado sobre los datos de entrenamiento.\n\nFormalmente,\n\\[\n\\operatorname{Opt}\n=\n\\mathbb{E}\n\\left[\nR(\\widehat{f}_{\\mathcal{D}})\n-\n\\widehat{R}_{train}\n\\right].\n\\]\nLos modelos más flexibles suelen presentar mayor optimismo.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -3838,7 +3838,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#conjunto-de-prueba",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.6 Conjunto de prueba",
-    "text": "11.6 Conjunto de prueba\nSea\n[ _{test} = { ({test}_j,y{test}j) }{j=1}^{m} ]\nuna muestra independiente del entrenamiento.\nEl error de prueba es\n[ {test} = {j=1}^{m} L ( y^{test}j, {}(^{test}_j) ). ]\nCondicionado al modelo ajustado,\n[ = R(_{}). ]\nPor tanto, el error de prueba es un estimador insesgado del riesgo del modelo fijo, siempre que el conjunto de prueba sea independiente y no intervenga en decisiones previas.",
+    "text": "11.6 Conjunto de prueba\nSea\n\\[\n\\mathcal{D}_{test}\n=\n\\left\\{\n(\\mathbf{x}^{test}_j,y^{test}_j)\n\\right\\}_{j=1}^{m}\n\\]\nuna muestra independiente del entrenamiento.\nEl error de prueba es\n\\[\n\\widehat{R}_{test}\n=\n\\frac{1}{m}\n\\sum_{j=1}^{m}\nL\n\\left(\ny^{test}_j,\n\\widehat{f}_{\\mathcal{D}}(\\mathbf{x}^{test}_j)\n\\right).\n\\]\nCondicionado al modelo ajustado,\n\\[\n\\mathbb{E}\n\\left[\n\\widehat{R}_{test}\n\\mid\n\\mathcal{D}\n\\right]\n=\nR(\\widehat{f}_{\\mathcal{D}}).\n\\]\nPor tanto, el error de prueba es un estimador insesgado del riesgo del modelo fijo, siempre que el conjunto de prueba sea independiente y no intervenga en decisiones previas.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -3849,7 +3849,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#división-entrenamiento-validación-prueba",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.7 División entrenamiento-validación-prueba",
-    "text": "11.7 División entrenamiento-validación-prueba\nUna muestra puede dividirse en tres partes:\n[ = {train} {val} _{test}, ]\ncon intersecciones vacías.\n\n11.7.1 Entrenamiento\nSe utiliza para estimar parámetros.\n\n\n11.7.2 Validación\nSe utiliza para seleccionar:\n\nhiperparámetros;\narquitectura;\nvariables;\numbrales;\nintensidad de regularización.\n\n\n\n11.7.3 Prueba\nSe utiliza una sola vez para estimar el desempeño final.",
+    "text": "11.7 División entrenamiento-validación-prueba\nUna muestra puede dividirse en tres partes:\n\\[\n\\mathcal{D}\n=\n\\mathcal{D}_{train}\n\\cup\n\\mathcal{D}_{val}\n\\cup\n\\mathcal{D}_{test},\n\\]\ncon intersecciones vacías.\n\n11.7.1 Entrenamiento\nSe utiliza para estimar parámetros.\n\n\n11.7.2 Validación\nSe utiliza para seleccionar:\n\nhiperparámetros;\narquitectura;\nvariables;\numbrales;\nintensidad de regularización.\n\n\n\n11.7.3 Prueba\nSe utiliza una sola vez para estimar el desempeño final.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -3860,7 +3860,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#proporciones-de-partición",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.8 Proporciones de partición",
-    "text": "11.8 Proporciones de partición\nNo existe una proporción universal. Algunas opciones son:\n\n(60%-20%-20%);\n(70%-15%-15%);\n(80%-20%), usando validación cruzada dentro del entrenamiento.\n\nLa elección depende de:\n\ntamaño total;\ncomplejidad del modelo;\ncantidad de hiperparámetros;\nprevalencia de clases;\ncosto de obtener datos.",
+    "text": "11.8 Proporciones de partición\nNo existe una proporción universal. Algunas opciones son:\n\n\\(60\\%-20\\%-20\\%\\);\n\\(70\\%-15\\%-15\\%\\);\n\\(80\\%-20\\%\\), usando validación cruzada dentro del entrenamiento.\n\nLa elección depende de:\n\ntamaño total;\ncomplejidad del modelo;\ncantidad de hiperparámetros;\nprevalencia de clases;\ncosto de obtener datos.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -3882,7 +3882,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#partición-estratificada",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.10 Partición estratificada",
-    "text": "11.10 Partición estratificada\n\nDefinición 11.2 Una partición estratificada conserva aproximadamente la proporción de clases en cada subconjunto.\n\nSi\n[ _k = , ]\nse busca que\n[ {k,train} {k,val} _{k,test}. ]\nEs especialmente importante en clases desbalanceadas.",
+    "text": "11.10 Partición estratificada\n\nDefinición 11.2 Una partición estratificada conserva aproximadamente la proporción de clases en cada subconjunto.\n\nSi\n\\[\n\\widehat{p}_k\n=\n\\frac{n_k}{n},\n\\]\nse busca que\n\\[\n\\widehat{p}_{k,train}\n\\approx\n\\widehat{p}_{k,val}\n\\approx\n\\widehat{p}_{k,test}.\n\\]\nEs especialmente importante en clases desbalanceadas.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -3904,7 +3904,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#método-holdout",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.12 Método holdout",
-    "text": "11.12 Método holdout\nEl método holdout utiliza una sola partición:\n[ = {train} {test}. ]\nVentajas:\n\nsimple;\nrápido;\nútil con muestras grandes.\n\nDesventajas:\n\nalta dependencia de una sola partición;\npuede tener alta varianza;\nutiliza menos datos para entrenar.",
+    "text": "11.12 Método holdout\nEl método holdout utiliza una sola partición:\n\\[\n\\mathcal{D}\n=\n\\mathcal{D}_{train}\n\\cup\n\\mathcal{D}_{test}.\n\\]\nVentajas:\n\nsimple;\nrápido;\nútil con muestras grandes.\n\nDesventajas:\n\nalta dependencia de una sola partición;\npuede tener alta varianza;\nutiliza menos datos para entrenar.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -3914,8 +3914,8 @@
     "objectID": "aprendizaje/evaluacion-modelos.html#validación-cruzada-de-k-pliegues",
     "href": "aprendizaje/evaluacion-modelos.html#validación-cruzada-de-k-pliegues",
     "title": "11  Evaluación, validación y selección de modelos",
-    "section": "11.13 Validación cruzada de (K) pliegues",
-    "text": "11.13 Validación cruzada de (K) pliegues\n\nDefinición 11.3 La validación cruzada de (K) pliegues divide la muestra en subconjuntos\n[ I_1,,I_K ]\naproximadamente del mismo tamaño.\n\nPara cada pliegue (k):\n\nse ajusta el modelo sin (I_k);\nse evalúa sobre (I_k).\n\nSea\n[ ^{(-k)} ]\nel modelo entrenado sin el pliegue (k).\nEl error es\n[ CV_K = {k=1}^{K} {iI_k} L ( y_i, ^{(-k)}(_i) ). ]\nSi los pliegues tienen igual tamaño,\n[ CV_K = _{k=1}^{K} _k. ]",
+    "section": "11.13 Validación cruzada de K pliegues",
+    "text": "11.13 Validación cruzada de K pliegues\n\nDefinición 11.3 La validación cruzada de \\(K\\) pliegues divide la muestra en subconjuntos\n\\[\nI_1,\\ldots,I_K\n\\]\naproximadamente del mismo tamaño.\n\nPara cada pliegue \\(k\\):\n\nse ajusta el modelo sin \\(I_k\\);\nse evalúa sobre \\(I_k\\).\n\nSea\n\\[\n\\widehat{f}^{(-k)}\n\\]\nel modelo entrenado sin el pliegue \\(k\\).\nEl error es\n\\[\nCV_K\n=\n\\frac{1}{n}\n\\sum_{k=1}^{K}\n\\sum_{i\\in I_k}\nL\n\\left(\ny_i,\n\\widehat{f}^{(-k)}(\\mathbf{x}_i)\n\\right).\n\\]\nSi los pliegues tienen igual tamaño,\n\\[\nCV_K\n=\n\\frac{1}{K}\n\\sum_{k=1}^{K}\n\\widehat{R}_k.\n\\]",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -3926,7 +3926,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#interpretación",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.14 Interpretación",
-    "text": "11.14 Interpretación\nCada observación se utiliza:\n\nuna vez para validación;\n(K-1) veces como parte del entrenamiento.\n\nLos valores habituales son\n[ K=5 ]\no\n[ K=10. ]",
+    "text": "11.14 Interpretación\nCada observación se utiliza:\n\nuna vez para validación;\n\\(K-1\\) veces como parte del entrenamiento.\n\nLos valores habituales son\n\\[\nK=5\n\\]\no\n\\[\nK=10.\n\\]",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -3937,7 +3937,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#sesgo-de-validación-cruzada",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.15 Sesgo de validación cruzada",
-    "text": "11.15 Sesgo de validación cruzada\nCada modelo se entrena con\n[ n ]\nobservaciones.\nPor tanto, (CV_K) estima el error de un modelo entrenado con menos observaciones que el modelo final.\nEsto puede introducir un sesgo ligeramente pesimista.",
+    "text": "11.15 Sesgo de validación cruzada\nCada modelo se entrena con\n\\[\n\\frac{K-1}{K}n\n\\]\nobservaciones.\nPor tanto, \\(CV_K\\) estima el error de un modelo entrenado con menos observaciones que el modelo final.\nEsto puede introducir un sesgo ligeramente pesimista.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -3959,7 +3959,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#validación-cruzada-repetida",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.17 Validación cruzada repetida",
-    "text": "11.17 Validación cruzada repetida\nSe repite la creación de pliegues (B) veces:\n[ CV_{K,B} = _{b=1}^{B} CV_K^{(b)}. ]\nLa repetición reduce la dependencia respecto de una sola división.",
+    "text": "11.17 Validación cruzada repetida\nSe repite la creación de pliegues \\(B\\) veces:\n\\[\nCV_{K,B}\n=\n\\frac{1}{B}\n\\sum_{b=1}^{B}\nCV_K^{(b)}.\n\\]\nLa repetición reduce la dependencia respecto de una sola división.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -3970,7 +3970,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#leave-one-out",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.18 Leave-one-out",
-    "text": "11.18 Leave-one-out\n\nDefinición 11.4 Leave-one-out cross-validation corresponde a\n[ K=n. ]\n\nCada modelo se entrena con (n-1) observaciones y se evalúa en una sola.\nEl estimador es\n[ CV_{LOO} = _{i=1}^{n} L ( y_i, ^{(-i)}(_i) ). ]",
+    "text": "11.18 Leave-one-out\n\nDefinición 11.4 Leave-one-out cross-validation corresponde a\n\\[\nK=n.\n\\]\n\nCada modelo se entrena con \\(n-1\\) observaciones y se evalúa en una sola.\nEl estimador es\n\\[\nCV_{LOO}\n=\n\\frac{1}{n}\n\\sum_{i=1}^{n}\nL\n\\left(\ny_i,\n\\widehat{f}^{(-i)}(\\mathbf{x}_i)\n\\right).\n\\]",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -3981,7 +3981,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#ventajas-y-limitaciones-de-loocv",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.19 Ventajas y limitaciones de LOOCV",
-    "text": "11.19 Ventajas y limitaciones de LOOCV\nVentajas:\n\ncasi toda la muestra se usa para entrenar;\nbajo sesgo.\n\nLimitaciones:\n\npuede tener alta varianza;\nalto costo computacional;\nlos modelos ajustados son muy similares;\nno siempre supera a (K=5) o (K=10).",
+    "text": "11.19 Ventajas y limitaciones de LOOCV\nVentajas:\n\ncasi toda la muestra se usa para entrenar;\nbajo sesgo.\n\nLimitaciones:\n\npuede tener alta varianza;\nalto costo computacional;\nlos modelos ajustados son muy similares;\nno siempre supera a \\(K=5\\) o \\(K=10\\).",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4014,7 +4014,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#validación-cruzada-para-series-de-tiempo",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.22 Validación cruzada para series de tiempo",
-    "text": "11.22 Validación cruzada para series de tiempo\nEn series temporales no debe mezclarse aleatoriamente pasado y futuro.\nUna estrategia es la ventana creciente.\nPara tiempos\n[ 1,,T, ]\nse realizan ajustes como:\n[ {1,,t} {t+1}. ]\nEl error temporal es\n[ CV_{time} = {m=1}^{M} L ( y{t_m+1}, {1:t_m}({t_m+1}) ). ]",
+    "text": "11.22 Validación cruzada para series de tiempo\nEn series temporales no debe mezclarse aleatoriamente pasado y futuro.\nUna estrategia es la ventana creciente.\nPara tiempos\n\\[\n1,\\ldots,T,\n\\]\nse realizan ajustes como:\n\\[\n\\{1,\\ldots,t\\}\n\\to\n\\{t+1\\}.\n\\]\nEl error temporal es\n\\[\nCV_{time}\n=\n\\frac{1}{M}\n\\sum_{m=1}^{M}\nL\n\\left(\ny_{t_m+1},\n\\widehat{f}_{1:t_m}(\\mathbf{x}_{t_m+1})\n\\right).\n\\]",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4025,7 +4025,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#ventana-deslizante",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.23 Ventana deslizante",
-    "text": "11.23 Ventana deslizante\nSe entrena con una ventana de longitud fija (w):\n[ {t-w+1,,t} {t+1}. ]\nEs útil cuando el proceso cambia con el tiempo.",
+    "text": "11.23 Ventana deslizante\nSe entrena con una ventana de longitud fija \\(w\\):\n\\[\n\\{t-w+1,\\ldots,t\\}\n\\to\n\\{t+1\\}.\n\\]\nEs útil cuando el proceso cambia con el tiempo.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4036,7 +4036,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#bootstrap",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.24 Bootstrap",
-    "text": "11.24 Bootstrap\n\nDefinición 11.5 Una muestra bootstrap se obtiene seleccionando (n) observaciones con reemplazo de la muestra original.\n\nSe denota por\n[ ^{*(b)}. ]\nCada muestra bootstrap contiene observaciones repetidas y deja fuera algunas observaciones originales.",
+    "text": "11.24 Bootstrap\n\nDefinición 11.5 Una muestra bootstrap se obtiene seleccionando \\(n\\) observaciones con reemplazo de la muestra original.\n\nSe denota por\n\\[\n\\mathcal{D}^{*(b)}.\n\\]\nCada muestra bootstrap contiene observaciones repetidas y deja fuera algunas observaciones originales.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4047,7 +4047,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#probabilidad-de-exclusión",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.25 Probabilidad de exclusión",
-    "text": "11.25 Probabilidad de exclusión\nLa probabilidad de que una observación no sea seleccionada en una muestra bootstrap es\n[ ( 1- )^n. ]\nCuando (n) es grande,\n[ ( 1- )^n e^{-1} . ]\nPor tanto, aproximadamente el (36.8%) de las observaciones queda fuera de cada muestra bootstrap.",
+    "text": "11.25 Probabilidad de exclusión\nLa probabilidad de que una observación no sea seleccionada en una muestra bootstrap es\n\\[\n\\left(\n1-\\frac{1}{n}\n\\right)^n.\n\\]\nCuando \\(n\\) es grande,\n\\[\n\\left(\n1-\\frac{1}{n}\n\\right)^n\n\\approx\ne^{-1}\n\\approx\n0.368.\n\\]\nPor tanto, aproximadamente el \\(36.8\\%\\) de las observaciones queda fuera de cada muestra bootstrap.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4069,7 +4069,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#estimador-bootstrap-del-error",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.27 Estimador bootstrap del error",
-    "text": "11.27 Estimador bootstrap del error\nPara (B) muestras bootstrap,\n[ {boot} = {b=1}^{B} _{OOB}^{(b)}. ]",
+    "text": "11.27 Estimador bootstrap del error\nPara \\(B\\) muestras bootstrap,\n\\[\n\\widehat{R}_{boot}\n=\n\\frac{1}{B}\n\\sum_{b=1}^{B}\n\\widehat{R}_{OOB}^{(b)}.\n\\]",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4080,7 +4080,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#estimador-.632",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.28 Estimador .632",
-    "text": "11.28 Estimador .632\nEl estimador .632 combina error de entrenamiento y error out-of-bag:\n[ {.632} = 0.368 {train} + 0.632 _{OOB}. ]\nLa ponderación se relaciona con la proporción esperada de observaciones distintas presentes en una muestra bootstrap.",
+    "text": "11.28 Estimador .632\nEl estimador .632 combina error de entrenamiento y error out-of-bag:\n\\[\n\\widehat{R}_{.632}\n=\n0.368\n\\widehat{R}_{train}\n+\n0.632\n\\widehat{R}_{OOB}.\n\\]\nLa ponderación se relaciona con la proporción esperada de observaciones distintas presentes en una muestra bootstrap.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4091,7 +4091,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#bootstrap-para-incertidumbre",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.29 Bootstrap para incertidumbre",
-    "text": "11.29 Bootstrap para incertidumbre\nAdemás de estimar error, bootstrap puede aproximar la distribución de un estadístico.\nSea\n[ T=T(). ]\nSe calculan\n[ T{*(1)},,T{*(B)}. ]\nLa varianza bootstrap es\n[ {boot}(T) = {b=1}^{B} ( T^{(b)} - ^{} )^2. ]",
+    "text": "11.29 Bootstrap para incertidumbre\nAdemás de estimar error, bootstrap puede aproximar la distribución de un estadístico.\nSea\n\\[\nT=T(\\mathcal{D}).\n\\]\nSe calculan\n\\[\nT^{*(1)},\\ldots,T^{*(B)}.\n\\]\nLa varianza bootstrap es\n\\[\n\\widehat{\\operatorname{Var}}_{boot}(T)\n=\n\\frac{1}{B-1}\n\\sum_{b=1}^{B}\n\\left(\nT^{*(b)}\n-\n\\overline{T}^{*}\n\\right)^2.\n\\]",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4102,7 +4102,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#selección-de-hiperparámetros",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.30 Selección de hiperparámetros",
-    "text": "11.30 Selección de hiperparámetros\nSea () un hiperparámetro.\nPara cada valor se estima\n[ CV_K(). ]\nSe selecciona\n[ = _{} CV_K(). ]\nDespués se reajusta el modelo usando toda la muestra de entrenamiento con ().",
+    "text": "11.30 Selección de hiperparámetros\nSea \\(\\lambda\\in\\Lambda\\) un hiperparámetro.\nPara cada valor se estima\n\\[\nCV_K(\\lambda).\n\\]\nSe selecciona\n\\[\n\\widehat{\\lambda}\n=\n\\arg\\min_{\\lambda\\in\\Lambda}\nCV_K(\\lambda).\n\\]\nDespués se reajusta el modelo usando toda la muestra de entrenamiento con \\(\\widehat{\\lambda}\\).",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4113,7 +4113,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#búsqueda-en-rejilla",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.31 Búsqueda en rejilla",
-    "text": "11.31 Búsqueda en rejilla\nSe define una rejilla\n[ = { _1,,_M }. ]\nSe evalúa cada combinación.\nVentajas:\n\nsistemática;\nreproducible.\n\nDesventajas:\n\ncostosa en espacios grandes;\nineficiente si muchos valores son irrelevantes.",
+    "text": "11.31 Búsqueda en rejilla\nSe define una rejilla\n\\[\n\\Lambda\n=\n\\{\n\\lambda_1,\\ldots,\\lambda_M\n\\}.\n\\]\nSe evalúa cada combinación.\nVentajas:\n\nsistemática;\nreproducible.\n\nDesventajas:\n\ncostosa en espacios grandes;\nineficiente si muchos valores son irrelevantes.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4135,7 +4135,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#optimización-bayesiana",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.33 Optimización bayesiana",
-    "text": "11.33 Optimización bayesiana\nConstruye un modelo sustituto de la función\n[ CV() ]\ny utiliza una función de adquisición para elegir nuevas evaluaciones.\nEs útil cuando cada entrenamiento es costoso.",
+    "text": "11.33 Optimización bayesiana\nConstruye un modelo sustituto de la función\n\\[\n\\lambda\n\\mapsto\nCV(\\lambda)\n\\]\ny utiliza una función de adquisición para elegir nuevas evaluaciones.\nEs útil cuando cada entrenamiento es costoso.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4157,7 +4157,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#preprocesamiento-correcto",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.35 Preprocesamiento correcto",
-    "text": "11.35 Preprocesamiento correcto\nToda transformación debe aprenderse únicamente en entrenamiento.\nPor ejemplo, para estandarizar:\n[ _{ij} = . ]\nLos valores de validación y prueba se transforman usando las estadísticas del entrenamiento.\nNo deben recalcularse con cada conjunto.",
+    "text": "11.35 Preprocesamiento correcto\nToda transformación debe aprenderse únicamente en entrenamiento.\nPor ejemplo, para estandarizar:\n\\[\n\\widetilde{x}_{ij}\n=\n\\frac{\nx_{ij}-\\widehat{\\mu}_{j,train}\n}{\n\\widehat{\\sigma}_{j,train}\n}.\n\\]\nLos valores de validación y prueba se transforman usando las estadísticas del entrenamiento.\nNo deben recalcularse con cada conjunto.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4190,7 +4190,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#validación-cruzada-anidada",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.38 Validación cruzada anidada",
-    "text": "11.38 Validación cruzada anidada\n\nDefinición 11.7 La validación cruzada anidada utiliza un ciclo externo para estimar desempeño y un ciclo interno para seleccionar hiperparámetros.\n\n\n11.38.1 Ciclo externo\nDivide los datos en pliegues de evaluación.\n\n\n11.38.2 Ciclo interno\nDentro del entrenamiento externo, selecciona hiperparámetros.\nEl error anidado es\n[ CV_{nested} = {k=1}^{K{ext}} ^{ext}_k. ]\nEste procedimiento reduce el sesgo de selección.",
+    "text": "11.38 Validación cruzada anidada\n\nDefinición 11.7 La validación cruzada anidada utiliza un ciclo externo para estimar desempeño y un ciclo interno para seleccionar hiperparámetros.\n\n\n11.38.1 Ciclo externo\nDivide los datos en pliegues de evaluación.\n\n\n11.38.2 Ciclo interno\nDentro del entrenamiento externo, selecciona hiperparámetros.\nEl error anidado es\n\\[\nCV_{nested}\n=\n\\frac{1}{K_{ext}}\n\\sum_{k=1}^{K_{ext}}\n\\widehat{R}^{ext}_k.\n\\]\nEste procedimiento reduce el sesgo de selección.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4201,7 +4201,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#sesgo-por-selección",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.39 Sesgo por selección",
-    "text": "11.39 Sesgo por selección\nSi se prueban muchos modelos y se reporta el mejor valor de validación, el resultado tiende a ser optimista.\nEsto ocurre porque se selecciona el mínimo entre estimaciones ruidosas:\n[ _m _m. ]\nLa validación anidada separa selección y evaluación.",
+    "text": "11.39 Sesgo por selección\nSi se prueban muchos modelos y se reporta el mejor valor de validación, el resultado tiende a ser optimista.\nEsto ocurre porque se selecciona el mínimo entre estimaciones ruidosas:\n\\[\n\\min_m\n\\widehat{R}_m.\n\\]\nLa validación anidada separa selección y evaluación.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4212,7 +4212,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#regla-de-un-error-estándar",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.40 Regla de un error estándar",
-    "text": "11.40 Regla de un error estándar\nSupóngase que (_{min}) minimiza el error medio.\nLa regla de un error estándar selecciona el modelo más simple cuyo error satisface\n[ CV() CV({min}) + SE({min}). ]\nEsta regla favorece modelos más parsimoniosos.",
+    "text": "11.40 Regla de un error estándar\nSupóngase que \\(\\lambda_{min}\\) minimiza el error medio.\nLa regla de un error estándar selecciona el modelo más simple cuyo error satisface\n\\[\nCV(\\lambda)\n\\leq\nCV(\\lambda_{min})\n+\nSE(\\lambda_{min}).\n\\]\nEsta regla favorece modelos más parsimoniosos.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4223,7 +4223,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#comparación-de-modelos",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.41 Comparación de modelos",
-    "text": "11.41 Comparación de modelos\nSupóngase que se comparan modelos (A) y (B).\nEn cada pliegue se calcula\n[ d_k = R_{A,k} - R_{B,k}. ]\nUna diferencia promedio negativa favorece a (A):\n[ = _{k=1}^{K}d_k. ]\nSin embargo, los pliegues no son independientes, por lo que las pruebas estadísticas deben interpretarse con cautela.",
+    "text": "11.41 Comparación de modelos\nSupóngase que se comparan modelos \\(A\\) y \\(B\\).\nEn cada pliegue se calcula\n\\[\nd_k\n=\nR_{A,k}\n-\nR_{B,k}.\n\\]\nUna diferencia promedio negativa favorece a \\(A\\):\n\\[\n\\overline{d}\n=\n\\frac{1}{K}\n\\sum_{k=1}^{K}d_k.\n\\]\nSin embargo, los pliegues no son independientes, por lo que las pruebas estadísticas deben interpretarse con cautela.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4234,7 +4234,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#prueba-de-mcnemar",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.42 Prueba de McNemar",
-    "text": "11.42 Prueba de McNemar\nPara dos clasificadores evaluados sobre las mismas observaciones, se consideran:\n\n(n_{01}): (A) falla y (B) acierta;\n(n_{10}): (A) acierta y (B) falla.\n\nEl estadístico aproximado es\n[ ^2 = . ]\nEsta prueba analiza si los patrones de error difieren.",
+    "text": "11.42 Prueba de McNemar\nPara dos clasificadores evaluados sobre las mismas observaciones, se consideran:\n\n\\(n_{01}\\): \\(A\\) falla y \\(B\\) acierta;\n\\(n_{10}\\): \\(A\\) acierta y \\(B\\) falla.\n\nEl estadístico aproximado es\n\\[\n\\chi^2\n=\n\\frac{\n(|n_{01}-n_{10}|-1)^2\n}{\nn_{01}+n_{10}\n}.\n\\]\nEsta prueba analiza si los patrones de error difieren.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4245,7 +4245,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#intervalo-para-error-de-clasificación",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.43 Intervalo para error de clasificación",
-    "text": "11.43 Intervalo para error de clasificación\nSi el error observado es\n[ = , ]\nuna aproximación del error estándar es\n[ SE() = . ]\nUna aproximación normal es\n[ z_{/2} SE(). ]\nPara muestras pequeñas o proporciones extremas son preferibles métodos como Wilson.",
+    "text": "11.43 Intervalo para error de clasificación\nSi el error observado es\n\\[\n\\widehat{p}\n=\n\\frac{e}{m},\n\\]\nuna aproximación del error estándar es\n\\[\nSE(\\widehat{p})\n=\n\\sqrt{\n\\frac{\n\\widehat{p}(1-\\widehat{p})\n}{\nm\n}\n}.\n\\]\nUna aproximación normal es\n\\[\n\\widehat{p}\n\\pm\nz_{\\alpha/2}\nSE(\\widehat{p}).\n\\]\nPara muestras pequeñas o proporciones extremas son preferibles métodos como Wilson.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4256,7 +4256,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#incertidumbre-del-error-cuadrático-medio",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.44 Incertidumbre del error cuadrático medio",
-    "text": "11.44 Incertidumbre del error cuadrático medio\nPara pérdidas\n[ _1,,_m, ]\nel error medio es\n[ = _{i=1}^{m}_i. ]\nSu error estándar aproximado es\n[ SE() = , ]\nsi las observaciones de prueba son independientes.",
+    "text": "11.44 Incertidumbre del error cuadrático medio\nPara pérdidas\n\\[\n\\ell_1,\\ldots,\\ell_m,\n\\]\nel error medio es\n\\[\n\\overline{\\ell}\n=\n\\frac{1}{m}\n\\sum_{i=1}^{m}\\ell_i.\n\\]\nSu error estándar aproximado es\n\\[\nSE(\\overline{\\ell})\n=\n\\frac{s_\\ell}{\\sqrt{m}},\n\\]\nsi las observaciones de prueba son independientes.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4289,7 +4289,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#evaluación-en-regresión",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.47 Evaluación en regresión",
-    "text": "11.47 Evaluación en regresión\n\n11.47.1 Error cuadrático medio\n[ MSE = _{i=1}^{m} ( y_i-_i )^2. ]\n\n\n11.47.2 Raíz del error cuadrático medio\n[ RMSE = . ]\n\n\n11.47.3 Error absoluto medio\n[ MAE = _{i=1}^{m} |y_i-_i|. ]\n\n\n11.47.4 Coeficiente de determinación\n[ R^2 = 1- . ]\nEn prueba, (R^2) puede ser negativo.",
+    "text": "11.47 Evaluación en regresión\n\n11.47.1 Error cuadrático medio\n\\[\nMSE\n=\n\\frac{1}{m}\n\\sum_{i=1}^{m}\n(\ny_i-\\widehat{y}_i\n)^2.\n\\]\n\n\n11.47.2 Raíz del error cuadrático medio\n\\[\nRMSE\n=\n\\sqrt{MSE}.\n\\]\n\n\n11.47.3 Error absoluto medio\n\\[\nMAE\n=\n\\frac{1}{m}\n\\sum_{i=1}^{m}\n|y_i-\\widehat{y}_i|.\n\\]\n\n\n11.47.4 Coeficiente de determinación\n\\[\nR^2\n=\n1-\n\\frac{\n\\sum_i(y_i-\\widehat{y}_i)^2\n}{\n\\sum_i(y_i-\\overline{y})^2\n}.\n\\]\nEn prueba, \\(R^2\\) puede ser negativo.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4322,7 +4322,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#ejemplo-manual-de-validación-cruzada",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.50 Ejemplo manual de validación cruzada",
-    "text": "11.50 Ejemplo manual de validación cruzada\nConsidere seis observaciones divididas en tres pliegues:\n[ I_1={1,2}, I_2={3,4}, I_3={5,6}. ]\nLos errores de validación son:\n[ _1=2.0, _2=3.5, _3=2.5. ]\nEntonces,\n[ CV_3 = = . ]",
+    "text": "11.50 Ejemplo manual de validación cruzada\nConsidere seis observaciones divididas en tres pliegues:\n\\[\nI_1=\\{1,2\\},\n\\quad\nI_2=\\{3,4\\},\n\\quad\nI_3=\\{5,6\\}.\n\\]\nLos errores de validación son:\n\\[\n\\widehat{R}_1=2.0,\n\\quad\n\\widehat{R}_2=3.5,\n\\quad\n\\widehat{R}_3=2.5.\n\\]\nEntonces,\n\\[\nCV_3\n=\n\\frac{2.0+3.5+2.5}{3}\n=\n\\frac{8}{3}\n\\approx\n2.67.\n\\]",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4333,7 +4333,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#ejemplo-de-fuga-de-información",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.51 Ejemplo de fuga de información",
-    "text": "11.51 Ejemplo de fuga de información\nSupóngase que se estandariza una variable usando:\n[ {total} = {i=1}^{n}x_i. ]\nSi esta media incluye observaciones de prueba, el entrenamiento utiliza indirectamente información futura.\nLa transformación correcta usa:\n[ {train} = {itrain}x_i. ]",
+    "text": "11.51 Ejemplo de fuga de información\nSupóngase que se estandariza una variable usando:\n\\[\n\\widehat{\\mu}_{total}\n=\n\\frac{1}{n}\n\\sum_{i=1}^{n}x_i.\n\\]\nSi esta media incluye observaciones de prueba, el entrenamiento utiliza indirectamente información futura.\nLa transformación correcta usa:\n\\[\n\\widehat{\\mu}_{train}\n=\n\\frac{1}{n_{train}}\n\\sum_{i\\in train}x_i.\n\\]",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4366,7 +4366,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#ejercicios-conceptuales",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.54 Ejercicios conceptuales",
-    "text": "11.54 Ejercicios conceptuales\n\nExplique la diferencia entre entrenamiento, validación y prueba.\n¿Por qué el error de entrenamiento es optimista?\n¿Qué ventaja ofrece la validación cruzada?\n¿Qué diferencia existe entre (K)-fold y LOOCV?\n¿Por qué debe utilizarse estratificación?\n¿Qué es fuga de información?\n¿Por qué el preprocesamiento debe realizarse dentro de cada pliegue?\n¿Qué problema resuelve la validación anidada?\n¿Qué significa la regla de un error estándar?\n¿Por qué no debe aleatorizarse una serie temporal?",
+    "text": "11.54 Ejercicios conceptuales\n\nExplique la diferencia entre entrenamiento, validación y prueba.\n¿Por qué el error de entrenamiento es optimista?\n¿Qué ventaja ofrece la validación cruzada?\n¿Qué diferencia existe entre \\(K\\)-fold y LOOCV?\n¿Por qué debe utilizarse estratificación?\n¿Qué es fuga de información?\n¿Por qué el preprocesamiento debe realizarse dentro de cada pliegue?\n¿Qué problema resuelve la validación anidada?\n¿Qué significa la regla de un error estándar?\n¿Por qué no debe aleatorizarse una serie temporal?",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4377,7 +4377,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#ejercicio-de-holdout",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.55 Ejercicio de holdout",
-    "text": "11.55 Ejercicio de holdout\nUna muestra contiene (1,000) observaciones.\n\nCalcule los tamaños para una división (70%-15%-15%).\nExplique el uso de cada subconjunto.\nProponga una alternativa usando validación cruzada.\nAnalice qué ocurriría si solo existen 40 observaciones positivas.",
+    "text": "11.55 Ejercicio de holdout\nUna muestra contiene \\(1\\,000\\) observaciones.\n\nCalcule los tamaños para una división \\(70\\%-15\\%-15\\%\\).\nExplique el uso de cada subconjunto.\nProponga una alternativa usando validación cruzada.\nAnalice qué ocurriría si solo existen 40 observaciones positivas.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4388,7 +4388,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#ejercicio-de-validación-cruzada",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.56 Ejercicio de validación cruzada",
-    "text": "11.56 Ejercicio de validación cruzada\nLos errores de cinco pliegues son:\n[ 0.18, 0.22, 0.20, 0.25, 0.15. ]\nCalcule:\n\nel error medio;\nla desviación estándar;\nel error estándar aproximado;\nun intervalo descriptivo de dos errores estándar.",
+    "text": "11.56 Ejercicio de validación cruzada\nLos errores de cinco pliegues son:\n\\[\n0.18,\\ 0.22,\\ 0.20,\\ 0.25,\\ 0.15.\n\\]\nCalcule:\n\nel error medio;\nla desviación estándar;\nel error estándar aproximado;\nun intervalo descriptivo de dos errores estándar.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4399,7 +4399,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#ejercicio-bootstrap",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.57 Ejercicio bootstrap",
-    "text": "11.57 Ejercicio bootstrap\nPara (n=100):\n\ncalcule aproximadamente la proporción esperada de observaciones no seleccionadas;\ncalcule la cantidad esperada de observaciones out-of-bag;\nexplique cómo se estima el error OOB;\nrelacione este procedimiento con random forest.",
+    "text": "11.57 Ejercicio bootstrap\nPara \\(n=100\\):\n\ncalcule aproximadamente la proporción esperada de observaciones no seleccionadas;\ncalcule la cantidad esperada de observaciones out-of-bag;\nexplique cómo se estima el error OOB;\nrelacione este procedimiento con random forest.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4410,7 +4410,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#ejercicio-de-selección",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.58 Ejercicio de selección",
-    "text": "11.58 Ejercicio de selección\nSe obtienen los siguientes errores:\n\n\n\n()\nError CV\nError estándar\n\n\n\n\n0.01\n0.245\n0.012\n\n\n0.10\n0.228\n0.010\n\n\n1.00\n0.231\n0.009\n\n\n10.00\n0.260\n0.011\n\n\n\n\nSeleccione el mínimo.\nAplique la regla de un error estándar.\nExplique cuál modelo sería más simple si una penalización mayor implica mayor regularización.",
+    "text": "11.58 Ejercicio de selección\nSe obtienen los siguientes errores:\n\n\n\n\\(\\lambda\\)\nError CV\nError estándar\n\n\n\n\n0.01\n0.245\n0.012\n\n\n0.10\n0.228\n0.010\n\n\n1.00\n0.231\n0.009\n\n\n10.00\n0.260\n0.011\n\n\n\n\nSeleccione el mínimo.\nAplique la regla de un error estándar.\nExplique cuál modelo sería más simple si una penalización mayor implica mayor regularización.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4443,7 +4443,7 @@
     "href": "aprendizaje/evaluacion-modelos.html#resumen",
     "title": "11  Evaluación, validación y selección de modelos",
     "section": "11.61 Resumen",
-    "text": "11.61 Resumen\nEn este capítulo se desarrollaron los fundamentos de evaluación y selección de modelos. Se distinguieron error de entrenamiento, validación, prueba y generalización.\nTambién se estudiaron holdout, validación cruzada de (K) pliegues, leave-one-out, validación repetida, validación agrupada y evaluación temporal.\nFinalmente, se introdujeron bootstrap, error out-of-bag, selección de hiperparámetros, validación anidada, fuga de información, pipelines, comparación de modelos y reproducibilidad. Estas herramientas son indispensables para obtener evaluaciones confiables y evitar conclusiones optimistas.",
+    "text": "11.61 Resumen\nEn este capítulo se desarrollaron los fundamentos de evaluación y selección de modelos. Se distinguieron error de entrenamiento, validación, prueba y generalización.\nTambién se estudiaron holdout, validación cruzada de \\(K\\) pliegues, leave-one-out, validación repetida, validación agrupada y evaluación temporal.\nFinalmente, se introdujeron bootstrap, error out-of-bag, selección de hiperparámetros, validación anidada, fuga de información, pipelines, comparación de modelos y reproducibilidad. Estas herramientas son indispensables para obtener evaluaciones confiables y evitar conclusiones optimistas.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Evaluación, validación y selección de modelos</span>"
@@ -4476,7 +4476,7 @@
     "href": "aprendizaje/regularizacion.html#objetivos",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.2 Objetivos",
-    "text": "12.2 Objetivos\nAl finalizar el capítulo, el lector podrá:\n\nexplicar por qué se utiliza regularización;\nformular problemas penalizados;\nrelacionar penalización y restricción;\nderivar el estimador ridge;\ninterpretar la penalización (L_2);\nformular el problema LASSO;\ninterpretar la penalización (L_1);\ncomprender por qué LASSO produce coeficientes exactamente iguales a cero;\nformular elastic net;\nanalizar el efecto del parámetro de regularización;\ncomprender la relación entre regularización, sesgo y varianza;\ninterpretar regularización desde un punto de vista bayesiano;\nseleccionar () mediante validación;\nreconocer limitaciones y precauciones prácticas.",
+    "text": "12.2 Objetivos\nAl finalizar el capítulo, el lector podrá:\n\nexplicar por qué se utiliza regularización;\nformular problemas penalizados;\nrelacionar penalización y restricción;\nderivar el estimador ridge;\ninterpretar la penalización \\(L_2\\);\nformular el problema LASSO;\ninterpretar la penalización \\(L_1\\);\ncomprender por qué LASSO produce coeficientes exactamente iguales a cero;\nformular elastic net;\nanalizar el efecto del parámetro de regularización;\ncomprender la relación entre regularización, sesgo y varianza;\ninterpretar regularización desde un punto de vista bayesiano;\nseleccionar \\(\\lambda\\) mediante validación;\nreconocer limitaciones y precauciones prácticas.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4487,7 +4487,7 @@
     "href": "aprendizaje/regularizacion.html#motivación",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.3 Motivación",
-    "text": "12.3 Motivación\nConsidere el modelo lineal\n[ = + . ]\nEl estimador de mínimos cuadrados es\n[ {OLS} = {} | - |_2^2. ]\nSi (^{T}) es invertible,\n[ _{OLS} = ( ^{T} )^{-1} ^{T}. ]\nSin embargo, este estimador puede presentar problemas cuando:\n\nexisten variables altamente correlacionadas;\n(p) es grande;\n(pn);\nhay ruido considerable;\nel modelo tiene demasiada flexibilidad;\nse desea seleccionar variables.",
+    "text": "12.3 Motivación\nConsidere el modelo lineal\n\\[\n\\mathbf{y}\n=\n\\mathbf{X}\\boldsymbol{\\beta}\n+\n\\boldsymbol{\\varepsilon}.\n\\]\nEl estimador de mínimos cuadrados es\n\\[\n\\widehat{\\boldsymbol{\\beta}}_{OLS}\n=\n\\arg\\min_{\\boldsymbol{\\beta}}\n\\left\\|\n\\mathbf{y}\n-\n\\mathbf{X}\\boldsymbol{\\beta}\n\\right\\|_2^2.\n\\]\nSi \\(\\mathbf{X}^{\\mathsf T}\\mathbf{X}\\) es invertible,\n\\[\n\\widehat{\\boldsymbol{\\beta}}_{OLS}\n=\n\\left(\n\\mathbf{X}^{\\mathsf T}\\mathbf{X}\n\\right)^{-1}\n\\mathbf{X}^{\\mathsf T}\\mathbf{y}.\n\\]\nSin embargo, este estimador puede presentar problemas cuando:\n\nexisten variables altamente correlacionadas;\n\\(p\\) es grande;\n\\(p\\geq n\\);\nhay ruido considerable;\nel modelo tiene demasiada flexibilidad;\nse desea seleccionar variables.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4498,7 +4498,7 @@
     "href": "aprendizaje/regularizacion.html#problemas-de-multicolinealidad",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.4 Problemas de multicolinealidad",
-    "text": "12.4 Problemas de multicolinealidad\nCuando algunas columnas de () están altamente correlacionadas, la matriz\n[ ^{T} ]\npuede estar mal condicionada.\nEsto provoca:\n\ncoeficientes inestables;\ngran varianza;\nsensibilidad a pequeñas perturbaciones;\nsignos difíciles de interpretar;\npredicciones poco robustas.",
+    "text": "12.4 Problemas de multicolinealidad\nCuando algunas columnas de \\(\\mathbf{X}\\) están altamente correlacionadas, la matriz\n\\[\n\\mathbf{X}^{\\mathsf T}\\mathbf{X}\n\\]\npuede estar mal condicionada.\nEsto provoca:\n\ncoeficientes inestables;\ngran varianza;\nsensibilidad a pequeñas perturbaciones;\nsignos difíciles de interpretar;\npredicciones poco robustas.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4509,18 +4509,18 @@
     "href": "aprendizaje/regularizacion.html#problema-penalizado-general",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.5 Problema penalizado general",
-    "text": "12.5 Problema penalizado general\n\nDefinición 12.1 Un problema de regularización tiene la forma\n[ = _{} { L() + () }, ]\ndonde:\n\n(L()) es la pérdida;\n(()) mide complejidad;\n() controla la intensidad de regularización.\n\n\nCuando\n[ , ]\nse recupera el modelo sin penalización.\nCuando () aumenta, la penalización adquiere mayor peso.",
+    "text": "12.5 Problema penalizado general\n\nDefinición 12.1 Un problema de regularización tiene la forma\n\\[\n\\widehat{\\boldsymbol{\\beta}}\n=\n\\arg\\min_{\\boldsymbol{\\beta}}\n\\left\\{\nL(\\boldsymbol{\\beta})\n+\n\\lambda\n\\Omega(\\boldsymbol{\\beta})\n\\right\\},\n\\]\ndonde:\n\n\\(L(\\boldsymbol{\\beta})\\) es la pérdida;\n\\(\\Omega(\\boldsymbol{\\beta})\\) mide complejidad;\n\\(\\lambda\\geq 0\\) controla la intensidad de regularización.\n\n\nCuando\n\\[\n\\lambda=0,\n\\]\nse recupera el modelo sin penalización.\nCuando \\(\\lambda\\) aumenta, la penalización adquiere mayor peso.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
     ]
   },
   {
-    "objectID": "aprendizaje/regularizacion.html#interpretación-del-parámetro",
-    "href": "aprendizaje/regularizacion.html#interpretación-del-parámetro",
+    "objectID": "aprendizaje/regularizacion.html#interpretación-del-parámetro-de-regularización",
+    "href": "aprendizaje/regularizacion.html#interpretación-del-parámetro-de-regularización",
     "title": "12  Regularización y control de la complejidad",
-    "section": "12.6 Interpretación del parámetro ()",
-    "text": "12.6 Interpretación del parámetro ()\nUn valor pequeño de ():\n\npermite mayor flexibilidad;\nreduce sesgo;\npuede aumentar varianza.\n\nUn valor grande:\n\nreduce la magnitud de los coeficientes;\naumenta estabilidad;\npuede aumentar sesgo;\npuede producir subajuste.",
+    "section": "12.6 Interpretación del parámetro de regularización",
+    "text": "12.6 Interpretación del parámetro de regularización\nUn valor pequeño de \\(\\lambda\\):\n\npermite mayor flexibilidad;\nreduce sesgo;\npuede aumentar varianza.\n\nUn valor grande:\n\nreduce la magnitud de los coeficientes;\naumenta estabilidad;\npuede aumentar sesgo;\npuede producir subajuste.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4531,7 +4531,7 @@
     "href": "aprendizaje/regularizacion.html#formulación-restringida",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.7 Formulación restringida",
-    "text": "12.7 Formulación restringida\nEl problema penalizado puede relacionarse con\n[ _{} L() ]\nsujeto a\n[ () t. ]\nExiste una correspondencia entre () y (t), bajo condiciones regulares.\nLa forma penalizada utiliza (); la forma restringida limita directamente la complejidad.",
+    "text": "12.7 Formulación restringida\nEl problema penalizado puede relacionarse con\n\\[\n\\min_{\\boldsymbol{\\beta}}\nL(\\boldsymbol{\\beta})\n\\]\nsujeto a\n\\[\n\\Omega(\\boldsymbol{\\beta})\n\\leq t.\n\\]\nExiste una correspondencia entre \\(\\lambda\\) y \\(t\\), bajo condiciones regulares.\nLa forma penalizada utiliza \\(\\lambda\\); la forma restringida limita directamente la complejidad.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4542,7 +4542,7 @@
     "href": "aprendizaje/regularizacion.html#regresión-ridge",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.8 Regresión ridge",
-    "text": "12.8 Regresión ridge\n\nDefinición 12.2 La regresión ridge minimiza\n[ J_{ridge}() = | - |_2^2 + | |_2^2. ]\n\nLa penalización es\n[ | |2^2 = {j=1}^{p} _j^2. ]\nHabitualmente el intercepto no se penaliza.",
+    "text": "12.8 Regresión ridge\n\nDefinición 12.2 La regresión ridge minimiza\n\\[\nJ_{ridge}(\\boldsymbol{\\beta})\n=\n\\left\\|\n\\mathbf{y}\n-\n\\mathbf{X}\\boldsymbol{\\beta}\n\\right\\|_2^2\n+\n\\lambda\n\\left\\|\n\\boldsymbol{\\beta}\n\\right\\|_2^2.\n\\]\n\nLa penalización es\n\\[\n\\left\\|\n\\boldsymbol{\\beta}\n\\right\\|_2^2\n=\n\\sum_{j=1}^{p}\n\\beta_j^2.\n\\]\nHabitualmente el intercepto no se penaliza.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4553,7 +4553,7 @@
     "href": "aprendizaje/regularizacion.html#forma-matricial-de-ridge",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.9 Forma matricial de ridge",
-    "text": "12.9 Forma matricial de ridge\nLa función objetivo puede escribirse como\n[ J_{ridge}() = (-)^{T} (-) + ^{T}. ]",
+    "text": "12.9 Forma matricial de ridge\nLa función objetivo puede escribirse como\n\\[\nJ_{ridge}(\\boldsymbol{\\beta})\n=\n(\\mathbf{y}-\\mathbf{X}\\boldsymbol{\\beta})^{\\mathsf T}\n(\\mathbf{y}-\\mathbf{X}\\boldsymbol{\\beta})\n+\n\\lambda\n\\boldsymbol{\\beta}^{\\mathsf T}\\boldsymbol{\\beta}.\n\\]",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4564,7 +4564,7 @@
     "href": "aprendizaje/regularizacion.html#derivación-del-estimador-ridge",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.10 Derivación del estimador ridge",
-    "text": "12.10 Derivación del estimador ridge\nDerivando respecto de (),\n[ J_{ridge} = -2^{T} (-) + 2. ]\nIgualando a cero,\n[ -2^{T} + 2^{T} + 2 = . ]\nEntonces,\n[ ( ^{T} + ) = ^{T}. ]\nPor tanto,\n[ _{ridge} = ( ^{T} + )^{-1} ^{T}. ]",
+    "text": "12.10 Derivación del estimador ridge\nDerivando respecto de \\(\\boldsymbol{\\beta}\\),\n\\[\n\\nabla J_{ridge}\n=\n-2\\mathbf{X}^{\\mathsf T}\n(\\mathbf{y}-\\mathbf{X}\\boldsymbol{\\beta})\n+\n2\\lambda\\boldsymbol{\\beta}.\n\\]\nIgualando a cero,\n\\[\n-2\\mathbf{X}^{\\mathsf T}\\mathbf{y}\n+\n2\\mathbf{X}^{\\mathsf T}\\mathbf{X}\\boldsymbol{\\beta}\n+\n2\\lambda\\boldsymbol{\\beta}\n=\n\\mathbf{0}.\n\\]\nEntonces,\n\\[\n\\left(\n\\mathbf{X}^{\\mathsf T}\\mathbf{X}\n+\n\\lambda\\mathbf{I}\n\\right)\n\\boldsymbol{\\beta}\n=\n\\mathbf{X}^{\\mathsf T}\\mathbf{y}.\n\\]\nPor tanto,\n\\[\n\\widehat{\\boldsymbol{\\beta}}_{ridge}\n=\n\\left(\n\\mathbf{X}^{\\mathsf T}\\mathbf{X}\n+\n\\lambda\\mathbf{I}\n\\right)^{-1}\n\\mathbf{X}^{\\mathsf T}\\mathbf{y}.\n\\]",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4575,7 +4575,7 @@
     "href": "aprendizaje/regularizacion.html#efecto-sobre-la-invertibilidad",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.11 Efecto sobre la invertibilidad",
-    "text": "12.11 Efecto sobre la invertibilidad\nIncluso si\n[ ^{T} ]\nes singular, para (&gt;0),\n[ ^{T} + ]\nes definida positiva y, por tanto, invertible.\nEsta es una ventaja fundamental de ridge.",
+    "text": "12.11 Efecto sobre la invertibilidad\nIncluso si\n\\[\n\\mathbf{X}^{\\mathsf T}\\mathbf{X}\n\\]\nes singular, para \\(\\lambda&gt;0\\),\n\\[\n\\mathbf{X}^{\\mathsf T}\\mathbf{X}\n+\n\\lambda\\mathbf{I}\n\\]\nes definida positiva y, por tanto, invertible.\nEsta es una ventaja fundamental de ridge.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4586,7 +4586,7 @@
     "href": "aprendizaje/regularizacion.html#interpretación-espectral",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.12 Interpretación espectral",
-    "text": "12.12 Interpretación espectral\nSupóngase que\n[ ^{T} = ^{T}, ]\ndonde\n[ = (_1,,_p). ]\nEntonces,\n[ ( ^{T} + )^{-1} = ( ) ^{T}. ]\nRidge reduce con mayor intensidad las direcciones asociadas a valores propios pequeños.",
+    "text": "12.12 Interpretación espectral\nSupóngase que\n\\[\n\\mathbf{X}^{\\mathsf T}\\mathbf{X}\n=\n\\mathbf{Q}\n\\boldsymbol{\\Lambda}\n\\mathbf{Q}^{\\mathsf T},\n\\]\ndonde\n\\[\n\\boldsymbol{\\Lambda}\n=\n\\operatorname{diag}\n(\\mu_1,\\ldots,\\mu_p).\n\\]\nEntonces,\n\\[\n\\left(\n\\mathbf{X}^{\\mathsf T}\\mathbf{X}\n+\n\\lambda\\mathbf{I}\n\\right)^{-1}\n=\n\\mathbf{Q}\n\\operatorname{diag}\n\\left(\n\\frac{1}{\\mu_j+\\lambda}\n\\right)\n\\mathbf{Q}^{\\mathsf T}.\n\\]\nRidge reduce con mayor intensidad las direcciones asociadas a valores propios pequeños.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4597,7 +4597,7 @@
     "href": "aprendizaje/regularizacion.html#factores-de-contracción",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.13 Factores de contracción",
-    "text": "12.13 Factores de contracción\nEn las coordenadas principales, el factor de contracción es\n[ . ]\nSe cumple\n[ 0 &lt; 1. ]\nCuando (_j) es pequeño, la contracción es mayor.",
+    "text": "12.13 Factores de contracción\nEn las coordenadas principales, el factor de contracción es\n\\[\n\\frac{\\mu_j}{\\mu_j+\\lambda}.\n\\]\nSe cumple\n\\[\n0\n\\leq\n\\frac{\\mu_j}{\\mu_j+\\lambda}\n&lt;\n1.\n\\]\nCuando \\(\\mu_j\\) es pequeño, la contracción es mayor.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4608,7 +4608,7 @@
     "href": "aprendizaje/regularizacion.html#sesgo-de-ridge",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.14 Sesgo de ridge",
-    "text": "12.14 Sesgo de ridge\nCondicionado a (),\n[ [ _{ridge}] = ( ^{T} + )^{-1} ^{T} . ]\nPor tanto, ridge es sesgado cuando (&gt;0).",
+    "text": "12.14 Sesgo de ridge\nCondicionado a \\(\\mathbf{X}\\),\n\\[\n\\mathbb{E}\n[\n\\widehat{\\boldsymbol{\\beta}}_{ridge}\n]\n=\n\\left(\n\\mathbf{X}^{\\mathsf T}\\mathbf{X}\n+\n\\lambda\\mathbf{I}\n\\right)^{-1}\n\\mathbf{X}^{\\mathsf T}\\mathbf{X}\n\\boldsymbol{\\beta}.\n\\]\nPor tanto, ridge es sesgado cuando \\(\\lambda&gt;0\\).",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4619,7 +4619,7 @@
     "href": "aprendizaje/regularizacion.html#varianza-de-ridge",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.15 Varianza de ridge",
-    "text": "12.15 Varianza de ridge\nSi\n[ () = ^2, ]\nentonces\n[ ( _{ridge} ) = ^2 ( ^{T} + )^{-1} ^{T} ( ^{T} + )^{-1}. ]\nRidge introduce sesgo, pero puede reducir considerablemente la varianza.",
+    "text": "12.15 Varianza de ridge\nSi\n\\[\n\\operatorname{Var}(\\boldsymbol{\\varepsilon})\n=\n\\sigma^2\\mathbf{I},\n\\]\nentonces\n\\[\n\\operatorname{Var}\n(\n\\widehat{\\boldsymbol{\\beta}}_{ridge}\n)\n=\n\\sigma^2\n\\left(\n\\mathbf{X}^{\\mathsf T}\\mathbf{X}\n+\n\\lambda\\mathbf{I}\n\\right)^{-1}\n\\mathbf{X}^{\\mathsf T}\\mathbf{X}\n\\left(\n\\mathbf{X}^{\\mathsf T}\\mathbf{X}\n+\n\\lambda\\mathbf{I}\n\\right)^{-1}.\n\\]\nRidge introduce sesgo, pero puede reducir considerablemente la varianza.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4641,7 +4641,7 @@
     "href": "aprendizaje/regularizacion.html#geometría-de-ridge",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.17 Geometría de ridge",
-    "text": "12.17 Geometría de ridge\nLa forma restringida es\n[ _{} | - |_2^2 ]\nsujeto a\n[ _{j=1}^{p} _j^2 t. ]\nLa región factible es una esfera o circunferencia (L_2).\nLa solución aparece donde una curva de nivel de la pérdida toca la región restringida.",
+    "text": "12.17 Geometría de ridge\nLa forma restringida es\n\\[\n\\min_{\\boldsymbol{\\beta}}\n\\left\\|\n\\mathbf{y}\n-\n\\mathbf{X}\\boldsymbol{\\beta}\n\\right\\|_2^2\n\\]\nsujeto a\n\\[\n\\sum_{j=1}^{p}\n\\beta_j^2\n\\leq\nt.\n\\]\nLa región factible es una esfera o circunferencia \\(L_2\\).\nLa solución aparece donde una curva de nivel de la pérdida toca la región restringida.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4652,7 +4652,7 @@
     "href": "aprendizaje/regularizacion.html#estandarización",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.18 Estandarización",
-    "text": "12.18 Estandarización\nRidge depende de la escala de las variables.\nAntes de ajustar, suele utilizarse\n[ z_{ij} = . ]\nSin estandarización, las variables con escalas grandes reciben una penalización relativa diferente.",
+    "text": "12.18 Estandarización\nRidge depende de la escala de las variables.\nAntes de ajustar, suele utilizarse\n\\[\nz_{ij}\n=\n\\frac{\nx_{ij}-\\overline{x}_j\n}{\ns_j\n}.\n\\]\nSin estandarización, las variables con escalas grandes reciben una penalización relativa diferente.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4663,7 +4663,7 @@
     "href": "aprendizaje/regularizacion.html#lasso",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.19 LASSO",
-    "text": "12.19 LASSO\n\nDefinición 12.3 LASSO minimiza\n[ J_{lasso}() = | - |_2^2 + | |_1. ]\n\nLa norma (L_1) es\n[ | |1 = {j=1}^{p} |_j|. ]",
+    "text": "12.19 LASSO\n\nDefinición 12.3 LASSO minimiza\n\\[\nJ_{lasso}(\\boldsymbol{\\beta})\n=\n\\left\\|\n\\mathbf{y}\n-\n\\mathbf{X}\\boldsymbol{\\beta}\n\\right\\|_2^2\n+\n\\lambda\n\\left\\|\n\\boldsymbol{\\beta}\n\\right\\|_1.\n\\]\n\nLa norma \\(L_1\\) es\n\\[\n\\left\\|\n\\boldsymbol{\\beta}\n\\right\\|_1\n=\n\\sum_{j=1}^{p}\n|\\beta_j|.\n\\]",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4674,7 +4674,7 @@
     "href": "aprendizaje/regularizacion.html#forma-restringida-de-lasso",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.20 Forma restringida de LASSO",
-    "text": "12.20 Forma restringida de LASSO\n[ _{} | - |_2^2 ]\nsujeto a\n[ _{j=1}^{p} |_j| t. ]",
+    "text": "12.20 Forma restringida de LASSO\n\\[\n\\min_{\\boldsymbol{\\beta}}\n\\left\\|\n\\mathbf{y}\n-\n\\mathbf{X}\\boldsymbol{\\beta}\n\\right\\|_2^2\n\\]\nsujeto a\n\\[\n\\sum_{j=1}^{p}\n|\\beta_j|\n\\leq\nt.\n\\]",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4685,7 +4685,7 @@
     "href": "aprendizaje/regularizacion.html#no-diferenciabilidad",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.21 No diferenciabilidad",
-    "text": "12.21 No diferenciabilidad\nLa función\n[ || ]\nno es diferenciable en\n[ . ]\nPor tanto, LASSO no posee una solución matricial cerrada análoga a ridge.\nSe utilizan métodos como:\n\ndescenso por coordenadas;\nsubgradientes;\nLARS;\nmétodos proximales.",
+    "text": "12.21 No diferenciabilidad\nLa función\n\\[\n|\\beta|\n\\]\nno es diferenciable en\n\\[\n\\beta=0.\n\\]\nPor tanto, LASSO no posee una solución matricial cerrada análoga a ridge.\nSe utilizan métodos como:\n\ndescenso por coordenadas;\nsubgradientes;\nLARS;\nmétodos proximales.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4696,7 +4696,7 @@
     "href": "aprendizaje/regularizacion.html#subgradiente",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.22 Subgradiente",
-    "text": "12.22 Subgradiente\nPara\n[ g()=||, ]\nel subgradiente es\n[ g() =\n\\[\\begin{cases}\n\\{1\\}, & \\beta&gt;0,\\\\\n[-1,1], & \\beta=0,\\\\\n\\{-1\\}, & \\beta&lt;0.\n\\end{cases}\\]\n]\nLas condiciones óptimas se expresan mediante subgradientes.",
+    "text": "12.22 Subgradiente\nPara\n\\[\ng(\\beta)=|\\beta|,\n\\]\nel subgradiente es\n\\[\n\\partial g(\\beta)\n=\n\\begin{cases}\n\\{1\\}, & \\beta&gt;0,\\\\\n[-1,1], & \\beta=0,\\\\\n\\{-1\\}, & \\beta&lt;0.\n\\end{cases}\n\\]\nLas condiciones óptimas se expresan mediante subgradientes.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4707,7 +4707,7 @@
     "href": "aprendizaje/regularizacion.html#operador-soft-thresholding",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.23 Operador soft-thresholding",
-    "text": "12.23 Operador soft-thresholding\n\nDefinición 12.4 El operador de umbral suave se define como\n[ S(z,) = (z) { |z|-, 0 }. ]\n\nEste operador reduce la magnitud y puede producir exactamente cero.",
+    "text": "12.23 Operador soft-thresholding\n\nDefinición 12.4 El operador de umbral suave se define como\n\\[\nS(z,\\gamma)\n=\n\\operatorname{sign}(z)\n\\max\n\\{\n|z|-\\gamma,\n0\n\\}.\n\\]\n\nEste operador reduce la magnitud y puede producir exactamente cero.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4718,7 +4718,7 @@
     "href": "aprendizaje/regularizacion.html#caso-ortonormal",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.24 Caso ortonormal",
-    "text": "12.24 Caso ortonormal\nSi\n[ ^{T} = , ]\nla solución LASSO tiene la forma\n[ j = S ( {j,OLS}, ), ]\nsegún la convención de escala utilizada.",
+    "text": "12.24 Caso ortonormal\nSi\n\\[\n\\mathbf{X}^{\\mathsf T}\\mathbf{X}\n=\n\\mathbf{I},\n\\]\nla solución LASSO tiene la forma\n\\[\n\\widehat{\\beta}_j\n=\nS\n\\left(\n\\widehat{\\beta}_{j,OLS},\n\\frac{\\lambda}{2}\n\\right),\n\\]\nsegún la convención de escala utilizada.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4729,7 +4729,7 @@
     "href": "aprendizaje/regularizacion.html#geometría-de-lasso",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.25 Geometría de LASSO",
-    "text": "12.25 Geometría de LASSO\nLa región\n[ | |_1 t ]\ntiene forma de rombo en dos dimensiones.\nSus vértices están sobre los ejes coordenados. Las curvas de nivel de la pérdida tienen mayor probabilidad de tocar un vértice.\nPor ello, LASSO produce coeficientes exactamente iguales a cero.",
+    "text": "12.25 Geometría de LASSO\nLa región\n\\[\n\\left\\|\n\\boldsymbol{\\beta}\n\\right\\|_1\n\\leq\nt\n\\]\ntiene forma de rombo en dos dimensiones.\nSus vértices están sobre los ejes coordenados. Las curvas de nivel de la pérdida tienen mayor probabilidad de tocar un vértice.\nPor ello, LASSO produce coeficientes exactamente iguales a cero.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4740,7 +4740,7 @@
     "href": "aprendizaje/regularizacion.html#selección-de-variables",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.26 Selección de variables",
-    "text": "12.26 Selección de variables\nSi\n[ _j=0, ]\nla variable (j) queda excluida del modelo.\nLASSO realiza simultáneamente:\n\najuste;\ncontracción;\nselección de variables.",
+    "text": "12.26 Selección de variables\nSi\n\\[\n\\widehat{\\beta}_j=0,\n\\]\nla variable \\(j\\) queda excluida del modelo.\nLASSO realiza simultáneamente:\n\najuste;\ncontracción;\nselección de variables.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4751,7 +4751,7 @@
     "href": "aprendizaje/regularizacion.html#limitaciones-de-lasso",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.27 Limitaciones de LASSO",
-    "text": "12.27 Limitaciones de LASSO\nLASSO puede presentar dificultades cuando:\n\nlas variables están fuertemente correlacionadas;\n(pn);\nexisten grupos de variables similares;\nla señal está distribuida entre muchas variables pequeñas.\n\nEn grupos correlacionados, puede seleccionar una variable y excluir otras de forma inestable.",
+    "text": "12.27 Limitaciones de LASSO\nLASSO puede presentar dificultades cuando:\n\nlas variables están fuertemente correlacionadas;\n\\(p\\gg n\\);\nexisten grupos de variables similares;\nla señal está distribuida entre muchas variables pequeñas.\n\nEn grupos correlacionados, puede seleccionar una variable y excluir otras de forma inestable.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4762,7 +4762,7 @@
     "href": "aprendizaje/regularizacion.html#elastic-net",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.28 Elastic net",
-    "text": "12.28 Elastic net\n\nDefinición 12.5 Elastic net combina penalizaciones (L_1) y (L_2):\n[ J_{EN}() = | - |_2^2 + _1 | |_1 + _2 | |_2^2. ]\n\nOtra parametrización es\n[ J_{EN}() = L() + , ]\ncon\n[ 0. ]",
+    "text": "12.28 Elastic net\n\nDefinición 12.5 Elastic net combina penalizaciones \\(L_1\\) y \\(L_2\\):\n\\[\nJ_{EN}(\\boldsymbol{\\beta})\n=\n\\left\\|\n\\mathbf{y}\n-\n\\mathbf{X}\\boldsymbol{\\beta}\n\\right\\|_2^2\n+\n\\lambda_1\n\\left\\|\n\\boldsymbol{\\beta}\n\\right\\|_1\n+\n\\lambda_2\n\\left\\|\n\\boldsymbol{\\beta}\n\\right\\|_2^2.\n\\]\n\nOtra parametrización es\n\\[\nJ_{EN}(\\boldsymbol{\\beta})\n=\nL(\\boldsymbol{\\beta})\n+\n\\lambda\n\\left[\n\\alpha\n\\left\\|\n\\boldsymbol{\\beta}\n\\right\\|_1\n+\n(1-\\alpha)\n\\left\\|\n\\boldsymbol{\\beta}\n\\right\\|_2^2\n\\right],\n\\]\ncon\n\\[\n0\\leq\\alpha\\leq 1.\n\\]",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4773,7 +4773,7 @@
     "href": "aprendizaje/regularizacion.html#casos-particulares",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.29 Casos particulares",
-    "text": "12.29 Casos particulares\nSi\n[ , ]\nse obtiene LASSO.\nSi\n[ , ]\nse obtiene ridge.\nSi\n[ 0&lt;&lt;1, ]\nse obtiene elastic net.",
+    "text": "12.29 Casos particulares\nSi\n\\[\n\\alpha=1,\n\\]\nse obtiene LASSO.\nSi\n\\[\n\\alpha=0,\n\\]\nse obtiene ridge.\nSi\n\\[\n0&lt;\\alpha&lt;1,\n\\]\nse obtiene elastic net.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4784,7 +4784,7 @@
     "href": "aprendizaje/regularizacion.html#ventaja-de-elastic-net",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.30 Ventaja de elastic net",
-    "text": "12.30 Ventaja de elastic net\nElastic net puede:\n\nseleccionar variables;\nestabilizar grupos correlacionados;\nfuncionar mejor cuando (p&gt;n);\ncombinar esparsidad y estabilidad.",
+    "text": "12.30 Ventaja de elastic net\nElastic net puede:\n\nseleccionar variables;\nestabilizar grupos correlacionados;\nfuncionar mejor cuando \\(p&gt;n\\);\ncombinar esparsidad y estabilidad.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4795,29 +4795,29 @@
     "href": "aprendizaje/regularizacion.html#caminos-de-regularización",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.31 Caminos de regularización",
-    "text": "12.31 Caminos de regularización\nAl variar (), se obtiene una trayectoria\n[ (). ]\nCuando (), la solución se aproxima al modelo no regularizado.\nCuando (), los coeficientes tienden a cero.",
+    "text": "12.31 Caminos de regularización\nAl variar \\(\\lambda\\), se obtiene una trayectoria\n\\[\n\\widehat{\\boldsymbol{\\beta}}(\\lambda).\n\\]\nCuando \\(\\lambda\\to 0\\), la solución se aproxima al modelo no regularizado.\nCuando \\(\\lambda\\to\\infty\\), los coeficientes tienden a cero.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
     ]
   },
   {
-    "objectID": "aprendizaje/regularizacion.html#section",
-    "href": "aprendizaje/regularizacion.html#section",
+    "objectID": "aprendizaje/regularizacion.html#valor-máximo-del-parámetro-de-regularización",
+    "href": "aprendizaje/regularizacion.html#valor-máximo-del-parámetro-de-regularización",
     "title": "12  Regularización y control de la complejidad",
-    "section": "12.32 (_{})",
-    "text": "12.32 (_{})\nEn LASSO existe un valor suficientemente grande\n[ _{} ]\npara el cual todos los coeficientes penalizados son cero.\nLos algoritmos suelen construir una secuencia decreciente desde (_{}).",
+    "section": "12.32 Valor máximo del parámetro de regularización",
+    "text": "12.32 Valor máximo del parámetro de regularización\nEn LASSO existe un valor suficientemente grande\n\\[\n\\lambda_{\\max}\n\\]\npara el cual todos los coeficientes penalizados son cero.\nLos algoritmos suelen construir una secuencia decreciente desde \\(\\lambda_{\\max}\\).",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
     ]
   },
   {
-    "objectID": "aprendizaje/regularizacion.html#selección-de",
-    "href": "aprendizaje/regularizacion.html#selección-de",
+    "objectID": "aprendizaje/regularizacion.html#selección-del-parámetro-de-regularización",
+    "href": "aprendizaje/regularizacion.html#selección-del-parámetro-de-regularización",
     "title": "12  Regularización y control de la complejidad",
-    "section": "12.33 Selección de ()",
-    "text": "12.33 Selección de ()\nLa práctica habitual es seleccionar () mediante validación cruzada:\n[ = _{} CV(). ]\nTambién puede utilizarse la regla de un error estándar para elegir una solución más regularizada y parsimoniosa.",
+    "section": "12.33 Selección del parámetro de regularización",
+    "text": "12.33 Selección del parámetro de regularización\nLa práctica habitual es seleccionar \\(\\lambda\\) mediante validación cruzada:\n\\[\n\\widehat{\\lambda}\n=\n\\arg\\min_{\\lambda}\nCV(\\lambda).\n\\]\nTambién puede utilizarse la regla de un error estándar para elegir una solución más regularizada y parsimoniosa.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4828,7 +4828,7 @@
     "href": "aprendizaje/regularizacion.html#ridge-como-estimación-bayesiana",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.34 Ridge como estimación bayesiana",
-    "text": "12.34 Ridge como estimación bayesiana\nSupóngase el modelo gaussiano\n[ N( , ^2 ). ]\nConsidérese la previa\n[ N( , ^2 ). ]\nEl estimador MAP minimiza\n[ | - |_2^2 + | |_2^2. ]\nPor tanto, ridge corresponde a una previa normal.",
+    "text": "12.34 Ridge como estimación bayesiana\nSupóngase el modelo gaussiano\n\\[\n\\mathbf{y}\n\\mid\n\\boldsymbol{\\beta}\n\\sim\nN(\n\\mathbf{X}\\boldsymbol{\\beta},\n\\sigma^2\\mathbf{I}\n).\n\\]\nConsidérese la previa\n\\[\n\\boldsymbol{\\beta}\n\\sim\nN(\n\\mathbf{0},\n\\tau^2\\mathbf{I}\n).\n\\]\nEl estimador MAP minimiza\n\\[\n\\frac{1}{2\\sigma^2}\n\\left\\|\n\\mathbf{y}\n-\n\\mathbf{X}\\boldsymbol{\\beta}\n\\right\\|_2^2\n+\n\\frac{1}{2\\tau^2}\n\\left\\|\n\\boldsymbol{\\beta}\n\\right\\|_2^2.\n\\]\nPor tanto, ridge corresponde a una previa normal.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4839,7 +4839,7 @@
     "href": "aprendizaje/regularizacion.html#lasso-como-estimación-bayesiana",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.35 LASSO como estimación bayesiana",
-    "text": "12.35 LASSO como estimación bayesiana\nSi la previa de cada coeficiente es Laplace,\n[ p(_j) ( - ), ]\nel estimador MAP conduce a una penalización (L_1).",
+    "text": "12.35 LASSO como estimación bayesiana\nSi la previa de cada coeficiente es Laplace,\n\\[\np(\\beta_j)\n\\propto\n\\exp\n\\left(\n-\\frac{|\\beta_j|}{b}\n\\right),\n\\]\nel estimador MAP conduce a una penalización \\(L_1\\).",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4850,7 +4850,7 @@
     "href": "aprendizaje/regularizacion.html#regularización-en-regresión-logística",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.36 Regularización en regresión logística",
-    "text": "12.36 Regularización en regresión logística\nLa pérdida logística penalizada es\n[ J() = - _{i=1}^{n} + (). ]\nPuede utilizarse:\n\nridge;\nLASSO;\nelastic net.",
+    "text": "12.36 Regularización en regresión logística\nLa pérdida logística penalizada es\n\\[\nJ(\\boldsymbol{\\beta})\n=\n-\n\\sum_{i=1}^{n}\n\\left[\ny_i\\log\\pi_i\n+\n(1-y_i)\\log(1-\\pi_i)\n\\right]\n+\n\\lambda\n\\Omega(\\boldsymbol{\\beta}).\n\\]\nPuede utilizarse:\n\nridge;\nLASSO;\nelastic net.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4861,7 +4861,7 @@
     "href": "aprendizaje/regularizacion.html#regularización-en-redes-neuronales",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.37 Regularización en redes neuronales",
-    "text": "12.37 Regularización en redes neuronales\n\n12.37.1 Weight decay\nSe añade\n[ _l | ^{(l)} |_F^2. ]\n\n\n12.37.2 Dropout\nDurante el entrenamiento, algunas activaciones se eliminan aleatoriamente.\n\n\n12.37.3 Early stopping\nSe detiene el entrenamiento cuando el error de validación deja de mejorar.\n\n\n12.37.4 Data augmentation\nSe generan transformaciones de los datos para reducir sobreajuste.",
+    "text": "12.37 Regularización en redes neuronales\n\n12.37.1 Weight decay\nSe añade\n\\[\n\\lambda\n\\sum_l\n\\left\\|\n\\mathbf{W}^{(l)}\n\\right\\|_F^2.\n\\]\n\n\n12.37.2 Dropout\nDurante el entrenamiento, algunas activaciones se eliminan aleatoriamente.\n\n\n12.37.3 Early stopping\nSe detiene el entrenamiento cuando el error de validación deja de mejorar.\n\n\n12.37.4 Data augmentation\nSe generan transformaciones de los datos para reducir sobreajuste.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4894,7 +4894,7 @@
     "href": "aprendizaje/regularizacion.html#grados-de-libertad-efectivos",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.40 Grados de libertad efectivos",
-    "text": "12.40 Grados de libertad efectivos\nEn ridge, los valores ajustados son\n[ = _{}, ]\ndonde\n[ _{} = ( ^{T} + )^{-1} ^{T}. ]\nLos grados de libertad efectivos son\n[ df() = ( _{} ). ]\nAl aumentar (), disminuyen los grados de libertad efectivos.",
+    "text": "12.40 Grados de libertad efectivos\nEn ridge, los valores ajustados son\n\\[\n\\widehat{\\mathbf{y}}\n=\n\\mathbf{H}_{\\lambda}\\mathbf{y},\n\\]\ndonde\n\\[\n\\mathbf{H}_{\\lambda}\n=\n\\mathbf{X}\n\\left(\n\\mathbf{X}^{\\mathsf T}\\mathbf{X}\n+\n\\lambda\\mathbf{I}\n\\right)^{-1}\n\\mathbf{X}^{\\mathsf T}.\n\\]\nLos grados de libertad efectivos son\n\\[\ndf(\\lambda)\n=\n\\operatorname{tr}\n(\n\\mathbf{H}_{\\lambda}\n).\n\\]\nAl aumentar \\(\\lambda\\), disminuyen los grados de libertad efectivos.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4927,7 +4927,7 @@
     "href": "aprendizaje/regularizacion.html#group-lasso",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.43 Group LASSO",
-    "text": "12.43 Group LASSO\nSi los parámetros se agrupan en (G) bloques,\n[ _1,,_G, ]\nla penalización es\n[ _{g=1}^{G} w_g | _g |_2. ]\nPuede eliminar grupos completos de variables.",
+    "text": "12.43 Group LASSO\nSi los parámetros se agrupan en \\(G\\) bloques,\n\\[\n\\boldsymbol{\\beta}_1,\\ldots,\\boldsymbol{\\beta}_G,\n\\]\nla penalización es\n\\[\n\\sum_{g=1}^{G}\nw_g\n\\left\\|\n\\boldsymbol{\\beta}_g\n\\right\\|_2.\n\\]\nPuede eliminar grupos completos de variables.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4938,7 +4938,7 @@
     "href": "aprendizaje/regularizacion.html#regularización-adaptativa",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.44 Regularización adaptativa",
-    "text": "12.44 Regularización adaptativa\nAdaptive LASSO utiliza pesos:\n[ _{j=1}^{p} w_j|_j|. ]\nLos pesos pueden depender de estimaciones iniciales.\nEsto permite penalizar menos los coeficientes aparentemente importantes.",
+    "text": "12.44 Regularización adaptativa\nAdaptive LASSO utiliza pesos:\n\\[\n\\sum_{j=1}^{p}\nw_j|\\beta_j|.\n\\]\nLos pesos pueden depender de estimaciones iniciales.\nEsto permite penalizar menos los coeficientes aparentemente importantes.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4971,7 +4971,7 @@
     "href": "aprendizaje/regularizacion.html#ejemplo-numérico-ridge",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.47 Ejemplo numérico ridge",
-    "text": "12.47 Ejemplo numérico ridge\nConsidere\n[ ^{T} =\n\\[\\begin{pmatrix}\n4 & 3\\\\\n3 & 2.5\n\\end{pmatrix}\\]\n, ]\ny\n[ ^{T} =\n\\[\\begin{pmatrix}\n10\\\\\n8\n\\end{pmatrix}\\]\n. ]\nCon\n[ , ]\nse obtiene\n[ ^{T} + =\n\\[\\begin{pmatrix}\n5 & 3\\\\\n3 & 3.5\n\\end{pmatrix}\\]\n. ]\nLa solución ridge es\n[ _{ridge} =\n\\[\\begin{pmatrix}\n5 & 3\\\\\n3 & 3.5\n\\end{pmatrix}\\]\n^{-1}\n\\[\\begin{pmatrix}\n10\\\\\n8\n\\end{pmatrix}\\]\n. ]\nEste sistema es más estable que el sistema sin penalización.",
+    "text": "12.47 Ejemplo numérico ridge\nConsidere\n\\[\n\\mathbf{X}^{\\mathsf T}\\mathbf{X}\n=\n\\begin{pmatrix}\n4 & 3\\\\\n3 & 2.5\n\\end{pmatrix},\n\\]\ny\n\\[\n\\mathbf{X}^{\\mathsf T}\\mathbf{y}\n=\n\\begin{pmatrix}\n10\\\\\n8\n\\end{pmatrix}.\n\\]\nCon\n\\[\n\\lambda=1,\n\\]\nse obtiene\n\\[\n\\mathbf{X}^{\\mathsf T}\\mathbf{X}\n+\n\\lambda\\mathbf{I}\n=\n\\begin{pmatrix}\n5 & 3\\\\\n3 & 3.5\n\\end{pmatrix}.\n\\]\nLa solución ridge es\n\\[\n\\widehat{\\boldsymbol{\\beta}}_{ridge}\n=\n\\begin{pmatrix}\n5 & 3\\\\\n3 & 3.5\n\\end{pmatrix}^{-1}\n\\begin{pmatrix}\n10\\\\\n8\n\\end{pmatrix}.\n\\]\nEste sistema es más estable que el sistema sin penalización.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4982,7 +4982,7 @@
     "href": "aprendizaje/regularizacion.html#comparación-conceptual",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.48 Comparación conceptual",
-    "text": "12.48 Comparación conceptual\n\n\n\nMétodo\nPenalización\nSelección de variables\nEstabilidad\n\n\n\n\nRidge\n(L_2)\nNo exacta\nAlta\n\n\nLASSO\n(L_1)\nSí\nPuede ser inestable con correlación\n\n\nElastic net\n(L_1+L_2)\nSí\nMayor con variables correlacionadas",
+    "text": "12.48 Comparación conceptual\n\n\n\nMétodo\nPenalización\nSelección de variables\nEstabilidad\n\n\n\n\nRidge\n\\(L_2\\)\nNo exacta\nAlta\n\n\nLASSO\n\\(L_1\\)\nSí\nPuede ser inestable con correlación\n\n\nElastic net\n\\(L_1+L_2\\)\nSí\nMayor con variables correlacionadas",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -4993,7 +4993,7 @@
     "href": "aprendizaje/regularizacion.html#errores-frecuentes",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.49 Errores frecuentes",
-    "text": "12.49 Errores frecuentes\n\nPenalizar variables sin estandarizarlas.\nPenalizar el intercepto sin intención.\nSeleccionar () usando el conjunto de prueba.\nInterpretar coeficientes LASSO como evidencia causal.\nSuponer que LASSO siempre selecciona la variable correcta.\nConfundir coeficiente pequeño con irrelevancia absoluta.\nIgnorar la inestabilidad entre variables correlacionadas.\nComparar soluciones obtenidas con escalas distintas.\nUtilizar regularización sin recalibrar el modelo cuando sea necesario.\nReportar únicamente (_{min}) sin considerar parsimonia.",
+    "text": "12.49 Errores frecuentes\n\nPenalizar variables sin estandarizarlas.\nPenalizar el intercepto sin intención.\nSeleccionar \\(\\lambda\\) usando el conjunto de prueba.\nInterpretar coeficientes LASSO como evidencia causal.\nSuponer que LASSO siempre selecciona la variable correcta.\nConfundir coeficiente pequeño con irrelevancia absoluta.\nIgnorar la inestabilidad entre variables correlacionadas.\nComparar soluciones obtenidas con escalas distintas.\nUtilizar regularización sin recalibrar el modelo cuando sea necesario.\nReportar únicamente \\(\\lambda_{min}\\) sin considerar parsimonia.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -5004,7 +5004,7 @@
     "href": "aprendizaje/regularizacion.html#ejercicios-conceptuales",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.50 Ejercicios conceptuales",
-    "text": "12.50 Ejercicios conceptuales\n\nExplique por qué ridge introduce sesgo.\n¿Cómo puede un estimador sesgado tener menor error cuadrático medio?\n¿Por qué ridge ayuda con multicolinealidad?\n¿Por qué LASSO produce coeficientes cero?\nExplique la diferencia geométrica entre (L_1) y (L_2).\n¿Qué ventaja ofrece elastic net?\n¿Por qué es necesaria la estandarización?\n¿Qué relación existe entre ridge y una previa normal?\n¿Qué relación existe entre LASSO y una previa Laplace?\nExplique la diferencia entre regularización explícita e implícita.",
+    "text": "12.50 Ejercicios conceptuales\n\nExplique por qué ridge introduce sesgo.\n¿Cómo puede un estimador sesgado tener menor error cuadrático medio?\n¿Por qué ridge ayuda con multicolinealidad?\n¿Por qué LASSO produce coeficientes cero?\nExplique la diferencia geométrica entre \\(L_1\\) y \\(L_2\\).\n¿Qué ventaja ofrece elastic net?\n¿Por qué es necesaria la estandarización?\n¿Qué relación existe entre ridge y una previa normal?\n¿Qué relación existe entre LASSO y una previa Laplace?\nExplique la diferencia entre regularización explícita e implícita.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -5015,7 +5015,7 @@
     "href": "aprendizaje/regularizacion.html#ejercicio-de-derivación-ridge",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.51 Ejercicio de derivación ridge",
-    "text": "12.51 Ejercicio de derivación ridge\nConsidere\n[ J() = (-)^{T} (-) + ^{T}. ]\n\nExpanda la expresión.\nCalcule el gradiente.\nIguale a cero.\nObtenga la solución ridge.\nExplique por qué la matriz resultante es invertible para (&gt;0).",
+    "text": "12.51 Ejercicio de derivación ridge\nConsidere\n\\[\nJ(\\boldsymbol{\\beta})\n=\n(\\mathbf{y}-\\mathbf{X}\\boldsymbol{\\beta})^{\\mathsf T}\n(\\mathbf{y}-\\mathbf{X}\\boldsymbol{\\beta})\n+\n\\lambda\n\\boldsymbol{\\beta}^{\\mathsf T}\\boldsymbol{\\beta}.\n\\]\n\nExpanda la expresión.\nCalcule el gradiente.\nIguale a cero.\nObtenga la solución ridge.\nExplique por qué la matriz resultante es invertible para \\(\\lambda&gt;0\\).",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -5026,7 +5026,7 @@
     "href": "aprendizaje/regularizacion.html#ejercicio-de-soft-thresholding",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.52 Ejercicio de soft-thresholding",
-    "text": "12.52 Ejercicio de soft-thresholding\nCalcule\n[ S(z,) ]\npara:\n\n(z=5), ();\n(z=-4), ();\n(z=1), ();\n(z=-0.5), ().\n\nInterprete cuándo el resultado es cero.",
+    "text": "12.52 Ejercicio de soft-thresholding\nCalcule\n\\[\nS(z,\\gamma)\n\\]\npara:\n\n\\(z=5\\), \\(\\gamma=2\\);\n\\(z=-4\\), \\(\\gamma=1.5\\);\n\\(z=1\\), \\(\\gamma=2\\);\n\\(z=-0.5\\), \\(\\gamma=0.5\\).\n\nInterprete cuándo el resultado es cero.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -5037,7 +5037,7 @@
     "href": "aprendizaje/regularizacion.html#ejercicio-de-validación",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.53 Ejercicio de validación",
-    "text": "12.53 Ejercicio de validación\nSe obtienen los siguientes errores:\n\n\n\n()\nError CV\n\n\n\n\n0.001\n4.80\n\n\n0.01\n4.20\n\n\n0.10\n3.95\n\n\n1.00\n4.05\n\n\n10.00\n5.30\n\n\n\n\nSeleccione ().\nExplique qué ocurre en valores muy pequeños.\nExplique qué ocurre en valores muy grandes.\nRelacione el patrón con sesgo y varianza.",
+    "text": "12.53 Ejercicio de validación\nSe obtienen los siguientes errores:\n\n\n\n\\(\\lambda\\)\nError CV\n\n\n\n\n0.001\n4.80\n\n\n0.01\n4.20\n\n\n0.10\n3.95\n\n\n1.00\n4.05\n\n\n10.00\n5.30\n\n\n\n\nSeleccione \\(\\lambda\\).\nExplique qué ocurre en valores muy pequeños.\nExplique qué ocurre en valores muy grandes.\nRelacione el patrón con sesgo y varianza.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -5059,7 +5059,7 @@
     "href": "aprendizaje/regularizacion.html#ejercicio-aplicado",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.55 Ejercicio aplicado",
-    "text": "12.55 Ejercicio aplicado\nSe desea predecir PM10 utilizando 40 variables meteorológicas y derivadas.\n\nExplique por qué puede existir multicolinealidad.\nProponga un esquema de estandarización.\nDefina un modelo ridge.\nDefina un modelo LASSO.\nDefina un modelo elastic net.\nDiseñe la selección de () y ().\nExplique qué métricas usaría.\nIndique cómo evitaría fuga de información.\nExplique cómo interpretaría los coeficientes.\nSeñale por qué la selección no implica causalidad.",
+    "text": "12.55 Ejercicio aplicado\nSe desea predecir PM10 utilizando 40 variables meteorológicas y derivadas.\n\nExplique por qué puede existir multicolinealidad.\nProponga un esquema de estandarización.\nDefina un modelo ridge.\nDefina un modelo LASSO.\nDefina un modelo elastic net.\nDiseñe la selección de \\(\\lambda\\) y \\(\\alpha\\).\nExplique qué métricas usaría.\nIndique cómo evitaría fuga de información.\nExplique cómo interpretaría los coeficientes.\nSeñale por qué la selección no implica causalidad.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -5070,7 +5070,7 @@
     "href": "aprendizaje/regularizacion.html#resumen",
     "title": "12  Regularización y control de la complejidad",
     "section": "12.56 Resumen",
-    "text": "12.56 Resumen\nEn este capítulo se estudió la regularización como mecanismo para controlar complejidad, reducir varianza y mejorar estabilidad.\nSe derivó el estimador ridge y se analizó su efecto espectral. También se formuló LASSO mediante penalización (L_1), se introdujeron subgradientes y soft-thresholding, y se explicó su capacidad de selección de variables.\nFinalmente, se desarrolló elastic net, la interpretación bayesiana, los caminos de regularización, la selección de () y extensiones como group LASSO. Estos conceptos serán fundamentales en regresión, clasificación y redes neuronales.",
+    "text": "12.56 Resumen\nEn este capítulo se estudió la regularización como mecanismo para controlar complejidad, reducir varianza y mejorar estabilidad.\nSe derivó el estimador ridge y se analizó su efecto espectral. También se formuló LASSO mediante penalización \\(L_1\\), se introdujeron subgradientes y soft-thresholding, y se explicó su capacidad de selección de variables.\nFinalmente, se desarrolló elastic net, la interpretación bayesiana, los caminos de regularización, la selección de \\(\\lambda\\) y extensiones como group LASSO. Estos conceptos serán fundamentales en regresión, clasificación y redes neuronales.",
     "crumbs": [
       "II. Fundamentos del aprendizaje automático",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Regularización y control de la complejidad</span>"
@@ -5081,7 +5081,7 @@
     "href": "regresion/regresion-lineal-simple.html",
     "title": "13  Regresión lineal simple",
     "section": "",
-    "text": "13.1 Introducción\nLa regresión lineal simple estudia la relación entre una variable explicativa (X) y una variable respuesta (Y). Su propósito es modelar cómo cambia, en promedio, la respuesta cuando cambia la variable explicativa.\nAunque se trata de uno de los modelos más sencillos, constituye la base conceptual de métodos más avanzados. En este capítulo se desarrollan la formulación probabilística, la estimación por mínimos cuadrados, las propiedades de los estimadores, la inferencia sobre los parámetros, los intervalos de confianza y predicción, el coeficiente de determinación y el análisis de residuos.",
+    "text": "13.1 Introducción\nLa regresión lineal simple estudia la relación entre una variable explicativa \\(X\\) y una variable respuesta \\(Y\\). Su propósito es modelar cómo cambia, en promedio, la respuesta cuando cambia la variable explicativa.\nAunque se trata de uno de los modelos más sencillos, constituye la base conceptual de métodos más avanzados. En este capítulo se desarrollan la formulación probabilística, la estimación por mínimos cuadrados, las propiedades de los estimadores, la inferencia sobre los parámetros, los intervalos de confianza y predicción, el coeficiente de determinación y el análisis de residuos.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5092,7 +5092,7 @@
     "href": "regresion/regresion-lineal-simple.html#objetivos",
     "title": "13  Regresión lineal simple",
     "section": "13.2 Objetivos",
-    "text": "13.2 Objetivos\nAl finalizar el capítulo, el lector podrá:\n\nformular el modelo de regresión lineal simple;\ninterpretar los parámetros (_0) y (_1);\nderivar los estimadores de mínimos cuadrados;\ninterpretar geométricamente el ajuste;\ndemostrar propiedades de insesgadez;\ncalcular varianzas de los estimadores;\nformular pruebas de hipótesis para la pendiente;\nconstruir intervalos de confianza;\nconstruir intervalos de predicción;\ninterpretar (R^2);\nanalizar residuos;\nreconocer violaciones de supuestos;\nrelacionar la regresión lineal con el aprendizaje supervisado.",
+    "text": "13.2 Objetivos\nAl finalizar el capítulo, el lector podrá:\n\nformular el modelo de regresión lineal simple;\ninterpretar los parámetros \\(\\beta_0\\) y \\(\\beta_1\\);\nderivar los estimadores de mínimos cuadrados;\ninterpretar geométricamente el ajuste;\ndemostrar propiedades de insesgadez;\ncalcular varianzas de los estimadores;\nformular pruebas de hipótesis para la pendiente;\nconstruir intervalos de confianza;\nconstruir intervalos de predicción;\ninterpretar \\(R^2\\);\nanalizar residuos;\nreconocer violaciones de supuestos;\nrelacionar la regresión lineal con el aprendizaje supervisado.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5103,7 +5103,7 @@
     "href": "regresion/regresion-lineal-simple.html#formulación-del-modelo",
     "title": "13  Regresión lineal simple",
     "section": "13.3 Formulación del modelo",
-    "text": "13.3 Formulación del modelo\nSean observaciones\n[ (x_i,y_i), i=1,,n. ]\nEl modelo de regresión lineal simple es\n[ Y_i = _0 + _1x_i + _i. ]\nAquí:\n\n(_0) es el intercepto;\n(_1) es la pendiente;\n(_i) es el error aleatorio.",
+    "text": "13.3 Formulación del modelo\nSean observaciones\n\\[\n(x_i,y_i),\n\\qquad\ni=1,\\ldots,n.\n\\]\nEl modelo de regresión lineal simple es\n\\[\nY_i\n=\n\\beta_0\n+\n\\beta_1x_i\n+\n\\varepsilon_i.\n\\]\nAquí:\n\n\\(\\beta_0\\) es el intercepto;\n\\(\\beta_1\\) es la pendiente;\n\\(\\varepsilon_i\\) es el error aleatorio.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5114,7 +5114,7 @@
     "href": "regresion/regresion-lineal-simple.html#interpretación-de-los-parámetros",
     "title": "13  Regresión lineal simple",
     "section": "13.4 Interpretación de los parámetros",
-    "text": "13.4 Interpretación de los parámetros\n\n13.4.1 Intercepto\n[ _0 ]\nrepresenta el valor esperado de (Y) cuando\n[ X=0. ]\nEsta interpretación solo es útil si (X=0) tiene sentido dentro del contexto del problema.\n\n\n13.4.2 Pendiente\n[ _1 ]\nrepresenta el cambio promedio esperado en (Y) por cada unidad adicional de (X).\nFormalmente,\n[ (YX=x) = _0+_1x. ]\nPor tanto,\n[ (YX=x) = _1. ]",
+    "text": "13.4 Interpretación de los parámetros\n\n13.4.1 Intercepto\n\\[\n\\beta_0\n\\]\nrepresenta el valor esperado de \\(Y\\) cuando\n\\[\nX=0.\n\\]\nEsta interpretación solo es útil si \\(X=0\\) tiene sentido dentro del contexto del problema.\n\n\n13.4.2 Pendiente\n\\[\n\\beta_1\n\\]\nrepresenta el cambio promedio esperado en \\(Y\\) por cada unidad adicional de \\(X\\).\nFormalmente,\n\\[\n\\mathbb{E}(Y\\mid X=x)\n=\n\\beta_0+\\beta_1x.\n\\]\nPor tanto,\n\\[\n\\frac{d}{dx}\n\\mathbb{E}(Y\\mid X=x)\n=\n\\beta_1.\n\\]",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5125,7 +5125,7 @@
     "href": "regresion/regresion-lineal-simple.html#supuestos-clásicos",
     "title": "13  Regresión lineal simple",
     "section": "13.5 Supuestos clásicos",
-    "text": "13.5 Supuestos clásicos\nSe supone:\n\n13.5.1 Linealidad\n[ (Y_ix_i) = _0+_1x_i. ]\n\n\n13.5.2 Media cero de los errores\n[ (_ix_i)=0. ]\n\n\n13.5.3 Varianza constante\n[ (_ix_i) = ^2. ]\n\n\n13.5.4 Independencia\n[ (_i,_j)=0, ij. ]\n\n\n13.5.5 Normalidad\nPara inferencia exacta,\n[ _i N(0,^2). ]\nLa normalidad no es necesaria para obtener los estimadores de mínimos cuadrados, pero sí para ciertas pruebas e intervalos exactos en muestras pequeñas.",
+    "text": "13.5 Supuestos clásicos\nSe supone:\n\n13.5.1 Linealidad\n\\[\n\\mathbb{E}(Y_i\\mid x_i)\n=\n\\beta_0+\\beta_1x_i.\n\\]\n\n\n13.5.2 Media cero de los errores\n\\[\n\\mathbb{E}(\\varepsilon_i\\mid x_i)=0.\n\\]\n\n\n13.5.3 Varianza constante\n\\[\n\\operatorname{Var}(\\varepsilon_i\\mid x_i)\n=\n\\sigma^2.\n\\]\n\n\n13.5.4 Independencia\n\\[\n\\operatorname{Cov}(\\varepsilon_i,\\varepsilon_j)=0,\n\\qquad\ni\\neq j.\n\\]\n\n\n13.5.5 Normalidad\nPara inferencia exacta,\n\\[\n\\varepsilon_i\n\\sim\nN(0,\\sigma^2).\n\\]\nLa normalidad no es necesaria para obtener los estimadores de mínimos cuadrados, pero sí para ciertas pruebas e intervalos exactos en muestras pequeñas.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5136,7 +5136,7 @@
     "href": "regresion/regresion-lineal-simple.html#función-de-regresión",
     "title": "13  Regresión lineal simple",
     "section": "13.6 Función de regresión",
-    "text": "13.6 Función de regresión\nLa función de regresión poblacional es\n[ m(x) = (YX=x) = _0+_1x. ]\nLa recta ajustada es\n[ (x) = _0 + _1x. ]",
+    "text": "13.6 Función de regresión\nLa función de regresión poblacional es\n\\[\nm(x)\n=\n\\mathbb{E}(Y\\mid X=x)\n=\n\\beta_0+\\beta_1x.\n\\]\nLa recta ajustada es\n\\[\n\\widehat{m}(x)\n=\n\\widehat{\\beta}_0\n+\n\\widehat{\\beta}_1x.\n\\]",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5147,7 +5147,7 @@
     "href": "regresion/regresion-lineal-simple.html#criterio-de-mínimos-cuadrados",
     "title": "13  Regresión lineal simple",
     "section": "13.7 Criterio de mínimos cuadrados",
-    "text": "13.7 Criterio de mínimos cuadrados\nLos residuos son\n[ e_i = y_i - _i, ]\ndonde\n[ _i = _0+_1x_i. ]\nLa suma de cuadrados residual es\n[ S(_0,1) = {i=1}^{n} ( y_i-_0-_1x_i )^2. ]\nLos estimadores de mínimos cuadrados son\n[ (_0,1) = {_0,_1} S(_0,_1). ]",
+    "text": "13.7 Criterio de mínimos cuadrados\nLos residuos son\n\\[\ne_i\n=\ny_i\n-\n\\widehat{y}_i,\n\\]\ndonde\n\\[\n\\widehat{y}_i\n=\n\\beta_0+\\beta_1x_i.\n\\]\nLa suma de cuadrados residual es\n\\[\nS(\\beta_0,\\beta_1)\n=\n\\sum_{i=1}^{n}\n\\left(\ny_i-\\beta_0-\\beta_1x_i\n\\right)^2.\n\\]\nLos estimadores de mínimos cuadrados son\n\\[\n(\\widehat{\\beta}_0,\\widehat{\\beta}_1)\n=\n\\arg\\min_{\\beta_0,\\beta_1}\nS(\\beta_0,\\beta_1).\n\\]",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5158,7 +5158,7 @@
     "href": "regresion/regresion-lineal-simple.html#derivación-de-las-ecuaciones-normales",
     "title": "13  Regresión lineal simple",
     "section": "13.8 Derivación de las ecuaciones normales",
-    "text": "13.8 Derivación de las ecuaciones normales\nDerivando respecto de (_0),\n[ = -2 _{i=1}^{n} ( y_i-_0-_1x_i ). ]\nIgualando a cero,\n[ _{i=1}^{n} y_i = n_0 + 1 {i=1}^{n} x_i. ]\nDerivando respecto de (_1),\n[ = -2 _{i=1}^{n} x_i ( y_i-_0-_1x_i ). ]\nIgualando a cero,\n[ _{i=1}^{n} x_iy_i = 0 {i=1}^{n} x_i + 1 {i=1}^{n} x_i^2. ]\nEstas son las ecuaciones normales.",
+    "text": "13.8 Derivación de las ecuaciones normales\nDerivando respecto de \\(\\beta_0\\),\n\\[\n\\frac{\\partial S}{\\partial\\beta_0}\n=\n-2\n\\sum_{i=1}^{n}\n\\left(\ny_i-\\beta_0-\\beta_1x_i\n\\right).\n\\]\nIgualando a cero,\n\\[\n\\sum_{i=1}^{n}\ny_i\n=\nn\\beta_0\n+\n\\beta_1\n\\sum_{i=1}^{n}\nx_i.\n\\]\nDerivando respecto de \\(\\beta_1\\),\n\\[\n\\frac{\\partial S}{\\partial\\beta_1}\n=\n-2\n\\sum_{i=1}^{n}\nx_i\n\\left(\ny_i-\\beta_0-\\beta_1x_i\n\\right).\n\\]\nIgualando a cero,\n\\[\n\\sum_{i=1}^{n}\nx_iy_i\n=\n\\beta_0\n\\sum_{i=1}^{n}\nx_i\n+\n\\beta_1\n\\sum_{i=1}^{n}\nx_i^2.\n\\]\nEstas son las ecuaciones normales.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5169,7 +5169,7 @@
     "href": "regresion/regresion-lineal-simple.html#estimador-de-la-pendiente",
     "title": "13  Regresión lineal simple",
     "section": "13.9 Estimador de la pendiente",
-    "text": "13.9 Estimador de la pendiente\nDefina\n[ S_{xx} = _{i=1}^{n} (x_i-)^2, ]\n[ S_{xy} = _{i=1}^{n} (x_i-)(y_i-). ]\nEntonces,\n[ _1 = . ]",
+    "text": "13.9 Estimador de la pendiente\nDefina\n\\[\nS_{xx}\n=\n\\sum_{i=1}^{n}\n(x_i-\\overline{x})^2,\n\\]\n\\[\nS_{xy}\n=\n\\sum_{i=1}^{n}\n(x_i-\\overline{x})(y_i-\\overline{y}).\n\\]\nEntonces,\n\\[\n\\widehat{\\beta}_1\n=\n\\frac{S_{xy}}{S_{xx}}.\n\\]",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5180,7 +5180,7 @@
     "href": "regresion/regresion-lineal-simple.html#estimador-del-intercepto",
     "title": "13  Regresión lineal simple",
     "section": "13.10 Estimador del intercepto",
-    "text": "13.10 Estimador del intercepto\n[ _0 = - _1. ]\nPor tanto, la recta ajustada pasa por el punto\n[ (,). ]",
+    "text": "13.10 Estimador del intercepto\n\\[\n\\widehat{\\beta}_0\n=\n\\overline{y}\n-\n\\widehat{\\beta}_1\\overline{x}.\n\\]\nPor tanto, la recta ajustada pasa por el punto\n\\[\n(\\overline{x},\\overline{y}).\n\\]",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5191,7 +5191,7 @@
     "href": "regresion/regresion-lineal-simple.html#relación-con-covarianza-y-varianza",
     "title": "13  Regresión lineal simple",
     "section": "13.11 Relación con covarianza y varianza",
-    "text": "13.11 Relación con covarianza y varianza\nLa pendiente puede escribirse como\n[ _1 = . ]\nTambién,\n[ 1 = r{XY} , ]\ndonde (r_{XY}) es la correlación muestral.",
+    "text": "13.11 Relación con covarianza y varianza\nLa pendiente puede escribirse como\n\\[\n\\widehat{\\beta}_1\n=\n\\frac{\n\\widehat{\\operatorname{Cov}}(X,Y)\n}{\n\\widehat{\\operatorname{Var}}(X)\n}.\n\\]\nTambién,\n\\[\n\\widehat{\\beta}_1\n=\nr_{XY}\n\\frac{s_Y}{s_X},\n\\]\ndonde \\(r_{XY}\\) es la correlación muestral.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5202,7 +5202,7 @@
     "href": "regresion/regresion-lineal-simple.html#interpretación-geométrica",
     "title": "13  Regresión lineal simple",
     "section": "13.12 Interpretación geométrica",
-    "text": "13.12 Interpretación geométrica\nEl vector de respuestas es\n[ =\n\\[\\begin{pmatrix}\ny_1\\\\\n\\vdots\\\\\ny_n\n\\end{pmatrix}\\]\n. ]\nEl espacio generado por\n[ =\n\\[\\begin{pmatrix}\n1\\\\\n\\vdots\\\\\n1\n\\end{pmatrix}\\]\n]\ny\n[ =\n\\[\\begin{pmatrix}\nx_1\\\\\n\\vdots\\\\\nx_n\n\\end{pmatrix}\\]\n]\nes un subespacio de (^{n}).\nEl vector ajustado\n[ ]\nes la proyección ortogonal de () sobre ese subespacio.\nPor tanto,\n[ = - ]\nes ortogonal a () y a ().",
+    "text": "13.12 Interpretación geométrica\nEl vector de respuestas es\n\\[\n\\mathbf{y}\n=\n\\begin{pmatrix}\ny_1\\\\\n\\vdots\\\\\ny_n\n\\end{pmatrix}.\n\\]\nEl espacio generado por\n\\[\n\\mathbf{1}\n=\n\\begin{pmatrix}\n1\\\\\n\\vdots\\\\\n1\n\\end{pmatrix}\n\\]\ny\n\\[\n\\mathbf{x}\n=\n\\begin{pmatrix}\nx_1\\\\\n\\vdots\\\\\nx_n\n\\end{pmatrix}\n\\]\nes un subespacio de \\(\\mathbb{R}^{n}\\).\nEl vector ajustado\n\\[\n\\widehat{\\mathbf{y}}\n\\]\nes la proyección ortogonal de \\(\\mathbf{y}\\) sobre ese subespacio.\nPor tanto,\n\\[\n\\mathbf{e}\n=\n\\mathbf{y}\n-\n\\widehat{\\mathbf{y}}\n\\]\nes ortogonal a \\(\\mathbf{1}\\) y a \\(\\mathbf{x}\\).",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5213,7 +5213,7 @@
     "href": "regresion/regresion-lineal-simple.html#propiedades-de-los-residuos",
     "title": "13  Regresión lineal simple",
     "section": "13.13 Propiedades de los residuos",
-    "text": "13.13 Propiedades de los residuos\nDe las ecuaciones normales se obtiene:\n[ _{i=1}^{n}e_i=0, ]\n[ _{i=1}^{n}x_ie_i=0, ]\ny\n[ _{i=1}^{n}_ie_i=0. ]\nAdemás,\n[ = . ]",
+    "text": "13.13 Propiedades de los residuos\nDe las ecuaciones normales se obtiene:\n\\[\n\\sum_{i=1}^{n}e_i=0,\n\\]\n\\[\n\\sum_{i=1}^{n}x_ie_i=0,\n\\]\ny\n\\[\n\\sum_{i=1}^{n}\\widehat{y}_ie_i=0.\n\\]\nAdemás,\n\\[\n\\overline{\\widehat{y}}\n=\n\\overline{y}.\n\\]",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5224,7 +5224,7 @@
     "href": "regresion/regresion-lineal-simple.html#insesgadez-de-la-pendiente",
     "title": "13  Regresión lineal simple",
     "section": "13.14 Insesgadez de la pendiente",
-    "text": "13.14 Insesgadez de la pendiente\nComo\n[ _1 = , ]\ny\n[ Y_i = _0+_1x_i+_i, ]\nse obtiene\n[ _1 = _1 + . ]\nTomando esperanza,\n[ ( _1 ) = _1. ]\nPor tanto, (_1) es insesgado.",
+    "text": "13.14 Insesgadez de la pendiente\nComo\n\\[\n\\widehat{\\beta}_1\n=\n\\frac{\n\\sum_{i=1}^{n}\n(x_i-\\overline{x})Y_i\n}{\nS_{xx}\n},\n\\]\ny\n\\[\nY_i\n=\n\\beta_0+\\beta_1x_i+\\varepsilon_i,\n\\]\nse obtiene\n\\[\n\\widehat{\\beta}_1\n=\n\\beta_1\n+\n\\frac{\n\\sum_{i=1}^{n}\n(x_i-\\overline{x})\\varepsilon_i\n}{\nS_{xx}\n}.\n\\]\nTomando esperanza,\n\\[\n\\mathbb{E}\n(\n\\widehat{\\beta}_1\n)\n=\n\\beta_1.\n\\]\nPor tanto, \\(\\widehat{\\beta}_1\\) es insesgado.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5235,7 +5235,7 @@
     "href": "regresion/regresion-lineal-simple.html#insesgadez-del-intercepto",
     "title": "13  Regresión lineal simple",
     "section": "13.15 Insesgadez del intercepto",
-    "text": "13.15 Insesgadez del intercepto\nComo\n[ _0 = - _1, ]\nentonces\n[ ( _0 ) = _0. ]",
+    "text": "13.15 Insesgadez del intercepto\nComo\n\\[\n\\widehat{\\beta}_0\n=\n\\overline{Y}\n-\n\\widehat{\\beta}_1\\overline{x},\n\\]\nentonces\n\\[\n\\mathbb{E}\n(\n\\widehat{\\beta}_0\n)\n=\n\\beta_0.\n\\]",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5246,7 +5246,7 @@
     "href": "regresion/regresion-lineal-simple.html#varianza-de-la-pendiente",
     "title": "13  Regresión lineal simple",
     "section": "13.16 Varianza de la pendiente",
-    "text": "13.16 Varianza de la pendiente\nBajo homocedasticidad e independencia,\n[ ( _1 ) = . ]\nLa varianza disminuye cuando:\n\naumenta (n);\naumenta la dispersión de (X);\ndisminuye (^2).",
+    "text": "13.16 Varianza de la pendiente\nBajo homocedasticidad e independencia,\n\\[\n\\operatorname{Var}\n(\n\\widehat{\\beta}_1\n)\n=\n\\frac{\n\\sigma^2\n}{\nS_{xx}\n}.\n\\]\nLa varianza disminuye cuando:\n\naumenta \\(n\\);\naumenta la dispersión de \\(X\\);\ndisminuye \\(\\sigma^2\\).",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5257,7 +5257,7 @@
     "href": "regresion/regresion-lineal-simple.html#varianza-del-intercepto",
     "title": "13  Regresión lineal simple",
     "section": "13.17 Varianza del intercepto",
-    "text": "13.17 Varianza del intercepto\n[ ( _0 ) = ^2 . ]",
+    "text": "13.17 Varianza del intercepto\n\\[\n\\operatorname{Var}\n(\n\\widehat{\\beta}_0\n)\n=\n\\sigma^2\n\\left[\n\\frac{1}{n}\n+\n\\frac{\n\\overline{x}^{\\,2}\n}{\nS_{xx}\n}\n\\right].\n\\]",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5268,7 +5268,7 @@
     "href": "regresion/regresion-lineal-simple.html#covarianza-entre-estimadores",
     "title": "13  Regresión lineal simple",
     "section": "13.18 Covarianza entre estimadores",
-    "text": "13.18 Covarianza entre estimadores\n[ ( _0, _1 ) = - . ]\nSi (X) se centra, es decir,\n[ z_i=x_i-, ]\nentonces la covarianza entre intercepto y pendiente se reduce a cero.",
+    "text": "13.18 Covarianza entre estimadores\n\\[\n\\operatorname{Cov}\n(\n\\widehat{\\beta}_0,\n\\widehat{\\beta}_1\n)\n=\n-\n\\frac{\n\\overline{x}\\sigma^2\n}{\nS_{xx}\n}.\n\\]\nSi \\(X\\) se centra, es decir,\n\\[\nz_i=x_i-\\overline{x},\n\\]\nentonces la covarianza entre intercepto y pendiente se reduce a cero.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5286,11 +5286,11 @@
     ]
   },
   {
-    "objectID": "regresion/regresion-lineal-simple.html#estimación-de-2",
-    "href": "regresion/regresion-lineal-simple.html#estimación-de-2",
+    "objectID": "regresion/regresion-lineal-simple.html#estimación-de-la-varianza-del-error",
+    "href": "regresion/regresion-lineal-simple.html#estimación-de-la-varianza-del-error",
     "title": "13  Regresión lineal simple",
-    "section": "13.20 Estimación de (^2)",
-    "text": "13.20 Estimación de (^2)\nLa suma de cuadrados residual es\n[ SSE = _{i=1}^{n} e_i^2. ]\nEl estimador insesgado de (^2) es\n[ s^2 = MSE = . ]\nSe utilizan (n-2) grados de libertad porque se estimaron dos parámetros.",
+    "section": "13.20 Estimación de la varianza del error",
+    "text": "13.20 Estimación de la varianza del error\nLa suma de cuadrados residual es\n\\[\nSSE\n=\n\\sum_{i=1}^{n}\ne_i^2.\n\\]\nEl estimador insesgado de \\(\\sigma^2\\) es\n\\[\ns^2\n=\nMSE\n=\n\\frac{\nSSE\n}{\nn-2\n}.\n\\]\nSe utilizan \\(n-2\\) grados de libertad porque se estimaron dos parámetros.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5301,7 +5301,7 @@
     "href": "regresion/regresion-lineal-simple.html#error-estándar-residual",
     "title": "13  Regresión lineal simple",
     "section": "13.21 Error estándar residual",
-    "text": "13.21 Error estándar residual\n[ s = . ]\nEste valor estima la desviación estándar de los errores.",
+    "text": "13.21 Error estándar residual\n\\[\ns\n=\n\\sqrt{\n\\frac{\nSSE\n}{\nn-2\n}\n}.\n\\]\nEste valor estima la desviación estándar de los errores.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5312,7 +5312,7 @@
     "href": "regresion/regresion-lineal-simple.html#distribución-de-los-estimadores",
     "title": "13  Regresión lineal simple",
     "section": "13.22 Distribución de los estimadores",
-    "text": "13.22 Distribución de los estimadores\nSi los errores son normales,\n[ _1 N ( _1, ). ]\nAdemás,\n[ t_{n-2}. ]",
+    "text": "13.22 Distribución de los estimadores\nSi los errores son normales,\n\\[\n\\widehat{\\beta}_1\n\\sim\nN\n\\left(\n\\beta_1,\n\\frac{\n\\sigma^2\n}{\nS_{xx}\n}\n\\right).\n\\]\nAdemás,\n\\[\n\\frac{\n\\widehat{\\beta}_1-\\beta_1\n}{\ns/\\sqrt{S_{xx}}\n}\n\\sim\nt_{n-2}.\n\\]",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5323,7 +5323,7 @@
     "href": "regresion/regresion-lineal-simple.html#error-estándar-de-la-pendiente",
     "title": "13  Regresión lineal simple",
     "section": "13.23 Error estándar de la pendiente",
-    "text": "13.23 Error estándar de la pendiente\n[ SE ( _1 ) = . ]",
+    "text": "13.23 Error estándar de la pendiente\n\\[\nSE\n(\n\\widehat{\\beta}_1\n)\n=\n\\frac{s}{\\sqrt{S_{xx}}}.\n\\]",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5334,7 +5334,7 @@
     "href": "regresion/regresion-lineal-simple.html#error-estándar-del-intercepto",
     "title": "13  Regresión lineal simple",
     "section": "13.24 Error estándar del intercepto",
-    "text": "13.24 Error estándar del intercepto\n[ SE ( _0 ) = s . ]",
+    "text": "13.24 Error estándar del intercepto\n\\[\nSE\n(\n\\widehat{\\beta}_0\n)\n=\ns\n\\sqrt{\n\\frac{1}{n}\n+\n\\frac{\n\\overline{x}^{\\,2}\n}{\nS_{xx}\n}\n}.\n\\]",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5345,7 +5345,7 @@
     "href": "regresion/regresion-lineal-simple.html#prueba-de-hipótesis-para-la-pendiente",
     "title": "13  Regresión lineal simple",
     "section": "13.25 Prueba de hipótesis para la pendiente",
-    "text": "13.25 Prueba de hipótesis para la pendiente\nSe desea contrastar\n[ H_0:_1=0 ]\ncontra\n[ H_1:_1. ]\nEl estadístico es\n[ t = . ]\nBajo (H_0),\n[ tt_{n-2}. ]\nSi el valor (p) es pequeño, existe evidencia de asociación lineal.",
+    "text": "13.25 Prueba de hipótesis para la pendiente\nSe desea contrastar\n\\[\nH_0:\\beta_1=0\n\\]\ncontra\n\\[\nH_1:\\beta_1\\neq 0.\n\\]\nEl estadístico es\n\\[\nt\n=\n\\frac{\n\\widehat{\\beta}_1\n}{\nSE(\n\\widehat{\\beta}_1\n)\n}.\n\\]\nBajo \\(H_0\\),\n\\[\nt\\sim t_{n-2}.\n\\]\nSi el valor \\(p\\) es pequeño, existe evidencia de asociación lineal.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5356,7 +5356,7 @@
     "href": "regresion/regresion-lineal-simple.html#interpretación-correcta",
     "title": "13  Regresión lineal simple",
     "section": "13.26 Interpretación correcta",
-    "text": "13.26 Interpretación correcta\nRechazar\n[ H_0:_1=0 ]\nindica evidencia de relación lineal, no necesariamente causalidad.\nUna pendiente no significativa no demuestra ausencia total de relación; puede existir:\n\nrelación no lineal;\npoca potencia;\nmedición deficiente;\nrango limitado de (X).",
+    "text": "13.26 Interpretación correcta\nRechazar\n\\[\nH_0:\\beta_1=0\n\\]\nindica evidencia de relación lineal, no necesariamente causalidad.\nUna pendiente no significativa no demuestra ausencia total de relación; puede existir:\n\nrelación no lineal;\npoca potencia;\nmedición deficiente;\nrango limitado de \\(X\\).",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5367,7 +5367,7 @@
     "href": "regresion/regresion-lineal-simple.html#intervalo-de-confianza-para-la-pendiente",
     "title": "13  Regresión lineal simple",
     "section": "13.27 Intervalo de confianza para la pendiente",
-    "text": "13.27 Intervalo de confianza para la pendiente\nUn intervalo de nivel (1-) es\n[ 1 t{/2,n-2} SE( _1 ). ]",
+    "text": "13.27 Intervalo de confianza para la pendiente\nUn intervalo de nivel \\(1-\\alpha\\) es\n\\[\n\\widehat{\\beta}_1\n\\pm\nt_{\\alpha/2,n-2}\nSE(\n\\widehat{\\beta}_1\n).\n\\]",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5378,7 +5378,7 @@
     "href": "regresion/regresion-lineal-simple.html#intervalo-de-confianza-para-el-intercepto",
     "title": "13  Regresión lineal simple",
     "section": "13.28 Intervalo de confianza para el intercepto",
-    "text": "13.28 Intervalo de confianza para el intercepto\n[ 0 t{/2,n-2} SE( _0 ). ]",
+    "text": "13.28 Intervalo de confianza para el intercepto\n\\[\n\\widehat{\\beta}_0\n\\pm\nt_{\\alpha/2,n-2}\nSE(\n\\widehat{\\beta}_0\n).\n\\]",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5389,7 +5389,7 @@
     "href": "regresion/regresion-lineal-simple.html#estimación-de-la-respuesta-media",
     "title": "13  Regresión lineal simple",
     "section": "13.29 Estimación de la respuesta media",
-    "text": "13.29 Estimación de la respuesta media\nEn un valor (x_0),\n[ _0 = _0 + _1x_0. ]\nSu error estándar es\n[ SE ( _0^{,mean} ) = s . ]",
+    "text": "13.29 Estimación de la respuesta media\nEn un valor \\(x_0\\),\n\\[\n\\widehat{y}_0\n=\n\\widehat{\\beta}_0\n+\n\\widehat{\\beta}_1x_0.\n\\]\nSu error estándar es\n\\[\nSE\n(\n\\widehat{y}_0^{\\,mean}\n)\n=\ns\n\\sqrt{\n\\frac{1}{n}\n+\n\\frac{\n(x_0-\\overline{x})^2\n}{\nS_{xx}\n}\n}.\n\\]",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5400,7 +5400,7 @@
     "href": "regresion/regresion-lineal-simple.html#intervalo-de-confianza-para-la-media",
     "title": "13  Regresión lineal simple",
     "section": "13.30 Intervalo de confianza para la media",
-    "text": "13.30 Intervalo de confianza para la media\n[ 0 t{/2,n-2} s . ]",
+    "text": "13.30 Intervalo de confianza para la media\n\\[\n\\widehat{y}_0\n\\pm\nt_{\\alpha/2,n-2}\ns\n\\sqrt{\n\\frac{1}{n}\n+\n\\frac{\n(x_0-\\overline{x})^2\n}{\nS_{xx}\n}\n}.\n\\]",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5411,7 +5411,7 @@
     "href": "regresion/regresion-lineal-simple.html#intervalo-de-predicción",
     "title": "13  Regresión lineal simple",
     "section": "13.31 Intervalo de predicción",
-    "text": "13.31 Intervalo de predicción\nPara una nueva observación,\n[ Y_{new} = _0+1x_0+{new}. ]\nEl error estándar es\n[ SE ( _0^{,pred} ) = s . ]\nEl intervalo de predicción es\n[ 0 t{/2,n-2} s . ]\nEs más ancho que el intervalo para la media.",
+    "text": "13.31 Intervalo de predicción\nPara una nueva observación,\n\\[\nY_{new}\n=\n\\beta_0+\\beta_1x_0+\\varepsilon_{new}.\n\\]\nEl error estándar es\n\\[\nSE\n(\n\\widehat{y}_0^{\\,pred}\n)\n=\ns\n\\sqrt{\n1\n+\n\\frac{1}{n}\n+\n\\frac{\n(x_0-\\overline{x})^2\n}{\nS_{xx}\n}\n}.\n\\]\nEl intervalo de predicción es\n\\[\n\\widehat{y}_0\n\\pm\nt_{\\alpha/2,n-2}\ns\n\\sqrt{\n1\n+\n\\frac{1}{n}\n+\n\\frac{\n(x_0-\\overline{x})^2\n}{\nS_{xx}\n}\n}.\n\\]\nEs más ancho que el intervalo para la media.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5422,7 +5422,7 @@
     "href": "regresion/regresion-lineal-simple.html#descomposición-de-la-variabilidad",
     "title": "13  Regresión lineal simple",
     "section": "13.32 Descomposición de la variabilidad",
-    "text": "13.32 Descomposición de la variabilidad\nLa suma total de cuadrados es\n[ SST = _{i=1}^{n} (y_i-)^2. ]\nLa suma explicada es\n[ SSR = _{i=1}^{n} (_i-)^2. ]\nLa suma residual es\n[ SSE = _{i=1}^{n} (y_i-_i)^2. ]\nSe cumple\n[ SST = SSR + SSE. ]",
+    "text": "13.32 Descomposición de la variabilidad\nLa suma total de cuadrados es\n\\[\nSST\n=\n\\sum_{i=1}^{n}\n(y_i-\\overline{y})^2.\n\\]\nLa suma explicada es\n\\[\nSSR\n=\n\\sum_{i=1}^{n}\n(\\widehat{y}_i-\\overline{y})^2.\n\\]\nLa suma residual es\n\\[\nSSE\n=\n\\sum_{i=1}^{n}\n(y_i-\\widehat{y}_i)^2.\n\\]\nSe cumple\n\\[\nSST\n=\nSSR\n+\nSSE.\n\\]",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5433,18 +5433,18 @@
     "href": "regresion/regresion-lineal-simple.html#coeficiente-de-determinación",
     "title": "13  Regresión lineal simple",
     "section": "13.33 Coeficiente de determinación",
-    "text": "13.33 Coeficiente de determinación\n\nDefinición 13.1 El coeficiente de determinación es\n[ R^2 = = 1- . ]\n\nEn regresión lineal simple con intercepto,\n[ R^2 = r_{XY}^2. ]",
+    "text": "13.33 Coeficiente de determinación\n\nDefinición 13.1 El coeficiente de determinación es\n\\[\nR^2\n=\n\\frac{\nSSR\n}{\nSST\n}\n=\n1-\n\\frac{\nSSE\n}{\nSST\n}.\n\\]\n\nEn regresión lineal simple con intercepto,\n\\[\nR^2\n=\nr_{XY}^2.\n\\]",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
     ]
   },
   {
-    "objectID": "regresion/regresion-lineal-simple.html#interpretación-de-r2",
-    "href": "regresion/regresion-lineal-simple.html#interpretación-de-r2",
+    "objectID": "regresion/regresion-lineal-simple.html#interpretación-del-coeficiente-de-determinación",
+    "href": "regresion/regresion-lineal-simple.html#interpretación-del-coeficiente-de-determinación",
     "title": "13  Regresión lineal simple",
-    "section": "13.34 Interpretación de (R^2)",
-    "text": "13.34 Interpretación de (R^2)\n(R^2) representa la proporción de variabilidad de (Y) explicada por el modelo lineal.\nNo indica:\n\ncausalidad;\nausencia de sesgo;\nvalidez de supuestos;\ncapacidad predictiva futura;\ncalidad absoluta del modelo.",
+    "section": "13.34 Interpretación del coeficiente de determinación",
+    "text": "13.34 Interpretación del coeficiente de determinación\n\\(R^2\\) representa la proporción de variabilidad de \\(Y\\) explicada por el modelo lineal.\nNo indica:\n\ncausalidad;\nausencia de sesgo;\nvalidez de supuestos;\ncapacidad predictiva futura;\ncalidad absoluta del modelo.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5455,7 +5455,7 @@
     "href": "regresion/regresion-lineal-simple.html#tabla-anova",
     "title": "13  Regresión lineal simple",
     "section": "13.35 Tabla ANOVA",
-    "text": "13.35 Tabla ANOVA\nLa descomposición puede organizarse como:\n\n\n\nFuente\nSuma de cuadrados\ngl\nCuadrado medio\n\n\n\n\nRegresión\n(SSR)\n1\n(MSR=SSR)\n\n\nError\n(SSE)\n(n-2)\n(MSE=SSE/(n-2))\n\n\nTotal\n(SST)\n(n-1)\n\n\n\n\nEl estadístico es\n[ F = . ]\nEn regresión simple,\n[ F=t^2 ]\npara la prueba de la pendiente.",
+    "text": "13.35 Tabla ANOVA\nLa descomposición puede organizarse como:\n\n\n\nFuente\nSuma de cuadrados\ngl\nCuadrado medio\n\n\n\n\nRegresión\n\\(SSR\\)\n1\n\\(MSR=SSR\\)\n\n\nError\n\\(SSE\\)\n\\(n-2\\)\n\\(MSE=SSE/(n-2)\\)\n\n\nTotal\n\\(SST\\)\n\\(n-1\\)\n\n\n\n\nEl estadístico es\n\\[\nF\n=\n\\frac{\nMSR\n}{\nMSE\n}.\n\\]\nEn regresión simple,\n\\[\nF=t^2\n\\]\npara la prueba de la pendiente.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5466,7 +5466,7 @@
     "href": "regresion/regresion-lineal-simple.html#residuos",
     "title": "13  Regresión lineal simple",
     "section": "13.36 Residuos",
-    "text": "13.36 Residuos\nLos residuos son\n[ e_i = y_i-_i. ]\nSe utilizan para evaluar los supuestos.",
+    "text": "13.36 Residuos\nLos residuos son\n\\[\ne_i\n=\ny_i-\\widehat{y}_i.\n\\]\nSe utilizan para evaluar los supuestos.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5477,7 +5477,7 @@
     "href": "regresion/regresion-lineal-simple.html#residuos-estandarizados",
     "title": "13  Regresión lineal simple",
     "section": "13.37 Residuos estandarizados",
-    "text": "13.37 Residuos estandarizados\nUna versión básica es\n[ r_i = . ]\nSin embargo, las varianzas de los residuos no son iguales porque dependen del apalancamiento.",
+    "text": "13.37 Residuos estandarizados\nUna versión básica es\n\\[\nr_i\n=\n\\frac{e_i}{s}.\n\\]\nSin embargo, las varianzas de los residuos no son iguales porque dependen del apalancamiento.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5488,7 +5488,7 @@
     "href": "regresion/regresion-lineal-simple.html#matriz-sombrero",
     "title": "13  Regresión lineal simple",
     "section": "13.38 Matriz sombrero",
-    "text": "13.38 Matriz sombrero\nEn forma matricial,\n[ = . ]\nLa matriz\n[ = ( ^{T} )^{-1} ^{T} ]\nse denomina matriz sombrero.",
+    "text": "13.38 Matriz sombrero\nEn forma matricial,\n\\[\n\\widehat{\\mathbf{y}}\n=\n\\mathbf{H}\\mathbf{y}.\n\\]\nLa matriz\n\\[\n\\mathbf{H}\n=\n\\mathbf{X}\n(\n\\mathbf{X}^{\\mathsf T}\\mathbf{X}\n)^{-1}\n\\mathbf{X}^{\\mathsf T}\n\\]\nse denomina matriz sombrero.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5499,7 +5499,7 @@
     "href": "regresion/regresion-lineal-simple.html#apalancamiento",
     "title": "13  Regresión lineal simple",
     "section": "13.39 Apalancamiento",
-    "text": "13.39 Apalancamiento\nLos elementos diagonales\n[ h_{ii} ]\nmiden apalancamiento.\nEn regresión simple,\n[ h_{ii} = + . ]\nObservaciones alejadas de () tienen mayor apalancamiento.",
+    "text": "13.39 Apalancamiento\nLos elementos diagonales\n\\[\nh_{ii}\n\\]\nmiden apalancamiento.\nEn regresión simple,\n\\[\nh_{ii}\n=\n\\frac{1}{n}\n+\n\\frac{\n(x_i-\\overline{x})^2\n}{\nS_{xx}\n}.\n\\]\nObservaciones alejadas de \\(\\overline{x}\\) tienen mayor apalancamiento.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5510,7 +5510,7 @@
     "href": "regresion/regresion-lineal-simple.html#varianza-de-los-residuos",
     "title": "13  Regresión lineal simple",
     "section": "13.40 Varianza de los residuos",
-    "text": "13.40 Varianza de los residuos\n[ (e_i) = ^2(1-h_{ii}). ]\nPor ello, los residuos estandarizados internamente son\n[ r_i = . ]",
+    "text": "13.40 Varianza de los residuos\n\\[\n\\operatorname{Var}(e_i)\n=\n\\sigma^2(1-h_{ii}).\n\\]\nPor ello, los residuos estandarizados internamente son\n\\[\nr_i\n=\n\\frac{\ne_i\n}{\ns\\sqrt{1-h_{ii}}\n}.\n\\]",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5521,7 +5521,7 @@
     "href": "regresion/regresion-lineal-simple.html#residuos-studentizados",
     "title": "13  Regresión lineal simple",
     "section": "13.41 Residuos studentizados",
-    "text": "13.41 Residuos studentizados\nLos residuos studentizados externamente utilizan una estimación de () obtenida sin la observación (i).\nSon útiles para detectar valores atípicos.",
+    "text": "13.41 Residuos studentizados\nLos residuos studentizados externamente utilizan una estimación de \\(\\sigma\\) obtenida sin la observación \\(i\\).\nSon útiles para detectar valores atípicos.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5532,7 +5532,7 @@
     "href": "regresion/regresion-lineal-simple.html#distancia-de-cook",
     "title": "13  Regresión lineal simple",
     "section": "13.42 Distancia de Cook",
-    "text": "13.42 Distancia de Cook\nLa distancia de Cook mide la influencia de una observación sobre el ajuste:\n[ D_i = , ]\ndonde (p=2) en regresión simple con intercepto.\nUna observación puede ser influyente si combina:\n\nresiduo grande;\napalancamiento alto.",
+    "text": "13.42 Distancia de Cook\nLa distancia de Cook mide la influencia de una observación sobre el ajuste:\n\\[\nD_i\n=\n\\frac{\ne_i^2\n}{\nps^2\n}\n\\frac{\nh_{ii}\n}{\n(1-h_{ii})^2\n},\n\\]\ndonde \\(p=2\\) en regresión simple con intercepto.\nUna observación puede ser influyente si combina:\n\nresiduo grande;\napalancamiento alto.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5543,7 +5543,7 @@
     "href": "regresion/regresion-lineal-simple.html#diagnóstico-de-linealidad",
     "title": "13  Regresión lineal simple",
     "section": "13.43 Diagnóstico de linealidad",
-    "text": "13.43 Diagnóstico de linealidad\nSe examina la gráfica:\n[ e_i _i. ]\nUn patrón curvo sugiere relación no lineal.",
+    "text": "13.43 Diagnóstico de linealidad\nSe examina la gráfica:\n\\[\ne_i\n\\quad\n\\text{contra}\n\\quad\n\\widehat{y}_i.\n\\]\nUn patrón curvo sugiere relación no lineal.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5554,7 +5554,7 @@
     "href": "regresion/regresion-lineal-simple.html#diagnóstico-de-homocedasticidad",
     "title": "13  Regresión lineal simple",
     "section": "13.44 Diagnóstico de homocedasticidad",
-    "text": "13.44 Diagnóstico de homocedasticidad\nSi la dispersión de residuos aumenta o disminuye con (), puede existir heterocedasticidad.",
+    "text": "13.44 Diagnóstico de homocedasticidad\nSi la dispersión de residuos aumenta o disminuye con \\(\\widehat{y}\\), puede existir heterocedasticidad.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5587,7 +5587,7 @@
     "href": "regresion/regresion-lineal-simple.html#heterocedasticidad",
     "title": "13  Regresión lineal simple",
     "section": "13.47 Heterocedasticidad",
-    "text": "13.47 Heterocedasticidad\nSi\n[ (_ix_i) = _i^2, ]\nla varianza no es constante.\nLos estimadores de mínimos cuadrados pueden seguir siendo insesgados, pero los errores estándar clásicos pueden ser incorrectos.",
+    "text": "13.47 Heterocedasticidad\nSi\n\\[\n\\operatorname{Var}(\\varepsilon_i\\mid x_i)\n=\n\\sigma_i^2,\n\\]\nla varianza no es constante.\nLos estimadores de mínimos cuadrados pueden seguir siendo insesgados, pero los errores estándar clásicos pueden ser incorrectos.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5609,7 +5609,7 @@
     "href": "regresion/regresion-lineal-simple.html#transformaciones",
     "title": "13  Regresión lineal simple",
     "section": "13.49 Transformaciones",
-    "text": "13.49 Transformaciones\nUna transformación puede ayudar a:\n\nlinealizar;\nestabilizar varianza;\nreducir asimetría.\n\nEjemplos:\n[ (Y), , (X). ]\nLa interpretación de los coeficientes cambia.",
+    "text": "13.49 Transformaciones\nUna transformación puede ayudar a:\n\nlinealizar;\nestabilizar varianza;\nreducir asimetría.\n\nEjemplos:\n\\[\n\\log(Y),\n\\qquad\n\\sqrt{Y},\n\\qquad\n\\log(X).\n\\]\nLa interpretación de los coeficientes cambia.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5620,7 +5620,7 @@
     "href": "regresion/regresion-lineal-simple.html#extrapolación",
     "title": "13  Regresión lineal simple",
     "section": "13.50 Extrapolación",
-    "text": "13.50 Extrapolación\nPredecir fuera del rango observado de (X) puede ser peligroso.\nAunque la recta se extienda matemáticamente, la relación real puede cambiar.",
+    "text": "13.50 Extrapolación\nPredecir fuera del rango observado de \\(X\\) puede ser peligroso.\nAunque la recta se extienda matemáticamente, la relación real puede cambiar.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5631,7 +5631,7 @@
     "href": "regresion/regresion-lineal-simple.html#correlación-y-regresión",
     "title": "13  Regresión lineal simple",
     "section": "13.51 Correlación y regresión",
-    "text": "13.51 Correlación y regresión\nEn regresión simple,\n[ _1 = r . ]\nSin embargo:\n\nla correlación es simétrica;\nla regresión distingue respuesta y predictor;\ncambiar unidades afecta la pendiente;\nla correlación no cambia ante cambios lineales de escala positiva.",
+    "text": "13.51 Correlación y regresión\nEn regresión simple,\n\\[\n\\widehat{\\beta}_1\n=\nr\n\\frac{s_Y}{s_X}.\n\\]\nSin embargo:\n\nla correlación es simétrica;\nla regresión distingue respuesta y predictor;\ncambiar unidades afecta la pendiente;\nla correlación no cambia ante cambios lineales de escala positiva.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5653,7 +5653,7 @@
     "href": "regresion/regresion-lineal-simple.html#relación-con-máxima-verosimilitud",
     "title": "13  Regresión lineal simple",
     "section": "13.53 Relación con máxima verosimilitud",
-    "text": "13.53 Relación con máxima verosimilitud\nSi\n[ _i N(0,^2), ]\nla verosimilitud es\n[ L(_0,1,^2) = {i=1}^{n} . ]\nMaximizar esta verosimilitud respecto de (_0) y (_1) equivale a minimizar\n[ _{i=1}^{n} (y_i-_0-_1x_i)^2. ]\nPor tanto, mínimos cuadrados y máxima verosimilitud coinciden bajo normalidad.",
+    "text": "13.53 Relación con máxima verosimilitud\nSi\n\\[\n\\varepsilon_i\n\\sim\nN(0,\\sigma^2),\n\\]\nla verosimilitud es\n\\[\nL(\\beta_0,\\beta_1,\\sigma^2)\n=\n\\prod_{i=1}^{n}\n\\frac{1}{\n\\sqrt{2\\pi\\sigma^2}\n}\n\\exp\n\\left[\n-\\frac{\n(y_i-\\beta_0-\\beta_1x_i)^2\n}{\n2\\sigma^2\n}\n\\right].\n\\]\nMaximizar esta verosimilitud respecto de \\(\\beta_0\\) y \\(\\beta_1\\) equivale a minimizar\n\\[\n\\sum_{i=1}^{n}\n(y_i-\\beta_0-\\beta_1x_i)^2.\n\\]\nPor tanto, mínimos cuadrados y máxima verosimilitud coinciden bajo normalidad.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5664,7 +5664,7 @@
     "href": "regresion/regresion-lineal-simple.html#relación-con-aprendizaje-supervisado",
     "title": "13  Regresión lineal simple",
     "section": "13.54 Relación con aprendizaje supervisado",
-    "text": "13.54 Relación con aprendizaje supervisado\nEl espacio de hipótesis es\n[ = { f(x)=_0+_1x }. ]\nLa pérdida es\n[ L(y,f(x)) = (y-f(x))^2. ]\nEl riesgo empírico es\n[ n(f) = {i=1}^{n} (y_i-f(x_i))^2. ]\nLa regresión lineal simple es, por tanto, un problema de minimización del riesgo empírico.",
+    "text": "13.54 Relación con aprendizaje supervisado\nEl espacio de hipótesis es\n\\[\n\\mathcal{F}\n=\n\\{\nf(x)=\\beta_0+\\beta_1x\n\\}.\n\\]\nLa pérdida es\n\\[\nL(y,f(x))\n=\n(y-f(x))^2.\n\\]\nEl riesgo empírico es\n\\[\n\\widehat{R}_n(f)\n=\n\\frac{1}{n}\n\\sum_{i=1}^{n}\n(y_i-f(x_i))^2.\n\\]\nLa regresión lineal simple es, por tanto, un problema de minimización del riesgo empírico.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5686,7 +5686,7 @@
     "href": "regresion/regresion-lineal-simple.html#ejemplo-numérico",
     "title": "13  Regresión lineal simple",
     "section": "13.56 Ejemplo numérico",
-    "text": "13.56 Ejemplo numérico\nConsidere:\n\n\n\n(x_i)\n(y_i)\n\n\n\n\n1\n2\n\n\n2\n3\n\n\n3\n5\n\n\n4\n6\n\n\n\nSe tiene\n[ =2.5, =4. ]\nAdemás,\n[ S_{xx} = (1-2.5)2+(2-2.5)2+(3-2.5)2+(4-2.5)2 = 5. ]\nY\n[ S_{xy} = (1-2.5)(2-4) + (2-2.5)(3-4) + (3-2.5)(5-4) + (4-2.5)(6-4). ]\nPor tanto,\n[ S_{xy}=6. ]\nEntonces,\n[ _1 = = 1.2. ]\nY\n[ _0 = 4 - 1.2(2.5) = 1. ]\nLa recta ajustada es\n[ = 1+1.2x. ]",
+    "text": "13.56 Ejemplo numérico\nConsidere:\n\n\n\n\\(x_i\\)\n\\(y_i\\)\n\n\n\n\n1\n2\n\n\n2\n3\n\n\n3\n5\n\n\n4\n6\n\n\n\nSe tiene\n\\[\n\\overline{x}=2.5,\n\\qquad\n\\overline{y}=4.\n\\]\nAdemás,\n\\[\nS_{xx}\n=\n(1-2.5)^2+(2-2.5)^2+(3-2.5)^2+(4-2.5)^2\n=\n5.\n\\]\nY\n\\[\nS_{xy}\n=\n(1-2.5)(2-4)\n+\n(2-2.5)(3-4)\n+\n(3-2.5)(5-4)\n+\n(4-2.5)(6-4).\n\\]\nPor tanto,\n\\[\nS_{xy}=6.\n\\]\nEntonces,\n\\[\n\\widehat{\\beta}_1\n=\n\\frac{6}{5}\n=\n1.2.\n\\]\nY\n\\[\n\\widehat{\\beta}_0\n=\n4\n-\n1.2(2.5)\n=\n1.\n\\]\nLa recta ajustada es\n\\[\n\\widehat{y}\n=\n1+1.2x.\n\\]",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5697,7 +5697,7 @@
     "href": "regresion/regresion-lineal-simple.html#errores-frecuentes",
     "title": "13  Regresión lineal simple",
     "section": "13.57 Errores frecuentes",
-    "text": "13.57 Errores frecuentes\n\nInterpretar el intercepto fuera del rango observado.\nConcluir causalidad a partir de una pendiente significativa.\nUtilizar (R^2) como único criterio de calidad.\nIgnorar patrones en los residuos.\nExtrapolar lejos del rango de los datos.\nConfundir intervalo de confianza con intervalo de predicción.\nIgnorar heterocedasticidad.\nEliminar observaciones influyentes sin justificación.\nSuponer que normalidad de (Y) es requerida; el supuesto se refiere a los errores.\nInterpretar una pendiente no significativa como prueba de ausencia de relación.",
+    "text": "13.57 Errores frecuentes\n\nInterpretar el intercepto fuera del rango observado.\nConcluir causalidad a partir de una pendiente significativa.\nUtilizar \\(R^2\\) como único criterio de calidad.\nIgnorar patrones en los residuos.\nExtrapolar lejos del rango de los datos.\nConfundir intervalo de confianza con intervalo de predicción.\nIgnorar heterocedasticidad.\nEliminar observaciones influyentes sin justificación.\nSuponer que normalidad de \\(Y\\) es requerida; el supuesto se refiere a los errores.\nInterpretar una pendiente no significativa como prueba de ausencia de relación.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5708,7 +5708,7 @@
     "href": "regresion/regresion-lineal-simple.html#ejercicios-conceptuales",
     "title": "13  Regresión lineal simple",
     "section": "13.58 Ejercicios conceptuales",
-    "text": "13.58 Ejercicios conceptuales\n\nExplique la diferencia entre función de regresión y recta ajustada.\n¿Qué representa (_1)?\n¿Por qué la recta ajustada pasa por ((,))?\n¿Qué significa el teorema de Gauss-Markov?\n¿Por qué se utilizan (n-2) grados de libertad?\n¿Qué diferencia existe entre intervalo de confianza y predicción?\n¿Qué mide (R^2)?\n¿Qué representa el apalancamiento?\n¿Qué diferencia existe entre valor atípico e influencia?\n¿Por qué la extrapolación puede ser peligrosa?",
+    "text": "13.58 Ejercicios conceptuales\n\nExplique la diferencia entre función de regresión y recta ajustada.\n¿Qué representa \\(\\beta_1\\)?\n¿Por qué la recta ajustada pasa por \\((\\overline{x},\\overline{y})\\)?\n¿Qué significa el teorema de Gauss-Markov?\n¿Por qué se utilizan \\(n-2\\) grados de libertad?\n¿Qué diferencia existe entre intervalo de confianza y predicción?\n¿Qué mide \\(R^2\\)?\n¿Qué representa el apalancamiento?\n¿Qué diferencia existe entre valor atípico e influencia?\n¿Por qué la extrapolación puede ser peligrosa?",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5719,7 +5719,7 @@
     "href": "regresion/regresion-lineal-simple.html#ejercicio-de-estimación",
     "title": "13  Regresión lineal simple",
     "section": "13.59 Ejercicio de estimación",
-    "text": "13.59 Ejercicio de estimación\nConsidere los datos:\n\n\n\n(x)\n2\n4\n6\n8\n10\n\n\n\n\n(y)\n5\n8\n9\n13\n15\n\n\n\nCalcule:\n\n();\n();\n(S_{xx});\n(S_{xy});\n(_1);\n(_0);\nlos valores ajustados;\nlos residuos.",
+    "text": "13.59 Ejercicio de estimación\nConsidere los datos:\n\n\n\n\\(x\\)\n2\n4\n6\n8\n10\n\n\n\n\n\\(y\\)\n5\n8\n9\n13\n15\n\n\n\nCalcule:\n\n\\(\\overline{x}\\);\n\\(\\overline{y}\\);\n\\(S_{xx}\\);\n\\(S_{xy}\\);\n\\(\\widehat{\\beta}_1\\);\n\\(\\widehat{\\beta}_0\\);\nlos valores ajustados;\nlos residuos.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5730,7 +5730,7 @@
     "href": "regresion/regresion-lineal-simple.html#ejercicio-de-inferencia",
     "title": "13  Regresión lineal simple",
     "section": "13.60 Ejercicio de inferencia",
-    "text": "13.60 Ejercicio de inferencia\nSupóngase:\n[ _1=2.4, ]\n[ SE(_1)=0.6, ]\n[ n=20. ]\n\nCalcule el estadístico (t).\nEvalúe (H_0:_1=0).\nConstruya un intervalo de confianza del (95%).\nInterprete el resultado.",
+    "text": "13.60 Ejercicio de inferencia\nSupóngase:\n\\[\n\\widehat{\\beta}_1=2.4,\n\\]\n\\[\nSE(\\widehat{\\beta}_1)=0.6,\n\\]\n\\[\nn=20.\n\\]\n\nCalcule el estadístico \\(t\\).\nEvalúe \\(H_0:\\beta_1=0\\).\nConstruya un intervalo de confianza del \\(95\\%\\).\nInterprete el resultado.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5741,7 +5741,7 @@
     "href": "regresion/regresion-lineal-simple.html#ejercicio-de-anova",
     "title": "13  Regresión lineal simple",
     "section": "13.61 Ejercicio de ANOVA",
-    "text": "13.61 Ejercicio de ANOVA\nSean:\n[ SST=200, SSE=80, n=12. ]\nCalcule:\n\n(SSR);\n(R^2);\n(MSR);\n(MSE);\nel estadístico (F).",
+    "text": "13.61 Ejercicio de ANOVA\nSean:\n\\[\nSST=200,\n\\qquad\nSSE=80,\n\\qquad\nn=12.\n\\]\nCalcule:\n\n\\(SSR\\);\n\\(R^2\\);\n\\(MSR\\);\n\\(MSE\\);\nel estadístico \\(F\\).",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5752,7 +5752,7 @@
     "href": "regresion/regresion-lineal-simple.html#ejercicio-de-predicción",
     "title": "13  Regresión lineal simple",
     "section": "13.62 Ejercicio de predicción",
-    "text": "13.62 Ejercicio de predicción\nSupóngase:\n[ = 4+1.5x, ]\n[ s=2, ]\n[ n=25, ]\n[ =10, ]\n[ S_{xx}=200. ]\nPara (x_0=12):\n\ncalcule la predicción;\ncalcule el error estándar de la media;\ncalcule el error estándar de predicción;\ncompare ambos intervalos.",
+    "text": "13.62 Ejercicio de predicción\nSupóngase:\n\\[\n\\widehat{y}\n=\n4+1.5x,\n\\]\n\\[\ns=2,\n\\]\n\\[\nn=25,\n\\]\n\\[\n\\overline{x}=10,\n\\]\n\\[\nS_{xx}=200.\n\\]\nPara \\(x_0=12\\):\n\ncalcule la predicción;\ncalcule el error estándar de la media;\ncalcule el error estándar de predicción;\ncompare ambos intervalos.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
@@ -5774,7 +5774,7 @@
     "href": "regresion/regresion-lineal-simple.html#ejercicio-aplicado",
     "title": "13  Regresión lineal simple",
     "section": "13.64 Ejercicio aplicado",
-    "text": "13.64 Ejercicio aplicado\nSe desea estudiar la relación entre temperatura y concentración de PM10.\n\nDefina el modelo.\nInterprete (_0) y (_1).\nIndique los supuestos.\nDescriba la estimación por mínimos cuadrados.\nExplique cómo probaría la pendiente.\nExplique cómo construiría un intervalo para la media.\nExplique cómo construiría un intervalo para una nueva observación.\nProponga gráficos de diagnóstico.\nExplique por qué la asociación no implica causalidad.\nIndique cuándo sería necesaria una transformación.",
+    "text": "13.64 Ejercicio aplicado\nSe desea estudiar la relación entre temperatura y concentración de PM10.\n\nDefina el modelo.\nInterprete \\(\\beta_0\\) y \\(\\beta_1\\).\nIndique los supuestos.\nDescriba la estimación por mínimos cuadrados.\nExplique cómo probaría la pendiente.\nExplique cómo construiría un intervalo para la media.\nExplique cómo construiría un intervalo para una nueva observación.\nProponga gráficos de diagnóstico.\nExplique por qué la asociación no implica causalidad.\nIndique cuándo sería necesaria una transformación.",
     "crumbs": [
       "III. Modelos de regresión",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Regresión lineal simple</span>"
