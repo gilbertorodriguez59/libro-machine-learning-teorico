@@ -1,0 +1,14 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.quarto/
+*_files/
+*.utf8.md
+*.knit.md
+*.tex
+.DS_Store
+Thumbs.db
+
+/.quarto/
+**/*.quarto_ipynb
