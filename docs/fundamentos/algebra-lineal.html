@@ -58,7 +58,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -332,8 +351,7 @@ window.Quarto = {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Fundamentos Matemáticos del Aprendizaje Automático</a> 
-        <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/gilbertorodriguez59/libro-machine-learning-teorico" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
+        <div class="sidebar-tools-main">
     <a href="../fundamentos-matematicos-aprendizaje-automatico.pdf" title="Descargar PDF" class="quarto-navigation-tool px-1" aria-label="Descargar PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
 </div>
@@ -481,7 +499,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../clasificacion/knn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Vecinos más cercanos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Vecinos más cercanos, k-NN</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -493,13 +511,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../clasificacion/random-forest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Bosques aleatorios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Random Forest</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../clasificacion/svm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Máquinas de vectores de soporte</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Máquinas de vectores de soporte, SVM</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -522,13 +540,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../no-supervisado/pca.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Análisis de componentes principales</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Análisis de Componentes Principales, PCA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../no-supervisado/kmeans.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Agrupamiento k-means</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Agrupamiento mediante K-means</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -648,8 +666,9 @@ window.Quarto = {
   <li><a href="#ejercicio-de-valores-propios" id="toc-ejercicio-de-valores-propios" class="nav-link" data-scroll-target="#ejercicio-de-valores-propios"><span class="header-section-number">6.56</span> Ejercicio de valores propios</a></li>
   <li><a href="#ejercicio-aplicado" id="toc-ejercicio-aplicado" class="nav-link" data-scroll-target="#ejercicio-aplicado"><span class="header-section-number">6.57</span> Ejercicio aplicado</a></li>
   <li><a href="#resumen" id="toc-resumen" class="nav-link" data-scroll-target="#resumen"><span class="header-section-number">6.58</span> Resumen</a></li>
+  <li><a href="#referencias-del-capítulo" id="toc-referencias-del-capítulo" class="nav-link" data-scroll-target="#referencias-del-capítulo">Referencias del capítulo</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/gilbertorodriguez59/libro-machine-learning-teorico/edit/main/fundamentos/algebra-lineal.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/gilbertorodriguez59/libro-machine-learning-teorico/issues/new" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -2114,10 +2133,22 @@ X_p
 <p>En este capítulo se desarrollaron los conceptos de escalares, vectores, matrices, combinaciones lineales, independencia, bases, espacios vectoriales, productos internos, normas, distancias y proyecciones.</p>
 <p>También se estudiaron sistemas lineales, inversas, rango, espacios columna y nulo, transformaciones lineales, formas cuadráticas, matrices definidas positivas, valores propios, descomposición espectral y descomposición en valores singulares.</p>
 <p>Estas herramientas constituyen la base matemática de numerosos algoritmos de aprendizaje automático, entre ellos regresión lineal, PCA, máquinas de vectores de soporte, redes neuronales, agrupamiento y métodos de reducción de dimensionalidad.</p>
+</section>
+<section id="referencias-del-capítulo" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="referencias-del-capítulo">Referencias del capítulo</h2>
+<p>Los fundamentos y resultados desarrollados en este capítulo se apoyan principalmente en <span class="citation" data-cites="mardia1979multivariate">Mardia et&nbsp;al. (<a href="../referencias.html#ref-mardia1979multivariate" role="doc-biblioref">1979</a>)</span>; <span class="citation" data-cites="bishop2006pattern">Bishop (<a href="../referencias.html#ref-bishop2006pattern" role="doc-biblioref">2006</a>)</span>.</p>
 
 
 <!-- -->
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-bishop2006pattern" class="csl-entry" role="listitem">
+Bishop, Christopher M. 2006. <em>Pattern Recognition and Machine Learning</em>. Springer.
+</div>
+<div id="ref-mardia1979multivariate" class="csl-entry" role="listitem">
+Mardia, Kanti V., John T. Kent, y John M. Bibby. 1979. <em>Multivariate Analysis</em>. Academic Press.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -2258,7 +2289,7 @@ X_p
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/gilbertorodriguez59\.github\.io\/libro-machine-learning-teorico\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -4257,6 +4288,10 @@ X_p
 <span id="cb2-1660"><a href="#cb2-1660" aria-hidden="true" tabindex="-1"></a>También se estudiaron sistemas lineales, inversas, rango, espacios columna y nulo, transformaciones lineales, formas cuadráticas, matrices definidas positivas, valores propios, descomposición espectral y descomposición en valores singulares.</span>
 <span id="cb2-1661"><a href="#cb2-1661" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1662"><a href="#cb2-1662" aria-hidden="true" tabindex="-1"></a>Estas herramientas constituyen la base matemática de numerosos algoritmos de aprendizaje automático, entre ellos regresión lineal, PCA, máquinas de vectores de soporte, redes neuronales, agrupamiento y métodos de reducción de dimensionalidad.</span>
+<span id="cb2-1663"><a href="#cb2-1663" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-1664"><a href="#cb2-1664" aria-hidden="true" tabindex="-1"></a><span class="fu">## Referencias del capítulo {.unnumbered}</span></span>
+<span id="cb2-1665"><a href="#cb2-1665" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-1666"><a href="#cb2-1666" aria-hidden="true" tabindex="-1"></a>Los fundamentos y resultados desarrollados en este capítulo se apoyan principalmente en @mardia1979multivariate; @bishop2006pattern.</span>
 </code></pre></div><button title="Copiar al portapapeles" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
@@ -4267,7 +4302,7 @@ X_p
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gilbertorodriguez59/libro-machine-learning-teorico/edit/main/fundamentos/algebra-lineal.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/gilbertorodriguez59/libro-machine-learning-teorico/issues/new" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></div>
+    </div>
     <div class="nav-footer-right">
 <p>MI Jesús Gilberto Rodríguez Escobedo</p>
 </div>

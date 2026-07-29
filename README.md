@@ -1,40 +1,38 @@
 # Fundamentos Matemáticos del Aprendizaje Automático
 
-Versión estable y publicable del libro teórico escrito en Quarto.
+Proyecto Quarto en desarrollo.
 
-**Autor:** MI Jesús Gilberto Rodríguez Escobedo
+## Abrir y renderizar
 
-## Sitio web
-
-https://gilbertorodriguez59.github.io/libro-machine-learning-teorico/
-
-## Repositorio
-
-https://github.com/gilbertorodriguez59/libro-machine-learning-teorico
-
-## Renderizar
-
-Para generar la versión HTML en la carpeta `docs`:
-
-```bash
-quarto render --to html
-```
-
-Para previsualizar:
+1. Copiar la carpeta completa al equipo.
+2. Abrir RStudio.
+3. Seleccionar **File > Open Project** o abrir `_quarto.yml`.
+4. En la terminal, ejecutar:
 
 ```bash
 quarto preview
 ```
 
-Para generar el PDF:
+Para generar HTML y PDF:
 
 ```bash
-quarto render --to pdf
+quarto render
 ```
 
-## Publicación
+## Autor
 
-GitHub Pages debe configurarse con:
+MI Jesús Gilberto Rodríguez Escobedo
 
-- Branch: `main`
-- Folder: `/docs`
+
+## Portada integrada
+
+La versión actual incluye:
+
+- portada vertical para la versión PDF;
+- portada horizontal tipo banner para la versión web.
+
+Los archivos se encuentran en:
+
+- `estilos/portadas/portada-teorico-pdf.png`
+- `estilos/portadas/portada-teorico-web.png`
+

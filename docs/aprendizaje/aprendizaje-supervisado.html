@@ -58,7 +58,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -332,8 +351,7 @@ window.Quarto = {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Fundamentos Matemáticos del Aprendizaje Automático</a> 
-        <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/gilbertorodriguez59/libro-machine-learning-teorico" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
+        <div class="sidebar-tools-main">
     <a href="../fundamentos-matematicos-aprendizaje-automatico.pdf" title="Descargar PDF" class="quarto-navigation-tool px-1" aria-label="Descargar PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
 </div>
@@ -481,7 +499,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../clasificacion/knn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Vecinos más cercanos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Vecinos más cercanos, k-NN</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -493,13 +511,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../clasificacion/random-forest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Bosques aleatorios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Random Forest</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../clasificacion/svm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Máquinas de vectores de soporte</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Máquinas de vectores de soporte, SVM</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -522,13 +540,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../no-supervisado/pca.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Análisis de componentes principales</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Análisis de Componentes Principales, PCA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../no-supervisado/kmeans.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Agrupamiento k-means</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Agrupamiento mediante K-means</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -655,8 +673,9 @@ window.Quarto = {
   <li><a href="#ejercicio-de-sesgo-y-varianza" id="toc-ejercicio-de-sesgo-y-varianza" class="nav-link" data-scroll-target="#ejercicio-de-sesgo-y-varianza"><span class="header-section-number">9.60</span> Ejercicio de sesgo y varianza</a></li>
   <li><a href="#ejercicio-aplicado" id="toc-ejercicio-aplicado" class="nav-link" data-scroll-target="#ejercicio-aplicado"><span class="header-section-number">9.61</span> Ejercicio aplicado</a></li>
   <li><a href="#resumen" id="toc-resumen" class="nav-link" data-scroll-target="#resumen"><span class="header-section-number">9.62</span> Resumen</a></li>
+  <li><a href="#referencias-del-capítulo" id="toc-referencias-del-capítulo" class="nav-link" data-scroll-target="#referencias-del-capítulo">Referencias del capítulo</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/gilbertorodriguez59/libro-machine-learning-teorico/edit/main/aprendizaje/aprendizaje-supervisado.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/gilbertorodriguez59/libro-machine-learning-teorico/issues/new" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -1800,10 +1819,22 @@ J(\boldsymbol{\beta})
 <p>En este capítulo se formuló matemáticamente el aprendizaje supervisado como un problema de selección de funciones. Se definieron espacios de entrada y salida, muestras de entrenamiento, hipótesis, espacios de hipótesis, parámetros e hiperparámetros.</p>
 <p>También se estudiaron funciones de pérdida, riesgo esperado, riesgo empírico, minimización del riesgo empírico y generalización.</p>
 <p>Finalmente, se analizaron sobreajuste, subajuste, complejidad, regularización, sesgo, varianza, ruido irreducible y selección de modelos. Estos conceptos servirán como base para la teoría de clasificación y para los algoritmos específicos de los capítulos posteriores.</p>
+</section>
+<section id="referencias-del-capítulo" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="referencias-del-capítulo">Referencias del capítulo</h2>
+<p>Los fundamentos y resultados desarrollados en este capítulo se apoyan principalmente en <span class="citation" data-cites="vapnik1998statistical">Vapnik (<a href="../referencias.html#ref-vapnik1998statistical" role="doc-biblioref">1998</a>)</span>; <span class="citation" data-cites="murphy2022probabilistic">Murphy (<a href="../referencias.html#ref-murphy2022probabilistic" role="doc-biblioref">2022</a>)</span>.</p>
 
 
 <!-- -->
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-murphy2022probabilistic" class="csl-entry" role="listitem">
+Murphy, Kevin P. 2022. <em>Probabilistic Machine Learning: An Introduction</em>. MIT Press.
+</div>
+<div id="ref-vapnik1998statistical" class="csl-entry" role="listitem">
+Vapnik, Vladimir N. 1998. <em>Statistical Learning Theory</em>. Wiley.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -1944,7 +1975,7 @@ J(\boldsymbol{\beta})
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/gilbertorodriguez59\.github\.io\/libro-machine-learning-teorico\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -3528,6 +3559,10 @@ J(\boldsymbol{\beta})
 <span id="cb2-1245"><a href="#cb2-1245" aria-hidden="true" tabindex="-1"></a>También se estudiaron funciones de pérdida, riesgo esperado, riesgo empírico, minimización del riesgo empírico y generalización.</span>
 <span id="cb2-1246"><a href="#cb2-1246" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-1247"><a href="#cb2-1247" aria-hidden="true" tabindex="-1"></a>Finalmente, se analizaron sobreajuste, subajuste, complejidad, regularización, sesgo, varianza, ruido irreducible y selección de modelos. Estos conceptos servirán como base para la teoría de clasificación y para los algoritmos específicos de los capítulos posteriores.</span>
+<span id="cb2-1248"><a href="#cb2-1248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-1249"><a href="#cb2-1249" aria-hidden="true" tabindex="-1"></a><span class="fu">## Referencias del capítulo {.unnumbered}</span></span>
+<span id="cb2-1250"><a href="#cb2-1250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-1251"><a href="#cb2-1251" aria-hidden="true" tabindex="-1"></a>Los fundamentos y resultados desarrollados en este capítulo se apoyan principalmente en @vapnik1998statistical; @murphy2022probabilistic.</span>
 </code></pre></div><button title="Copiar al portapapeles" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
@@ -3538,7 +3573,7 @@ J(\boldsymbol{\beta})
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gilbertorodriguez59/libro-machine-learning-teorico/edit/main/aprendizaje/aprendizaje-supervisado.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/gilbertorodriguez59/libro-machine-learning-teorico/issues/new" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></div>
+    </div>
     <div class="nav-footer-right">
 <p>MI Jesús Gilberto Rodríguez Escobedo</p>
 </div>

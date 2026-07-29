@@ -303,8 +303,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Fundamentos Matemáticos del Aprendizaje Automático</a> 
-        <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/gilbertorodriguez59/libro-machine-learning-teorico" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
+        <div class="sidebar-tools-main">
     <a href="./fundamentos-matematicos-aprendizaje-automatico.pdf" title="Descargar PDF" class="quarto-navigation-tool px-1" aria-label="Descargar PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
 </div>
@@ -452,7 +451,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./clasificacion/knn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Vecinos más cercanos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Vecinos más cercanos, k-NN</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -464,13 +463,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./clasificacion/random-forest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Bosques aleatorios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Random Forest</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./clasificacion/svm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Máquinas de vectores de soporte</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Máquinas de vectores de soporte, SVM</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -493,13 +492,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./no-supervisado/pca.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Análisis de componentes principales</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Análisis de Componentes Principales, PCA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./no-supervisado/kmeans.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Agrupamiento k-means</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Agrupamiento mediante K-means</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -550,8 +549,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#organización-de-la-obra" id="toc-organización-de-la-obra" class="nav-link active" data-scroll-target="#organización-de-la-obra"><span class="header-section-number">2.1</span> Organización de la obra</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -587,10 +592,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>su implementación computacional con datos reales.</li>
 </ol>
 <p>El contenido se presenta de forma gradual. Cada capítulo comienza con una explicación conceptual del problema, seguida de la notación matemática necesaria, definiciones formales, proposiciones, teoremas, demostraciones y derivaciones. Posteriormente se desarrollan ejemplos numéricos manuales y se establece la conexión con los algoritmos estudiados en el volumen práctico.</p>
+<section id="organización-de-la-obra" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="organización-de-la-obra"><span class="header-section-number">2.1</span> Organización de la obra</h2>
+<p>La obra se organiza en seis partes:</p>
+<ol type="1">
+<li>fundamentos matemáticos;</li>
+<li>fundamentos del aprendizaje automático;</li>
+<li>modelos de regresión;</li>
+<li>métodos de clasificación;</li>
+<li>aprendizaje no supervisado;</li>
+<li>temas avanzados.</li>
+</ol>
+<p>Cada capítulo incluye referencias académicas específicas, mientras que la bibliografía consolidada aparece al final del libro.</p>
 
 
 <!-- -->
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -730,7 +748,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/gilbertorodriguez59\.github\.io\/libro-machine-learning-teorico\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -1085,7 +1103,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>el procedimiento algorítmico utilizado para resolverlo;</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>su implementación computacional con datos reales.</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>El contenido se presenta de forma gradual. Cada capítulo comienza con una explicación conceptual del problema, seguida de la notación matemática necesaria, definiciones formales, proposiciones, teoremas, demostraciones y derivaciones. Posteriormente se desarrollan ejemplos numéricos manuales y se establece la conexión con los algoritmos estudiados en el volumen práctico.</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>El contenido se presenta de forma gradual. Cada capítulo comienza con una explicación conceptual del problema, seguida de la notación matemática necesaria, definiciones formales, proposiciones, teoremas, demostraciones y derivaciones. Posteriormente se desarrollan ejemplos numéricos manuales y se establece la conexión con los algoritmos estudiados en el volumen práctico.</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## Organización de la obra</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>La obra se organiza en seis partes:</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>fundamentos matemáticos;</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>fundamentos del aprendizaje automático;</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>modelos de regresión;</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>métodos de clasificación;</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>aprendizaje no supervisado;</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>temas avanzados.</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>Cada capítulo incluye referencias académicas específicas, mientras que la bibliografía consolidada aparece al final del libro.</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
@@ -1095,7 +1127,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/gilbertorodriguez59/libro-machine-learning-teorico/edit/main/presentacion.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/gilbertorodriguez59/libro-machine-learning-teorico/issues/new" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></div>
+    </div>
     <div class="nav-footer-right">
 <p>MI Jesús Gilberto Rodríguez Escobedo</p>
 </div>
